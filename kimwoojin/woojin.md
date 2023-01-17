@@ -210,3 +210,7 @@ For more examples and ideas, visit:
         - 크기, type, 이름, date
     - 방송 배너 사진
         - 크기, type, 이름, date
+-------------------------------
+## 23.01.17 
+- [기능 명세서](https://www.notion.so/e5110b1024f04ad996daf0832b1a1fe6?v=ee53a0261e2f4789a8d6da4fccd5f1ae)
+- [ERD, 데이터 설계](https://www.notion.so/ERD-2bcf4a10b26e4d4595cfda4358d0f1bd)
