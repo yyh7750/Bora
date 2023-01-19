@@ -235,3 +235,43 @@ For more examples and ideas, visit:
   - 사연함
     - 삭제는 안된다.
     - 방송중에 들어오는 사연은 어떻게 할 것인지?
+
+
+    -------------
+    ##23.01.19  도커 공부 
+    도커 스웜을 시각화해주는 Visualizer 이미지 추가하기
+
+docker-compose.yml 을 수정한다.
+
+version: "3"
+services:
+  web:
+    # replace username/repo:tag with your name and image details
+    image: kok202/myRepository:v1.0.0
+    deploy:
+      replicas: 5
+      restart_policy:
+        condition: on-failure
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: 50M
+    ports:
+      - "80:80"
+    networks:
+      - webnet
+  
+  # 클러스터 환경을 확인할 수 있는 gui 툴
+  visualizer:
+    image: dockersamples/visualizer:stable
+    ports:
+      - "8080:8080"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    deploy:
+      placement:
+        constraints: [node.role == manager]
+    networks:
+      - webnet
+networks:
+  webnet:
