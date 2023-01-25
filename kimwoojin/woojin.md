@@ -298,3 +298,35 @@ networks:
 ### ****복제 및 지속성****
 
 1. Redis는 기본-복제 아키텍처를 사용하며 비동기식 복제를 지원하므로 데이터가 여러 복제 서버에 복제될 수 있습니다.
+
+
+-----------------
+2023-01-25(수)
+
+## **REST API 디자인 가이드**
+
+1. URI는 정보의 자원을 표현해야 한다.
+    - 리소스명은 동사보단 명사를 사용한다.
+        - GET/members/delete/1 (x)
+        - GET/members/1 (o)
+    - 슬래시 구분자(/)는 계층 관계를 나타내는데 사용한다.
+    - 마지막 문자로 슬래시(/)를 포함하지 않는다.
+    - 가독성을 위해 하이픈(-)을 사용한다. (밑줄(_)은 사용하지 않는다.)
+        - 케밥식
+    - 대문자를 사용을 피하며 소문자를 사용한다.
+    - 파일 확장자는 URI에 포함시키지 않는다.
+        - `/members/soccer/345/photo.jpg (X)`
+        - REST API에서는 메시지 body 내용의 포맷을 나타내기 위한 파일 확장자를 URI에 포함시키지 않는다.
+            - Accept Header을 이용한다.
+            - `GET / members/soccer/345/photo HTTP/1.1 Host: restapi.example.com Accept: image/jpg`
+            - Accept Header vs Content-Type Header 참조
+            
+            [Contents-Type Header 와 Accept Header의 차이점](https://webstone.tistory.com/66)
+            
+    - Collection과 Document로 표현
+        - Collection은 문서들의 집합, 객체들의 집합, Document는 단순히 문서 또는 객체
+        - ex) `http:// [restapi.example.com/sports/soccer](http://restapi.example.com/sports/soccer)` → Collection : sports / Document : soccer
+        - ex) `http:// [restapi.example.com/sports/soccer/players/13](http://restapi.example.com/sports/soccer/players/13)`
+            - Collection : sports, players / Document : soccer, 13  → Collection은 복수로 사용한다.
+
+-> API 명세 작성 완료, 아키텍처 구성 완료
