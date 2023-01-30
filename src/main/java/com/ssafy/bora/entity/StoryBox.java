@@ -13,11 +13,11 @@ import java.time.LocalDate;
 public class StoryBox implements Serializable {
 
     @Id
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "dj_id")
     private User dj;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "writer_id")
     private User writer;
 

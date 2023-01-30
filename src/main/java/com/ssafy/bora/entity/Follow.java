@@ -15,12 +15,12 @@ public class Follow {
 
     // 시청자가 DJ를 팔로우 할 때 User는 시청자 기준으로 매핑
     // DJ (시청자가 DJ 팔로우)
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "from_id")
     private User fromId;
 
     // 시청자 (팔로우한 시청자)
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "to_id")
     private User toId;
 

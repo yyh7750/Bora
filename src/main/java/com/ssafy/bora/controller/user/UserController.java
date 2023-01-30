@@ -2,19 +2,12 @@ package com.ssafy.bora.controller.user;
 
 import com.ssafy.bora.dto.BlacklistDTO;
 import com.ssafy.bora.dto.UserDTO;
-import com.ssafy.bora.entity.Blacklist;
-import com.ssafy.bora.entity.User;
-import com.ssafy.bora.repository.user.IUserRepository;
-import com.ssafy.bora.repository.user.IBlacklistRepository;
 import com.ssafy.bora.service.user.IBlacklistService;
 import com.ssafy.bora.service.user.IUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
@@ -58,9 +51,13 @@ public class UserController {
         return new ResponseEntity<>(blacklistService.findAllBlacklist(id), HttpStatus.OK);
     }
 
-    @DeleteMapping("/blacklist{id}")
+    @DeleteMapping("/blacklist")
     public ResponseEntity<?> deleteBlacklist(@RequestBody BlacklistDTO blacklistDTO) {
-        return null;
+        int result = blacklistService.deleteBlacklist(blacklistDTO);
+        if (result > 0) {
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     // * end blacklist controller

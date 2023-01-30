@@ -13,7 +13,7 @@ import java.io.Serializable;
 public class Privacy implements Serializable {
 
     @Id
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
 

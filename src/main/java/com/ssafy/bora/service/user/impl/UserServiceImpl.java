@@ -10,12 +10,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class UserServiceImpl implements IUserService {
 
     private final IUserRepository userRepository;
 
     @Override
-    @Transactional
     public UserDTO findUserById(String id) {
         User findUser = userRepository.findById(id).get();
         UserDTO userDTO = new UserDTO(findUser);
@@ -23,7 +23,6 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    @Transactional
     public UserDTO updateUserById(UserDTO updateUserInfo) {
         User oldUser = userRepository.findById(updateUserInfo.getId()).get();
         UserDTO newUser = new UserDTO(oldUser.updateUser(updateUserInfo));
@@ -31,7 +30,6 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    @Transactional
     public UserDTO deleteUserById(String id) {
         User findUser = userRepository.findById(id).get();
         if (findUser != null && !findUser.isStatus()) {
