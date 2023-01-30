@@ -341,3 +341,45 @@ networks:
 라에 관계없이 항상 동일하게 실행됩니다.
 컨테이너는 소프트웨어를 환경으로부터 격리시키고 개발과 스테이징의 차이에도 불구하고 균일
 하게 작동하도록 보장한다.
+
+-----------------------
+2023-01-30
+@Service
+@Slf4j
+@RequiredArgsConstructor
+public class CustomOAuth2UserService extends DefaultOAuth2UserService {
+
+    private final UserRepository userRepository;
+
+    @Override
+    public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
+        OAuth2User oAuth2User = super.loadUser(userRequest);
+
+        String registrationId = userRequest.getClientRegistration().getRegistrationId();
+        log.info("oauth provider: {}", registrationId);
+
+        CustomOAuth2User customOAuth2User = new KakaoCustomOAuth2User(
+                oAuth2User.getAttributes(),
+                Collections.singleton(new SimpleGrantedAuthority("ROLE_USER")),
+                "id"
+        );
+
+
+        User user = saveOrUpdate(customOAuth2User);
+        log.info("oauth login success - user : {}", user);
+
+//        return new DefaultOAuth2User(
+//                Collections.singleton(new SimpleGrantedAuthority("ROLE_USER")),
+//                oAuth2User.getAttributes(),
+//                "id");
+        return customOAuth2User;
+    }
+
+    private User saveOrUpdate(CustomOAuth2User oAuth2User) {
+        User user = User.of(oAuth2User);
+        userRepository.findByEmail(user.getEmail()).ifPresent(entity -> user.setId(entity.getId()));
+        return userRepository.save(user);
+    }
+}
+
+OAuth2 공부
