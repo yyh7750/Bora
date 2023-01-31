@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/users/station")
+@RequestMapping("/stations")
 public class StationController {
 
     private final IStationService stationService;
@@ -34,7 +34,7 @@ public class StationController {
         return new ResponseEntity<>(stationService.deleteStation(id), HttpStatus.OK);
     }
 
-    @GetMapping("/{name}")
+    @GetMapping("/check/{name}")
     public ResponseEntity<?> chechDuplicateStationName(@PathVariable String name) {
         return new ResponseEntity<>(stationService.checkDuplicateStationName(name), HttpStatus.OK);
     }

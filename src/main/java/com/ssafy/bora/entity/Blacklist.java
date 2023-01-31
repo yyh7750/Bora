@@ -2,7 +2,6 @@ package com.ssafy.bora.entity;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
 import javax.persistence.*;
 
 @Entity

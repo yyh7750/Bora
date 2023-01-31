@@ -1,6 +1,5 @@
 package com.ssafy.bora.repository.user;
 
-import com.ssafy.bora.dto.BlacklistDTO;
 import com.ssafy.bora.entity.Blacklist;
 import com.ssafy.bora.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;

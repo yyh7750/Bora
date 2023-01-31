@@ -1,7 +1,6 @@
 package com.ssafy.bora.service.user;
 
 import com.ssafy.bora.dto.BlacklistDTO;
-import com.ssafy.bora.dto.UserDTO;
 import com.ssafy.bora.entity.Blacklist;
 
 import java.util.List;
