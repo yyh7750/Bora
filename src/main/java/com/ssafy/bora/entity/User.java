@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -39,17 +40,21 @@ public class User {
     private boolean status;
 
     public User updateUser(UserDTO updateUser) {
-        if (updateUser.getName() != null && !updateUser.getName().isBlank()) {
-            this.name = updateUser.getName();
-        }
-        if (updateUser.getNickName() != null && !updateUser.getNickName().isBlank()) {
-            this.nickName = updateUser.getNickName();
-        }
+        this.name = updateUser.getName();
+        this.nickName = updateUser.getNickName();
         return this;
     }
 
     public User deleteUser() {
         this.isDelete = true;
         return this;
+    }
+
+    public void createStation(){
+        this.status = true;
+    }
+
+    public void deleteStation(){
+        this.status = false;
     }
 }

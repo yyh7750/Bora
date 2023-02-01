@@ -10,4 +10,6 @@ public interface IStationRepository extends JpaRepository<Station, User> {
 
     @Query(value = "select s from Station s where s.id=:djId")
     Station findStationByDjId(@Param("djId") String djId);
+
+    Station findByName(String name);
 }

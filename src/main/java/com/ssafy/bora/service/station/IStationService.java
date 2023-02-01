@@ -8,9 +8,9 @@ public interface IStationService {
 
     StationDTO findStationByDjId(String djId);
 
-    int updateStationInfo(StationDTO stationDTO);
+    StationDTO updateStationInfo(StationDTO stationDTO);
 
-    int deleteStation(String djId);
+    Boolean deleteStation(String djId);
 
     Boolean checkDuplicateStationName(String name);
 }

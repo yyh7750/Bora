@@ -1,20 +1,15 @@
 package com.ssafy.bora.entity;
 
 import com.ssafy.bora.dto.StationDTO;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-
+import lombok.*;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Entity
 @Getter
+@Setter
 @NoArgsConstructor
-@AllArgsConstructor
-@Builder
 public class Station implements Serializable {
 
     @Id
@@ -55,27 +50,40 @@ public class Station implements Serializable {
     private Boolean sat;
 
     private Boolean sun;
+//
+//    public Station createStationWithDTO(User dj, StationDTO stationDTO) {
+//        return Station.builder()
+//                .user(dj)
+//                .category(stationDTO.getCategory())
+//                .startTime(stationDTO.getStartTime())
+//                .endTime(stationDTO.getEndTime())
+//                .description(stationDTO.getDescription())
+//                .name(stationDTO.getName())
+//                .notice(stationDTO.getNotice())
+//                .mon(stationDTO.getMon())
+//                .tue(stationDTO.getTue())
+//                .wen(stationDTO.getWen())
+//                .thu(stationDTO.getThu())
+//                .fri(stationDTO.getFri())
+//                .sat(stationDTO.getSat())
+//                .sun(stationDTO.getSun())
+//                .build();
+//    }
 
-    public Station convertStationDtoToEntity(User dj, StationDTO stationDTO) {
-        return Station.builder()
-                .user(dj)
-                .category(stationDTO.getCategory())
-                .startTime(stationDTO.getStartTime())
-                .endTime(stationDTO.getEndTime())
-                .description(stationDTO.getDescription())
-                .name(stationDTO.getName())
-                .notice(stationDTO.getNotice())
-                .mon(stationDTO.getMon())
-                .tue(stationDTO.getTue())
-                .wen(stationDTO.getWen())
-                .thu(stationDTO.getThu())
-                .fri(stationDTO.getFri())
-                .sat(stationDTO.getSat())
-                .sun(stationDTO.getSun())
-                .build();
-    }
-
-    public void updateStation(StationDTO stationDTO) {
-        
+    public void convertDtoToStation(User dj, StationDTO stationDTO) {
+        this.user = dj;
+        this.category = stationDTO.getCategory();
+        this.startTime = stationDTO.getStartTime();
+        this.endTime = stationDTO.getEndTime();
+        this.description = stationDTO.getDescription();
+        this.name = stationDTO.getName();
+        this.notice = stationDTO.getNotice();
+        this.mon = stationDTO.getMon();
+        this.tue = stationDTO.getTue();
+        this.wen = stationDTO.getWen();
+        this.thu = stationDTO.getThu();
+        this.fri = stationDTO.getFri();
+        this.sat = stationDTO.getSat();
+        this.sun = stationDTO.getSun();
     }
 }

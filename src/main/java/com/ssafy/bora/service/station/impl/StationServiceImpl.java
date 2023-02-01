@@ -22,34 +22,57 @@ public class StationServiceImpl implements IStationService {
     public StationDTO createStation(StationDTO stationDTO) {
         // Station Entity에 들어갈 방송국을 개설하는 Dj 정보
         User dj = userRepository.findById(stationDTO.getUserId()).get();
-        Station station = new Station().convertStationDtoToEntity(dj, stationDTO);
-        Station registedStation = stationRepository.save(station);
-        return new StationDTO().convertStationEntityToDTO(registedStation);
+
+        // 요청받은 DTO 정보를 Entity에 추가
+        Station station = new Station();
+        station.convertDtoToStation(dj, stationDTO);
+
+        // 방송국 status 변경 및 save
+        dj.createStation();
+        Station registeredStation = stationRepository.save(station);
+
+        StationDTO registeredStationDTO = new StationDTO();
+        registeredStationDTO.convertStationToDTO(registeredStation);
+
+        return registeredStationDTO;
     }
 
     @Override
     public StationDTO findStationByDjId(String djId) {
         Station findStation = stationRepository.findStationByDjId(djId);
-        return new StationDTO().convertStationEntityToDTO(findStation);
+        StationDTO findStationDTO = new StationDTO();
+        findStationDTO.convertStationToDTO(findStation);
+        return findStationDTO;
     }
 
     @Override
-    public int updateStationInfo(StationDTO stationDTO) {
+    public StationDTO updateStationInfo(StationDTO stationDTO) {
         String djId = stationDTO.getUserId();
-        Station oldStation = stationRepository.findStationByDjId(djId);
-        oldStation.updateStation(stationDTO);
-        return 0;
+        Station station = stationRepository.findStationByDjId(djId);
+
+        station.convertDtoToStation(station.getUser(), stationDTO);
+
+        StationDTO newStationDTO = new StationDTO();
+        newStationDTO.convertStationToDTO(station);
+        return newStationDTO;
     }
 
+    // 로직에는 있지만 실제 기능에선 사용하지 않는 메소드
     @Override
-    public int deleteStation(String djId) {
+    public Boolean deleteStation(String djId) {
+        User dj = userRepository.findById(djId).get();
+        dj.deleteStation();
 
-        return 0;
+        // 삭제 완료 됐다면 true 반환
+        return !dj.isStatus();
     }
 
     @Override
     public Boolean checkDuplicateStationName(String name) {
-
-        return null;
+        Station findStation = stationRepository.findByName(name);
+        if (findStation != null) {
+            return false;
+        }
+        return true;
     }
 }
