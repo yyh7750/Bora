@@ -29,4 +29,19 @@ public class StoryBoxServiceImpl implements IStoryBoxService {
     public ResStoryBoxDTO findByDjIdAndStoryBoxId(String djId, int storyBoxId) {
         return null;
     }
+
+    @Override
+    public ResStoryBoxDTO deleteOneStoryBoxByDj(int storyBoxId) {
+        return null;
+    }
+
+    @Override
+    public int deleteStoryBoxListByDj() {
+        return 0;
+    }
+
+    @Override
+    public ResStoryBoxDTO findMyStoryBoxOfDj(String djId, String viewerId) {
+        return null;
+    }
 }

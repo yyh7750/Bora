@@ -35,7 +35,7 @@ public interface IStoryBoxService {
     ResStoryBoxDTO findMyStoryBoxOfDj(String djId, String viewerId);
 
     // 사연함 수정 (시청자)
-    ResStoryBoxDTO
+//    ResStoryBoxDTO
 
     // 사연함 전체 삭제 (방송 끝나는 시점에 일괄처리)
 }
