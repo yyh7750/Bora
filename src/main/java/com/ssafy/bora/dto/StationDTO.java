@@ -3,7 +3,6 @@ package com.ssafy.bora.dto;
 import com.ssafy.bora.entity.Station;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
 import java.time.LocalDateTime;
 
 @Getter
@@ -24,19 +23,19 @@ public class StationDTO {
 
     private String category;
 
-    private Boolean mon;
+    private boolean mon;
 
-    private Boolean tue;
+    private boolean tue;
 
-    private Boolean wen;
+    private boolean wen;
 
-    private Boolean thu;
+    private boolean thu;
 
-    private Boolean fri;
+    private boolean fri;
 
-    private Boolean sat;
+    private boolean sat;
 
-    private Boolean sun;
+    private boolean sun;
 
 //    public StationDTO convertStationEntityToDTO(Station station){
 //        return StationDTO.builder()
@@ -65,12 +64,12 @@ public class StationDTO {
         this.description = station.getDescription();
         this.name = station.getName();
         this.notice = station.getNotice();
-        this.mon = station.getMon();
-        this.tue = station.getTue();
-        this.wen = station.getWen();
-        this.thu = station.getThu();
-        this.fri = station.getFri();
-        this.sat = station.getSat();
-        this.sun = station.getSun();
+        this.mon = station.isMon();
+        this.tue = station.isTue();
+        this.wen = station.isWen();
+        this.thu = station.isThu();
+        this.fri = station.isFri();
+        this.sat = station.isSat();
+        this.sun = station.isSun();
     }
 }

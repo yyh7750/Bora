@@ -2,7 +2,6 @@ package com.ssafy.bora.entity;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -13,13 +12,14 @@ import java.time.LocalDate;
 public class StoryBox implements Serializable {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "dj_id")
     private User dj;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "writer_id")
-    private User writer;
+    private String writerId;
 
     @Column(length = 64)
     private String title;

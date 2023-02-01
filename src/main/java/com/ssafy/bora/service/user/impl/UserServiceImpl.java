@@ -22,22 +22,21 @@ public class UserServiceImpl implements IUserService {
         return userDTO;
     }
 
+    // 유저 닉네임 수정
     @Override
-    public UserDTO updateUserById(UserDTO updateUserInfo) {
+    public UserDTO updateUserNickNameById(UserDTO updateUserInfo) {
         User oldUser = userRepository.findById(updateUserInfo.getId()).get();
-        UserDTO newUser = new UserDTO(oldUser.updateUser(updateUserInfo));
+        UserDTO newUser = new UserDTO(oldUser.updateUser(updateUserInfo.getNickName()));
         return newUser;
     }
 
     @Override
     public UserDTO deleteUserById(String id) {
         User findUser = userRepository.findById(id).get();
-        if (findUser != null && !findUser.isStatus()) {
+        if (findUser != null) {
             UserDTO deleteUser = new UserDTO(findUser.deleteUser());
             return deleteUser;
         }
-        // 방송국이 있을 경우 (status ture) 로직을 새로 짜줘야함
-        
         return null;
     }
 }

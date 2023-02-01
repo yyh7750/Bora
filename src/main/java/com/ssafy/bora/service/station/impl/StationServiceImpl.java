@@ -23,7 +23,7 @@ public class StationServiceImpl implements IStationService {
         // Station Entity에 들어갈 방송국을 개설하는 Dj 정보
         User dj = userRepository.findById(stationDTO.getUserId()).get();
 
-        // 요청받은 DTO 정보를 Entity에 추가
+        // 요청받은 DTO 정보를 Entity로 변환
         Station station = new Station();
         station.convertDtoToStation(dj, stationDTO);
 
@@ -50,8 +50,10 @@ public class StationServiceImpl implements IStationService {
         String djId = stationDTO.getUserId();
         Station station = stationRepository.findStationByDjId(djId);
 
+        // 업데이트 실행
         station.convertDtoToStation(station.getUser(), stationDTO);
 
+        // 업데이트 된 엔티티를 DTO로 변환하여 반환
         StationDTO newStationDTO = new StationDTO();
         newStationDTO.convertStationToDTO(station);
         return newStationDTO;

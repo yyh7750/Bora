@@ -32,6 +32,7 @@ public class User {
     @Column(name = "nick_name", length = 10)
     private String nickName;
 
+    // 문자열 변경 예정
     @Type(type = "json")
     private Map<String, String> playlist;
 
@@ -39,9 +40,8 @@ public class User {
 
     private boolean status;
 
-    public User updateUser(UserDTO updateUser) {
-        this.name = updateUser.getName();
-        this.nickName = updateUser.getNickName();
+    public User updateUser(String nickName) {
+        this.nickName = nickName;
         return this;
     }
 

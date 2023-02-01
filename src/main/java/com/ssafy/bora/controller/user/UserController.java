@@ -26,7 +26,7 @@ public class UserController {
 
     @PatchMapping
     public ResponseEntity<?> updateUserById(@RequestBody UserDTO userDTO) {
-        return new ResponseEntity<>(userService.updateUserById(userDTO), HttpStatus.OK);
+        return new ResponseEntity<>(userService.updateUserNickNameById(userDTO), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")

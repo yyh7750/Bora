@@ -6,7 +6,7 @@ public interface IUserService {
 
     public UserDTO findUserById(String id);
 
-    public UserDTO updateUserById(UserDTO user);
+    public UserDTO updateUserNickNameById(UserDTO user);
 
     public UserDTO deleteUserById(String id);
 

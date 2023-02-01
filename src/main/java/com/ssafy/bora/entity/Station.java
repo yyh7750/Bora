@@ -37,36 +37,36 @@ public class Station implements Serializable {
     @Column(length = 16)
     private String category;
 
-    private Boolean mon;
+    private boolean mon;
 
-    private Boolean tue;
+    private boolean tue;
 
-    private Boolean wen;
+    private boolean wen;
 
-    private Boolean thu;
+    private boolean thu;
 
-    private Boolean fri;
+    private boolean fri;
 
-    private Boolean sat;
+    private boolean sat;
 
-    private Boolean sun;
+    private boolean sun;
 //
 //    public Station createStationWithDTO(User dj, StationDTO stationDTO) {
-//        return Station.builder()
-//                .user(dj)
-//                .category(stationDTO.getCategory())
-//                .startTime(stationDTO.getStartTime())
-//                .endTime(stationDTO.getEndTime())
-//                .description(stationDTO.getDescription())
-//                .name(stationDTO.getName())
-//                .notice(stationDTO.getNotice())
-//                .mon(stationDTO.getMon())
-//                .tue(stationDTO.getTue())
-//                .wen(stationDTO.getWen())
-//                .thu(stationDTO.getThu())
-//                .fri(stationDTO.getFri())
-//                .sat(stationDTO.getSat())
-//                .sun(stationDTO.getSun())
+////        return Station.builder()
+////                .user(dj)
+////                .category(stationDTO.getCategory())
+////                .startTime(stationDTO.getStartTime())
+////                .endTime(stationDTO.getEndTime())
+////                .description(stationDTO.getDescription())
+////                .name(stationDTO.getName())
+////                .notice(stationDTO.getNotice())
+////                .mon(stationDTO.getMon())
+////                .tue(stationDTO.getTue())
+////                .wen(stationDTO.getWen())
+////                .thu(stationDTO.getThu())
+////                .fri(stationDTO.getFri())
+////                .sat(stationDTO.getSat())
+////                .sun(stationDTO.getSun())
 //                .build();
 //    }
 
@@ -78,12 +78,12 @@ public class Station implements Serializable {
         this.description = stationDTO.getDescription();
         this.name = stationDTO.getName();
         this.notice = stationDTO.getNotice();
-        this.mon = stationDTO.getMon();
-        this.tue = stationDTO.getTue();
-        this.wen = stationDTO.getWen();
-        this.thu = stationDTO.getThu();
-        this.fri = stationDTO.getFri();
-        this.sat = stationDTO.getSat();
-        this.sun = stationDTO.getSun();
+        this.mon = stationDTO.isMon();
+        this.tue = stationDTO.isTue();
+        this.wen = stationDTO.isWen();
+        this.thu = stationDTO.isThu();
+        this.fri = stationDTO.isFri();
+        this.sat = stationDTO.isSat();
+        this.sun = stationDTO.isSun();
     }
 }
