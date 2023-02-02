@@ -12,6 +12,7 @@ public interface IStoryBoxService {
 
     /**
      * desc: 사연함 목록 조회 (dj)
+     *
      * @param djId
      * @return
      */
@@ -19,6 +20,7 @@ public interface IStoryBoxService {
 
     /**
      * desc: 사연함 상세 조회 (dj)
+     *
      * @param djId
      * @param storyBoxId
      * @return
@@ -35,7 +37,8 @@ public interface IStoryBoxService {
     ResStoryBoxDTO findMyStoryBoxOfDj(String djId, String viewerId);
 
     // 사연함 수정 (시청자)
-    ResStoryBoxDTO
+    ResStoryBoxDTO updateStoryBox(ReqStoryBoxDTO updateStoryBoxDTO);
 
     // 사연함 전체 삭제 (방송 끝나는 시점에 일괄처리)
+
 }
