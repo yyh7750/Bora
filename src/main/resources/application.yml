@@ -5,7 +5,7 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/bora?serverTimezone=UTC&characterEncoding=UTF-8
+    url: jdbc:mysql://i8b301t.p.ssafy.io:3306/bora?serverTimezone=UTC&characterEncoding=UTF-8
     username: ssafy
     password: ssafy
   jpa:

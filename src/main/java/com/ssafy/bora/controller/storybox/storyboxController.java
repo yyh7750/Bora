@@ -69,7 +69,7 @@ public class storyboxController {
         if(resStoryBoxDTO != null){
             return new ResponseEntity<>(resStoryBoxDTO, HttpStatus.OK);
         }
-        // 에러 코드 뭐넣지
+        // TODO: 에러 코드 뭐넣지
         return new ResponseEntity<>("업데이트 오류", HttpStatus.UNPROCESSABLE_ENTITY);
     }
 }
