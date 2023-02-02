@@ -393,3 +393,12 @@ OAuth2 공부
 OAuth2 공부
 [ Spring Security란? ]
 Spring Security는 Spring 기반의 애플리케이션의 보안(인증과 권한, 인가 등)을 담당하는 스프링 하위 프레임워크이다. Spring Security는 '인증'과 '권한'에 대한 부분을 Filter 흐름에 따라 처리하고 있다. Filter는 Dispatcher Servlet으로 가기 전에 적용되므로 가장 먼저 URL 요청을 받지만, Interceptor는 Dispatcher와 Controller사이에 위치한다는 점에서 적용 시기의 차이가 있다. Spring Security는 보안과 관련해서 체계적으로 많은 옵션을 제공해주기 때문에 개발자 입장에서는 일일이 보안관련 로직을 작성하지 않아도 된다는 장점이 있다.
+
+-------------
+2023 -02-02
+docker 공부
+1. Docker 이미지 수동저장
+docker save <docker image name> | gzip > <docker image name>.tar.gz
+빌드한 이미지가 있는 머신에서 위의 명령어를 통해 압축 이미지 파일을 생성할 수 있다. <docker image name> 부분은 빌드한 이미지 이름으로 대체해서 명령어를 실행하면 압축 이미지 파일이 생성된다.
+2. Docker 이미지 수동배포
+zcat <docker image name>.tar.gz | docker load
