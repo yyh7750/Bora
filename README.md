@@ -9,8 +9,8 @@
 | :white_check_mark: Desktop Web | :black_square_button: AI | :white_check_mark: JavaScript | :black_square_button: Vue.js |
 | :black_square_button: Mobile Web | :black_square_button: Big Data | :black_square_button: TypeScript | :white_check_mark: React |
 | :white_check_mark: Responsive Web | :black_square_button: Blockchain | :black_square_button: C/C++ | :black_square_button: Angular |
-| :black_square_button: Android App | :black_square_button: IoT | :black_square_button: C# | :black_square_button: Node.js |
-| :black_square_button: iOS App | :black_square_button: AR/VR/Metaverse | :white_check_mark: Python | :white_check_mark: Flask/Django |
+| :black_square_button: Android App | :black_square_button: IoT | :black_square_button: C# | :white_check_mark: Node.js |
+| :black_square_button: iOS App | :black_square_button: AR/VR/Metaverse | :black_square_button: Python | :white_check_mark: Flask/Django |
 | :black_square_button: Desktop App | :black_square_button: Game | :white_check_mark: Java | :white_check_mark: Spring/Springboot |
 | | | :black_square_button: Kotlin | |
 
@@ -57,5 +57,5 @@
 * 김대은: https://lab.ssafy.com/s08-webmobile1-sub2/S08P12B301/-/blob/study/daeeun/%EA%B9%80%EB%8C%80%EC%9D%80.md
 * 유영훈: 프로젝트 전반적인 REST API 개발 진행 중. 브랜치명 : back_user (url : https://lab.ssafy.com/s08-webmobile1-sub2/S08P12B301/-/tree/back_user)
 * 이상민: 
-* 김승완: 
+* 김승완: https://lab.ssafy.com/s08-webmobile1-sub2/S08P12B301/-/blob/study/SeungwanKim/%EA%B9%80%EC%8A%B9%EC%99%84.md
 * 김이슬: 
