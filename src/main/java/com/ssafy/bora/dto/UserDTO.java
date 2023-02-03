@@ -22,12 +22,14 @@ public class UserDTO {
 
     private boolean status;
 
-    public UserDTO(User findUser) {
-        this.id = findUser.getId();
-        this.name = findUser.getName();
-        this.nickName = findUser.getNickName();
-        this.playlist = findUser.getPlaylist();
-        this.isDelete = findUser.isDelete();
-        this.status = findUser.isStatus();
+    public static UserDTO convertEntityToDTO(User findUser) {
+        UserDTO userDTO = new UserDTO();
+        userDTO.id = findUser.getId();
+        userDTO.name = findUser.getName();
+        userDTO.nickName = findUser.getNickName();
+        userDTO.playlist = findUser.getPlaylist();
+        userDTO.isDelete = findUser.isDelete();
+        userDTO.status = findUser.isStatus();
+        return userDTO;
     }
 }

@@ -18,7 +18,7 @@ public class UserServiceImpl implements IUserService {
     @Override
     public UserDTO findUserById(String id) {
         User findUser = userRepository.findById(id).get();
-        UserDTO userDTO = new UserDTO(findUser);
+        UserDTO userDTO = UserDTO.convertEntityToDTO(findUser);
         return userDTO;
     }
 
@@ -26,7 +26,7 @@ public class UserServiceImpl implements IUserService {
     @Override
     public UserDTO updateUserNickNameById(UserDTO updateUserInfo) {
         User oldUser = userRepository.findById(updateUserInfo.getId()).get();
-        UserDTO newUser = new UserDTO(oldUser.updateUser(updateUserInfo.getNickName()));
+        UserDTO newUser = UserDTO.convertEntityToDTO(oldUser.updateUser(updateUserInfo.getNickName()));
         return newUser;
     }
 
@@ -34,7 +34,7 @@ public class UserServiceImpl implements IUserService {
     public UserDTO deleteUserById(String id) {
         User findUser = userRepository.findById(id).get();
         if (findUser != null) {
-            UserDTO deleteUser = new UserDTO(findUser.deleteUser());
+            UserDTO deleteUser = UserDTO.convertEntityToDTO(findUser.deleteUser());
             return deleteUser;
         }
         return null;

@@ -37,39 +37,22 @@ public class StationDTO {
 
     private boolean sun;
 
-//    public StationDTO convertStationEntityToDTO(Station station){
-//        return StationDTO.builder()
-//                .userId(station.getUser().getId())
-//                .category(station.getCategory())
-//                .startTime(station.getStartTime())
-//                .endTime(station.getEndTime())
-//                .description(station.getDescription())
-//                .name(station.getName())
-//                .notice(station.getNotice())
-//                .mon(station.getMon())
-//                .tue(station.getTue())
-//                .wen(station.getWen())
-//                .thu(station.getThu())
-//                .fri(station.getFri())
-//                .sat(station.getSat())
-//                .sun(station.getSun())
-//                .build();
-//    }
-
-    public void convertStationToDTO(Station station) {
-        this.userId = station.getUser().getId();
-        this.category = station.getCategory();
-        this.startTime = station.getStartTime();
-        this.endTime = station.getEndTime();
-        this.description = station.getDescription();
-        this.name = station.getName();
-        this.notice = station.getNotice();
-        this.mon = station.isMon();
-        this.tue = station.isTue();
-        this.wen = station.isWen();
-        this.thu = station.isThu();
-        this.fri = station.isFri();
-        this.sat = station.isSat();
-        this.sun = station.isSun();
+    public static StationDTO convertStationToDTO(Station station) {
+        StationDTO stationDTO = new StationDTO();
+        stationDTO.userId = station.getUser().getId();
+        stationDTO.category = station.getCategory();
+        stationDTO.startTime = station.getStartTime();
+        stationDTO.endTime = station.getEndTime();
+        stationDTO.description = station.getDescription();
+        stationDTO.name = station.getName();
+        stationDTO.notice = station.getNotice();
+        stationDTO.mon = station.isMon();
+        stationDTO.tue = station.isTue();
+        stationDTO.wen = station.isWen();
+        stationDTO.thu = station.isThu();
+        stationDTO.fri = station.isFri();
+        stationDTO.sat = station.isSat();
+        stationDTO.sun = station.isSun();
+        return stationDTO;
     }
 }

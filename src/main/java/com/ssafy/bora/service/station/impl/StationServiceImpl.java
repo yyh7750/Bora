@@ -24,24 +24,21 @@ public class StationServiceImpl implements IStationService {
         User dj = userRepository.findById(stationDTO.getUserId()).get();
 
         // 요청받은 DTO 정보를 Entity로 변환
-        Station station = new Station();
-        station.convertDtoToStation(dj, stationDTO);
+        Station station = Station.convertDtoToStation(dj, stationDTO);
 
         // 방송국 status 변경 및 save
         dj.createStation();
         Station registeredStation = stationRepository.save(station);
 
-        StationDTO registeredStationDTO = new StationDTO();
-        registeredStationDTO.convertStationToDTO(registeredStation);
-
+        // DTO로 변환
+        StationDTO registeredStationDTO = StationDTO.convertStationToDTO(registeredStation);
         return registeredStationDTO;
     }
 
     @Override
     public StationDTO findStationByDjId(String djId) {
         Station findStation = stationRepository.findStationByDjId(djId);
-        StationDTO findStationDTO = new StationDTO();
-        findStationDTO.convertStationToDTO(findStation);
+        StationDTO findStationDTO = StationDTO.convertStationToDTO(findStation);
         return findStationDTO;
     }
 
@@ -54,8 +51,7 @@ public class StationServiceImpl implements IStationService {
         station.convertDtoToStation(station.getUser(), stationDTO);
 
         // 업데이트 된 엔티티를 DTO로 변환하여 반환
-        StationDTO newStationDTO = new StationDTO();
-        newStationDTO.convertStationToDTO(station);
+        StationDTO newStationDTO = StationDTO.convertStationToDTO(station);
         return newStationDTO;
     }
 

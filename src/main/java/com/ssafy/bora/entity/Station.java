@@ -50,40 +50,23 @@ public class Station implements Serializable {
     private boolean sat;
 
     private boolean sun;
-//
-//    public Station createStationWithDTO(User dj, StationDTO stationDTO) {
-////        return Station.builder()
-////                .user(dj)
-////                .category(stationDTO.getCategory())
-////                .startTime(stationDTO.getStartTime())
-////                .endTime(stationDTO.getEndTime())
-////                .description(stationDTO.getDescription())
-////                .name(stationDTO.getName())
-////                .notice(stationDTO.getNotice())
-////                .mon(stationDTO.getMon())
-////                .tue(stationDTO.getTue())
-////                .wen(stationDTO.getWen())
-////                .thu(stationDTO.getThu())
-////                .fri(stationDTO.getFri())
-////                .sat(stationDTO.getSat())
-////                .sun(stationDTO.getSun())
-//                .build();
-//    }
 
-    public void convertDtoToStation(User dj, StationDTO stationDTO) {
-        this.user = dj;
-        this.category = stationDTO.getCategory();
-        this.startTime = stationDTO.getStartTime();
-        this.endTime = stationDTO.getEndTime();
-        this.description = stationDTO.getDescription();
-        this.name = stationDTO.getName();
-        this.notice = stationDTO.getNotice();
-        this.mon = stationDTO.isMon();
-        this.tue = stationDTO.isTue();
-        this.wen = stationDTO.isWen();
-        this.thu = stationDTO.isThu();
-        this.fri = stationDTO.isFri();
-        this.sat = stationDTO.isSat();
-        this.sun = stationDTO.isSun();
+    public static Station convertDtoToStation(User dj, StationDTO stationDTO) {
+        Station station = new Station();
+        station.user = dj;
+        station.category = stationDTO.getCategory();
+        station.startTime = stationDTO.getStartTime();
+        station.endTime = stationDTO.getEndTime();
+        station.description = stationDTO.getDescription();
+        station.name = stationDTO.getName();
+        station.notice = stationDTO.getNotice();
+        station.mon = stationDTO.isMon();
+        station.tue = stationDTO.isTue();
+        station.wen = stationDTO.isWen();
+        station.thu = stationDTO.isThu();
+        station.fri = stationDTO.isFri();
+        station.sat = stationDTO.isSat();
+        station.sun = stationDTO.isSun();
+        return station;
     }
 }

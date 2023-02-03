@@ -1,6 +1,6 @@
 package com.ssafy.bora.controller.user;
 
-import com.ssafy.bora.dto.BlacklistDTO;
+import com.ssafy.bora.dto.blacklist.ReqBlacklistDTO;
 import com.ssafy.bora.dto.UserDTO;
 import com.ssafy.bora.service.user.IBlacklistService;
 import com.ssafy.bora.service.user.IUserService;
@@ -42,7 +42,7 @@ public class UserController {
     // * start blacklist controller
 
     @PostMapping("/blacklist")
-    public ResponseEntity<?> registBlackList(@RequestBody BlacklistDTO blacklist) {
+    public ResponseEntity<?> registBlackList(@RequestBody ReqBlacklistDTO blacklist) {
         return new ResponseEntity<>(blacklistService.registBlacklist(blacklist), HttpStatus.CREATED);
     }
 
@@ -52,8 +52,8 @@ public class UserController {
     }
 
     @DeleteMapping("/blacklist")
-    public ResponseEntity<?> deleteBlacklist(@RequestBody BlacklistDTO blacklistDTO) {
-        int result = blacklistService.deleteBlacklist(blacklistDTO);
+    public ResponseEntity<?> deleteBlacklist(@RequestBody ReqBlacklistDTO reqBlacklistDTO) {
+        int result = blacklistService.deleteBlacklist(reqBlacklistDTO);
         if (result > 0) {
             return new ResponseEntity<>(result, HttpStatus.OK);
         }
