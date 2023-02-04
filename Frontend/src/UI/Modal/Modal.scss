@@ -1,0 +1,39 @@
+.modal {
+  display: block;
+  position: absolute;
+  width: 300px;
+  height: 200px;
+  border: 2px solid #d8a3ff;
+  border-radius: 15px;
+  color: #000000;
+  overflow: hidden;
+  background-color: #d8a3ff;
+  transition: color 0s 0.1s;
+  text-align: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.modalInfo {
+  padding-top: 15%;
+  font-weight: bold;
+}
+
+.modalButton {
+  width: 70px;
+  height: 35px;
+  border: none;
+  border-radius: 15px;
+  background-color: #c9c9c9;
+  color: black;
+  font-weight: bold;
+  margin-top: 10px;
+  box-shadow: 0 6px 10px -2px gray;
+}
+
+.closeButton {
+  float: right;
+  margin-right: 5px;
+  margin-top: 3px;
+}

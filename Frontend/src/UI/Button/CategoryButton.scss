@@ -1,0 +1,49 @@
+.ctButton {
+  display: block;
+  position: relative;
+  padding: 5px 20px 5px 20px;
+  border: 3px solid #b969df;
+  border-radius: 8px;
+  color: #fff;
+  overflow: hidden;
+  background-color: transparent;
+  transition: color 0s 0.1s;
+  font-weight: bold;
+  font-size: 20px;
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    transform: translateY(-100%);
+    transition: transform 0.25s cubic-bezier(0.65, 0.05, 0.36, 1);
+    color: #b969df;
+
+    z-index: -1;
+  }
+  &::before {
+    background-color: #b969df;
+    transition-delay: 0.025s;
+  }
+  &::after {
+    background-color: #b969df;
+  }
+  &:hover {
+    animation: ctButton 1s ease infinite;
+    -moz-animation: ctButton 1s ease infinite;
+    -webkit-animation: ctButton 1s ease infinite;
+    color: #000;
+    &::before,
+    &::after {
+      transform: translateY(0%);
+      transition: transform 0.25s cubic-bezier(0.65, 0.05, 0.36, 1);
+    }
+    &::after {
+      transition-delay: 0.025s;
+    }
+  }
+}
