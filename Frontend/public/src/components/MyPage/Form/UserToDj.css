@@ -1,0 +1,221 @@
+/* button {
+  margin-left: 1rem;
+  background: #d8a3ff;
+  color: #191919;
+  border: none;
+  position: relative;
+  height: 40px;
+  font-size: 17px;
+  font-weight: 700;
+  padding: 0 1em;
+  cursor: pointer;
+  transition: 800ms ease all;
+  outline: none;
+  border-radius: 30px;
+}
+button:hover {
+  background: #191919;
+  color: #d8a3ff;
+}
+button:before,
+button:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 2px;
+  width: 0;
+  background: #d8a3ff;
+  transition: 400ms ease all;
+}
+button:after {
+  right: inherit;
+  top: inherit;
+  left: 0;
+  bottom: 0;
+}
+button:hover:before,
+button:hover:after {
+  width: 100%;
+  transition: 800ms ease all;
+}
+#buttonFirst {
+  padding: 10px 0;
+  font-family: "Lato", sans-serif;
+  color: #191919;
+  text-align: center;
+}
+.button-wrapper {
+  display: inline-block;
+  padding: 5px;
+}
+.dark-button,
+.dark-button-2 {
+  background: #191919;
+}
+.button {
+  background: #d8a3ff;
+  border: none;
+  padding: 1px;
+  cursor: pointer;
+  display: block;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.35s ease-in-out 0.35s;
+  margin: 0 auto;
+  width: 100px;
+  text-align: center;
+  border-radius: 30px;
+  border-color: #d8a3ff;
+  border: 2px solid #d8a3ff;
+}
+.light-button .button,
+.light-button .button #button {
+  background: #191919;
+  color: #d8a3ff;
+}
+.light-button .button:after,
+.light-button .button:before,
+.light-button .button:hover #button {
+  background: #d8a3ff;
+  color: #191919;
+}
+.light-button-2 .button,
+.light-button-2 .button #button {
+  background: #191919;
+  color: #d8a3ff;
+}
+.light-button-2 .button:after,
+.light-button-2 .button:before,
+.light-button-2 .button:hover #button {
+  background: #d8a3ff;
+  color: #191919;
+}
+#button {
+  display: block;
+  padding: 5px 5px;
+  background: #d8a3ff;
+  z-index: 100;
+  position: relative;
+  transition: all 0.35s ease-in-out 0.35s;
+}
+.button:hover #button {
+  background: white;
+  color: #ffe4ff;
+  transition: all 0.35s ease-in-out 0.35s;
+}
+.button:after {
+  bottom: -100%;
+  right: -100%;
+  content: "";
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background: white;
+  transition: all 0.35s ease-in-out 0.5s;
+}
+.button:hover:after {
+  right: 0;
+  bottom: 0;
+  transition: all ease-in-out 0.35s;
+}
+.button:before {
+  top: -100%;
+  left: -100%;
+  content: "";
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background: white;
+  transition: all 0.35s ease-in-out 0.5s;
+}
+.button:hover:before {
+  left: 0;
+  top: 0;
+  transition: all ease-in-out 0.35s;
+} */
+fieldset {
+  border-color: #000000;
+  color: white;
+  font-weight: bold;
+  font-size: 23px;
+}
+.circle {
+  background-color: #191919;
+  width: 150px;
+  height: 150px;
+  border-radius: 75px;
+  text-align: center;
+  font-size: 12px;
+  vertical-align: middle;
+  line-height: 150px;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  margin-left: 1rem;
+  float: left;
+}
+.trainerInfo {
+  float: left;
+  margin-left: 5rem;
+  margin-right: 5rem;
+  color: #d1d1d1;
+  font-size: 18px;
+}
+.trainerInfo2 {
+  float: left;
+  margin-left: 13rem;
+}
+
+.content {
+  color: #d1d1d1;
+  font-size: 14px;
+}
+.playlist {
+  width: 150px;
+  height: 150px;
+}
+
+.container {
+  float: left;
+}
+
+.nickname {
+  color: #ffffff;
+  font-size: 25px;
+  margin-top: 2rem;
+}
+
+.lister {
+  width: 150px;
+  color: #ffffff;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: 700;
+  width: 60px;
+  text-align: center;
+}
+
+.lister {
+  width: 150px;
+  color: #d8a3ff;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: 700;
+  width: 60px;
+  text-align: center;
+}
+
+.listercnt {
+  width: 150px;
+  color: #ffffff;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: 700;
+  margin-left: 0.5rem;
+  width: 60px;
+  text-align: center;
+}
+
+.infoTop {
+  display: flex;
+}

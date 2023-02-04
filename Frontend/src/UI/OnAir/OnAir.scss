@@ -1,0 +1,65 @@
+@font-face {
+  font-family: neon;
+  src: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/707108/neon.ttf);
+}
+
+.onAir {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+
+.container {
+  width: 80%;
+  min-height: 440px;
+  min-height: 400px;
+  position: absolute;
+  margin-top: 2rem;
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+  border: 8px solid #e2b8ff;
+  border-style: double;
+  border-radius: 20px;
+  z-index: 4;
+}
+
+.neon {
+  position: absolute;
+  z-index: 3;
+  width: 150px;
+  height: 60px;
+  top: -40px;
+  left: 44%;
+  font-family: neon;
+  color: #742e8e;
+  font-size: 40px;
+  line-height: 9vw;
+  text-shadow: 0 0 3vw #742e8e;
+  background-color: #13161f;
+  line-height: 60px;
+  border: 8px solid #e2b8ff;
+  border-style: double;
+  border-radius: 20px;
+  margin: auto;
+}
+
+.neon {
+  animation: neon 1s ease infinite;
+  -moz-animation: neon 1s ease infinite;
+  -webkit-animation: neon 1s ease infinite;
+}
+
+@keyframes neon {
+  0%,
+  100% {
+    text-shadow: 0 0 1vw #742e8e, 0 0 3vw #742e8e, 0 0 10vw #742e8e,
+      0 0 10vw #742e8e, 0 0 0.4vw #e2b8ff, 0.5vw 0.5vw 0.1vw #390b4a;
+    color: #e2b8ff;
+  }
+  50% {
+    text-shadow: 0 0 0.5vw #4d1063, 0 0 1.5vw #4d1063, 0 0 5vw #4d1063,
+      0 0 5vw #4d1063, 0 0 0.2vw #4d1063, 0.5vw 0.5vw 0.1vw #320442;
+    color: #742e8e;
+  }
+}

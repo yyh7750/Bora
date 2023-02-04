@@ -1,0 +1,21 @@
+.myScheduleSwiper {
+  min-width: 500px;
+  min-height: 620px;
+}
+
+.myScheduleSwiper > .swiper-slide {
+  background-position: center;
+  background-size: cover;
+  width: 500px;
+  height: 620px;
+}
+
+.myScheduleSwiper > .swiper-slide img {
+  display: block;
+  width: 100%;
+}
+
+.schedule_img {
+  width: 300px;
+  height: 200px;
+}
