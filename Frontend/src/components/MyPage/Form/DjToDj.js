@@ -1,9 +1,8 @@
 import { Link, Outlet } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import { motion } from "framer-motion";
 import { boardActions } from "../../../store/board";
 import "./UserToDj.scss";
-
-import { motion } from "framer-motion";
 
 import profileImg from "../../../assets/profileimg.jpg";
 import radio from "../../../assets/radio.png";

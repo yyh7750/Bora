@@ -1,6 +1,8 @@
 import { useSelector, useDispatch } from "react-redux";
 import { loginActions } from "../../store/login";
 import axios from "axios";
+
+ 
 import { useEffect } from "react";
 
 const UserRegist = () => {
@@ -10,6 +12,7 @@ const UserRegist = () => {
     window.localStorage.clear();
     window.localStorage.setItem("atk", accessToken);
   }, []);
+  
   const dispatch = useDispatch();
 
   const id = useSelector((state) => state.login.id);

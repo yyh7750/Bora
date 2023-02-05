@@ -12,7 +12,6 @@
 .container {
   width: 80%;
   min-height: 440px;
-  min-height: 400px;
   position: absolute;
   margin-top: 2rem;
   display: table-cell;
@@ -21,6 +20,7 @@
   border: 8px solid #e2b8ff;
   border-style: double;
   border-radius: 20px;
+
   z-index: 4;
 }
 
@@ -37,7 +37,6 @@
   line-height: 9vw;
   text-shadow: 0 0 3vw #742e8e;
   background-color: #13161f;
-  line-height: 60px;
   border: 8px solid #e2b8ff;
   border-style: double;
   border-radius: 20px;

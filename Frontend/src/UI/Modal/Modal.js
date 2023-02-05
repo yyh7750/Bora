@@ -12,6 +12,7 @@ const Modal = (props) => {
   return (
     <Fragment>
       <div className="modal">
+
         <FontAwesomeIcon
           icon={faXmark}
           className="closeButton"
@@ -22,6 +23,7 @@ const Modal = (props) => {
           <br />
           {flag && <span>{value}</span>}
           {flag && <br />}
+
           <button
             className="modalButton"
             style={{ marginRight: "10px" }}

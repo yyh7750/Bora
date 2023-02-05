@@ -1,14 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+
 const initialBlacklistState = {
   showBlacklist: false,
   showBlacklistModal: false,
 };
 
+
 //로그인 관련된 state요소들을 최신화 하는 slice (initialLoginState에 있는 state들을 최신화하는 코드)
 const blacklistSlice = createSlice({
   name: "blacklist",
   initialState: initialBlacklistState,
+
   reducers: {
     openBlacklist(state) {
       state.showBlacklist = true;
