@@ -25,6 +25,7 @@ function KakaoRedirectHandler() {
 
         access_token = res.data.access_token;
         console.log(access_token);
+        //서버에서 데이터 생성할때는 POST사용
         axios
           .post(
             "https://kapi.kakao.com/v2/user/me",
@@ -35,11 +36,13 @@ function KakaoRedirectHandler() {
               },
             }
           )
+          //성공시 then 실행
           .then((res) => {
             console.log(res);
             console.log(res.data.kakao_account.profile.nickname);
             navigate("/");
           });
+        //실패시 catch실행
       });
   });
 

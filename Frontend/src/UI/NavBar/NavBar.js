@@ -1,21 +1,11 @@
 import React, { useState } from "react";
-
-// ICONS
+// import { useSelector, useDispatch } from "react-redux";
 import * as FaIcons from "react-icons/fa"; //Now i get access to all the icons
 import * as AiIcons from "react-icons/ai";
-
 import { IconContext } from "react-icons";
-
-// ROUTING
-
 import { Link } from "react-router-dom";
-
-// DATA FILE
 import { NavBarData } from "./NavBarData";
-
-// STYLES
 import "./NavBar.css";
-
 import Logo from "../../assets/bora_logo.png";
 
 export default function Navbar() {
@@ -23,20 +13,26 @@ export default function Navbar() {
 
   const showSidebar = () => setSidebar(!sidebar);
 
-  // const navigate = useNavigate();
-
-  // const onClickImg = () => {
-  //   navigate(`/main`);
-  // };
+  // useEffect(() => {
+  //   document.body.style.cssText = `
+  //     position: fixed;
+  //     top: -${window.scrollY}px;
+  //     overflow-y: scroll;
+  //     width: 100%;`;
+  //   return () => {
+  //     const scrollY = document.body.style.top;
+  //     document.body.style.cssText = "";
+  //     window.scrollTo(0, parseInt(scrollY || "0", 10) * -1);
+  //   };
+  // }, []);
 
   return (
     <>
       <IconContext.Provider value={{ color: "#FFF" }}>
-        {/* All the icons now are white */}
         <div className="navbar">
-          <Link to="#" className="menu-bars">
+          <div className="menu-bars">
             <FaIcons.FaBars onClick={showSidebar} />
-          </Link>
+          </div>
           <a href="/main">
             <img id="mainLogo" src={Logo} alt="" />
           </a>
@@ -52,13 +48,17 @@ export default function Navbar() {
               </button>
             </div>
           </div>
+          <div
+            className={sidebar ? "menu-bars-blocking" : ""}
+            onClick={showSidebar}
+          ></div>
         </div>
         <nav className={sidebar ? "nav-menu active" : "nav-menu"}>
           <ul className="nav-menu-items" onClick={showSidebar}>
             <li className="navbar-toggle">
-              <Link to="#" className="menu-bars">
+              <div className="menu-bars">
                 <AiIcons.AiOutlineClose />
-              </Link>
+              </div>
             </li>
 
             {NavBarData.map((item, index) => {
@@ -74,6 +74,7 @@ export default function Navbar() {
             })}
           </ul>
         </nav>
+        <div className={sidebar ? "blocking" : ""} onClick={showSidebar}></div>
       </IconContext.Provider>
     </>
   );

@@ -1,24 +1,39 @@
-// Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
-
-// Import Swiper styles
 import "swiper/css";
 import "swiper/css/effect-flip";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 
+import { motion } from "framer-motion";
+
 import "./MySchedule.scss";
 
-// import required modules
 import { EffectFlip, Pagination, Navigation } from "swiper";
 
 import Schedular from "../../UI/Schedular/Schedular";
 
 import thumbnialImg from "../../assets/4.jpg";
 
+const containerVariants = {
+  hidden: {
+    opacity: 0,
+  },
+  visible: {
+    opacity: 1,
+    transition: {
+      delay: 0.3,
+      duration: 0.3,
+    },
+  },
+  exit: {
+    x: "-100vw",
+    transition: { ease: "easeInOut" },
+  },
+};
+
 const MySchedule = () => {
   return (
-    <>
+    <motion.div variants={containerVariants} initial="hidden" animate="visible">
       <Swiper
         effect={"flip"}
         grabCursor={true}
@@ -179,7 +194,7 @@ const MySchedule = () => {
           <Schedular />
         </SwiperSlide>
       </Swiper>
-    </>
+    </motion.div>
   );
 };
 
