@@ -1,0 +1,66 @@
+.blacklistModal {
+  display: block;
+  position: absolute;
+  z-index: 2;
+  width: 400px;
+  height: 800px;
+  border: 2px solid #000;
+  border-radius: 15px;
+  color: #13161f;
+  overflow: hidden;
+  background-color: #000;
+  transition: color 0s 0.1s;
+  text-align: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.blacklistTitle {
+  font-size: 20px;
+  font-weight: bold;
+  color: #d8a3ff;
+}
+
+.blackModalInfo {
+  padding-top: 7%;
+  font-weight: bold;
+}
+
+.blackModalInfo2 {
+  padding-top: 20px;
+  margin-left: 6.5%;
+  margin-top: 3%;
+  background-color: white;
+  width: 350px;
+  height: 700px;
+  border-radius: 15px;
+}
+
+.blackListButton {
+  width: 70px;
+  height: 35px;
+  border: none;
+  border-radius: 15px;
+  background-color: #c9c9c9;
+  color: black;
+  font-weight: bold;
+  margin-top: 10px;
+  margin-left: 10px;
+  box-shadow: 0 6px 10px -2px gray;
+}
+
+.closeButton {
+  float: right;
+  color: white;
+  margin-right: 5px;
+  margin-top: 3px;
+}
+.blacklistImg {
+  margin-left: 10px;
+}
+
+.blackModal {
+  background-color: #13161f;
+  color: #d8a3ff;
+}

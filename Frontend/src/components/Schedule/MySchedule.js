@@ -12,6 +12,8 @@ import "./MySchedule.scss";
 // import required modules
 import { EffectFlip, Pagination, Navigation } from "swiper";
 
+import Schedular from "../../UI/Schedular/Schedular";
+
 import thumbnialImg from "../../assets/4.jpg";
 
 const MySchedule = () => {
@@ -148,6 +150,33 @@ const MySchedule = () => {
               <p id="schedule_descs">#음악 #춤</p>
             </div>
           </div>
+          <div className="schedule_img">
+            <img src={thumbnialImg} alt="" />
+          </div>
+          <div classNmae="schedule_desc">
+            <p>DJ 이름</p>
+            <p>방송국명</p>
+            <p>pm 2:00 ~ 3:00</p>
+            <p>#음악 #춤</p>
+          </div>
+        </SwiperSlide>
+        <SwiperSlide>
+          <Schedular />
+        </SwiperSlide>
+        <SwiperSlide>
+          <Schedular />
+        </SwiperSlide>
+        <SwiperSlide>
+          <Schedular />
+        </SwiperSlide>
+        <SwiperSlide>
+          <Schedular />
+        </SwiperSlide>
+        <SwiperSlide>
+          <Schedular />
+        </SwiperSlide>
+        <SwiperSlide>
+          <Schedular />
         </SwiperSlide>
       </Swiper>
     </>

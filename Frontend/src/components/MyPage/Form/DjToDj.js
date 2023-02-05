@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { motion } from "framer-motion";
 import { boardActions } from "../../../store/board";
 import "./UserToDj.scss";
+
 import profileImg from "../../../assets/profileimg.jpg";
 import radio from "../../../assets/radio.png";
 import Button from "../../../UI/Button/Button";

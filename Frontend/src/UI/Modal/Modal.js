@@ -12,16 +12,30 @@ const Modal = (props) => {
   return (
     <Fragment>
       <div className="modal">
-        <FontAwesomeIcon icon={faXmark} className="closeButton" />
+
+        <FontAwesomeIcon
+          icon={faXmark}
+          className="closeButton"
+          onClick={props.close}
+        />
         <div className="modalInfo">
           <span>{props.name}</span>
           <br />
           {flag && <span>{value}</span>}
           {flag && <br />}
-          <button className="modalButton" style={{ marginRight: "10px" }}>
+
+          <button
+            className="modalButton"
+            style={{ marginRight: "10px" }}
+            onClick={props.yes}
+          >
             예
           </button>
-          <button className="modalButton" style={{ marginLeft: "10px" }}>
+          <button
+            className="modalButton"
+            style={{ marginLeft: "10px" }}
+            onClick={props.no}
+          >
             아니오
           </button>
         </div>

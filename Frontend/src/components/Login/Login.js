@@ -1,7 +1,7 @@
+
 import { useSelector, useDispatch } from "react-redux";
 import { loginActions } from "../../store/login";
 // import kakaoLogin from "../assets/kakaoLogin.png";
-import axios from "axios";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -12,19 +12,16 @@ const Login = () => {
     dispatch(loginActions.toggleLogin());
   };
 
-  const goKakao = () => {
-    axios.get("http://localhost:9999/userApi/goKakao").then((res) => {
-      window.location.href = res.data;
-    });
-  };
+
+  const CLIENT_ID = "506dd048e8b6d28b22eaf5dce091b0df";
+  const REDIRECT_URI = "http://localhost:8080/oauth2/authorization/kakao";
+  let URL = `https://kauth.kakao.com/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code`;
 
   return (
     <div>
       <button onClick={toggleLoginHandler}>CLICK</button>
-      {show && <button onClick={goKakao}>로그인</button>}
-      {/* <img src={kakaoLogin} alt="kakaoLogin" onClick={goKakao} /> */}
+      {show && <a href={URL}>로그인</a>}
     </div>
   );
 };
-
 export default Login;

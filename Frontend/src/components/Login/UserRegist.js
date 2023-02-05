@@ -2,8 +2,17 @@ import { useSelector, useDispatch } from "react-redux";
 import { loginActions } from "../../store/login";
 import axios from "axios";
 
+ 
+import { useEffect } from "react";
+
 const UserRegist = () => {
-  //
+  useEffect(() => {
+    const urlSearch = new URLSearchParams(window.location.search);
+    const accessToken = urlSearch.get("atk");
+    window.localStorage.clear();
+    window.localStorage.setItem("atk", accessToken);
+  }, []);
+  
   const dispatch = useDispatch();
 
   const id = useSelector((state) => state.login.id);
