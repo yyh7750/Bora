@@ -3,19 +3,23 @@
   min-height: 620px;
 }
 
-.myScheduleSwiper > .swiper-slide {
-  background-position: center;
-  background-size: cover;
-  width: 500px;
-  height: 620px;
-}
-
-.myScheduleSwiper > .swiper-slide img {
-  display: block;
-  width: 100%;
+.schedules {
+  display: flex;
+  margin-top: 20px;
 }
 
 .schedule_img {
+  margin-left: 200px;
+  margin-right: 100px;
   width: 300px;
   height: 200px;
+}
+
+.schedule_img > img {
+  border-radius: 50px;
+  border-width: 5px;
+}
+
+#schedule_descs {
+  color: #fff;
 }

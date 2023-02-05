@@ -91,7 +91,7 @@ body {
   align-items: center;
 }
 
-span {
+#item_title {
   margin-left: 16px;
 }
 .search {
