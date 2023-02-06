@@ -1,6 +1,6 @@
 package com.ssafy.bora.service.user.impl;
 
-import com.ssafy.bora.dto.UserDTO;
+import com.ssafy.bora.dto.user.UserDTO;
 import com.ssafy.bora.entity.User;
 import com.ssafy.bora.repository.user.IUserRepository;
 import com.ssafy.bora.service.user.IUserService;

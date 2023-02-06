@@ -1,6 +1,6 @@
 package com.ssafy.bora.controller.user;
 
-import com.ssafy.bora.dto.StationDTO;
+import com.ssafy.bora.dto.user.StationDTO;
 import com.ssafy.bora.service.station.IStationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

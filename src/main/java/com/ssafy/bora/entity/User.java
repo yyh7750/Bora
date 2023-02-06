@@ -1,7 +1,6 @@
 package com.ssafy.bora.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.ssafy.bora.dto.UserDTO;
 import com.vladmihalcea.hibernate.type.json.JsonType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

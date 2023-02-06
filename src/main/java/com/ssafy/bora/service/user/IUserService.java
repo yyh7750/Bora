@@ -1,6 +1,6 @@
 package com.ssafy.bora.service.user;
 
-import com.ssafy.bora.dto.UserDTO;
+import com.ssafy.bora.dto.user.UserDTO;
 
 public interface IUserService {
 

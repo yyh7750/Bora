@@ -17,8 +17,13 @@ public interface IBlacklistRepository extends JpaRepository<Blacklist, Integer> 
      * @param viewerId
      * @return : Blacklist : 기존에 DJ가 차단한 Viewer ID에 해당하는 차단 정보
      */
-    Blacklist findByDjIdAndViewerId(String djId, String viewerId);
+    Optional<Blacklist> findByDjIdAndViewerId(String djId, String viewerId);
 
+    /**
+     * desc: 해당 DJ의 블랙리스트 목록 조회
+     * @param dj
+     * @return
+     */
     List<Optional<Blacklist>> findByDjAndIsDeleteFalse(User dj);
 
     // DJ 블랙리스트에 있던 Viewer의 블랙리스트 상태값을 삭제해준다.(isDelete 상태값 true로 변경)

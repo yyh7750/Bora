@@ -1,7 +1,7 @@
 package com.ssafy.bora.controller.user;
 
 import com.ssafy.bora.dto.blacklist.ReqBlacklistDTO;
-import com.ssafy.bora.dto.UserDTO;
+import com.ssafy.bora.dto.user.UserDTO;
 import com.ssafy.bora.service.user.IBlacklistService;
 import com.ssafy.bora.service.user.IUserService;
 import lombok.RequiredArgsConstructor;

@@ -1,6 +1,6 @@
 package com.ssafy.bora.service.station;
 
-import com.ssafy.bora.dto.StationDTO;
+import com.ssafy.bora.dto.user.StationDTO;
 
 public interface IStationService {
 

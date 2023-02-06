@@ -1,4 +1,4 @@
-package com.ssafy.bora.dto;
+package com.ssafy.bora.dto.user;
 
 import com.ssafy.bora.entity.Station;
 import lombok.Getter;

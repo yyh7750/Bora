@@ -1,6 +1,6 @@
 package com.ssafy.bora.service.station.impl;
 
-import com.ssafy.bora.dto.StationDTO;
+import com.ssafy.bora.dto.user.StationDTO;
 import com.ssafy.bora.entity.Station;
 import com.ssafy.bora.entity.User;
 import com.ssafy.bora.repository.station.IStationRepository;

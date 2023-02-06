@@ -29,11 +29,11 @@ public class BlacklistServiceImpl implements IBlacklistService {
         String djId = reqBlacklistDTO.getDjId();
         String viewerId = reqBlacklistDTO.getViewerId();
         // 기존에 있는 정보 확인을 위한 메소드
-        Blacklist hasBlacklist = blacklistRepository.findByDjIdAndViewerId(djId, viewerId);
+        Blacklist hasBlacklist = blacklistRepository.findByDjIdAndViewerId(djId, viewerId).orElseThrow(() -> new RuntimeException());
 
         // 없다면 생성
         if (hasBlacklist == null) {
-            // Entity에 저장할 Dj, Viwer 정보 가져오기
+            // Entity에 저장할 Dj, Viewer 정보 가져오기
             User dj = userRepository.findById(reqBlacklistDTO.getDjId()).get();
             User viewer = userRepository.findById(reqBlacklistDTO.getViewerId()).get();
 
@@ -45,8 +45,7 @@ public class BlacklistServiceImpl implements IBlacklistService {
             return registedBlacklist;
         }
         // 있다면 상태값만 변경하여 반환
-        hasBlacklist.reviveStatus();
-        ResBlacklistDTO reviveStatusBlacklist = ResBlacklistDTO.convertEntityToResDTO(hasBlacklist);
+        ResBlacklistDTO reviveStatusBlacklist = ResBlacklistDTO.convertEntityToResDTO(hasBlacklist.reviveStatus());
         return reviveStatusBlacklist;
     }
 

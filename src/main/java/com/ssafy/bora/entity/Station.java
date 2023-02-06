@@ -1,6 +1,6 @@
 package com.ssafy.bora.entity;
 
-import com.ssafy.bora.dto.StationDTO;
+import com.ssafy.bora.dto.user.StationDTO;
 import lombok.*;
 import javax.persistence.*;
 import java.io.Serializable;
