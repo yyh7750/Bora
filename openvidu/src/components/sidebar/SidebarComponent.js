@@ -247,7 +247,7 @@ export default class SidebarComponent extends Component {
               : "편집기 끄기"}
           </ListItemText>
         </MenuItem> */}
-        <MenuItem onClick={this.toggleChat}>
+        {/* <MenuItem onClick={this.toggleChat}>
           <ListItemIcon
             color="inherit"
             // className="navButton"
@@ -265,7 +265,7 @@ export default class SidebarComponent extends Component {
           >
             채팅하기
           </ListItemText>
-        </MenuItem>
+        </MenuItem> */}
         <MenuItem onClick={this.leaveSession}>
           <ListItemIcon
             color="secondary"

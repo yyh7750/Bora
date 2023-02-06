@@ -44,46 +44,70 @@
   position: absolute;
   right: 0;
 }
+
+#chatBox {
+  position: absolute;
+  top: 8vh;
+  left: 150vh;
+}
+
+.streamComponent {
+  position: absolute;
+  width: 90%;
+  height: 90%;
+  margin: auto;
+  top: 5%;
+  left: 5%;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
 .stream-container {
   padding: 0;
 }
 
 .sidebar {
-  background-color: #d8a3ff;
+  background-color: #fff;
   /* 사이드 바는 화면을 기준으로 배치 */
   position: fixed;
   left: 0;
-  top: 0;
+  /* top: 0; */
   bottom: 0;
-  width: 20vw;
-  padding: 1rem;
+  /* height: 100px; */
+  /* width: 20vw; */
   z-index: 9999;
 }
 
+.OT-widget_container {
+  position: relative;
+}
+
 .publish {
-  background-color: #494949;
-  /* overflow: hidden; */
+  background-color: #9a47d5;
+  overflow: hidden;
   position: absolute;
-  left: 100vw;
   right: 0px;
-  top: 8vh;
+  top: 10vh;
+  left: 6vh;
   bottom: 0px;
-  height: 80vh;
-  min-width: 20vw !important;
-  width: 70vw;
+  height: 77vh;
+  /* min-width: 20vw !important; */
+  border-radius: 20px;
+  border-style: solid #fff;
+  border-width: 10px;
+  width: 68vw;
 }
 
 .bounds {
-  background-color: #494949;
+  background-color: #13161f; /* 배경색 */
   overflow: hidden;
   position: absolute;
-  left: 22vw;
   right: 0;
   top: 0;
   bottom: 0;
   height: 100vh;
-  min-width: 15% !important;
-  width: 78vw;
+  /* min-width: 15% !important; */
+  width: 100%;
 }
 
 /*!
@@ -294,6 +318,14 @@
 }
 
 /* .OT_publisher, */
+#remoteUsers {
+  position: absolute;
+  top: 10vh;
+  width: 3vh;
+  left: 79.6vh;
+  height: 40vh;
+}
+
 .OT_subscriber {
   position: relative;
   min-width: 48px;

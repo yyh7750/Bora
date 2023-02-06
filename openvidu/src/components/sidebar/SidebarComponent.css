@@ -84,3 +84,11 @@
     display: none;
   }
 }
+
+.MuiList-root {
+  list-style: none !important;
+}
+
+.MuiListItem-button {
+  float: left !important;
+}

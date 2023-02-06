@@ -4,7 +4,7 @@ import React, { Component } from "react";
 import ChatComponent from "./chat/ChatComponent";
 import StreamComponent from "./stream/StreamComponent";
 import "./VideoRoomComponent.css";
-import OpenViduLayout from "../layout/openvidu-layout";
+// import OpenViduLayout from "../layout/openvidu-layout";
 import UserModel from "../models/user-model";
 import SidebarComponent from "./sidebar/SidebarComponent";
 
@@ -16,7 +16,7 @@ class VideoRoomComponent extends Component {
   constructor(props) {
     super(props);
     this.hasBeenUpdated = false;
-    this.layout = new OpenViduLayout();
+    // this.layout = new OpenViduLayout();
     let sessionName = this.props.sessionName ? this.props.sessionName : "Boar1";
     let userName = this.props.user
       ? this.props.user
@@ -29,7 +29,7 @@ class VideoRoomComponent extends Component {
       session: undefined,
       localUser: undefined,
       subscribers: [],
-      chatDisplay: "none",
+      chatDisplay: "block",
       currentVideoDevice: undefined,
       isFullscreen: false,
       color: "#00000",
@@ -42,14 +42,14 @@ class VideoRoomComponent extends Component {
     this.joinSession = this.joinSession.bind(this);
     this.leaveSession = this.leaveSession.bind(this);
     this.onbeforeunload = this.onbeforeunload.bind(this);
-    this.updateLayout = this.updateLayout.bind(this);
+    // this.updateLayout = this.updateLayout.bind(this);
     this.camStatusChanged = this.camStatusChanged.bind(this);
     this.micStatusChanged = this.micStatusChanged.bind(this);
     this.nicknameChanged = this.nicknameChanged.bind(this);
     this.toggleFullscreen = this.toggleFullscreen.bind(this);
     this.screenShare = this.screenShare.bind(this);
     this.stopScreenShare = this.stopScreenShare.bind(this);
-    this.toggleChat = this.toggleChat.bind(this);
+    // this.toggleChat = this.toggleChat.bind(this);
   }
 
   componentDidMount() {
@@ -66,19 +66,19 @@ class VideoRoomComponent extends Component {
       animate: true, // Whether you want to animate the transitions
     };
 
-    this.layout.initLayoutContainer(
-      document.getElementById("layout"),
-      openViduLayoutOptions
-    );
+    // this.layout.initLayoutContainer(
+    //   document.getElementById("layout"),
+    //   openViduLayoutOptions
+    // );
     window.addEventListener("beforeunload", this.onbeforeunload);
-    window.addEventListener("resize", this.updateLayout);
-    window.addEventListener("resize", this.checkSize);
-    this.joinSession();
+    // window.addEventListener("resize", this.updateLayout);
+    // window.addEventListener("resize", this.checkSize);
+    // this.joinSession();
   }
 
   componentWillUnmount() {
     window.removeEventListener("beforeunload", this.onbeforeunload);
-    window.removeEventListener("resize", this.updateLayout);
+    // window.removeEventListener("resize", this.updateLayout);
     window.removeEventListener("resize", this.checkSize);
     window.addEventListener("fullscreenchange", (e) => {
       this.state({ isFullscreen: document.fullscreen });
@@ -201,7 +201,7 @@ class VideoRoomComponent extends Component {
       { currentVideoDevice: videoDevices[0], localUser: localUser },
       () => {
         this.state.localUser.getStreamManager().on("streamPlaying", (e) => {
-          this.updateLayout();
+          // this.updateLayout();
           publisher.videos[0].video.parentElement.classList.remove(
             "custom-class"
           );
@@ -226,7 +226,7 @@ class VideoRoomComponent extends Component {
             isScreenShareActive: this.state.localUser.isScreenShareActive(),
           });
         }
-        this.updateLayout();
+        // this.updateLayout();
       }
     );
   }
@@ -326,7 +326,7 @@ class VideoRoomComponent extends Component {
         this.checkSomeoneShareScreen();
       }, 20);
       event.preventDefault();
-      this.updateLayout();
+      // this.updateLayout();
     });
   }
 
@@ -360,11 +360,11 @@ class VideoRoomComponent extends Component {
     });
   }
 
-  updateLayout() {
-    setTimeout(() => {
-      this.layout.updateLayout();
-    }, 20);
-  }
+  // updateLayout() {
+  //   setTimeout(() => {
+  //     this.layout.updateLayout();
+  //   }, 20);
+  // }
 
   sendSignalUserChanged(data) {
     const signalOptions = {
@@ -446,7 +446,7 @@ class VideoRoomComponent extends Component {
       });
     });
     publisher.on("streamPlaying", () => {
-      this.updateLayout();
+      // this.updateLayout();
       publisher.videos[0].video.parentElement.classList.remove("custom-class");
     });
   }
@@ -476,113 +476,163 @@ class VideoRoomComponent extends Component {
       bigFirst: true,
       animate: true,
     };
-    this.layout.setLayoutOptions(openviduLayoutOptions);
-    this.updateLayout();
+    // this.layout.setLayoutOptions(openviduLayoutOptions);
+    // this.updateLayout();
   }
 
-  //채팅 토글
-  toggleChat(property) {
-    let display = property;
+  // //채팅 토글
+  // toggleChat(property) {
+  //   let display = property;
 
-    if (display === undefined) {
-      display = this.state.chatDisplay === "none" ? "block" : "none";
-    }
-    if (display === "block") {
-      this.setState({ chatDisplay: display, messageReceived: false });
-    } else {
-      console.log("chat", display);
-      this.setState({ chatDisplay: display });
-    }
-    this.updateLayout();
-  }
+  //   if (display === undefined) {
+  //     display = this.state.chatDisplay === "none" ? "block" : "none";
+  //   }
+  //   if (display === "block") {
+  //     this.setState({ chatDisplay: display, messageReceived: false });
+  //   } else {
+  //     console.log("chat", display);
+  //     this.setState({ chatDisplay: display });
+  //   }
+  //   // this.updateLayout();
+  // }
 
-  checkNotification(event) {
-    this.setState({
-      messageReceived: this.state.chatDisplay === "none",
-    });
-  }
-  checkSize() {
-    if (
-      document.getElementById("layout").offsetWidth <= 700 &&
-      !this.hasBeenUpdated
-    ) {
-      // this.toggleChat("none");
-      this.hasBeenUpdated = true;
-    }
-    if (
-      document.getElementById("layout").offsetWidth > 700 &&
-      this.hasBeenUpdated
-    ) {
-      this.hasBeenUpdated = false;
-    }
-  }
+  // checkNotification(event) {
+  //   this.setState({
+  //     messageReceived: this.state.chatDisplay === "none",
+  //   });
+  // }
+  // checkSize() {
+  //   if (
+  //     document.getElementById("layout").offsetWidth <= 700 &&
+  //     !this.hasBeenUpdated
+  //   ) {
+  //     // this.toggleChat("none");
+  //     this.hasBeenUpdated = true;
+  //   }
+  //   if (
+  //     document.getElementById("layout").offsetWidth > 700 &&
+  //     this.hasBeenUpdated
+  //   ) {
+  //     this.hasBeenUpdated = false;
+  //   }
+  // }
 
   render() {
     const localUser = this.state.localUser;
     var chatDisplay = { display: this.state.chatDisplay };
 
     return (
-      <div className="container" id="container">
-        <div className="sidebar">
-          {/* 사이드바 => 얘 제어할 수 있는건 DJ만.. 제어판같은걸 넣어볼까.. */}
-          <SidebarComponent
-            // sessionId={mySessionId}
-            user={localUser}
-            camStatusChanged={this.camStatusChanged}
-            micStatusChanged={this.micStatusChanged}
-            screenShare={this.screenShare}
-            stopScreenShare={this.stopScreenShare}
-            toggleFullscreen={this.toggleFullscreen}
-            leaveSession={this.leaveSession}
-            toggleChat={this.toggleChat}
-          />
-        </div>
-
-        {/* 참여자들 관리(layout 수정해주는 => layout 수정해야함) */}
-        <div id="layout" className="bounds">
-          {/* publish => 왼쪽 상단에 뜨는 내 화면 클래스 */}
-          <div className="publish">
-            {localUser !== undefined &&
-              localUser.getStreamManager() !== undefined && (
-                <div
-                  className="OT_root OT_publisher custom-class"
-                  id="localUser"
-                >
-                  <StreamComponent
-                    user={localUser}
-                    handleNickname={this.nicknameChanged}
-                  />
-                </div>
-              )}
-          </div>
-          {this.state.subscribers.map((sub, i) => (
-            <div
-              key={i}
-              className="OT_root OT_publisher custom-class"
-              id="remoteUsers"
-            >
-              <StreamComponent
-                user={sub}
-                streamId={sub.streamManager.stream.streamId}
+      <div>
+        {this.state.session === undefined ? (
+          <div id="join">
+            <div id="img-div">
+              <img
+                src="resources/images/openvidu_grey_bg_transp_cropped.png"
+                alt="OpenVidu logo"
               />
             </div>
-          ))}
-          {localUser !== undefined &&
-            localUser.getStreamManager() !== undefined && (
-              <div
-                className="OT_root OT_publisher custom-class"
-                style={chatDisplay}
-              >
-                {/* 채팅 컴포넌트 => 얘도 넓이 고정 위치 고정으로 수정. */}
-                <ChatComponent
-                  user={localUser}
-                  chatDisplay={this.state.chatDisplay}
-                  close={this.toggleChat}
-                  messageReceived={this.checkNotification}
-                />
+            <div id="join-dialog" className="jumbotron vertical-center">
+              <h1> Join a video session </h1>
+              <form className="form-group" onSubmit={this.joinSession}>
+                <p>
+                  <label>Participant: </label>
+                  <input
+                    className="form-control"
+                    type="text"
+                    id="userName"
+                    value={localUser}
+                    onChange={this.handleChangeUserName}
+                    required
+                  />
+                </p>
+                <p>
+                  <label> Session: </label>
+                  <input
+                    className="form-control"
+                    type="text"
+                    id="sessionId"
+                    value="SessionA"
+                    onChange={this.handleChangeSessionId}
+                    required
+                  />
+                </p>
+                <p className="text-center">
+                  <input
+                    className="btn btn-lg btn-success"
+                    name="commit"
+                    type="submit"
+                    value="JOIN"
+                  />
+                </p>
+              </form>
+            </div>
+          </div>
+        ) : null}
+
+        {this.state.session !== undefined ? (
+          <div className="container" id="container">
+            <div className="sidebar">
+              {/* 사이드바 => 얘 제어할 수 있는건 DJ만.. 제어판같은걸 넣어볼까.. */}
+              <SidebarComponent
+                // sessionId={mySessionId}
+                user={localUser}
+                camStatusChanged={this.camStatusChanged}
+                micStatusChanged={this.micStatusChanged}
+                screenShare={this.screenShare}
+                stopScreenShare={this.stopScreenShare}
+                toggleFullscreen={this.toggleFullscreen}
+                leaveSession={this.leaveSession}
+                // toggleChat={this.toggleChat}
+              />
+            </div>
+
+            <div id="layout" className="bounds">
+              {/* publish => DJ */}
+              <div className="publish">
+                {localUser !== undefined &&
+                  localUser.getStreamManager() !== undefined && (
+                    <div
+                      className="OT_root OT_publisher custom-class"
+                      id="localUser"
+                    >
+                      <StreamComponent
+                        user={localUser}
+                        handleNickname={this.nicknameChanged}
+                      />
+                    </div>
+                  )}
               </div>
-            )}
-        </div>
+              {this.state.subscribers.map((sub, i) => (
+                <div
+                  key={i}
+                  className="OT_root OT_publisher custom-class"
+                  id="remoteUsers"
+                >
+                  <StreamComponent
+                    user={sub}
+                    streamId={sub.streamManager.stream.streamId}
+                  />
+                </div>
+              ))}
+              {localUser !== undefined &&
+                localUser.getStreamManager() !== undefined && (
+                  <div
+                    className="OT_root OT_publisher custom-class"
+                    style={chatDisplay}
+                    id="chatBox"
+                  >
+                    {/* 채팅 컴포넌트 => 얘도 넓이 고정 위치 고정으로 수정. */}
+                    <ChatComponent
+                      user={localUser}
+                      chatDisplay={"display"}
+                      close={this.toggleChat}
+                      messageReceived={this.checkNotification}
+                    />
+                  </div>
+                )}
+            </div>
+          </div>
+        ) : null}
       </div>
     );
   }
