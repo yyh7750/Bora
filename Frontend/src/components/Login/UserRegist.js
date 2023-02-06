@@ -2,7 +2,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { loginActions } from "../../store/login";
 import axios from "axios";
 
- 
 import { useEffect } from "react";
 
 const UserRegist = () => {
@@ -12,7 +11,7 @@ const UserRegist = () => {
     window.localStorage.clear();
     window.localStorage.setItem("atk", accessToken);
   }, []);
-  
+
   const dispatch = useDispatch();
 
   const id = useSelector((state) => state.login.id);
@@ -50,7 +49,7 @@ const UserRegist = () => {
     };
     console.log(userInfo);
 
-    const API_URL = `http://localhost:9999/userApi/백엔드 컨트롤러 경로`;
+    const API_URL = `http://localhost:8080/userApi/백엔드 컨트롤러 경로`;
     axios({
       url: API_URL,
       method: "POST",

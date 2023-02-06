@@ -1,7 +1,7 @@
-import { Fragment } from "react";
+import React from "react";
 
-const ModifySchedule = () => {
-  return <Fragment></Fragment>;
-};
+function ModifySchedule() {
+  return <div></div>;
+}
 
 export default ModifySchedule;

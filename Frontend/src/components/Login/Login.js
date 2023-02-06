@@ -21,8 +21,14 @@ const Login = () => {
 
   return (
     <div>
-      <button onClick={toggleLoginHandler}>CLICK</button>
-      {show && <a href={URL}>로그인</a>}
+      <button onClick={toggleLoginHandler} style={{ marginTop: "100px" }}>
+        CLICK
+      </button>
+      {show && (
+        <a href={URL} style={{ marginTop: "100px" }}>
+          로그인
+        </a>
+      )}
     </div>
   );
 };

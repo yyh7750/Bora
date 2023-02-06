@@ -1,16 +1,19 @@
 import "./MakeBroadcast.scss";
 
+import { useState, useEffect } from "react";
+import { Button } from "@mui/material";
+import axios from "axios";
 import { Link } from "react-router-dom";
 import left from "../../../assets/left.png";
 import right from "../../../assets/right.png";
-import Button from "../../../UI/Button/Button";
+import Button2 from "../../../UI/Button/Button";
 
 //더미데이터
 import bannerImg from "../../../assets/2.jpg";
 import thumbnailImg from "../../../assets/4.jpg";
 
 const MakeBroadcast = () => {
-  const createBroadcast = () => {
+  const createBroadcast = async () => {
     // {
     //   userId:
     //   name:
@@ -28,10 +31,74 @@ const MakeBroadcast = () => {
     //   sun:
     // }
     console.log("방송국 생성!");
+    //서버에 이미지 업로드 (배너이미지)
+    if (image.image_file) {
+      const formData = new FormData();
+      formData.append("file", image.image_file);
+      await axios.post("/api/image/upload", formData);
+      alert("서버에 등록이 완료되었습니다!");
+      setImage({
+        image_file: "",
+        preview_URL: bannerImg,
+      });
+    } else {
+      alert("사진을 등록하세요!");
+    }
   };
+
+  const [image, setImage] = useState({
+    image_file: "",
+    preview_URL: bannerImg,
+  });
+
+  let inputRef;
+
+  const saveImage = (e) => {
+    e.preventDefault();
+    if (e.target.files[0]) {
+      // 새로운 이미지를 올리면 createObjectURL()을 통해 생성한 기존 URL을 폐기
+      URL.revokeObjectURL(image.preview_URL);
+      const preview_URL = URL.createObjectURL(e.target.files[0]);
+      setImage(() => ({
+        image_file: e.target.files[0],
+        preview_URL: preview_URL,
+      }));
+    }
+  };
+
+  const deleteImage = () => {
+    // createObjectURL()을 통해 생성한 기존 URL을 폐기
+    URL.revokeObjectURL(image.preview_URL);
+    setImage({
+      image_file: "",
+      preview_URL: bannerImg,
+    });
+  };
+
+  useEffect(() => {
+    // 컴포넌트가 언마운트되면 createObjectURL()을 통해 생성한 기존 URL을 폐기
+    return () => {
+      URL.revokeObjectURL(image.preview_URL);
+    };
+  }, []);
+
   return (
     <div>
-      <img className="bannerImg" src={bannerImg} alt="썸네일이미지" />
+      <div className="uploader-wrapper">
+        <input
+          type="file"
+          accept="image/*"
+          onChange={saveImage}
+          // 클릭할 때 마다 file input의 value를 초기화 하지 않으면 버그가 발생할 수 있다
+          // 사진 등록을 두개 띄우고 첫번째에 사진을 올리고 지우고 두번째에 같은 사진을 올리면 그 값이 남아있음!
+          onClick={(e) => (e.target.value = null)}
+          ref={(refParam) => (inputRef = refParam)}
+          style={{ display: "none" }}
+        />
+        <div className="img-wrapper">
+          <img src={image.preview_URL} onClick={() => inputRef.click()} />
+        </div>
+      </div>
       <div className="space"></div>
       <div className="banner">
         <img src={left} alt="왼쪽확성기" className="bannerIcon" />
@@ -152,11 +219,11 @@ const MakeBroadcast = () => {
           <input type="text" className="desc" />
           <br />
           <Link to="/broadcast">
-            <Button
+            <Button2
               name="생성하기"
               value={createBroadcast}
               style={{ float: "left" }}
-            ></Button>
+            ></Button2>
           </Link>
         </div>
       </div>
