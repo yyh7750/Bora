@@ -1,0 +1,34 @@
+server:
+  address: localhost
+  port: 8080
+
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/bora?serverTimezone=UTC&characterEncoding=UTF-8
+    username: ssafy
+    password: ssafy
+  jpa:
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        globally_quoted_identifiers: true
+        format_sql: true
+  cache: redis
+  redis:
+    host: localhost
+    port: 6379
+    password: b301
+  profiles:
+    include: oauth
+
+logging:
+  level:
+    org.hibernate.SQL: debug
+    org.hibernate.type: trace
