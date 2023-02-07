@@ -12,20 +12,27 @@ var localUser = new UserModel();
 const APPLICATION_SERVER_URL =
   process.env.NODE_ENV === "production" ? "" : "http://localhost:5000/";
 
+const users = { user: "1", value: "디제이" };
+const participant = { user: "2", value: "Participant" };
+localStorage.setItem(users.user, users.value);
+localStorage.setItem(participant.user, participant.value);
+
 class VideoRoomComponent extends Component {
   constructor(props) {
     super(props);
     this.hasBeenUpdated = false;
     // this.layout = new OpenViduLayout();
-    let sessionName = this.props.sessionName ? this.props.sessionName : "Boar1";
-    let userName = this.props.user
-      ? this.props.user
-      : "User" + Math.floor(Math.random() * 100);
+    const sessionName = "a" + Math.floor(Math.random() * 10000000000);
+    // let userName = localStorage.getItem("1");
+
     this.remotes = [];
     this.localUserAccessAllowed = false;
     this.state = {
+      //"세션 아이디는 영어+숫자조합 랜덤으로 부여"
       mySessionId: sessionName,
-      myUserName: userName,
+      myUserName: localStorage.getItem("1"),
+      myRoomName: "방송 제목을 입력하세요",
+      myRoomType: [],
       session: undefined,
       localUser: undefined,
       subscribers: [],
@@ -39,6 +46,8 @@ class VideoRoomComponent extends Component {
       lazyRadius: 0,
     };
 
+    this.handleChangeRoomName = this.handleChangeRoomName.bind(this);
+    this.handleChangeSessionId = this.handleChangeSessionId.bind(this);
     this.joinSession = this.joinSession.bind(this);
     this.leaveSession = this.leaveSession.bind(this);
     this.onbeforeunload = this.onbeforeunload.bind(this);
@@ -112,6 +121,8 @@ class VideoRoomComponent extends Component {
     } else {
       try {
         var token = await this.getToken();
+        localStorage.setItem("DJ_session", this.state.session);
+        console.log(this.state.session);
         console.log(token);
         this.connect(token);
       } catch (error) {
@@ -239,18 +250,31 @@ class VideoRoomComponent extends Component {
       mySession.disconnect();
     }
 
-    //방 나가기
     this.OV = null;
     this.setState({
       session: undefined,
       subscribers: [],
-      mySessionId: "Studyroom1",
+      mySessionId: this.state.mySessionId,
       myUserName: "OpenVidu_User" + Math.floor(Math.random() * 100),
       localUser: undefined,
     });
     if (this.props.leaveSession) {
       this.props.leaveSession();
     }
+  }
+
+  handleChangeSessionId(e) {
+    this.setState({
+      mySessionId: e.target.value,
+    });
+  }
+
+  handleChangeRoomName(e) {
+    console.log("바뀐건가?");
+    console.log(e.target.value);
+    this.setState({
+      myRoomName: e.target.value,
+    });
   }
 
   //캠 온오프 상태 바꼈을 때
@@ -517,7 +541,13 @@ class VideoRoomComponent extends Component {
   //   }
   // }
 
+  // submitHandler() {
+  //   localStorage.setItem()
+  // }
+
   render() {
+    const mySessionId = this.state.mySessionId;
+    const myRoomName = this.state.myRoomName;
     const localUser = this.state.localUser;
     var chatDisplay = { display: this.state.chatDisplay };
 
@@ -540,22 +570,50 @@ class VideoRoomComponent extends Component {
                     className="form-control"
                     type="text"
                     id="userName"
-                    value={localUser}
-                    onChange={this.handleChangeUserName}
+                    value={localStorage.getItem("1")}
                     required
                   />
                 </p>
                 <p>
-                  <label> Session: </label>
+                  <label>RoomName: </label>
+                  <input
+                    className="form-control"
+                    type="text"
+                    id="roomName"
+                    value={myRoomName || ""}
+                    onChange={this.handleChangeRoomName}
+                    required
+                  />
+                </p>
+                <p>
+                  <label>RoomType: </label>
+                  {/* <input type="checkbox" name="잔잔한" value="잔잔한">
+                    잔잔한
+                  </input>
+                  <input type="checkbox" name="신나는" value="신나는">
+                    신나는
+                  </input>
+                  <input type="checkbox" name="조용한" value="조용한">
+                    조용한
+                  </input>
+                  <input type="checkbox" name="활기찬" value="활기찬">
+                    활기찬
+                  </input>
+                  <input type="checkbox" name="교육적인" value="교육적인">
+                    교육적인
+                  </input> */}
+                </p>
+                {/* <p>
+                  <label>session: </label>
                   <input
                     className="form-control"
                     type="text"
                     id="sessionId"
-                    value="SessionA"
+                    value={mySessionId || ""}
                     onChange={this.handleChangeSessionId}
                     required
                   />
-                </p>
+                </p> */}
                 <p className="text-center">
                   <input
                     className="btn btn-lg btn-success"
@@ -571,10 +629,13 @@ class VideoRoomComponent extends Component {
 
         {this.state.session !== undefined ? (
           <div className="container" id="container">
+            {/* {this.state.nickname ===
+              localStorage.getItem("1")( */}
             <div className="sidebar">
               {/* 사이드바 => 얘 제어할 수 있는건 DJ만.. 제어판같은걸 넣어볼까.. */}
               <SidebarComponent
-                // sessionId={mySessionId}
+                sessionId={mySessionId}
+                myRoom={myRoomName}
                 user={localUser}
                 camStatusChanged={this.camStatusChanged}
                 micStatusChanged={this.micStatusChanged}
@@ -585,8 +646,11 @@ class VideoRoomComponent extends Component {
                 // toggleChat={this.toggleChat}
               />
             </div>
-
+            {/* )} */}
             <div id="layout" className="bounds">
+              <h1 id="session-title" style={{ color: "white" }}>
+                {myRoomName + " "}
+              </h1>
               {/* publish => DJ */}
               <div className="publish">
                 {localUser !== undefined &&
@@ -597,7 +661,7 @@ class VideoRoomComponent extends Component {
                     >
                       <StreamComponent
                         user={localUser}
-                        handleNickname={this.nicknameChanged}
+                        // handleNickname={this.nicknameChanged}
                       />
                     </div>
                   )}
