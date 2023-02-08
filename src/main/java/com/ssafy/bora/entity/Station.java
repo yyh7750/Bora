@@ -37,6 +37,8 @@ public class Station implements Serializable {
     @Column(length = 16)
     private String category;
 
+    private boolean isDelete;
+
     private boolean mon;
 
     private boolean tue;
@@ -68,5 +70,30 @@ public class Station implements Serializable {
         station.sat = stationDTO.isSat();
         station.sun = stationDTO.isSun();
         return station;
+    }
+
+    public void createStation() {
+        this.isDelete = true;
+    }
+
+    /**
+     * desc: 업데이트 및 방송국을 삭제했다가 다시 생성할 경우 사용하는 메소드
+     *
+     * @param station
+     */
+    public void changeStation(Station station) {
+        this.category = station.getCategory();
+        this.startTime = station.getStartTime();
+        this.endTime = station.getEndTime();
+        this.description = station.getDescription();
+        this.name = station.getName();
+        this.notice = station.getNotice();
+        this.mon = station.isMon();
+        this.tue = station.isTue();
+        this.wen = station.isWen();
+        this.thu = station.isThu();
+        this.fri = station.isFri();
+        this.sat = station.isSat();
+        this.sun = station.isSun();
     }
 }

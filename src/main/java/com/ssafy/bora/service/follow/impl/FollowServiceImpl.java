@@ -102,7 +102,6 @@ public class FollowServiceImpl implements IFollowService {
             String viewerNickName = followingInfo.getViewer().getNickName();
             resFollowingList.add(ResFollowDTO.addDTO(djNickName, viewerNickName));
         }
-        System.out.println(resFollowingList.size());
         return resFollowingList;
     }
 
@@ -116,7 +115,6 @@ public class FollowServiceImpl implements IFollowService {
             String viewerNickName = followingInfo.getViewer().getNickName();
             resFollowingList.add(ResFollowDTO.addDTO(djNickName, viewerNickName));
         }
-        System.out.println(resFollowingList.size());
         return resFollowingList;
     }
 }

@@ -8,9 +8,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Map;
 
 @Entity
@@ -38,6 +36,9 @@ public class User {
     private boolean isDelete;
 
     private boolean status;
+
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "user")
+    private Station station;
 
     public User updateUser(String nickName) {
         this.nickName = nickName;
