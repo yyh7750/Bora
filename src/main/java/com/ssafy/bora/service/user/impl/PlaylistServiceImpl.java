@@ -48,13 +48,13 @@ public class PlaylistServiceImpl implements IPlaylistService {
         List<Station> stationList = stationRepository.findAllByIsDeleteFalse();
 
         List<ResPlaylistDTO> resPlaylistDTOs = new ArrayList<>();
-        if (!stationList.isEmpty() && stationList == null) {
+        if (!stationList.isEmpty() && stationList != null) {
             for (Station stationInfo : stationList) {
                 resPlaylistDTOs.add(ResPlaylistDTO.convertStationToDTO(stationInfo));
             }
         }
 
-        if (resPlaylistDTOs.isEmpty() && resPlaylistDTOs == null) {
+        if (!resPlaylistDTOs.isEmpty() && resPlaylistDTOs != null) {
             return resPlaylistDTOs;
         }
         return null;

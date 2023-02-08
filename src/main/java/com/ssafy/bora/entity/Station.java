@@ -73,7 +73,7 @@ public class Station implements Serializable {
     }
 
     public void createStation() {
-        this.isDelete = true;
+        this.isDelete = false;
     }
 
     /**

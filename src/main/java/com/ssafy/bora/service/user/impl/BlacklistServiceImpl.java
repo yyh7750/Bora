@@ -28,7 +28,7 @@ public class BlacklistServiceImpl implements IBlacklistService {
         String djId = reqBlacklistDTO.getDjId();
         String viewerId = reqBlacklistDTO.getViewerId();
         // 기존에 있는 정보 확인을 위한 메소드
-        Blacklist hasBlacklist = blacklistRepository.findByDjIdAndViewerId(djId, viewerId).orElseThrow(() -> new RuntimeException());
+        Blacklist hasBlacklist = blacklistRepository.findByDjIdAndViewerId(djId, viewerId);
 
         // 없다면 생성
         if (hasBlacklist == null) {
