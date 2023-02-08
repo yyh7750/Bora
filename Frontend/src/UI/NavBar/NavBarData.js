@@ -23,4 +23,10 @@ export const NavBarData = [
     icon: <AiIcons.AiFillCalendar />,
     cName: "nav-text",
   },
+  {
+    title: "방송 만들기",
+    path: "/createRoom",
+    icon: <AiIcons.AiFillVideoCamera />,
+    cName: "nav-text",
+  },
 ];
