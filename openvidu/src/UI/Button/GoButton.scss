@@ -1,0 +1,101 @@
+@import url("https://fonts.googleapis.com/css?family=Mukta:700");
+
+$white: #000;
+$purple: #d8a3ff;
+
+@mixin transition(
+  $property: all,
+  $duration: 0.45s,
+  $ease: cubic-bezier(0.65, 0, 0.076, 1)
+) {
+  transition: $property $duration $ease;
+}
+
+#goButton {
+  margin-top: 20px;
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  outline: none;
+  border: 0;
+  vertical-align: middle;
+  text-decoration: none;
+  background: transparent;
+  padding: 0;
+  font-size: inherit;
+  font-family: inherit;
+  &.learn-more {
+    width: 24rem;
+    height: auto;
+    .circle {
+      @include transition(all, 0.45s, cubic-bezier(0.65, 0, 0.076, 1));
+      position: relative;
+      margin: 0;
+      width: 5rem;
+      height: 5rem;
+      background: $purple;
+      border-radius: 3.25rem;
+      .icon {
+        @include transition(all, 0.45s, cubic-bezier(0.65, 0, 0.076, 1));
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+        background: $purple;
+        &.arrow {
+          @include transition(all, 0.45s, cubic-bezier(0.65, 0, 0.076, 1));
+          left: 0.625rem;
+          width: 2.1rem;
+          height: 0.125rem;
+          background: none;
+          &::before {
+            position: absolute;
+            content: "";
+            top: -0.3rem;
+            right: 0.0625rem;
+            width: 0.625rem;
+            height: 0.625rem;
+            border-top: 0.125rem solid #000;
+            border-right: 0.125rem solid #000;
+            transform: rotate(45deg);
+          }
+        }
+      }
+    }
+    .button-text {
+      @include transition(all, 0.45s, cubic-bezier(0.65, 0, 0.076, 1));
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      padding: 0.75rem 0;
+      margin: 0 0 0 3.85rem;
+      margin-top: 0.2rem;
+      color: $purple;
+      font-weight: 700;
+      font-size: 30px;
+      line-height: 1.6;
+      text-align: center;
+      text-transform: uppercase;
+    }
+  }
+  &:hover {
+    .circle {
+      width: 100%;
+      .icon {
+        &.arrow {
+          background: #000;
+          transform: translate(1rem, 0);
+        }
+      }
+    }
+    .button-text {
+      color: #000;
+    }
+  }
+}
+
+#container {
+  margin-top: 20px;
+}

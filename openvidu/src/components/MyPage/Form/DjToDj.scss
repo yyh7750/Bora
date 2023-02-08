@@ -1,0 +1,113 @@
+body {
+  position: relative;
+}
+
+fieldset {
+  border: none;
+  color: white;
+  font-weight: bold;
+  font-size: 23px;
+  margin-left: 12rem;
+  margin-right: 12rem;
+}
+.circle {
+  background-color: #191919;
+  width: 150px;
+  height: 150px;
+  border-radius: 75px;
+  text-align: center;
+  font-size: 12px;
+  vertical-align: middle;
+  line-height: 150px;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  margin-left: 1rem;
+  float: left;
+}
+.trainerInfo {
+  float: left;
+  margin-left: 5rem;
+  margin-right: 5rem;
+  color: #d1d1d1;
+  font-size: 18px;
+}
+.trainerInfo2 {
+  float: left;
+  margin-left: 13rem;
+}
+
+.content {
+  color: #d1d1d1;
+  font-size: 14px;
+}
+.playlist {
+  width: 150px;
+  height: 150px;
+}
+
+.container {
+  float: left;
+}
+
+.nickname {
+  color: #ffffff;
+  font-size: 25px;
+  margin-top: 2rem;
+}
+
+.lister {
+  width: 150px;
+  color: #ffffff;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: 700;
+  width: 60px;
+  text-align: center;
+}
+
+.lister {
+  width: 150px;
+  color: #d8a3ff;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: 700;
+  width: 60px;
+  text-align: center;
+}
+
+.listercnt {
+  width: 150px;
+  color: #ffffff;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: 700;
+  margin-left: 0.5rem;
+  width: 60px;
+  text-align: center;
+}
+
+.infoTop {
+  display: flex;
+}
+.goLetter {
+  position: absolute;
+  font-size: 20px;
+  top: 20%;
+  right: 15.2%;
+}
+
+.click {
+  position: absolute;
+  top: 33%;
+  right: 18.3%;
+  color: #d8a3ff;
+  font-size: 15px;
+  font-style: italic;
+}
+
+.monitor img {
+  width: 80px;
+  position: absolute;
+  top: 43%;
+  right: 18.1%;
+}

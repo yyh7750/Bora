@@ -1,30 +1,62 @@
 {
-    "browserslist": [
-        ">0.2%",
-        "not dead",
-        "not ie <= 11",
-        "not op_mini all"
+  "name": "bora",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.2.1",
+    "@fortawesome/free-brands-svg-icons": "^6.2.1",
+    "@fortawesome/free-regular-svg-icons": "^6.2.1",
+    "@fortawesome/free-solid-svg-icons": "^6.2.1",
+    "@fortawesome/react-fontawesome": "^0.2.0",
+    "@material-ui/core": "^4.12.4",
+    "@material-ui/icons": "^4.11.3",
+    "@reduxjs/toolkit": "^1.9.2",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "axios": "^1.2.6",
+    "framer-motion": "^9.0.0",
+    "node-sass": "^7.0.3",
+    "node-scss": "^7.0.3",
+    "openvidu-browser": "^2.25.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-icons": "^4.7.1",
+    "react-redux": "^8.0.5",
+    "react-router-dom": "^6.0.0",
+    "react-scripts": "5.0.1",
+    "redux": "^4.2.1",
+    "redux-persist": "^6.0.0",
+    "simplebar-react": "^3.2.0",
+    "swiper": "^9.0.1",
+    "web-vitals": "^2.1.4"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
     ],
-    "dependencies": {
-        "@material-ui/core": "^4.12.4",
-        "@material-ui/icons": "^4.11.3",
-        "@uiw/react-md-editor": "^3.20.2",
-        "axios": "0.19.2",
-        "jquery": "3.5.0",
-        "openvidu-browser": "2.25.0",
-        "react": "^17.0.2",
-        "react-canvas-draw": "^1.2.1",
-        "react-dom": "^17.0.2",
-        "react-scripts": "^3.4.3"
-    },
-    "name": "openvidu-call-react",
-    "private": true,
-    "scripts": {
-        "build": "react-scripts build",
-        "build:openvidu-react": "npm install --prefix ../library/ && node library-copy.js && cd ../library && npm run create-library",
-        "eject": "react-scripts eject",
-        "start": "react-scripts start",
-        "test": "react-scripts test --env=jsdom"
-    },
-    "version": "2.25.0"
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
+  "main": "index.js",
+  "author": "",
+  "license": "ISC"
 }
