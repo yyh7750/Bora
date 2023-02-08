@@ -29,10 +29,6 @@ public class User {
     @Column(name = "nick_name", length = 10)
     private String nickName;
 
-    // 문자열 변경 예정
-    @Type(type = "json")
-    private Map<String, String> playlist;
-
     private boolean isDelete;
 
     private boolean status;
