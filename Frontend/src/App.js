@@ -16,7 +16,6 @@ import UserToDj from "./components/MyPage/Form/UserToDj";
 import DjToDj from "./components/MyPage/Form/DjToDj";
 import UserToUser from "./components/MyPage/Form/UserToUser";
 
-
 import Broadcast from "./components/MyPage/Broadcast/Broadcast";
 import EmptyBroadcast from "./components/MyPage/Broadcast/EmptyBroadcast";
 import MakeBroadcast from "./components/MyPage/Broadcast/MakeBroadcast";
@@ -28,6 +27,9 @@ import Navbar from "./UI/NavBar/NavBar";
 import MySchedule from "./components/Schedule/MySchedule";
 import ModifySchedule from "./components/Schedule/ModifySchedule";
 
+import VideoRoomComponent from "./components/Openvidu/components/VideoRoomComponent";
+
+// import VideoRoomComponent from "./components/Openvidu/components/VideoRoomComponent";
 const App = () => {
   // const location = useLocation();
   return (
@@ -72,6 +74,9 @@ const App = () => {
         {/**편성표 */}
         <Route path="/mySchedule" element={<MySchedule />} />
         <Route path="/modifySchedule" element={<ModifySchedule />} />
+
+        {/* 오픈비두 */}
+        <Route path="/createRoom" element={<VideoRoomComponent />} />
       </Routes>
     </AnimatePresence>
   );
