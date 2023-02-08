@@ -16,7 +16,6 @@ import UserToDj from "./components/MyPage/Form/UserToDj";
 import DjToDj from "./components/MyPage/Form/DjToDj";
 import UserToUser from "./components/MyPage/Form/UserToUser";
 
-
 import Broadcast from "./components/MyPage/Broadcast/Broadcast";
 import EmptyBroadcast from "./components/MyPage/Broadcast/EmptyBroadcast";
 import MakeBroadcast from "./components/MyPage/Broadcast/MakeBroadcast";
@@ -32,7 +31,7 @@ const App = () => {
   // const location = useLocation();
   return (
     <AnimatePresence>
-      <Navbar />
+      {/* <Navbar /> */}
       <Routes>
         {/**redirect = Navigate */}
         <Route path="/" element={<Navigate to="/makeBroadcast" />} />

@@ -8,7 +8,6 @@ const UserRegist = () => {
   useEffect(() => {
     const urlSearch = new URLSearchParams(window.location.search);
     const accessToken = urlSearch.get("atk");
-    window.localStorage.clear();
     window.localStorage.setItem("atk", accessToken);
   }, []);
 
