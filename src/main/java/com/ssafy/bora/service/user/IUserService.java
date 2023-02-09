@@ -1,13 +1,17 @@
 package com.ssafy.bora.service.user;
 
+import com.ssafy.bora.dto.sign_up.SignUpDTO;
 import com.ssafy.bora.dto.user.UserDTO;
 
 public interface IUserService {
 
-    public UserDTO findUserById(String id);
+    UserDTO findUserById(String id);
 
-    public UserDTO updateUserNickNameById(UserDTO user);
+    UserDTO createUser(SignUpDTO signUpDTO);
 
-    public UserDTO deleteUserById(String id);
+    UserDTO updateUserNickNameById(UserDTO userDTO);
 
+    UserDTO deleteUserById(String id);
+
+    boolean checkDuplicateNickName(String nickName);
 }

@@ -16,6 +16,4 @@ public class ReqStoryBoxDTO {
     private String title;
 
     private String contents;
-
-    private LocalDate regDateTime;
 }

@@ -10,6 +10,7 @@ import com.ssafy.bora.service.storybox.IStoryBoxService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,9 +22,6 @@ public class StoryBoxServiceImpl implements IStoryBoxService {
     private final IStoryBoxRepository storyBoxRepository;
     private final IUserRepository userRepository;
 
-    /**
-     * {@inhreitDoc}
-     */
     @Override
     public ResStoryBoxDTO createStoryBox(ReqStoryBoxDTO reqStoryBoxDTO) {
         User dj = userRepository.findById(reqStoryBoxDTO.getDjId()).get();
@@ -40,7 +38,7 @@ public class StoryBoxServiceImpl implements IStoryBoxService {
                     .viewerId(reqStoryBoxDTO.getViewerId())
                     .title(reqStoryBoxDTO.getTitle())
                     .contents(reqStoryBoxDTO.getContents())
-                    .regDateTime(reqStoryBoxDTO.getRegDateTime())
+                    .regDateTime(LocalDateTime.now())
                     .build();
 
             // DB에 넣고 Response DTO로 변환
@@ -51,9 +49,6 @@ public class StoryBoxServiceImpl implements IStoryBoxService {
         return null;
     }
 
-    /**
-     * {@inhreitDoc}
-     */
     @Override
     public List<ResStoryBoxDTO> findAllStoryBox(String djId) {
         // Entity List 조회
@@ -71,9 +66,6 @@ public class StoryBoxServiceImpl implements IStoryBoxService {
         return null;
     }
 
-    /**
-     * {@inhreitDoc}
-     */
     @Override
     public ResStoryBoxDTO findByDjIdAndStoryBoxId(String djId, int storyBoxId) {
         User dj = userRepository.findById(djId).get();
@@ -85,9 +77,6 @@ public class StoryBoxServiceImpl implements IStoryBoxService {
         return null;
     }
 
-    /**
-     * {@inhreitDoc}
-     */
     @Override
     public ResStoryBoxDTO deleteOneStoryBoxByDj(int storyBoxId) {
         StoryBox storyBox = storyBoxRepository.findById(storyBoxId);
@@ -100,16 +89,13 @@ public class StoryBoxServiceImpl implements IStoryBoxService {
     }
 
     /**
-     * {@inhreitDoc}
+     * TODO 여러개 삭제 구현합시다
      */
     @Override
     public int deleteStoryBoxListByDj() {
         return 0;
     }
 
-    /**
-     * {@inhreitDoc}
-     */
     @Override
     public ResStoryBoxDTO findMyStoryBoxOfDj(String djId, String viewerId) {
         User dj = userRepository.findById(djId).get();
@@ -122,9 +108,6 @@ public class StoryBoxServiceImpl implements IStoryBoxService {
         return null;
     }
 
-    /**
-     * {@inhreitDoc}
-     */
     @Override
     public ResStoryBoxDTO updateStoryBox(ReqStoryBoxDTO updateStoryBoxDTO) {
         String djId = updateStoryBoxDTO.getDjId();

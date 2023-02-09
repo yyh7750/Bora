@@ -6,7 +6,7 @@ import com.ssafy.bora.security.jwt.JwtAuthenticationFilter;
 import com.ssafy.bora.security.jwt.JwtProvider;
 import com.ssafy.bora.security.oauth2.CustomOAuth2UserService;
 import com.ssafy.bora.security.oauth2.OAuth2LoginSuccessHandler;
-import com.ssafy.bora.repository.privacy.PrivacyRepository;
+import com.ssafy.bora.repository.login.LoginRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
@@ -21,7 +21,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @RequiredArgsConstructor
 public class SecurityConfig {
 
-    private final PrivacyRepository privacyRepository;
+    private final LoginRepository privacyRepository;
     private final JwtProvider jwtProvider;
     private final CustomOAuth2UserService customOAuth2UserService;
     private final JwtAuthenticationFilter jwtAuthenticationFilter;

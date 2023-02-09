@@ -10,8 +10,6 @@ public class UserDTO {
 
     private String id;
 
-    private String name;
-
     private String nickName;
 
     private boolean isDelete;
@@ -21,7 +19,6 @@ public class UserDTO {
     public static UserDTO convertEntityToDTO(User findUser) {
         UserDTO userDTO = new UserDTO();
         userDTO.id = findUser.getId();
-        userDTO.name = findUser.getName();
         userDTO.nickName = findUser.getNickName();
         userDTO.isDelete = findUser.isDelete();
         userDTO.status = findUser.isStatus();

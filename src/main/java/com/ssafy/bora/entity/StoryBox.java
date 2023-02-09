@@ -1,15 +1,13 @@
 package com.ssafy.bora.entity;
 
 import com.ssafy.bora.dto.stroybox.ReqStoryBoxDTO;
-import com.ssafy.bora.dto.stroybox.ResStoryBoxDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
 import javax.persistence.*;
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -35,7 +33,7 @@ public class StoryBox implements Serializable {
     @Column(length = 2048)
     private String contents;
 
-    private LocalDate regDateTime;
+    private LocalDateTime regDateTime;
 
     private boolean isDelete;
 

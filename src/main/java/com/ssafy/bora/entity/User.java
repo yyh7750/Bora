@@ -1,15 +1,13 @@
 package com.ssafy.bora.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.ssafy.bora.dto.sign_up.SignUpDTO;
 import com.vladmihalcea.hibernate.type.json.JsonType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
-
 import javax.persistence.*;
-import java.util.Map;
 
 @Entity
 @Getter
@@ -23,9 +21,6 @@ public class User {
     @Column(length = 16)
     private String id;
 
-    @Column(length = 10)
-    private String name;
-
     @Column(name = "nick_name", length = 10)
     private String nickName;
 
@@ -35,6 +30,15 @@ public class User {
 
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "user")
     private Station station;
+
+    public static User createUser(SignUpDTO signUpDTO) {
+        User user = new User();
+        user.id = signUpDTO.getUserId();
+        user.nickName = signUpDTO.getNickName();
+        user.isDelete = false;
+        user.status = false;
+        return user;
+    }
 
     public User updateUser(String nickName) {
         this.nickName = nickName;
@@ -46,11 +50,11 @@ public class User {
         return this;
     }
 
-    public void createStation(){
+    public void createStation() {
         this.status = true;
     }
 
-    public void deleteStation(){
+    public void deleteStation() {
         this.status = false;
     }
 }

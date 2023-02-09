@@ -1,7 +1,7 @@
 package com.ssafy.bora.security.oauth2;
-import com.ssafy.bora.entity.PrivacyUser;
+import com.ssafy.bora.entity.LoginUser;
 import com.ssafy.bora.security.jwt.JwtProvider;
-import com.ssafy.bora.repository.privacy.PrivacyRepository;
+import com.ssafy.bora.repository.login.LoginRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseCookie;
@@ -20,7 +20,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class OAuth2LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 
-    private final PrivacyRepository privacyRepository;
+    private final LoginRepository privacyRepository;
     private final JwtProvider jwtProvider;
 
     private final String redirectUrl = "http://localhost:3000/regist";
@@ -55,11 +55,11 @@ public class OAuth2LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHan
     }
 
     private void saveOrUpdateUser(String refreshToken, CustomOAuth2User oAuth2User) {
-        Optional<PrivacyUser> opt = privacyRepository.findByEmail(oAuth2User.getEmail());
-        PrivacyUser user;
+        Optional<LoginUser> opt = privacyRepository.findByEmail(oAuth2User.getEmail());
+        LoginUser user;
 
         if (opt.isEmpty()) {
-            user = PrivacyUser.builder()
+            user = LoginUser.builder()
                     .email(oAuth2User.getEmail())
                     .nickname(oAuth2User.getNickname())
                     .refreshToken(refreshToken)

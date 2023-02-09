@@ -3,8 +3,7 @@ package com.ssafy.bora.dto.stroybox;
 import com.ssafy.bora.entity.StoryBox;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Getter
 @NoArgsConstructor
@@ -20,7 +19,7 @@ public class ResStoryBoxDTO {
 
     private String contents;
 
-    private LocalDate regDateTime;
+    private LocalDateTime regDateTime;
 
     public static ResStoryBoxDTO convertEntityToResDTO(StoryBox registeredStoryBox) {
         ResStoryBoxDTO resStoryBoxDTO = new ResStoryBoxDTO();

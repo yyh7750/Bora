@@ -8,24 +8,24 @@ import lombok.ToString;
 
 @Getter @Setter
 @ToString
-public class  PrivacyUser {
+public class LoginUser {
 
     private Long id;
     private String email;
     private String nickname;
     private String refreshToken;
-    public PrivacyUser() {}
+    public LoginUser() {}
 
     @Builder
-    public PrivacyUser(Long id, String email, String nickname, String refreshToken) {
+    public LoginUser(Long id, String email, String nickname, String refreshToken) {
         this.id = id;
         this.email = email;
         this.nickname = nickname;
         this.refreshToken = refreshToken;
     }
 
-    public static PrivacyUser of(CustomOAuth2User oAuth2User) {
-        PrivacyUser user = new PrivacyUser();
+    public static LoginUser of(CustomOAuth2User oAuth2User) {
+        LoginUser user = new LoginUser();
         user.email = oAuth2User.getEmail();
         user.nickname = oAuth2User.getNickname();
         return user;

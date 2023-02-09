@@ -1,18 +1,18 @@
-package com.ssafy.bora.repository.privacy;
+package com.ssafy.bora.repository.login;
 
-import com.ssafy.bora.entity.PrivacyUser;
+import com.ssafy.bora.entity.LoginUser;
 import org.springframework.stereotype.Repository;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Repository
-public class PrivacyRepository {
+public class LoginRepository {
 
     private static Long seq = 1L; // 직렬화 Serializalble
-    private static Map<Long, PrivacyUser> table = new ConcurrentHashMap<>();
+    private static Map<Long, LoginUser> table = new ConcurrentHashMap<>();
 
-    public PrivacyUser save(PrivacyUser user) {
+    public LoginUser save(LoginUser user) {
         if (user.getId() == null) {
             user.setId(seq);
             table.put(seq++, user);
@@ -23,13 +23,13 @@ public class PrivacyRepository {
         return user;
     }
 
-    public List<PrivacyUser> findAll() {
-        Collection<PrivacyUser> values = table.values();
+    public List<LoginUser> findAll() {
+        Collection<LoginUser> values = table.values();
         return values.size() == 0 ? new ArrayList<>() : new ArrayList<>(values);
     }
 
-    public Optional<PrivacyUser> findByEmail(String email) {
-        for (PrivacyUser user : table.values()) {
+    public Optional<LoginUser> findByEmail(String email) {
+        for (LoginUser user : table.values()) {
             if (user.getEmail().equals(email)) {
                 return Optional.of(user);
             }
