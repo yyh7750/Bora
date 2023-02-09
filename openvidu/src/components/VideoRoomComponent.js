@@ -1,4 +1,5 @@
 import axios from "axios";
+import { motion } from "framer-motion";
 import { OpenVidu } from "openvidu-browser";
 import React, { Component } from "react";
 import ChatComponent from "./chat/ChatComponent";
@@ -7,10 +8,28 @@ import "./VideoRoomComponent.css";
 // import OpenViduLayout from "../layout/openvidu-layout";
 import UserModel from "../models/user-model";
 import SidebarComponent from "./sidebar/SidebarComponent";
+import thumbnail from "../../../assets/wallpaper.jpg";
+
+const containerVariants = {
+  hidden: {
+    opacity: 0,
+  },
+  visible: {
+    opacity: 1,
+    transition: {
+      delay: 0.5,
+      duration: 0.5,
+    },
+  },
+  exit: {
+    x: "-100vw",
+    transition: { ease: "easeInOut" },
+  },
+};
 
 var localUser = new UserModel();
-const APPLICATION_SERVER_URL =
-  process.env.NODE_ENV === "production" ? "" : "http://localhost:5000/";
+const APPLICATION_SERVER_URL = "https://i8b301.p.ssafy.io/";
+const OPENVIDU_SERVER_SECRET = "MY_SECRET";
 
 const users = { user: "1", value: "디제이" };
 const participant = { user: "2", value: "Participant" };
@@ -99,12 +118,14 @@ class VideoRoomComponent extends Component {
     this.leaveSession();
   }
 
+  //세션에 참여
   joinSession() {
-    this.OV = new OpenVidu();
+    this.OV = new OpenVidu(); //1)오픈비두 오브젝트 생성
+    console.log("11");
 
     this.setState(
       {
-        session: this.OV.initSession(),
+        session: this.OV.initSession(), //2) 세션을 시작
       },
       async () => {
         this.subscribeToStreamCreated();
@@ -550,60 +571,58 @@ class VideoRoomComponent extends Component {
     const myRoomName = this.state.myRoomName;
     const localUser = this.state.localUser;
     var chatDisplay = { display: this.state.chatDisplay };
-
+    console.log("제발!!");
     return (
-      <div>
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+        // exit="exit"
+      >
         {this.state.session === undefined ? (
-          <div id="join">
-            <div id="img-div">
-              <img
-                src="resources/images/openvidu_grey_bg_transp_cropped.png"
-                alt="OpenVidu logo"
-              />
-            </div>
+          <div id="joinRoom">
             <div id="join-dialog" className="jumbotron vertical-center">
-              <h1> Join a video session </h1>
-              <form className="form-group" onSubmit={this.joinSession}>
-                <p>
-                  <label>Participant: </label>
-                  <input
-                    className="form-control"
-                    type="text"
-                    id="userName"
-                    value={localStorage.getItem("1")}
-                    required
-                  />
-                </p>
-                <p>
-                  <label>RoomName: </label>
-                  <input
-                    className="form-control"
-                    type="text"
-                    id="roomName"
-                    value={myRoomName || ""}
-                    onChange={this.handleChangeRoomName}
-                    required
-                  />
-                </p>
-                <p>
-                  <label>RoomType: </label>
-                  {/* <input type="checkbox" name="잔잔한" value="잔잔한">
+              <h1> 방 만들기 </h1>
+              <div id="create_thumbnail">
+                <img src={thumbnail} alt="" />
+              </div>
+              <div id="create_room">
+                <form className="form-group" onSubmit={this.joinSession}>
+                  <p>
+                    <label>Participant: </label>
+                    <input
+                      className="form-control"
+                      type="text"
+                      id="userName"
+                      value={localStorage.getItem("1")}
+                      required
+                    />
+                  </p>
+                  <p>
+                    <label>RoomName: </label>
+                    <input
+                      className="form-control"
+                      type="text"
+                      id="roomName"
+                      value={myRoomName || ""}
+                      onChange={this.handleChangeRoomName}
+                      required
+                    />
+                  </p>
+                  <p>
+                    <label>RoomType: </label>
+                    <input type="checkbox" name="잔잔한" value="잔잔한" />
                     잔잔한
-                  </input>
-                  <input type="checkbox" name="신나는" value="신나는">
+                    <input type="checkbox" name="신나는" value="신나는" />
                     신나는
-                  </input>
-                  <input type="checkbox" name="조용한" value="조용한">
+                    <input type="checkbox" name="조용한" value="조용한" />
                     조용한
-                  </input>
-                  <input type="checkbox" name="활기찬" value="활기찬">
+                    <input type="checkbox" name="활기찬" value="활기찬" />
                     활기찬
-                  </input>
-                  <input type="checkbox" name="교육적인" value="교육적인">
+                    <input type="checkbox" name="교육적인" value="교육적인" />
                     교육적인
-                  </input> */}
-                </p>
-                {/* <p>
+                  </p>
+                  {/* <p>
                   <label>session: </label>
                   <input
                     className="form-control"
@@ -614,15 +633,16 @@ class VideoRoomComponent extends Component {
                     required
                   />
                 </p> */}
-                <p className="text-center">
-                  <input
-                    className="btn btn-lg btn-success"
-                    name="commit"
-                    type="submit"
-                    value="JOIN"
-                  />
-                </p>
-              </form>
+                  <p className="text-center">
+                    <input
+                      className="btn btn-lg btn-success"
+                      name="commit"
+                      type="submit"
+                      value="JOIN"
+                    />
+                  </p>
+                </form>
+              </div>
             </div>
           </div>
         ) : null}
@@ -646,11 +666,14 @@ class VideoRoomComponent extends Component {
                 // toggleChat={this.toggleChat}
               />
             </div>
+            <h2 id="session-title" style={{ color: "white" }}>
+              {myRoomName + " "}
+            </h2>
+            <h3 id="session-nickname" style={{ color: "white" }}>
+              {}
+            </h3>
             {/* )} */}
             <div id="layout" className="bounds">
-              <h1 id="session-title" style={{ color: "white" }}>
-                {myRoomName + " "}
-              </h1>
               {/* publish => DJ */}
               <div className="publish">
                 {localUser !== undefined &&
@@ -697,7 +720,7 @@ class VideoRoomComponent extends Component {
             </div>
           </div>
         ) : null}
-      </div>
+      </motion.div>
     );
   }
 
@@ -724,25 +747,64 @@ class VideoRoomComponent extends Component {
   }
 
   async createSession(sessionId) {
-    const response = await axios.post(
-      APPLICATION_SERVER_URL + "api/sessions",
-      { customSessionId: sessionId },
-      {
-        headers: { "Content-Type": "application/json" },
-      }
-    );
-    return response.data; // The sessionId
+    return new Promise((resolve, reject) => {
+      const data = JSON.stringify({ customSessionId: sessionId });
+      axios
+        .post(`${APPLICATION_SERVER_URL}/openvidu/api/sessions`, data, {
+          headers: {
+            Authorization: `Basic ${btoa(
+              `OPENVIDUAPP:${OPENVIDU_SERVER_SECRET}`
+            )}`,
+            "Content-Type": "application/json",
+          },
+        })
+        .then((response) => {
+          resolve(response.data.id);
+        })
+        .catch((response) => {
+          const error = { ...response };
+          if (error?.response?.status === 409) {
+            resolve(sessionId);
+          } else {
+            console.warn(
+              `No connection to OpenVidu Server. This may be a certificate error at ${APPLICATION_SERVER_URL} OPENVIDU_SERVER_SECRET:${OPENVIDU_SERVER_SECRET}`
+            );
+            if (
+              window.confirm(
+                `No connection to OpenVidu Server. This may be a certificate error at "${APPLICATION_SERVER_URL}"\n\nClick OK to navigate and accept it. ` +
+                  `If no certificate warning is shown, then check that your OpenVidu Server is up and running at "${APPLICATION_SERVER_URL}"`
+              )
+            ) {
+              window.location.assign(
+                `${APPLICATION_SERVER_URL}/accept-certificate`
+              );
+            }
+          }
+        });
+    });
   }
 
   async createToken(sessionId) {
-    const response = await axios.post(
-      APPLICATION_SERVER_URL + "api/sessions/" + sessionId + "/connections",
-      {},
-      {
-        headers: { "Content-Type": "application/json" },
-      }
-    );
-    return response.data; // The token
+    return new Promise((resolve, reject) => {
+      const data = {};
+      axios
+        .post(
+          `${APPLICATION_SERVER_URL}/openvidu/api/sessions/${sessionId}/connection`,
+          data,
+          {
+            headers: {
+              Authorization: `Basic ${btoa(
+                `OPENVIDUAPP:${OPENVIDU_SERVER_SECRET}`
+              )}`,
+              "Content-Type": "application/json",
+            },
+          }
+        )
+        .then((response) => {
+          resolve(response.data.token);
+        })
+        .catch((error) => reject(error));
+    });
   }
 }
 export default VideoRoomComponent;
