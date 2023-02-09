@@ -28,7 +28,7 @@ const containerVariants = {
 };
 
 var localUser = new UserModel();
-const APPLICATION_SERVER_URL = "https://i8b301.p.ssafy.io/";
+const APPLICATION_SERVER_URL = "https://i8b301.p.ssafy.io:8445";
 const OPENVIDU_SERVER_SECRET = "MY_SECRET";
 
 const users = { user: "1", value: "디제이" };
