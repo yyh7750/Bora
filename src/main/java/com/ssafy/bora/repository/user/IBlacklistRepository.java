@@ -17,7 +17,7 @@ public interface IBlacklistRepository extends JpaRepository<Blacklist, Integer> 
      * @param viewerId
      * @return : Blacklist : 기존에 DJ가 차단한 Viewer ID에 해당하는 차단 정보
      */
-    Optional<Blacklist> findByDjIdAndViewerId(String djId, String viewerId);
+    Blacklist findByDjIdAndViewerId(String djId, String viewerId);
 
     /**
      * desc: 해당 DJ의 블랙리스트 목록 조회

@@ -1,5 +1,6 @@
 package com.ssafy.bora.repository.follow;
 
+import com.ssafy.bora.dto.main.TopTenDTO;
 import com.ssafy.bora.entity.follow.Follow;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -30,4 +31,7 @@ public interface IFollowRepository extends JpaRepository<Follow, Integer> {
      */
     @Query(value = "select f from Follow f where f.dj.id=:djId and f.isDelete=false")
     List<Follow> findAllFollowerList(@Param("djId") String djId);
+
+    @Query(nativeQuery = true, value = "select f.dj_id, count(*) as a from follow f group by f.dj_id order by a desc limit 10")
+    List<TopTenDTO> countTopTen();
 }

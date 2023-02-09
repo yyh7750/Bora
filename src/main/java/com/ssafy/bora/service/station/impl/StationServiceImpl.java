@@ -23,16 +23,39 @@ public class StationServiceImpl implements IStationService {
         // Station Entity에 들어갈 방송국을 개설하는 Dj 정보
         User dj = userRepository.findById(stationDTO.getUserId()).get();
 
-        // 요청받은 DTO 정보를 Entity로 변환
-        Station station = Station.convertDtoToStation(dj, stationDTO);
+        // 실질적인 데이터는 삭제되는게 아니라 상태값을 변경하여 관리하기 때문에
+        // User의 status로 방송국을 그 전에 가지고 있었다가 삭제했었는지를 판단해야한다.
+        if (dj.isStatus() == false) {
 
-        // 방송국 status 변경 및 save
-        dj.createStation();
-        Station registeredStation = stationRepository.save(station);
+            // 요청받은 DTO 정보를 Entity로 변환
+            Station station = Station.convertDtoToStation(dj, stationDTO);
 
-        // DTO로 변환
-        StationDTO registeredStationDTO = StationDTO.convertStationToDTO(registeredStation);
-        return registeredStationDTO;
+            // 유저가 그 전에 방송국을 생성 했다가 삭제했을 경우
+            if (dj.getStation() != null) {
+                // 이미 방송국 정보를 가지고 있었다면 (방송국을 생성했었다가 삭제한 경우)
+                // 이전 정보를 불러와 업데이트 해주기 위해 먼저 조회한다.
+                // 덮어쓰기 위해 한번 더 정의해준다.
+                Station updateStation = stationRepository.findStationByDjId(dj.getId());
+                updateStation.changeStation(station);
+
+                // 다시 상태값을 true로 바꿔주고 덮어쓴다.
+                dj.createStation();
+                updateStation.createStation();
+
+                StationDTO registeredStationDTO = StationDTO.convertStationToDTO(updateStation);
+                return registeredStationDTO;
+            }
+            // user status 및 방송국 생성상태 변경 및 save
+            // 방송국 생성 상태 변경
+            dj.createStation();
+            station.createStation();
+            Station registeredStation = stationRepository.save(station);
+            // DTO로 변환
+            StationDTO registeredStationDTO = StationDTO.convertStationToDTO(registeredStation);
+            return registeredStationDTO;
+        }
+
+        return null;
     }
 
     @Override
@@ -45,13 +68,14 @@ public class StationServiceImpl implements IStationService {
     @Override
     public StationDTO updateStationInfo(StationDTO stationDTO) {
         String djId = stationDTO.getUserId();
-        Station station = stationRepository.findStationByDjId(djId);
+        Station oldStation = stationRepository.findStationByDjId(djId);
 
         // 업데이트 실행
-        station.convertDtoToStation(station.getUser(), stationDTO);
+        Station newStation = Station.convertDtoToStation(oldStation.getUser(), stationDTO);
+        oldStation.changeStation(newStation);
 
         // 업데이트 된 엔티티를 DTO로 변환하여 반환
-        StationDTO newStationDTO = StationDTO.convertStationToDTO(station);
+        StationDTO newStationDTO = StationDTO.convertStationToDTO(oldStation);
         return newStationDTO;
     }
 
