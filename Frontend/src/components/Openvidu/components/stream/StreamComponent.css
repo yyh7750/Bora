@@ -61,6 +61,18 @@ video {
   color: #ffffff;
 }
 
+#heartIcons {
+  position: absolute;
+  bottom: 0;
+  z-index: 100;
+  left: 117vh;
+  cursor: pointer;
+}
+
+#heartIcons > img {
+  width: 50px;
+}
+
 #camIcon,
 #micIcon {
   text-align: center;

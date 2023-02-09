@@ -8,7 +8,7 @@ const NavProfile = (props) => {
     <Fragment>
       <div className="navContainer">
         <img src={younha} className="profileImg" />
-        <div className="userName">{value}</div>
+        <div className="userNickname">{value}</div>
       </div>
     </Fragment>
   );

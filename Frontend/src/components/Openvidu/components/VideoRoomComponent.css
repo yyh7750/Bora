@@ -70,12 +70,12 @@
   background-color: #fff;
   /* 사이드 바는 화면을 기준으로 배치 */
   position: fixed;
-  left: 0;
+  left: 98vh;
   /* top: 0; */
-  bottom: 0;
+  bottom: 12.5vh;
   /* height: 100px; */
   /* width: 20vw; */
-  z-index: 9999;
+  z-index: 10;
 }
 
 .OT-widget_container {
@@ -90,7 +90,7 @@
   top: 11vh;
   left: 6vh;
   bottom: 0px;
-  height: 77vh;
+  height: 70vh;
   /* min-width: 20vw !important; */
   border-radius: 20px;
   border-style: solid #fff;
@@ -108,6 +108,19 @@
   height: 100vh;
   /* min-width: 15% !important; */
   width: 100%;
+}
+
+#session-title {
+  position: fixed;
+  top: 80vh;
+  left: 13vh;
+  z-index: 99;
+}
+
+#create_thumbnail {
+}
+
+#create_room {
 }
 
 /*!

@@ -28,12 +28,16 @@
   position: absolute;
   left: 0;
   right: 0;
-  min-width: 400px;
+  /* min-width: 400px; */
 }
 #navChatButton {
   position: absolute;
   right: 10px;
   top: 0;
+}
+
+.MuiListItem-gutters {
+  min-width: none !important;
 }
 
 #titleContent {

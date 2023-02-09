@@ -28,12 +28,12 @@
   background-color: #b8b8b8;
   position: absolute;
   /* z-index: 3; */
-  top: 0;
+  top: -6vh;
   left: 0;
   right: 0;
   bottom: 0;
   margin: auto;
-  height: calc(100% - 30px);
+  height: calc(100% - 80px);
   width: calc(100% - 30px);
   border-radius: 20px;
 }

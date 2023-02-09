@@ -1,4 +1,5 @@
 import axios from "axios";
+import { motion } from "framer-motion";
 import { OpenVidu } from "openvidu-browser";
 import React, { Component } from "react";
 import ChatComponent from "./chat/ChatComponent";
@@ -7,6 +8,24 @@ import "./VideoRoomComponent.css";
 // import OpenViduLayout from "../layout/openvidu-layout";
 import UserModel from "../models/user-model";
 import SidebarComponent from "./sidebar/SidebarComponent";
+import thumbnail from "../../../assets/wallpaper.jpg";
+
+const containerVariants = {
+  hidden: {
+    opacity: 0,
+  },
+  visible: {
+    opacity: 1,
+    transition: {
+      delay: 0.5,
+      duration: 0.5,
+    },
+  },
+  exit: {
+    x: "-100vw",
+    transition: { ease: "easeInOut" },
+  },
+};
 
 var localUser = new UserModel();
 const APPLICATION_SERVER_URL =
@@ -99,12 +118,13 @@ class VideoRoomComponent extends Component {
     this.leaveSession();
   }
 
+  //세션에 참여
   joinSession() {
-    this.OV = new OpenVidu();
+    this.OV = new OpenVidu(); //1)오픈비두 오브젝트 생성
 
     this.setState(
       {
-        session: this.OV.initSession(),
+        session: this.OV.initSession(), //2) 세션을 시작
       },
       async () => {
         this.subscribeToStreamCreated();
@@ -552,50 +572,56 @@ class VideoRoomComponent extends Component {
     var chatDisplay = { display: this.state.chatDisplay };
 
     return (
-      <div>
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+        // exit="exit"
+      >
         {this.state.session === undefined ? (
-          <div id="join">
-            <div id="img-div">
-              <img src="../assets/images/bora_logo.png" alt="Bora logo" />
-            </div>
+          <div id="joinRoom">
             <div id="join-dialog" className="jumbotron vertical-center">
-              <h1> Join a video session </h1>
-              <form className="form-group" onSubmit={this.joinSession}>
-                <p>
-                  <label>Participant: </label>
-                  <input
-                    className="form-control"
-                    type="text"
-                    id="userName"
-                    value={localStorage.getItem("1")}
-                    required
-                  />
-                </p>
-                <p>
-                  <label>RoomName: </label>
-                  <input
-                    className="form-control"
-                    type="text"
-                    id="roomName"
-                    value={myRoomName || ""}
-                    onChange={this.handleChangeRoomName}
-                    required
-                  />
-                </p>
-                <p>
-                  <label>RoomType: </label>
-                  <input type="checkbox" name="잔잔한" value="잔잔한" />
-                  잔잔한
-                  <input type="checkbox" name="신나는" value="신나는" />
-                  신나는
-                  <input type="checkbox" name="조용한" value="조용한" />
-                  조용한
-                  <input type="checkbox" name="활기찬" value="활기찬" />
-                  활기찬
-                  <input type="checkbox" name="교육적인" value="교육적인" />
-                  교육적인
-                </p>
-                {/* <p>
+              <h1> 방 만들기 </h1>
+              <div id="create_thumbnail">
+                <img src={thumbnail} alt="" />
+              </div>
+              <div id="create_room">
+                <form className="form-group" onSubmit={this.joinSession}>
+                  <p>
+                    <label>Participant: </label>
+                    <input
+                      className="form-control"
+                      type="text"
+                      id="userName"
+                      value={localStorage.getItem("1")}
+                      required
+                    />
+                  </p>
+                  <p>
+                    <label>RoomName: </label>
+                    <input
+                      className="form-control"
+                      type="text"
+                      id="roomName"
+                      value={myRoomName || ""}
+                      onChange={this.handleChangeRoomName}
+                      required
+                    />
+                  </p>
+                  <p>
+                    <label>RoomType: </label>
+                    <input type="checkbox" name="잔잔한" value="잔잔한" />
+                    잔잔한
+                    <input type="checkbox" name="신나는" value="신나는" />
+                    신나는
+                    <input type="checkbox" name="조용한" value="조용한" />
+                    조용한
+                    <input type="checkbox" name="활기찬" value="활기찬" />
+                    활기찬
+                    <input type="checkbox" name="교육적인" value="교육적인" />
+                    교육적인
+                  </p>
+                  {/* <p>
                   <label>session: </label>
                   <input
                     className="form-control"
@@ -606,15 +632,16 @@ class VideoRoomComponent extends Component {
                     required
                   />
                 </p> */}
-                <p className="text-center">
-                  <input
-                    className="btn btn-lg btn-success"
-                    name="commit"
-                    type="submit"
-                    value="JOIN"
-                  />
-                </p>
-              </form>
+                  <p className="text-center">
+                    <input
+                      className="btn btn-lg btn-success"
+                      name="commit"
+                      type="submit"
+                      value="JOIN"
+                    />
+                  </p>
+                </form>
+              </div>
             </div>
           </div>
         ) : null}
@@ -638,11 +665,14 @@ class VideoRoomComponent extends Component {
                 // toggleChat={this.toggleChat}
               />
             </div>
+            <h2 id="session-title" style={{ color: "white" }}>
+              {myRoomName + " "}
+            </h2>
+            <h3 id="session-nickname" style={{ color: "white" }}>
+              {}
+            </h3>
             {/* )} */}
             <div id="layout" className="bounds">
-              <h1 id="session-title" style={{ color: "white" }}>
-                {myRoomName + " "}
-              </h1>
               {/* publish => DJ */}
               <div className="publish">
                 {localUser !== undefined &&
@@ -689,7 +719,7 @@ class VideoRoomComponent extends Component {
             </div>
           </div>
         ) : null}
-      </div>
+      </motion.div>
     );
   }
 

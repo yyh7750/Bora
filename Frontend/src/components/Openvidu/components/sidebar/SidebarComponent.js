@@ -5,8 +5,8 @@ import Mic from "@material-ui/icons/Mic";
 import MicOff from "@material-ui/icons/MicOff";
 import Videocam from "@material-ui/icons/Videocam";
 import VideocamOff from "@material-ui/icons/VideocamOff";
-import Fullscreen from "@material-ui/icons/Fullscreen";
-import FullscreenExit from "@material-ui/icons/FullscreenExit";
+// import Fullscreen from "@material-ui/icons/Fullscreen";
+// import FullscreenExit from "@material-ui/icons/FullscreenExit";
 import PictureInPicture from "@material-ui/icons/PictureInPicture";
 import ScreenShare from "@material-ui/icons/ScreenShare";
 import StopScreenShare from "@material-ui/icons/StopScreenShare";
@@ -17,7 +17,7 @@ import PowerSettingsNew from "@material-ui/icons/PowerSettingsNew";
 // import BorderColorIcon from "@material-ui/icons/BorderColor";
 // import HighlightOffIcon from "@material-ui/icons/HighlightOff";
 import {
-  ListItemText,
+  // ListItemText,
   ListItemIcon,
   MenuItem,
   MenuList,
@@ -116,7 +116,7 @@ export default class SidebarComponent extends Component {
 
   render() {
     const localUser = this.props.user;
-    const { isFull } = this.state;
+    // const { isFull } = this.state;
     // const editorDisplay = this.props.editorDisplay.display;
     return (
       // <AppBar className="toolbar" id="header">
@@ -133,7 +133,7 @@ export default class SidebarComponent extends Component {
               <MicOff color="secondary" />
             )}
           </ListItemIcon>
-          <ListItemText
+          {/* <ListItemText
             // color="inherit"
             // className="navButton"
             id="navMicButton"
@@ -141,7 +141,7 @@ export default class SidebarComponent extends Component {
             {localUser !== undefined && localUser.isAudioActive()
               ? "마이크 끄기"
               : "마이크 켜기"}
-          </ListItemText>
+          </ListItemText> */}
         </MenuItem>
         <MenuItem onClick={this.camStatusChanged}>
           <ListItemIcon
@@ -155,7 +155,7 @@ export default class SidebarComponent extends Component {
               <VideocamOff color="secondary" />
             )}
           </ListItemIcon>
-          <ListItemText
+          {/* <ListItemText
             color="inherit"
             // className="navButton"
             id="navCamButton"
@@ -163,7 +163,7 @@ export default class SidebarComponent extends Component {
             {localUser !== undefined && localUser.isVideoActive()
               ? "카메라 끄기"
               : "카메라 켜기"}
-          </ListItemText>
+          </ListItemText> */}
         </MenuItem>
         <MenuItem onClick={this.screenShare}>
           <ListItemIcon
@@ -177,7 +177,7 @@ export default class SidebarComponent extends Component {
               <ScreenShare />
             )}
           </ListItemIcon>
-          <ListItemText
+          {/* <ListItemText
             color="inherit"
             // className="navButton"
             id="navScreenButton"
@@ -185,17 +185,17 @@ export default class SidebarComponent extends Component {
             {localUser !== undefined && localUser.isScreenShareActive()
               ? "창 변경하기"
               : "화면 공유"}
-          </ListItemText>
+          </ListItemText> */}
         </MenuItem>
         {localUser !== undefined && localUser.isScreenShareActive() && (
           <MenuItem onClick={this.stopScreenShare}>
             <ListItemIcon id="navScreenButton">
               <StopScreenShare color="secondary" />
             </ListItemIcon>
-            <ListItemText id="navScreenButton">화면 공유 중지</ListItemText>
+            {/* <ListItemText id="navScreenButton">화면 공유 중지</ListItemText> */}
           </MenuItem>
         )}
-        <MenuItem onClick={this.handleFullScreen}>
+        {/* <MenuItem onClick={this.handleFullScreen}>
           <ListItemIcon
             color="inherit"
             // className="navButton"
@@ -212,7 +212,7 @@ export default class SidebarComponent extends Component {
           >
             {localUser !== undefined && isFull ? "전체 화면 종료" : "전체 화면"}
           </ListItemText>
-        </MenuItem>
+        </MenuItem> */}
         {/* <MenuItem onClick={this.toggleIsBlackBoard}>
           <ListItemIcon
             color="inherit"
@@ -274,13 +274,13 @@ export default class SidebarComponent extends Component {
           >
             <PowerSettingsNew color="#8A6BCD" />
           </ListItemIcon>
-          <ListItemText
+          {/* <ListItemText
             color="secondary"
             // className="navButton"
             // id="navLeaveButton"
           >
             종료하기
-          </ListItemText>
+          </ListItemText> */}
         </MenuItem>
       </MenuList>
     );
