@@ -67,18 +67,15 @@ public class PlaylistServiceImpl implements IPlaylistService {
 
         int result = 0;
         for (ReqPlaylistDTO reqPlaylistDTO : reqPlaylistDTOs) {
-            int size = reqPlaylistDTO.getDays().size();
 
             User user = userRepository.findById(reqPlaylistDTO.getUserId()).get();
-            for (int i = 0; i < size; i++) {
-                Playlist playlist = Playlist.convertDtoToEntity(user, reqPlaylistDTO, reqPlaylistDTO.getDays().get(i));
-                result = playlistRepository.createOrUpdatePlaylist(
-                        user.getId(), playlist.getDay(), playlist.getDjName(),
-                        playlist.getStationName(), playlist.getStartTime(),
-                        playlist.getEndTime());
-                if (result == 0) {
-                    return result;
-                }
+            Playlist playlist = Playlist.convertDtoToEntity(user, reqPlaylistDTO);
+            result = playlistRepository.createOrUpdatePlaylist(
+                    user.getId(), playlist.getDay(), playlist.getDjName(),
+                    playlist.getStationName(), playlist.getStartTime(),
+                    playlist.getEndTime());
+            if (result == 0) {
+                return result;
             }
         }
         return result;
@@ -90,7 +87,7 @@ public class PlaylistServiceImpl implements IPlaylistService {
         List<Playlist> userPlaylist = playlistRepository.findByUserIdAndIsDeleteFalse(userId);
 
         List<ResPlaylistDTO> resUserPlaylist = new ArrayList<>();
-        for (Playlist playlist: userPlaylist) {
+        for (Playlist playlist : userPlaylist) {
             resUserPlaylist.add(ResPlaylistDTO.convertPlaylistToDTO(playlist));
         }
 

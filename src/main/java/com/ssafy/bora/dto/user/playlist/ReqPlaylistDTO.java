@@ -2,8 +2,6 @@ package com.ssafy.bora.dto.user.playlist;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import java.time.LocalDateTime;
 import java.util.Map;
 
 @Getter
@@ -14,7 +12,7 @@ public class ReqPlaylistDTO {
 
     private String djName;
 
-    private Map<Integer, String> days;
+    private String day;
 
     private String stationName;
 

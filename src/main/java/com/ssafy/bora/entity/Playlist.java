@@ -36,10 +36,10 @@ public class Playlist implements Serializable {
 
     private boolean isDelete;
 
-    public static Playlist convertDtoToEntity(User user, ReqPlaylistDTO reqPlaylistDTO, String day) {
+    public static Playlist convertDtoToEntity(User user, ReqPlaylistDTO reqPlaylistDTO) {
         Playlist playlist = new Playlist();
         playlist.user = user;
-        playlist.day = day;
+        playlist.day = reqPlaylistDTO.getDay();
         playlist.djName = reqPlaylistDTO.getDjName();
         playlist.stationName = reqPlaylistDTO.getStationName();
         playlist.startTime = reqPlaylistDTO.getStartTime();

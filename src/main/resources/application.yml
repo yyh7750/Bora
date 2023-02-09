@@ -6,20 +6,26 @@ spring:
   main:
     allow-bean-definition-overriding: true
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/bora?serverTimezone=UTC&characterEncoding=UTF-8
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://i8b301.p.ssafy.io:3306/bora?serverTimezone=UTC&characterEncoding=UTF-8
     username: ssafy
     password: ssafy
   jpa:
-    database: mysql
-    database-platform: org.hibernate.dialect.MySQL8Dialect
+    open-in-view: false
+    generate-ddl: true
     show-sql: true
     hibernate:
-      ddl-auto: none
-    properties:
-      hibernate:
-        globally_quoted_identifiers: true
-        format_sql: true
+      ddl-auto: update
+#    database: mysql
+#    database-platform: org.hibernate.dialect.MySQL8Dialect
+#    show-sql: true
+#    hibernate:
+#      ddl-auto: none
+#    properties:
+#      hibernate:
+#        globally_quoted_identifiers: true
+#        format_sql: true
+
   cache: redis
   redis:
     host: localhost
