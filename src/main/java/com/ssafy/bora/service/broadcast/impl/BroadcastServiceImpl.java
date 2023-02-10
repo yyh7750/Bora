@@ -55,8 +55,8 @@ public class BroadcastServiceImpl implements IBroadcastService {
     }
 
     @Override
-    public List<BroadcastDTO> findAllLiveBroadcast(String category, String[] mood, String sortBy) {
-        SearchCondition searchCondition = new SearchCondition(category, mood[0],mood[1],mood[2],mood[3],mood[4],mood[5]);
+    public List<BroadcastDTO> findAllLiveBroadcast(String category, List<String> mood, String sortBy) {
+        SearchCondition searchCondition = new SearchCondition(category, mood);
         if(sortBy.equals("recommend")){
             sortBy=null;
         }

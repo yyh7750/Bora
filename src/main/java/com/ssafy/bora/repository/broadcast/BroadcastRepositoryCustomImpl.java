@@ -66,12 +66,9 @@ public class BroadcastRepositoryCustomImpl implements BroadcastRepositoryCustom 
         BooleanBuilder booleanBuilder = new BooleanBuilder();
         if (StringUtils.hasText(condition.getCategory()))
             booleanBuilder.and(station.category.contains(condition.getCategory()));
-        if (StringUtils.hasText(condition.getMoodA())) booleanBuilder.or(broadcast.mood.contains(condition.getMoodA()));
-        if (StringUtils.hasText(condition.getMoodB())) booleanBuilder.or(broadcast.mood.contains(condition.getMoodB()));
-        if (StringUtils.hasText(condition.getMoodC())) booleanBuilder.or(broadcast.mood.contains(condition.getMoodC()));
-        if (StringUtils.hasText(condition.getMoodD())) booleanBuilder.or(broadcast.mood.contains(condition.getMoodD()));
-        if (StringUtils.hasText(condition.getMoodE())) booleanBuilder.or(broadcast.mood.contains(condition.getMoodE()));
-        if (StringUtils.hasText(condition.getMoodF())) booleanBuilder.or(broadcast.mood.contains(condition.getMoodF()));
+        for(String s : condition.getMood()){
+            booleanBuilder.or(broadcast.mood.contains(s));
+        }
         return booleanBuilder;
     }
 

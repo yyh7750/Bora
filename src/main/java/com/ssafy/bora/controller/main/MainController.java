@@ -6,6 +6,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/main")
@@ -26,7 +28,7 @@ public class MainController {
 
     @GetMapping("/live-board/{category}")
     public ResponseEntity<?> findLiveBroadcast(@PathVariable(required = false) String category,
-                                               @RequestParam(value="mood",required = false) String[] mood,
+                                               @RequestParam(value="mood",required = false) List<String> mood,
                                                @RequestParam(value="sortBy",required = false) String sortBy) {
         return new ResponseEntity<>(broadcastService.findAllLiveBroadcast(category,mood,sortBy), HttpStatus.OK);
     }
