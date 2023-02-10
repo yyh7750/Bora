@@ -14,7 +14,7 @@ import java.util.List;
 @RequestMapping("/api/main")
 public class MainController {
 
-    private IBroadcastService broadcastService;
+    private final IBroadcastService broadcastService;
 
     //팔로워 수 탑텐
     @GetMapping("/top-ten")
@@ -39,6 +39,10 @@ public class MainController {
     }
     @DeleteMapping("/broadcast")
     public ResponseEntity<?> updateBroadcast(@RequestBody BroadcastReqDTO broadcastReqDTO){
+        return new ResponseEntity<>(broadcastService.removeBroadcast(broadcastReqDTO),HttpStatus.OK);
+    }
+    @PostMapping("/viewer")
+    public ResponseEntity<?> createViewLog(@RequestBody BroadcastReqDTO broadcastReqDTO){
         return new ResponseEntity<>(broadcastService.removeBroadcast(broadcastReqDTO),HttpStatus.OK);
     }
 }
