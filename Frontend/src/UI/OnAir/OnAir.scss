@@ -9,7 +9,7 @@
   margin-top: 1.5rem;
 }
 
-.container {
+.onAir_container {
   width: 80%;
   min-height: 400px;
   position: absolute;
@@ -42,9 +42,9 @@
 }
 
 .neon {
-  animation: neon 1s ease infinite;
-  -moz-animation: neon 1s ease infinite;
-  -webkit-animation: neon 1s ease infinite;
+  animation: neon 0.8s ease infinite;
+  -moz-animation: neon 0.8s ease infinite;
+  -webkit-animation: neon 0.8s ease infinite;
 }
 
 @keyframes neon {

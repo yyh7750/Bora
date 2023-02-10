@@ -26,6 +26,18 @@ export default function Navbar() {
   //   };
   // }, []);
 
+  if (sidebar) {
+    document.body.style.cssText = `
+    position: fixed;
+    top: -${window.scrollY}px;
+    overflow-y: scroll;
+    width: 100%;`;
+  } else {
+    const scrollY = document.body.style.top;
+    document.body.style.cssText = "";
+    window.scrollTo(0, parseInt(scrollY || "0", 10) * -1);
+  }
+
   return (
     <>
       <IconContext.Provider value={{ color: "#FFF" }}>
@@ -36,18 +48,8 @@ export default function Navbar() {
           <a href="/main">
             <img id="mainLogo" src={Logo} alt="" />
           </a>
-          <div class="wrap">
-            <div class="search">
-              <input
-                type="text"
-                class="searchTerm"
-                placeholder="What are you looking for?"
-              />
-              <button type="submit" class="searchButton">
-                <FaIcons.FaSearch />
-              </button>
-            </div>
-          </div>
+
+          <div class="wrap"></div>
           <div
             className={sidebar ? "menu-bars-blocking" : ""}
             onClick={showSidebar}

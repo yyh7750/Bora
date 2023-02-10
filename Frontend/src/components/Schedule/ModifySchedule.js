@@ -66,5 +66,4 @@ function ModifySchedule() {
     </RecoilRoot>
   );
 }
-
 export default ModifySchedule;
