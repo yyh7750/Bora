@@ -72,6 +72,8 @@ export default function Navbar() {
                 </li>
               );
             })}
+
+            {/**여기서 구독자 목록이 나타나야함 */}
           </ul>
         </nav>
         <div className={sidebar ? "blocking" : ""} onClick={showSidebar}></div>

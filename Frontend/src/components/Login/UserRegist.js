@@ -10,6 +10,7 @@ const UserRegist = () => {
     const accessToken = urlSearch.get("atk");
     window.localStorage.setItem("atk", accessToken);
   }, []);
+  // axios.get(`/users/dummyuser`).then((res) => console.log(res));
 
   const dispatch = useDispatch();
 
@@ -41,21 +42,27 @@ const UserRegist = () => {
   };
 
   const sendUserInfo = () => {
-    const userInfo = {
-      id: id,
-      age: age,
-      gender: gender,
-    };
-    console.log(userInfo);
+    // const userInfo = {
+    //   id: id,
+    //   age: age,
+    //   gender: gender,
+    // };
+    // console.log(userInfo);
 
-    const API_URL = `http://localhost:8080/userApi/백엔드 컨트롤러 경로`;
+    const API_URL = `http://localhost:8080/api/sign-up`;
     axios({
       url: API_URL,
       method: "POST",
-      params: userInfo,
+      data: {
+        userId: document.getElementById("inputEmail").value,
+        nickName: document.getElementById("inputNickname").value,
+        gender: gender,
+        age: age,
+      },
     })
-      .then(() => {
-        window.location.href = "메인페이지";
+      .then((res) => {
+        console.log(res);
+        // window.location.href = "메인페이지";
       })
       .catch((err) => {
         console.log(err);
@@ -64,13 +71,23 @@ const UserRegist = () => {
 
   return (
     <div>
-      <div>회원가입</div>
+      <div style={{ marginBottom: "100px" }}>회원가입</div>
+      <label>
+        이메일
+        <input type="text" id="inputEmail" />
+      </label>
+      <br />
+      <label>
+        닉네임 <input type="text" id="inputNickname" />
+      </label>
+      <br />
       <label>
         <input type="radio" value="m" name="gender" onClick={genderHandler} />
         남성
         <input type="radio" value="f" name="gender" onClick={genderHandler} />
         여성
       </label>
+      <br />
       <label>
         <input type="radio" value="1" name="age" onClick={ageHandler} />
         10대 이하

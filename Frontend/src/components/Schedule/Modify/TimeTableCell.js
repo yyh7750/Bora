@@ -1,17 +1,29 @@
 import DeleteIcon from "@mui/icons-material/Delete";
 import { TableCell } from "@mui/material";
-import React, { memo, useCallback, useMemo, useState } from "react";
+import React, {
+  memo,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+  useRef,
+} from "react";
 import { useRecoilState } from "recoil";
-import ConfirmModal from "./ConfirmModal";
+
 import { timeTableState } from "./store";
 import "./TimeTable.scss";
+import { useDispatch, useSelector } from "react-redux";
+import { scheduleActions } from "../../../store/schedule";
+import { redirect } from "react-router-dom";
 
-function TimeTableCell({ day, timeNum, Edit }) {
+function TimeTableCell({ day, timeNum, Edit, products }) {
+  // useDispatch를 통해 변경되는 값을 스토어에 전달.
   const [timeTableData, settimeTableData] = useRecoilState(timeTableState);
+  // const [hover, sethover] = useState(false);
   const [hover, sethover] = useState(false);
-  const [open, setopen] = useState(false);
-  const [doubleopen, setdoubleopen] = useState(false);
-
+  const dispatch = useDispatch();
+  const didMount = useRef(false);
+  const arr = useSelector((state) => state.schedule.arr);
   const timeData = useMemo(
     () =>
       timeTableData[day].find(
@@ -19,16 +31,14 @@ function TimeTableCell({ day, timeNum, Edit }) {
       ),
     [day, timeNum, timeTableData]
   );
-  const handleClose = useCallback(() => {
-    setopen(false);
-    setdoubleopen(false);
-  }, []);
-  const handleConfirm = useCallback(() => setopen(true), []);
-  const handleDelete = useCallback(() => {
-    setdoubleopen(true);
-  }, []);
+
+  // useEffect(() => {
+  //   if (didMount.current) djname = timeData.djName;
+  //   else didMount.current = true;
+  // }, [djname]);
 
   const confirmDelete = useCallback(() => {
+    // dispatch(scheduleActions.searchDjName());
     settimeTableData((oldtimeTableData) => {
       const newDayData = oldtimeTableData[day].filter(
         (data) => data.id !== timeData.id
@@ -38,10 +48,8 @@ function TimeTableCell({ day, timeNum, Edit }) {
         [day]: newDayData,
       };
     });
-    setopen(false);
-    setdoubleopen(false);
+    dispatch(scheduleActions.deleteArr("dj2"));
   }, [day, settimeTableData, timeData?.id]);
-
   return (
     <>
       {timeData?.start === timeNum ? (
@@ -53,16 +61,14 @@ function TimeTableCell({ day, timeNum, Edit }) {
           onMouseLeave={() => sethover(false)}
         >
           {timeData.name}
-          {timeData.userId}
+          <br />
           {timeData.djName}
-          {day}
-          {timeData.start}
-          {timeData.end}
+
           {hover ? (
             <div style={{ position: "absolute", top: 5, right: 5 }}>
               <DeleteIcon
                 style={{ cursor: "pointer" }}
-                onClick={handleConfirm}
+                onClick={confirmDelete}
               />
             </div>
           ) : null}
@@ -70,13 +76,6 @@ function TimeTableCell({ day, timeNum, Edit }) {
       ) : timeData?.start < timeNum && timeNum < timeData?.end ? null : (
         <TableCell />
       )}
-      <ConfirmModal
-        open={open}
-        handleClose={handleClose}
-        handleDelete={handleDelete}
-        confirmDelete={confirmDelete}
-        doubleopen={doubleopen}
-      ></ConfirmModal>
     </>
   );
 }

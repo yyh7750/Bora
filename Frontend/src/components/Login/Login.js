@@ -2,6 +2,7 @@
 //useDispatch(): 생성한 액션을 발생시키며, 액션생성 함수를 가져온다.
 import { useSelector, useDispatch } from "react-redux";
 import { loginActions } from "../../store/login";
+import axios from "axios";
 // import kakaoLogin from "../assets/kakaoLogin.png";
 
 const Login = () => {
@@ -19,6 +20,9 @@ const Login = () => {
   const REDIRECT_URI = "http://localhost:8080/oauth2/authorization/kakao";
   let URL = `https://kauth.kakao.com/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code`;
 
+  // const login = () => {
+  //   axios.post(`/users/dummyuser`).then((res) => console.log(res));
+  // };
   return (
     <div>
       <button onClick={toggleLoginHandler} style={{ marginTop: "100px" }}>

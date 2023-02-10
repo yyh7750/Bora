@@ -6,22 +6,28 @@ import {
   TableHead,
   TableRow,
 } from "@mui/material";
-import React, { useCallback } from "react";
+import React, { useCallback, useMemo } from "react";
 import TimeTableCell from "./TimeTableCell";
 import { useState } from "react";
 import { timeTableState } from "./store";
-import { useRecoilValue } from "recoil";
+import { useRecoilValue, useRecoilState } from "recoil";
 import "./TimeTable.scss";
 import SearchBar from "./SearchBar";
 import Button from "../../../UI/Button/Button";
+import { useSelector } from "react-redux";
 
 const hourData = Array.from({ length: 24 }, (i, j) => j);
 
 const TimeTable = (props) => {
   const products = props.searchItems;
   const timeTableData = useRecoilValue(timeTableState);
+  const [timeTableData2, settimeTableData] = useRecoilState(timeTableState);
   const [showModal, setshowModal] = useState(true);
   const [editInfo, seteditInfo] = useState({});
+
+  //useSelector로 스토어에서 현재 상태값을 가져온다.
+  const arr = useSelector((state) => state.schedule.arr);
+
   const handleClose = useCallback(() => {
     setshowModal(false);
     seteditInfo({});
@@ -47,11 +53,7 @@ const TimeTable = (props) => {
   );
 
   const ModifyTimeTable = () => {
-    const arr = [];
-    const tableValue = window.localStorage.getItem("timeTable");
-    console.log(tableValue);
-    console.log(Object.keys(tableValue));
-    console.log(Object.values(tableValue));
+    console.log(arr);
   };
 
   return (
@@ -110,13 +112,48 @@ const TimeTable = (props) => {
                 <TableCell align="center" className="rowcell">
                   <p className="rowcell">{`${time}:00-${time + 1}:00`}</p>
                 </TableCell>
-                <TimeTableCell day="sun" timeNum={time} Edit={Edit} />
-                <TimeTableCell day="mon" timeNum={time} Edit={Edit} />
-                <TimeTableCell day="tue" timeNum={time} Edit={Edit} />
-                <TimeTableCell day="wed" timeNum={time} Edit={Edit} />
-                <TimeTableCell day="thu" timeNum={time} Edit={Edit} />
-                <TimeTableCell day="fri" timeNum={time} Edit={Edit} />
-                <TimeTableCell day="sat" timeNum={time} Edit={Edit} />
+                <TimeTableCell
+                  day="sun"
+                  timeNum={time}
+                  Edit={Edit}
+                  products={products}
+                />
+                <TimeTableCell
+                  day="mon"
+                  timeNum={time}
+                  Edit={Edit}
+                  products={products}
+                />
+                <TimeTableCell
+                  day="tue"
+                  timeNum={time}
+                  Edit={Edit}
+                  products={products}
+                />
+                <TimeTableCell
+                  day="wed"
+                  timeNum={time}
+                  Edit={Edit}
+                  products={products}
+                />
+                <TimeTableCell
+                  day="thu"
+                  timeNum={time}
+                  Edit={Edit}
+                  products={products}
+                />
+                <TimeTableCell
+                  day="fri"
+                  timeNum={time}
+                  Edit={Edit}
+                  products={products}
+                />
+                <TimeTableCell
+                  day="sat"
+                  timeNum={time}
+                  Edit={Edit}
+                  products={products}
+                />
               </TableRow>
             ))}
           </TableBody>

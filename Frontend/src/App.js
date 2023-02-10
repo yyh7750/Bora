@@ -26,12 +26,14 @@ import Navbar from "./UI/NavBar/NavBar";
 
 import MySchedule from "./components/Schedule/MySchedule";
 import ModifySchedule from "./components/Schedule/ModifySchedule";
+import ModifyBroadcast from "./components/MyPage/Broadcast/ModifyBroadcast";
+import ModifyProfile from "./components/MyPage/ModifyProfile/ModifyProfile";
 
 const App = () => {
   // const location = useLocation();
   return (
     <AnimatePresence>
-      {/* <Navbar /> */}
+      <Navbar />
       <Routes>
         {/**redirect = Navigate */}
         <Route path="/" element={<Navigate to="/makeBroadcast" />} />
@@ -55,18 +57,21 @@ const App = () => {
           <Route element={<OnAir />}>
             <Route path="/viewBoardList" element={<ViewBoardList />} />
             <Route path="/detailBoard" element={<DetailBoard />} />
-
             <Route path="/broadcast" element={<Broadcast />} />
+            <Route path="/modifyBroadcast" element={<ModifyBroadcast />} />
           </Route>
         </Route>
 
         {/**유저가 보는 유저 */}
         <Route element={<UserToUser />}>
+          <Route path="/modifyProfile" element={<ModifyProfile />} />
           <Route element={<OnAir />}>
             <Route path="/emptyBroadcast" element={<EmptyBroadcast />} />
             <Route path="/makeBroadcast" element={<MakeBroadcast />} />
           </Route>
         </Route>
+
+        {/* <Route path="/modifyProfile" element={<ModifyProfile />} /> */}
 
         {/**편성표 */}
         <Route path="/mySchedule" element={<MySchedule />} />

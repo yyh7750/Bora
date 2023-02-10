@@ -5,12 +5,12 @@ import React, { useState, useCallback } from "react";
 import { useForm } from "react-hook-form";
 import { useRecoilState } from "recoil";
 import { timeTableState } from "./store";
-import { v4 as uuidv1 } from "uuid";
 import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { scheduleActions } from "../../../store/schedule";
 
 const checkOverLap = (A, B) =>
   B.start < A.start ? B.end > A.start : B.start < A.end;
-
 const SearchBar = ({
   showModal,
   handleClose,
@@ -26,7 +26,8 @@ const SearchBar = ({
   const handleInputChange = (event) => {
     setSearchValue(event.target.value);
   };
-
+  const arr = [];
+  const arr2 = useSelector((state) => state.schedule.arr);
   const {
     formState: {},
     reset,
@@ -56,12 +57,9 @@ const SearchBar = ({
   const filteredProducts = products.filter((product) => {
     return product.name.includes(searchValue);
   });
+  const dispatch = useDispatch();
   const Submit = useCallback(
     (name, day, start, end, dj, userId) => {
-      console.log(name);
-      console.log(day);
-      console.log(start);
-      console.log(end);
       let valid = true;
 
       for (let index = 0; index < timeTableData[day].length; index++) {
@@ -90,6 +88,16 @@ const SearchBar = ({
         djName: dj,
       };
 
+      const returnData = {
+        start: parseInt(start),
+        end: parseInt(end),
+        name: name,
+        day: day,
+        userId: userId,
+        djName: dj,
+      };
+      dispatch(scheduleActions.setArr(returnData));
+
       settimeTableData((oldTimeData) => ({
         ...oldTimeData,
         [day]: [...oldTimeData[day], data],
@@ -99,7 +107,6 @@ const SearchBar = ({
     },
     [handleClose, settimeTableData, timeTableData]
   );
-
   return (
     <div className="searchBar">
       <input type="text" value={searchValue} onChange={handleInputChange} />
