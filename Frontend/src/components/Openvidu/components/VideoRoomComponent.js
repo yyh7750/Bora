@@ -30,8 +30,8 @@ const containerVariants = {
 };
 
 var localUser = new UserModel();
-const APPLICATION_SERVER_URL =
-  process.env.NODE_ENV === "production" ? "" : "http://localhost:5000/";
+const OPENVIDU_SERVER_URL = "https://i8b301.p.ssafy.io:8445";
+const OPENVIDU_SERVER_SECRET = "MY_SECRET";
 
 const users = { user: "1", value: "디제이" };
 const participant = { user: "2", value: "Participant" };
@@ -762,30 +762,77 @@ class VideoRoomComponent extends Component {
 
   //세션아이디 가져오는데, DJ는 따로 저장해놓은 다음 권한 부여해야할거같음.
   async getToken() {
-    const sessionId = await this.createSession(this.state.mySessionId);
-    return await this.createToken(sessionId);
-  }
-
-  async createSession(sessionId) {
-    const response = await axios.post(
-      APPLICATION_SERVER_URL + "api/sessions",
-      { customSessionId: sessionId },
-      {
-        headers: { "Content-Type": "application/json" },
-      }
+    return this.createSession(this.state.mySessionId).then((sessionId) =>
+      this.createToken(sessionId)
     );
-    return response.data; // The sessionId
+  }
+  async createSession(sessionId) {
+    return new Promise((resolve, reject) => {
+      let data = JSON.stringify({ customSessionId: sessionId });
+      axios
+        .post(OPENVIDU_SERVER_URL + "/openvidu/api/sessions", data, {
+          headers: {
+            Authorization:
+              "Basic " + btoa("OPENVIDUAPP:" + OPENVIDU_SERVER_SECRET),
+            "Content-Type": "application/json",
+          },
+        })
+        .then((response) => {
+          console.log("CREATE SESION", response);
+          resolve(response.data.id);
+        })
+        .catch((response) => {
+          var error = Object.assign({}, response);
+          if (error?.response?.status === 409) {
+            resolve(sessionId);
+          } else {
+            console.log(error);
+            console.warn(
+              "No connection to OpenVidu Server. This may be a certificate error at " +
+                OPENVIDU_SERVER_URL
+            );
+            if (
+              window.confirm(
+                'No connection to OpenVidu Server. This may be a certificate error at "' +
+                  OPENVIDU_SERVER_URL +
+                  '"\n\nClick OK to navigate and accept it. ' +
+                  'If no certificate warning is shown, then check that your OpenVidu Server is up and running at "' +
+                  OPENVIDU_SERVER_URL +
+                  '"'
+              )
+            ) {
+              window.location.assign(
+                OPENVIDU_SERVER_URL + "/openvidu/accept-certificate"
+              ); // window.location.assign(OPENVIDU_SERVER_URL + '/accept-certificate');
+            }
+          }
+        });
+    });
   }
 
   async createToken(sessionId) {
-    const response = await axios.post(
-      APPLICATION_SERVER_URL + "api/sessions/" + sessionId + "/connections",
-      {},
-      {
-        headers: { "Content-Type": "application/json" },
-      }
-    );
-    return response.data; // The token
+    return new Promise((resolve, reject) => {
+      axios
+        .post(
+          OPENVIDU_SERVER_URL +
+            "/openvidu/api/sessions/" +
+            sessionId +
+            "/connection",
+          {},
+          {
+            headers: {
+              Authorization:
+                "Basic " + btoa("OPENVIDUAPP:" + OPENVIDU_SERVER_SECRET),
+              "Content-Type": "application/json",
+            },
+          }
+        )
+        .then((response) => {
+          console.log("TOKEN", response);
+          resolve(response.data.token);
+        })
+        .catch((error) => reject(error));
+    });
   }
 }
 export default VideoRoomComponent;
