@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/main")
+@RequestMapping("/api/main")
 public class MainController {
 
     private IBroadcastService broadcastService;

@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/storybox")
+@RequestMapping("/api/storybox")
 public class storyboxController {
 
     private final IStoryBoxService storyBoxService;
