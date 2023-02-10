@@ -59,8 +59,6 @@ public class BroadcastServiceImpl implements IBroadcastService {
         return mfbDtoList;
     }
 
-
-    //TODO sortBy가 recommend일때 처리해야한다...
     @Override
     public List<BroadcastResDTO> findAllLiveBroadcast(String category, List<String> mood, String sortBy) {
         SearchCondition searchCondition = new SearchCondition(category, mood);
