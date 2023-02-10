@@ -1,19 +1,24 @@
-package com.ssafy.bora.service.impl;
+package com.ssafy.bora.service.broadcast.impl;
 
 import com.ssafy.bora.dto.main.*;
 import com.ssafy.bora.entity.Broadcast;
 import com.ssafy.bora.entity.Station;
+import com.ssafy.bora.entity.User;
 import com.ssafy.bora.entity.follow.Follow;
 import com.ssafy.bora.repository.broadcast.BroadcastRepositoryCustom;
 import com.ssafy.bora.repository.broadcast.IBroadcastRepository;
 import com.ssafy.bora.repository.follow.IFollowRepository;
 import com.ssafy.bora.repository.station.IStationRepository;
+import com.ssafy.bora.repository.user.IUserRepository;
 import com.ssafy.bora.service.broadcast.IBroadcastService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -21,10 +26,10 @@ import java.util.List;
 @Transactional
 public class BroadcastServiceImpl implements IBroadcastService {
 
-    private IBroadcastRepository broadcastRepository;
-    private IFollowRepository followRepository;
-    private IStationRepository stationRepository;
-    private BroadcastRepositoryCustom broadcastRepositoryCustom;
+    private final IBroadcastRepository broadcastRepository;
+    private final IFollowRepository followRepository;
+    private final IStationRepository stationRepository;
+    private final IUserRepository userRepository;
 
     @Override
     public List<BasicMainDTO> findTopTenBroadcast() {
@@ -54,12 +59,51 @@ public class BroadcastServiceImpl implements IBroadcastService {
         return mfbDtoList;
     }
 
+
+    //TODO sortBy가 recommend일때 처리해야한다...
     @Override
-    public List<BroadcastDTO> findAllLiveBroadcast(String category, List<String> mood, String sortBy) {
+    public List<BroadcastResDTO> findAllLiveBroadcast(String category, List<String> mood, String sortBy) {
         SearchCondition searchCondition = new SearchCondition(category, mood);
         if(sortBy.equals("recommend")){
             sortBy=null;
         }
-        return broadcastRepositoryCustom.findAllByCategoryAndSort(searchCondition,sortBy);
+        return broadcastRepository.findAllByCategoryAndSort(searchCondition,sortBy);
     }
+    @Override
+    public String createBroadcast(BroadcastReqDTO broadcastReqDTO) {
+        User dj = userRepository.findById(broadcastReqDTO.getUserId()).get();
+        Station station = dj.getStation();
+        if(station==null) return null;
+
+        Broadcast hasBroadcast=broadcastRepository.findByUserAndEndBroadIsNull(dj);
+        if(hasBroadcast!=null) return null;
+
+        String moodStr = String.join("",broadcastReqDTO.getMoods());
+
+        Broadcast broadcast = Broadcast.builder()
+                .user(dj)
+                .title(broadcastReqDTO.getTitle())
+                .mood(moodStr)
+                .startBroad(LocalDateTime.now())
+                .endBroad(null)
+                .sessionId(broadcastReqDTO.getSessionId())
+                .build();
+        broadcastRepository.save(broadcast);
+        return broadcastReqDTO.getSessionId();
+    }
+
+    //TODO front는 세션만료를 이 과정 끝나고 해야한다는 것을 알려주기
+    @Override
+    public String removeBroadcast(BroadcastReqDTO broadcastReqDTO) {
+        Broadcast broadcast = broadcastRepository.findBySessionId(broadcastReqDTO.getSessionId());
+        Station station = stationRepository.findStationByDjId(broadcastReqDTO.getUserId());
+
+        Duration startDuration= Duration.between(broadcast.getStartBroad(), station.getStartTime());
+        Duration endDuration = Duration.between(broadcast.getEndBroad(), station.getEndTime());
+        boolean isOnTime = startDuration.getSeconds()<300&&endDuration.getSeconds()<300;
+
+        broadcast.deleteBroadcast(LocalDateTime.now(), broadcastReqDTO.getMaxViewer(), isOnTime);
+        return broadcastReqDTO.getSessionId();
+    }
+
 }

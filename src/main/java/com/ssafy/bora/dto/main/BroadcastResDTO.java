@@ -1,18 +1,14 @@
 package com.ssafy.bora.dto.main;
 
 import com.querydsl.core.annotations.QueryProjection;
-import com.ssafy.bora.entity.Broadcast;
-import com.ssafy.bora.entity.Station;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Getter
 @NoArgsConstructor
-public class BroadcastDTO {
+public class BroadcastResDTO {
     private String userId;
     private String nickName;
     //private 어떠한 ++이미지
@@ -40,7 +36,7 @@ public class BroadcastDTO {
 //    }
 
     @QueryProjection
-    public BroadcastDTO(String userId, String nickName, String stationName, String title, String mood, String category, String sessionId, LocalDateTime startTime){
+    public BroadcastResDTO(String userId, String nickName, String stationName, String title, String mood, String category, String sessionId, LocalDateTime startTime){
         this.userId=userId;
         this.nickName=nickName;
         this.stationName=stationName;

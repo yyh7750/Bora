@@ -1,5 +1,6 @@
 package com.ssafy.bora.controller.main;
 
+import com.ssafy.bora.dto.main.BroadcastReqDTO;
 import com.ssafy.bora.service.broadcast.IBroadcastService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -30,6 +31,14 @@ public class MainController {
     public ResponseEntity<?> findLiveBroadcast(@PathVariable(required = false) String category,
                                                @RequestParam(value="mood",required = false) List<String> mood,
                                                @RequestParam(value="sortBy",required = false) String sortBy) {
-        return new ResponseEntity<>(broadcastService.findAllLiveBroadcast(category,mood,sortBy), HttpStatus.OK);
+        return new ResponseEntity<>(broadcastService.findAllLiveBroadcast(category, mood, sortBy), HttpStatus.OK);
+    }
+    @PostMapping("/broadcast")
+    public ResponseEntity<?> createBroadcast(@RequestBody BroadcastReqDTO broadcastReqDTO){
+        return new ResponseEntity<>(broadcastService.createBroadcast(broadcastReqDTO),HttpStatus.CREATED);
+    }
+    @DeleteMapping("/broadcast")
+    public ResponseEntity<?> updateBroadcast(@RequestBody BroadcastReqDTO broadcastReqDTO){
+        return new ResponseEntity<>(broadcastService.removeBroadcast(broadcastReqDTO),HttpStatus.OK);
     }
 }

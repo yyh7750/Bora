@@ -1,8 +1,6 @@
 package com.ssafy.bora.entity;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
 import javax.persistence.*;
@@ -11,9 +9,10 @@ import java.time.LocalDateTime;
 
 @Entity
 @Getter
-@Setter
 @DynamicInsert
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Broadcast implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,8 +37,14 @@ public class Broadcast implements Serializable {
     private int maxViewer;
 
     @Column(name = "is_on_time")
-    @ColumnDefault("N")
+    @ColumnDefault("0")
     private boolean isOnTime;
 
     private String sessionId;
+
+    public void deleteBroadcast(LocalDateTime endBroad, int maxViewer, boolean isOnTime){
+        this.endBroad=endBroad;
+        this.maxViewer=maxViewer;
+        this.isOnTime=isOnTime;
+    }
 }

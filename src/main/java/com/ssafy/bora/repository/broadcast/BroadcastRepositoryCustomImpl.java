@@ -3,14 +3,11 @@ package com.ssafy.bora.repository.broadcast;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.Order;
 import com.querydsl.core.types.OrderSpecifier;
-import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import com.ssafy.bora.dto.main.BroadcastDTO;
-import com.ssafy.bora.dto.main.OrderCondition;
-import com.ssafy.bora.dto.main.QBroadcastDTO;
+import com.ssafy.bora.dto.main.BroadcastResDTO;
+import com.ssafy.bora.dto.main.QBroadcastResDTO;
 import com.ssafy.bora.dto.main.SearchCondition;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Sort;
 import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
@@ -27,11 +24,11 @@ public class BroadcastRepositoryCustomImpl implements BroadcastRepositoryCustom 
     private final JPAQueryFactory queryFactory;
 
     @Override
-    public List<BroadcastDTO> findAllByCategoryAndSort(SearchCondition condition, String sortCondition) {
+    public List<BroadcastResDTO> findAllByCategoryAndSort(SearchCondition condition, String sortCondition) {
         BooleanBuilder searchBuilder = searchMoodByBuilder(condition);
         OrderSpecifier[] orderSpecifiers = createOrderSpecifier(sortCondition);
         return queryFactory
-                .select(new QBroadcastDTO(
+                .select(new QBroadcastResDTO(
                         broadcast.user.id,
                         broadcast.user.nickName,
                         station.name,
