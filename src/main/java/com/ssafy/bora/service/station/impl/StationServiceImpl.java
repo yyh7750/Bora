@@ -10,6 +10,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 @Transactional
@@ -35,15 +37,16 @@ public class StationServiceImpl implements IStationService {
                 // 이미 방송국 정보를 가지고 있었다면 (방송국을 생성했었다가 삭제한 경우)
                 // 이전 정보를 불러와 업데이트 해주기 위해 먼저 조회한다.
                 // 덮어쓰기 위해 한번 더 정의해준다.
-                Station updateStation = stationRepository.findStationByDjId(dj.getId());
-                updateStation.changeStation(station);
-
-                // 다시 상태값을 true로 바꿔주고 덮어쓴다.
-                dj.createStation();
-                updateStation.createStation();
-
-                StationDTO registeredStationDTO = StationDTO.convertStationToDTO(updateStation);
-                return registeredStationDTO;
+                Optional<Station> updateStation = stationRepository.findStationByDjId(dj.getId());
+                if (updateStation.isPresent()) {
+                    updateStation.get().changeStation(station);
+                    // 다시 상태값을 true로 바꿔주고 덮어쓴다.
+                    dj.createStation();
+                    updateStation.get().createStation();
+                    StationDTO registeredStationDTO = StationDTO.convertStationToDTO(updateStation.get());
+                    return registeredStationDTO;
+                }
+                return null;
             }
             // user status 및 방송국 생성상태 변경 및 save
             // 방송국 생성 상태 변경
@@ -60,23 +63,29 @@ public class StationServiceImpl implements IStationService {
 
     @Override
     public StationDTO findStationByDjId(String djId) {
-        Station findStation = stationRepository.findStationByDjId(djId);
-        StationDTO findStationDTO = StationDTO.convertStationToDTO(findStation);
-        return findStationDTO;
+        Optional<Station> findStation = stationRepository.findStationByDjId(djId);
+        if (findStation.isPresent()) {
+            StationDTO findStationDTO = StationDTO.convertStationToDTO(findStation.get());
+            return findStationDTO;
+        }
+        return null;
     }
 
     @Override
     public StationDTO updateStationInfo(StationDTO stationDTO) {
         String djId = stationDTO.getUserId();
-        Station oldStation = stationRepository.findStationByDjId(djId);
+        Optional<Station> oldStation = stationRepository.findStationByDjId(djId);
 
-        // 업데이트 실행
-        Station newStation = Station.convertDtoToStation(oldStation.getUser(), stationDTO);
-        oldStation.changeStation(newStation);
+        if (oldStation.isPresent()) {
+            // 업데이트 실행
+            Station newStation = Station.convertDtoToStation(oldStation.get().getUser(), stationDTO);
+            oldStation.get().changeStation(newStation);
 
-        // 업데이트 된 엔티티를 DTO로 변환하여 반환
-        StationDTO newStationDTO = StationDTO.convertStationToDTO(oldStation);
-        return newStationDTO;
+            // 업데이트 된 엔티티를 DTO로 변환하여 반환
+            StationDTO newStationDTO = StationDTO.convertStationToDTO(oldStation.get());
+            return newStationDTO;
+        }
+        return null;
     }
 
     // 로직에는 있지만 실제 기능에선 사용하지 않는 메소드
@@ -91,8 +100,8 @@ public class StationServiceImpl implements IStationService {
 
     @Override
     public Boolean checkDuplicateStationName(String name) {
-        Station findStation = stationRepository.findByName(name);
-        if (findStation != null) {
+        Optional<Station> findStation = stationRepository.findByName(name);
+        if (findStation.isPresent()) {
             return false;
         }
         return true;

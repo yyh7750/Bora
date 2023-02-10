@@ -7,7 +7,11 @@ spring:
     allow-bean-definition-overriding: true
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
+<<<<<<< Updated upstream
     url: jdbc:mariadb://i8b301.p.ssafy.io:3306/bora?serverTimezone=UTC&characterEncoding=UTF-8
+=======
+    url: jdbc:mariadb://i8b301.p.ssafy.io/bora?serverTimezone=UTC&characterEncoding=UTF-8
+>>>>>>> Stashed changes
     username: ssafy
     password: ssafy
   jpa:
