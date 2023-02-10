@@ -23,8 +23,8 @@ public class MainController {
     }
     //내가 팔로워한거
     @GetMapping("/follow-broad/{id}")
-    public ResponseEntity<?> findFollowBroadcast(@PathVariable String id){
-        return new ResponseEntity<>(broadcastService.findFollowBroadcast(id),HttpStatus.OK);
+    public ResponseEntity<?> findFollowBroadcast(@PathVariable String userId){
+        return new ResponseEntity<>(broadcastService.findFollowBroadcast(userId),HttpStatus.OK);
     }
 
     @GetMapping("/live-board/{category}")
