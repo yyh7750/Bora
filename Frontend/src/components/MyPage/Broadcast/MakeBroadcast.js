@@ -31,6 +31,7 @@ const MakeBroadcast = () => {
     //   sun:
     // }
     console.log("방송국 생성!");
+
     //서버에 이미지 업로드 (배너이미지)
     if (image.image_file) {
       const formData = new FormData();
@@ -147,6 +148,8 @@ const MakeBroadcast = () => {
             className="thumbnailImg"
           />
         </div>
+
+        <img src={thumbnailImg} alt="썸네일이미지" className="thumbnailImg" />
       </div>
       <div className="broadcastInfo">
         <div className="titleLine">
@@ -259,7 +262,7 @@ const MakeBroadcast = () => {
               name="생성하기"
               value={createBroadcast}
               style={{ float: "left" }}
-            ></Button2>
+            />
           </Link>
         </div>
       </div>

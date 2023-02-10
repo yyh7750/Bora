@@ -1,7 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import { loginActions } from "../../store/login";
 import axios from "axios";
-
 import { useEffect } from "react";
 
 const UserRegist = () => {
@@ -81,13 +80,16 @@ const UserRegist = () => {
         닉네임 <input type="text" id="inputNickname" />
       </label>
       <br />
+      <div>회원가입</div>
       <label>
         <input type="radio" value="m" name="gender" onClick={genderHandler} />
         남성
         <input type="radio" value="f" name="gender" onClick={genderHandler} />
         여성
       </label>
+
       <br />
+
       <label>
         <input type="radio" value="1" name="age" onClick={ageHandler} />
         10대 이하
