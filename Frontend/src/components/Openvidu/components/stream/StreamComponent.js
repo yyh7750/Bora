@@ -17,7 +17,7 @@ export default class StreamComponent extends Component {
       showForm: false,
       mutedSound: false,
       isFormValid: true,
-      heartCnt: 0,
+      heartCnt: 1,
     };
     this.toggleSound = this.toggleSound.bind(this);
     this.heartHandler = this.heartHandler.bind(this);
@@ -29,7 +29,7 @@ export default class StreamComponent extends Component {
 
   heartHandler() {
     this.setState({ heartCnt: this.state.heartCnt + 1 });
-    console.log(this.heartCnt);
+    console.log(this.state.heartCnt);
   }
 
   render() {

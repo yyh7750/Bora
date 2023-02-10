@@ -137,6 +137,8 @@ class VideoRoomComponent extends Component {
         await this.connectToSession();
       }
     );
+    //배열의 길이 출력하는거 확인해야함.
+    console.log(this.state.subscribers);
   }
 
   //session 연결
@@ -540,10 +542,15 @@ class VideoRoomComponent extends Component {
     // 선택된 목록에서 value 찾기
     let result = "";
     selectedEls.forEach((el) => {
-      result += "#" + el.value + " ";
+      result += el.value + " ";
     });
-
-    document.getElementById("checkbox_result").innerText = result;
+    const arr = result.split(" ");
+    if (arr.length >= 2) {
+      arr.pop();
+    }
+    this.setState({ myRoomType: arr });
+    console.log(this.state.myRoomType);
+    //클래스형 함수에서 배열 setState로 복사해오는 방법
   }
 
   render() {
