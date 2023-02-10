@@ -1,4 +1,4 @@
-package com.ssafy.bora.service.impl;
+package com.ssafy.bora.service.broadcast.impl;
 
 import com.ssafy.bora.dto.main.*;
 import com.ssafy.bora.entity.Broadcast;
@@ -28,11 +28,11 @@ public class BroadcastServiceImpl implements IBroadcastService {
 
     @Override
     public List<BasicMainDTO> findTopTenBroadcast() {
-        List<BasicMainDTO>topTenList = new ArrayList<>();
-        List<TopTenDTO>list = followRepository.countTopTen();
-        for(TopTenDTO ttDto:list){
-            Station station =stationRepository.findStationByDjId(ttDto.getUserId());
-            BasicMainDTO bmDTO= BasicMainDTO.convertEntityToBasicMainDTO(station, ttDto);
+        List<BasicMainDTO> topTenList = new ArrayList<>();
+        List<TopTenDTO> list = followRepository.countTopTen();
+        for (TopTenDTO ttDto : list) {
+            Station station = stationRepository.findStationByDjId(ttDto.getUserId());
+            BasicMainDTO bmDTO = BasicMainDTO.convertEntityToBasicMainDTO(station, ttDto);
             topTenList.add(bmDTO);
         }
         return topTenList;
@@ -40,15 +40,15 @@ public class BroadcastServiceImpl implements IBroadcastService {
 
     @Override
     public List<MyFollowBroadcastDTO> findFollowBroadcast(String id) {
-        List<MyFollowBroadcastDTO>mfbDtoList = new ArrayList<>();
-        List<Follow>list =followRepository.findAllFollowingList(id);
-        for(Follow follow :list){
+        List<MyFollowBroadcastDTO> mfbDtoList = new ArrayList<>();
+        List<Follow> list = followRepository.findAllFollowingList(id);
+        for (Follow follow : list) {
             //내가 팔로우하는 방송국
             Station station = stationRepository.findStationByDjId(follow.getDj().getId());
             //방송중인 유저
             Broadcast broadcast = broadcastRepository.findByUserAndEndBroadIsNull(follow.getDj());
-            boolean isLive= broadcast!=null;
-            MyFollowBroadcastDTO mfbDTO = MyFollowBroadcastDTO.convertEntityToMyFollowBroadcastDTO(isLive,station);
+            boolean isLive = broadcast != null;
+            MyFollowBroadcastDTO mfbDTO = MyFollowBroadcastDTO.convertEntityToMyFollowBroadcastDTO(isLive, station);
             mfbDtoList.add(mfbDTO);
         }
         return mfbDtoList;
@@ -57,9 +57,9 @@ public class BroadcastServiceImpl implements IBroadcastService {
     @Override
     public List<BroadcastDTO> findAllLiveBroadcast(String category, List<String> mood, String sortBy) {
         SearchCondition searchCondition = new SearchCondition(category, mood);
-        if(sortBy.equals("recommend")){
-            sortBy=null;
+        if (sortBy.equals("recommend")) {
+            sortBy = null;
         }
-        return broadcastRepositoryCustom.findAllByCategoryAndSort(searchCondition,sortBy);
+        return broadcastRepositoryCustom.findAllByCategoryAndSort(searchCondition, sortBy);
     }
 }
