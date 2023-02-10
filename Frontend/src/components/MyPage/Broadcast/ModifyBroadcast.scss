@@ -1,0 +1,140 @@
+.uploader-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  .img-wrapper {
+    // width: 100%;
+    margin: 50px 0 20px 0;
+    img {
+      width: 200px;
+      height: 200px;
+    }
+  }
+  .upload-button {
+    button {
+      margin: 0 5px;
+    }
+  }
+}
+
+.bannerImg {
+  width: 100%;
+  height: 500px;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+}
+
+.notice {
+  color: #fff;
+  width: 30%;
+  font-size: 20px;
+  font-weight: bold;
+  border-radius: 5px;
+  border: 2px solid #000;
+}
+
+input[placeholder] {
+  text-align: center;
+  color: #fff;
+}
+
+::placeholder {
+  color: lightgray;
+}
+
+.space {
+  height: 30px;
+}
+
+.banner {
+  background-color: #e2b8ff;
+  border: none;
+  height: 100px;
+}
+
+.bannerIcon {
+  padding-top: 15px;
+  vertical-align: bottom;
+  top: 20px;
+  margin-left: 10px;
+  margin-right: 10px;
+  width: 50px;
+  height: 50px;
+}
+
+.modifyBroadcastNotice {
+  color: #fff;
+  width: 30%;
+  font-size: 20px;
+  font-weight: bold;
+  border-radius: 5px;
+  border: 2px solid #000;
+}
+
+.thumbnail {
+  float: left;
+  background-color: #306fa4;
+  width: 50%;
+  height: 330px;
+  border-radius: 10px;
+  margin: 20px 50px 20px 50px;
+}
+.thumbnailImg {
+  margin-top: 20px;
+  width: 500px;
+  height: 287px;
+}
+
+.broadcastInfo {
+  width: 35%;
+  float: left;
+  text-align: left;
+  color: white;
+  font-weight: bold;
+}
+
+.titleLine {
+  margin-top: 20px;
+}
+
+.modifyBroadcastTitle {
+  color: #fff;
+  margin-right: 100px;
+  width: 98%;
+  font-size: 23px;
+  font-weight: bold;
+  border-radius: 5px;
+  border: 2px solid #e2b8ff;
+  background-color: #13161f;
+}
+
+input[type="checkbox"] {
+  position: relative;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  border: 2px solid #e2b8ff;
+  appearance: none;
+  cursor: pointer;
+  transition: background 0.5s;
+  margin-right: 10px;
+  margin-left: 15px;
+  vertical-align: text-top;
+}
+
+input[type="checkbox"]:checked {
+  background: #e2b8ff;
+  border: none;
+}
+
+.desc {
+  color: #fff;
+  margin-right: 100px;
+  width: 108%;
+  height: 50px;
+  font-weight: bold;
+  border-radius: 5px;
+  border: 2px solid #e2b8ff;
+  background-color: #13161f;
+}

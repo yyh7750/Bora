@@ -1,0 +1,50 @@
+.swiper {
+  width: 80%;
+  padding-top: 20px;
+  padding-bottom: 50px;
+  z-index: 0 !important;
+}
+
+.swiper-slide {
+  background-position: center;
+  background-size: cover;
+  width: 400px;
+  height: 600px;
+}
+
+#carousel {
+  width: 400px;
+  height: 500px;
+  object-fit: cover;
+  -webkit-box-reflect: below 50px
+    linear-gradient(transparent, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.3));
+}
+
+#carousel:hover {
+  background-color: #000;
+  opacity: 60%;
+  transition: all 1s;
+}
+
+#lankTitle {
+  color: #fff;
+  height: 19.5px;
+  margin: 5px 0px 5px;
+  // font-weight: lighter;
+  font-size: 25px;
+  text-align: center;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+}
+
+.swiper .swiper-pagination {
+  position: absolute;
+}
+
+.swiper .swiper-pagination-bullet {
+  background-color: #fff;
+  margin: 0 10px !important;
+}
