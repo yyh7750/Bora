@@ -117,7 +117,37 @@
   z-index: 99;
 }
 
+#session-roomtype {
+  position: fixed;
+  top: 80vh;
+  left: 13vh;
+  z-index: 100;
+}
+
+#joinRoom {
+  margin-top: 10vh;
+  margin-left: 10vh;
+}
+
+#joinRoom_h1 {
+  color: #fff;
+}
+
+#joinRoom_label {
+  margin-top: 10px;
+  color: #fff;
+}
+
+#checkbox_id {
+  color: #fff;
+}
+
+#join-dialog {
+  display: flex;
+}
+
 #create_thumbnail {
+  margin-right: 10vh;
 }
 
 #create_room {
@@ -971,4 +1001,80 @@
   text-align: center;
   height: 100%;
   margin-top: 40px;
+}
+
+/* input scss */
+$primary: #b464ee;
+$secondary: #deb0ff;
+$white: #fff;
+$gray: #9b9b9b;
+.form__group {
+  position: relative;
+  padding: 15px 0 0;
+  margin-top: 40px;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.form__field {
+  font-family: inherit;
+  width: 100%;
+  border: 0;
+  border-bottom: 2px solid $gray;
+  outline: 0;
+  font-size: 1.3rem;
+  color: $white;
+  padding: 7px 0;
+  background: transparent;
+  transition: border-color 0.2s;
+
+  &::placeholder {
+    color: transparent;
+  }
+
+  &:placeholder-shown ~ .form__label {
+    font-size: 1.3rem;
+    cursor: text;
+    top: 20px;
+  }
+}
+
+.form__label {
+  position: absolute;
+  top: 0;
+  display: block;
+  transition: 0.2s;
+  font-size: 1rem;
+  color: $gray;
+}
+
+.form__field:focus {
+  ~ .form__label {
+    position: absolute;
+    top: 0;
+    display: block;
+    transition: 0.2s;
+    font-size: 1rem;
+    color: $primary;
+    font-weight: 700;
+  }
+  padding-bottom: 6px;
+  font-weight: 700;
+  border-width: 3px;
+  border-image: linear-gradient(to right, $primary, $secondary);
+  border-image-slice: 1;
+}
+/* reset input */
+.form__field {
+  &:required,
+  &:invalid {
+    box-shadow: none;
+  }
+}
+
+#checkbox_result {
+  color: #fff;
+  margin-top: 10px;
+  font-size: 20px;
+  height: 40px;
 }

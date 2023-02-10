@@ -1,14 +1,16 @@
 import axios from "axios";
+// import {connect} from "react-redux";
 import { motion } from "framer-motion";
 import { OpenVidu } from "openvidu-browser";
 import React, { Component } from "react";
 import ChatComponent from "./chat/ChatComponent";
 import StreamComponent from "./stream/StreamComponent";
-import "./VideoRoomComponent.css";
+import "./VideoRoomComponent.scss";
 // import OpenViduLayout from "../layout/openvidu-layout";
 import UserModel from "../models/user-model";
 import SidebarComponent from "./sidebar/SidebarComponent";
 import thumbnail from "../../../assets/wallpaper.jpg";
+import GoButton from "../../../UI/Button/GoButton";
 
 const containerVariants = {
   hidden: {
@@ -50,7 +52,7 @@ class VideoRoomComponent extends Component {
       //"세션 아이디는 영어+숫자조합 랜덤으로 부여"
       mySessionId: sessionName,
       myUserName: localStorage.getItem("1"),
-      myRoomName: "방송 제목을 입력하세요",
+      myRoomName: "",
       myRoomType: [],
       session: undefined,
       localUser: undefined,
@@ -64,6 +66,9 @@ class VideoRoomComponent extends Component {
       brushRadius: 5,
       lazyRadius: 0,
     };
+
+    this.state = { dj: "" };
+    this.state = {};
 
     this.handleChangeRoomName = this.handleChangeRoomName.bind(this);
     this.handleChangeSessionId = this.handleChangeSessionId.bind(this);
@@ -121,6 +126,7 @@ class VideoRoomComponent extends Component {
   //세션에 참여
   joinSession() {
     this.OV = new OpenVidu(); //1)오픈비두 오브젝트 생성
+    console.log("11");
 
     this.setState(
       {
@@ -524,46 +530,21 @@ class VideoRoomComponent extends Component {
     // this.updateLayout();
   }
 
-  // //채팅 토글
-  // toggleChat(property) {
-  //   let display = property;
+  //체크박스 체크하면 화면에 띄우기
+  getCheckboxValue(event) {
+    console.log(event.target.checked);
+    // 선택된 목록 가져오기
+    const query = 'input[name="roomType"]:checked';
+    const selectedEls = document.querySelectorAll(query);
 
-  //   if (display === undefined) {
-  //     display = this.state.chatDisplay === "none" ? "block" : "none";
-  //   }
-  //   if (display === "block") {
-  //     this.setState({ chatDisplay: display, messageReceived: false });
-  //   } else {
-  //     console.log("chat", display);
-  //     this.setState({ chatDisplay: display });
-  //   }
-  //   // this.updateLayout();
-  // }
+    // 선택된 목록에서 value 찾기
+    let result = "";
+    selectedEls.forEach((el) => {
+      result += "#" + el.value + " ";
+    });
 
-  // checkNotification(event) {
-  //   this.setState({
-  //     messageReceived: this.state.chatDisplay === "none",
-  //   });
-  // }
-  // checkSize() {
-  //   if (
-  //     document.getElementById("layout").offsetWidth <= 700 &&
-  //     !this.hasBeenUpdated
-  //   ) {
-  //     // this.toggleChat("none");
-  //     this.hasBeenUpdated = true;
-  //   }
-  //   if (
-  //     document.getElementById("layout").offsetWidth > 700 &&
-  //     this.hasBeenUpdated
-  //   ) {
-  //     this.hasBeenUpdated = false;
-  //   }
-  // }
-
-  // submitHandler() {
-  //   localStorage.setItem()
-  // }
+    document.getElementById("checkbox_result").innerText = result;
+  }
 
   render() {
     const mySessionId = this.state.mySessionId;
@@ -580,46 +561,81 @@ class VideoRoomComponent extends Component {
       >
         {this.state.session === undefined ? (
           <div id="joinRoom">
+            <h1 id="joinRoom_h1"> 방 만들기 </h1>
             <div id="join-dialog" className="jumbotron vertical-center">
-              <h1> 방 만들기 </h1>
               <div id="create_thumbnail">
                 <img src={thumbnail} alt="" />
               </div>
               <div id="create_room">
                 <form className="form-group" onSubmit={this.joinSession}>
-                  <p>
-                    <label>Participant: </label>
+                  {/* <p>
+                    <label id="joinRoom_label">Participant: </label>
                     <input
                       className="form-control"
                       type="text"
-                      id="userName"
+                      id="createRooms userName"
                       value={localStorage.getItem("1")}
                       required
                     />
-                  </p>
+                  </p> */}
                   <p>
-                    <label>RoomName: </label>
+                    {/* <label id="joinRoom_label">RoomName: </label> */}
+                    <div className="form__group">
+                      {/* 방송 제목은 25자로 제한을 둘것 => 코드 처리 필요 */}
+                      <input
+                        className="form-control form__field"
+                        type="text"
+                        id="createRooms roomName"
+                        value={myRoomName || ""}
+                        onChange={this.handleChangeRoomName}
+                        required
+                      />
+                      <label for="name" class="form__label">
+                        방송 제목을 입력하세요
+                      </label>
+                    </div>
+                  </p>
+                  <br />
+                  <p>
+                    <label id="joinRoom_label">RoomType: </label>
                     <input
-                      className="form-control"
-                      type="text"
-                      id="roomName"
-                      value={myRoomName || ""}
-                      onChange={this.handleChangeRoomName}
-                      required
+                      type="checkbox"
+                      name="roomType"
+                      value="잔잔한"
+                      onClick={this.getCheckboxValue}
                     />
+                    <a id="checkbox_id">잔잔한</a>
+                    <input
+                      type="checkbox"
+                      name="roomType"
+                      value="신나는"
+                      onClick={this.getCheckboxValue}
+                    />
+                    <a id="checkbox_id">신나는</a>
+                    <input
+                      type="checkbox"
+                      name="roomType"
+                      value="조용한"
+                      onClick={this.getCheckboxValue}
+                    />
+                    <a id="checkbox_id">조용한</a>
+                    <input
+                      type="checkbox"
+                      name="roomType"
+                      value="활기찬"
+                      onClick={this.getCheckboxValue}
+                    />
+                    <a id="checkbox_id">활기찬</a>
+                    <input
+                      type="checkbox"
+                      name="roomType"
+                      value="교육적인"
+                      onClick={this.getCheckboxValue}
+                    />
+                    <a id="checkbox_id">교육적인</a>
                   </p>
                   <p>
-                    <label>RoomType: </label>
-                    <input type="checkbox" name="잔잔한" value="잔잔한" />
-                    잔잔한
-                    <input type="checkbox" name="신나는" value="신나는" />
-                    신나는
-                    <input type="checkbox" name="조용한" value="조용한" />
-                    조용한
-                    <input type="checkbox" name="활기찬" value="활기찬" />
-                    활기찬
-                    <input type="checkbox" name="교육적인" value="교육적인" />
-                    교육적인
+                    <div id="checkbox_result"></div>
                   </p>
                   {/* <p>
                   <label>session: </label>
@@ -633,11 +649,15 @@ class VideoRoomComponent extends Component {
                   />
                 </p> */}
                   <p className="text-center">
-                    <input
+                    <GoButton
                       className="btn btn-lg btn-success"
-                      name="commit"
+                      name="submit"
                       type="submit"
-                      value="JOIN"
+                      value="방송 생성하기"
+                      onClick={() =>
+                        (document.getElementById("session-roomtype").innerText =
+                          this.result)
+                      }
                     />
                   </p>
                 </form>
@@ -671,6 +691,7 @@ class VideoRoomComponent extends Component {
             <h3 id="session-nickname" style={{ color: "white" }}>
               {}
             </h3>
+            <div id="session-roomtype" style={{ color: "white" }}></div>
             {/* )} */}
             <div id="layout" className="bounds">
               {/* publish => DJ */}

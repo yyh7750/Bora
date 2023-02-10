@@ -5,6 +5,7 @@ import broadcastReducer from "./broadcast";
 import boardReducer from "./board";
 import blacklistReducer from "./blacklist";
 import letterReducer from "./letter";
+import djReducer from "./dj";
 
 const store = configureStore({
   reducer: {
@@ -13,6 +14,7 @@ const store = configureStore({
     board: boardReducer,
     blacklist: blacklistReducer,
     letter: letterReducer,
+    dj: djReducer,
   },
 });
 

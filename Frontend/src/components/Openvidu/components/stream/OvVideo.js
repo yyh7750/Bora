@@ -1,45 +1,54 @@
-import React, { useEffect, useRef } from "react";
+import React, { Component } from "react";
 import "./StreamComponent.css";
 
-const OvVideoComponent = (props) => {
-  const videoRef = useRef();
+export default class OvVideoComponent extends Component {
+  constructor(props) {
+    super(props);
+    this.videoRef = React.createRef();
+  }
 
-  useEffect((props) => {
-    if (props && props.user.streamManager && !!videoRef) {
-      console.log("PROPS: ", props);
-      props.user.getStreamManager().addVideoElement(videoRef.current);
+  componentDidMount() {
+    if (this.props && this.props.user.streamManager && !!this.videoRef) {
+      console.log("PROPS: ", this.props);
+      this.props.user.getStreamManager().addVideoElement(this.videoRef.current);
     }
+
     if (
-      props &&
-      props.user.streamManager.session &&
+      this.props &&
+      this.props.user.streamManager.session &&
       this.props.user &&
-      !!videoRef
+      !!this.videoRef
     ) {
-      props.user.streamManager.session.on("signal:userChanged", (event) => {
-        const data = JSON.parse(event.data);
-        if (data.isScreenShareActive !== undefined) {
-          props.user.getStreamManager().addVideoElement(videoRef.current);
+      this.props.user.streamManager.session.on(
+        "signal:userChanged",
+        (event) => {
+          const data = JSON.parse(event.data);
+          if (data.isScreenShareActive !== undefined) {
+            this.props.user
+              .getStreamManager()
+              .addVideoElement(this.videoRef.current);
+          }
         }
-      });
+      );
     }
-  }, []);
+  }
 
-  useEffect((props) => {
-    if (props && !!videoRef) {
-      props.user.getStreamManager().addVideoElement(videoRef.current);
-      console.log(props.user.getStreamManager());
+  componentDidUpdate(props) {
+    if (props && !!this.videoRef) {
+      this.props.user.getStreamManager().addVideoElement(this.videoRef.current);
+      console.log(this.props.user.getStreamManager());
     }
-  });
+  }
 
-  return (
-    <video
-      autoPlay={true}
-      id={"video-" + this.props.user.getStreamManager().stream.streamId}
-      ref={this.videoRef}
-      // 들어오면 소리 꺼놓는건가?
-      // muted={this.props.mutedSound}
-    />
-  );
-};
-
-export default OvVideoComponent;
+  render() {
+    return (
+      <video
+        autoPlay={true}
+        id={"video-" + this.props.user.getStreamManager().stream.streamId}
+        ref={this.videoRef}
+        // 들어오면 소리 꺼놓는건가?
+        // muted={this.props.mutedSound}
+      />
+    );
+  }
+}

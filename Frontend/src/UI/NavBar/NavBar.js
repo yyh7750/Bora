@@ -35,7 +35,7 @@ export default function Navbar() {
           <a href="/main">
             <img id="mainLogo" src={Logo} alt="" />
           </a>
-          <div class="wrap">
+          {/* <div class="wrap">
             <div class="search">
               <input
                 type="text"
@@ -46,7 +46,7 @@ export default function Navbar() {
                 <FaIcons.FaSearch />
               </button>
             </div>
-          </div>
+          </div> */}
           <div
             className={sidebar ? "menu-bars-blocking" : ""}
             onClick={showSidebar}
