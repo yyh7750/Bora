@@ -15,13 +15,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * TODO
- * 카테고리는 db에 넣지 않는다.
- * 나의 플레이리스트에 보여질 카테고리는 카테고리 테이블을 join하여 얻어온다.
- * mappedby를 이용해 카테고리 정보를 가져온다.
- */
-
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -62,7 +55,6 @@ public class PlaylistServiceImpl implements IPlaylistService {
 
     @Override
     public int createOrUpdatePlaylist(List<ReqPlaylistDTO> reqPlaylistDTOs) {
-
         playlistRepository.resetPlaylist();
 
         int result = 0;
