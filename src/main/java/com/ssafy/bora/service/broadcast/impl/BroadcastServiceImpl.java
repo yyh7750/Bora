@@ -4,9 +4,11 @@ import com.ssafy.bora.dto.main.*;
 import com.ssafy.bora.entity.Broadcast;
 import com.ssafy.bora.entity.Station;
 import com.ssafy.bora.entity.User;
+import com.ssafy.bora.entity.ViewLog;
 import com.ssafy.bora.entity.follow.Follow;
 import com.ssafy.bora.repository.broadcast.BroadcastRepositoryCustom;
 import com.ssafy.bora.repository.broadcast.IBroadcastRepository;
+import com.ssafy.bora.repository.broadcast.ViewLogRepository;
 import com.ssafy.bora.repository.follow.IFollowRepository;
 import com.ssafy.bora.repository.station.IStationRepository;
 import com.ssafy.bora.repository.user.IUserRepository;
@@ -30,6 +32,7 @@ public class BroadcastServiceImpl implements IBroadcastService {
     private final IFollowRepository followRepository;
     private final IStationRepository stationRepository;
     private final IUserRepository userRepository;
+    private final ViewLogRepository viewLogRepository;
 
     @Override
     public List<BasicMainDTO> findTopTenBroadcast() {
@@ -103,5 +106,27 @@ public class BroadcastServiceImpl implements IBroadcastService {
         broadcast.deleteBroadcast(LocalDateTime.now(), broadcastReqDTO.getMaxViewer(), isOnTime);
         return broadcastReqDTO.getSessionId();
     }
+
+    @Override
+    public void createViewLog(ViewLogDTO viewLogDTO) {
+
+    }
+//    @Override
+//    public void createViewLog(ViewLogDTO viewLogDTO) {
+//        //viewLogDto에 세션ID받았고
+//        //viewlog에는 broadcast를 저장했다.
+//        User viewer = userRepository.findById(viewLogDTO.getViewerId()).get();
+//        Broadcast broadcast = broadcastRepository.findBySessionId(viewLogDTO.getSessionId());
+//        User dj = broadcast.getUser();
+//        //방송끝날때 다같이 보내면 안되나?
+//        List<AirtimeDTO>airtimeDTOList = broadcastRepository.findByStartDate(viewLogDTO.getEntrance());
+//        long airTime=0;
+//        for(AirtimeDTO airtimeDTO:airtimeDTOList){
+//            airTime += Duration.between(airtimeDTO.getStartTime(),airtimeDTO.getEndTime()).getSeconds();
+//        }
+//        long keepTime=Duration.between(viewLogDTO.getEntrance(),viewLogDTO.getExit()).getSeconds();
+//        ViewLog viewLog = ViewLog.convertDtoToEntity(viewer,dj,viewLogDTO,keepTime/airTime);
+//        viewLogRepository.save(viewLog);
+//    }
 
 }

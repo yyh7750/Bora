@@ -3,13 +3,14 @@ package com.ssafy.bora.repository.broadcast;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.Order;
 import com.querydsl.core.types.OrderSpecifier;
+import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import com.ssafy.bora.dto.main.BroadcastResDTO;
-import com.ssafy.bora.dto.main.QBroadcastResDTO;
-import com.ssafy.bora.dto.main.SearchCondition;
+import com.ssafy.bora.dto.main.*;
+import com.ssafy.bora.entity.Broadcast;
 import lombok.RequiredArgsConstructor;
 import org.springframework.util.StringUtils;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -46,6 +47,20 @@ public class BroadcastRepositoryCustomImpl implements BroadcastRepositoryCustom 
                 .orderBy(orderSpecifiers)
                 .fetch();
     }
+
+//    @Override
+//    public List<AirtimeDTO> findByStartDate(LocalDateTime dateTime) {
+//        return queryFactory
+//                .select(new QAirtimeDTO(
+//                        broadcast.startBroad,
+//                        broadcast.endBroad
+//                ))
+//                .from(broadcast)
+//                .where(broadcast.startBroad.year().eq(dateTime.getYear()),
+//                        broadcast.startBroad.dayOfMonth().eq(dateTime.getDayOfMonth()),
+//                        broadcast.startBroad.month().eq(dateTime.getMonthValue()))
+//                .fetch();
+//    }
 
     //    private BooleanExpression categoryEq(String category){
 //        return StringUtils.hasText(category)?station.category.eq(category) :null;

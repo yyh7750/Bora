@@ -15,6 +15,9 @@ public class BoraApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(BoraApplication.class, args);
+        long a = 30;
+        long b =324234;
+        System.out.println(a/b);
     }
 
 }
