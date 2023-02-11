@@ -31,7 +31,7 @@ public interface IStoryBoxService {
     ResStoryBoxDTO deleteOneStoryBoxByDj(int storyBoxId);
 
     // 사연함 여러 개 삭제 (dj) - 보류 (데이터 받아오는게 확실해질 경우 진행)
-    int deleteStoryBoxListByDj();
+    void deleteStoryBoxListByDj(List<Integer> storyBoxList);
 
     // 사연함 조회 (시청자)
     ResStoryBoxDTO findMyStoryBoxOfDj(String djId, String viewerId);

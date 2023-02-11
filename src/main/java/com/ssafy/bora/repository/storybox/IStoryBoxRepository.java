@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface IStoryBoxRepository extends JpaRepository<StoryBox, String> {
+public interface IStoryBoxRepository extends JpaRepository<StoryBox, Integer> {
 
     List<StoryBox> findByDjAndIsDeleteFalse(User dj);
 

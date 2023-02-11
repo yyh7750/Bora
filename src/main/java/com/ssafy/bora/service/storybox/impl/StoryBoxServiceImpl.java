@@ -88,12 +88,10 @@ public class StoryBoxServiceImpl implements IStoryBoxService {
         return null;
     }
 
-    /**
-     * TODO 여러개 삭제 구현합시다
-     */
     @Override
-    public int deleteStoryBoxListByDj() {
-        return 0;
+    public void deleteStoryBoxListByDj(List<Integer> storyBoxList) {
+        Iterable<Integer> iterable = new ArrayList<>(storyBoxList);
+        storyBoxRepository.deleteAllByIdInBatch(iterable);
     }
 
     @Override

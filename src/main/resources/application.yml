@@ -28,6 +28,19 @@ spring:
   profiles:
     include: oauth
 
+cloud:
+  aws:
+    credentials:
+      accessKey: [key]
+      secretKey: [key]
+    s3:
+      bucket: woojin-test-bucket
+      # dir: kwj
+    region:
+      static: ap-northeast-2
+    stack:
+      auto: false
+
 logging:
   level:
     org.hibernate.SQL: debug

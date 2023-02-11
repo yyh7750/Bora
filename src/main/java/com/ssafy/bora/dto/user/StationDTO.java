@@ -4,6 +4,8 @@ import com.ssafy.bora.entity.Station;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 
 @Getter
 @NoArgsConstructor
@@ -13,9 +15,9 @@ public class StationDTO {
 
     private String name;
 
-    private LocalDateTime startTime;
+    private String startTime;
 
-    private LocalDateTime endTime;
+    private String endTime;
 
     private String description;
 
@@ -41,8 +43,8 @@ public class StationDTO {
         StationDTO stationDTO = new StationDTO();
         stationDTO.userId = station.getUser().getId();
         stationDTO.category = station.getCategory();
-        stationDTO.startTime = station.getStartTime();
-        stationDTO.endTime = station.getEndTime();
+        stationDTO.startTime = station.getStartTime().format(DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT));
+        stationDTO.endTime = station.getEndTime().format(DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT));
         stationDTO.description = station.getDescription();
         stationDTO.name = station.getName();
         stationDTO.notice = station.getNotice();
