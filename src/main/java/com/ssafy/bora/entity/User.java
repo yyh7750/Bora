@@ -28,6 +28,8 @@ public class User {
 
     private boolean status;
 
+    private String desc;
+
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "user")
     private Station station;
 
@@ -40,8 +42,9 @@ public class User {
         return user;
     }
 
-    public User updateUser(String nickName) {
+    public User updateUser(String nickName, String desc) {
         this.nickName = nickName;
+        this.desc = desc;
         return this;
     }
 

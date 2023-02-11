@@ -1,6 +1,7 @@
 package com.ssafy.bora.service.user.impl;
 
 import com.ssafy.bora.dto.sign_up.SignUpDTO;
+import com.ssafy.bora.dto.user.StationDTO;
 import com.ssafy.bora.dto.user.UserDTO;
 import com.ssafy.bora.entity.Privacy;
 import com.ssafy.bora.entity.User;
@@ -10,6 +11,7 @@ import com.ssafy.bora.service.user.IUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import java.util.Optional;
 
 @Service
@@ -37,6 +39,9 @@ public class UserServiceImpl implements IUserService {
     public UserDTO findUserById(String id) {
         User findUser = userRepository.findById(id).get();
         UserDTO userDTO = UserDTO.convertEntityToDTO(findUser);
+        if (findUser.isStatus()) {
+            userDTO.getStation(findUser);
+        }
         return userDTO;
     }
 
@@ -44,7 +49,8 @@ public class UserServiceImpl implements IUserService {
     @Override
     public UserDTO updateUserNickNameById(UserDTO updateUserInfo) {
         User oldUser = userRepository.findById(updateUserInfo.getId()).get();
-        UserDTO newUser = UserDTO.convertEntityToDTO(oldUser.updateUser(updateUserInfo.getNickName()));
+        UserDTO newUser = UserDTO.convertEntityToDTO(
+                oldUser.updateUser(updateUserInfo.getNickName(), updateUserInfo.getDesc()));
         return newUser;
     }
 

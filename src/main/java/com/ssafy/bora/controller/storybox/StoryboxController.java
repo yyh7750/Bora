@@ -7,7 +7,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -44,6 +43,12 @@ public class StoryboxController {
     public ResponseEntity<?> deleteStoryBox(@PathVariable(name = "storybox-id") int storyBoxId) {
         ResStoryBoxDTO resStoryBoxDTO = storyBoxService.deleteOneStoryBoxByDj(storyBoxId);
         return new ResponseEntity<>(resStoryBoxDTO, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/list")
+    public ResponseEntity<?> deleteStoryBoxList(@RequestBody List<Integer> storyBoxList) {
+        storyBoxService.deleteStoryBoxListByDj(storyBoxList);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping("/{dj-id}/{viewer-id}")

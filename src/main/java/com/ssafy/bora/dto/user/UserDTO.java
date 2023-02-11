@@ -16,12 +16,21 @@ public class UserDTO {
 
     private boolean status;
 
+    private String desc;
+
+    private StationDTO stationDTO;
+
     public static UserDTO convertEntityToDTO(User findUser) {
         UserDTO userDTO = new UserDTO();
         userDTO.id = findUser.getId();
         userDTO.nickName = findUser.getNickName();
         userDTO.isDelete = findUser.isDelete();
         userDTO.status = findUser.isStatus();
+        userDTO.desc = findUser.getDesc();
         return userDTO;
+    }
+
+    public void getStation(User findUser) {
+        this.stationDTO = StationDTO.convertStationToDTO(findUser.getStation());
     }
 }

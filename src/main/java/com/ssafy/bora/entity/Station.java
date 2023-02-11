@@ -5,6 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Entity
 @Getter
@@ -55,10 +56,12 @@ public class Station implements Serializable {
 
     public static Station convertDtoToStation(User dj, StationDTO stationDTO) {
         Station station = new Station();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+
         station.user = dj;
         station.category = stationDTO.getCategory();
-        station.startTime = stationDTO.getStartTime();
-        station.endTime = stationDTO.getEndTime();
+        station.startTime = LocalDateTime.parse(stationDTO.getStartTime(), formatter);
+        station.endTime = LocalDateTime.parse(stationDTO.getEndTime(), formatter);
         station.description = stationDTO.getDescription();
         station.name = stationDTO.getName();
         station.notice = stationDTO.getNotice();
