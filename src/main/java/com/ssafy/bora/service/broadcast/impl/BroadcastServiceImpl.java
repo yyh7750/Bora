@@ -108,25 +108,22 @@ public class BroadcastServiceImpl implements IBroadcastService {
     }
 
     @Override
-    public void createViewLog(ViewLogDTO viewLogDTO) {
-
+    public int createViewLog(List<ViewLogDTO> viewLogDTOList) {
+        //viewLogDto에 세션ID받았고
+        //viewlog에는 broadcast를 저장했다.
+        List<ViewLog>logList = new ArrayList<>();
+        for(ViewLogDTO viewLogDTO : viewLogDTOList) {
+            User viewer = userRepository.findById(viewLogDTO.getViewerId()).get();
+            Broadcast broadcast = broadcastRepository.findBySessionId(viewLogDTO.getSessionId());
+            User dj = broadcast.getUser();
+            //TODO 방송끝날때 다같이 보내는걸로 작성했음
+            long airTime = Duration.between(broadcast.getEndBroad(), broadcast.getStartBroad()).getSeconds();
+            long keepTime = Duration.between(viewLogDTO.getEntrance(), viewLogDTO.getExit()).getSeconds();
+            ViewLog viewLog = ViewLog.convertDtoToEntity(viewer, dj, viewLogDTO, keepTime * 100 / airTime);
+            logList.add(viewLog);
+        }
+        viewLogRepository.saveAll(logList);
+        return logList.size();
     }
-//    @Override
-//    public void createViewLog(ViewLogDTO viewLogDTO) {
-//        //viewLogDto에 세션ID받았고
-//        //viewlog에는 broadcast를 저장했다.
-//        User viewer = userRepository.findById(viewLogDTO.getViewerId()).get();
-//        Broadcast broadcast = broadcastRepository.findBySessionId(viewLogDTO.getSessionId());
-//        User dj = broadcast.getUser();
-//        //방송끝날때 다같이 보내면 안되나?
-//        List<AirtimeDTO>airtimeDTOList = broadcastRepository.findByStartDate(viewLogDTO.getEntrance());
-//        long airTime=0;
-//        for(AirtimeDTO airtimeDTO:airtimeDTOList){
-//            airTime += Duration.between(airtimeDTO.getStartTime(),airtimeDTO.getEndTime()).getSeconds();
-//        }
-//        long keepTime=Duration.between(viewLogDTO.getEntrance(),viewLogDTO.getExit()).getSeconds();
-//        ViewLog viewLog = ViewLog.convertDtoToEntity(viewer,dj,viewLogDTO,keepTime/airTime);
-//        viewLogRepository.save(viewLog);
-//    }
 
 }

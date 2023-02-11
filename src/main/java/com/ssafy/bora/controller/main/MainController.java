@@ -1,6 +1,7 @@
 package com.ssafy.bora.controller.main;
 
 import com.ssafy.bora.dto.main.BroadcastReqDTO;
+import com.ssafy.bora.dto.main.ViewLogDTO;
 import com.ssafy.bora.service.broadcast.IBroadcastService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -41,8 +42,9 @@ public class MainController {
     public ResponseEntity<?> updateBroadcast(@RequestBody BroadcastReqDTO broadcastReqDTO){
         return new ResponseEntity<>(broadcastService.removeBroadcast(broadcastReqDTO),HttpStatus.OK);
     }
+    //TODO 방송 종료 후(/broadcast)->세션 or redis에 저장되어있던 값들 보내기(/viewer)
     @PostMapping("/viewer")
-    public ResponseEntity<?> createViewLog(@RequestBody BroadcastReqDTO broadcastReqDTO){
-        return new ResponseEntity<>(broadcastService.removeBroadcast(broadcastReqDTO),HttpStatus.OK);
+    public ResponseEntity<?> createViewLog(@RequestBody List<ViewLogDTO> viewLogDTOList){
+        return new ResponseEntity<>(broadcastService.createViewLog(viewLogDTOList),HttpStatus.OK);
     }
 }

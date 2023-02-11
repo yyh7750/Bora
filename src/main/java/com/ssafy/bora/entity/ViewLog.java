@@ -21,7 +21,7 @@ public class ViewLog {
     private User viewer;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "broadcast_id")
-    private Broadcast broadcast;
+    private User dj;
     @Column(name="heart_click")
     private int heartClick;
     @Column(name="chat_cnt")
@@ -31,9 +31,9 @@ public class ViewLog {
     private long durationTime;
 
 
-    public static ViewLog convertDtoToEntity(User viewer,Broadcast broadcast,ViewLogDTO vlDto,long durationTime){
+    public static ViewLog convertDtoToEntity(User viewer,User dj,ViewLogDTO vlDto,long durationTime){
         ViewLog viewLog = new ViewLog();
-        viewLog.broadcast=broadcast;
+        viewLog.dj=dj;
         viewLog.viewer=viewer;
         viewLog.heartClick= vlDto.getHeartClick();
         viewLog.chatCnt= vlDto.getChatCnt();

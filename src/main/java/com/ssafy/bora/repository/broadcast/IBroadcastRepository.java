@@ -1,6 +1,5 @@
 package com.ssafy.bora.repository.broadcast;
 
-import com.ssafy.bora.dto.main.AirtimeDTO;
 import com.ssafy.bora.entity.Broadcast;
 import com.ssafy.bora.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;

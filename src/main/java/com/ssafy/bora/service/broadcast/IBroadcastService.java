@@ -10,7 +10,7 @@ public interface IBroadcastService {
     List<MyFollowBroadcastDTO> findFollowBroadcast(String id);
     String createBroadcast(BroadcastReqDTO broadcastReqDTO);
     String removeBroadcast(BroadcastReqDTO broadcastReqDTO);
-    void createViewLog(ViewLogDTO viewLogDTO);
+    int createViewLog(List<ViewLogDTO> viewLogDTOList);
 
 
 }
