@@ -1,5 +1,6 @@
 package com.ssafy.bora.service.follow.impl;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.ssafy.bora.dto.follow.ReqFollowDTO;
 import com.ssafy.bora.dto.follow.ResFollowDTO;
 import com.ssafy.bora.entity.follow.Follow;
@@ -8,6 +9,7 @@ import com.ssafy.bora.repository.follow.IFollowRepository;
 import com.ssafy.bora.repository.follow.IRedisFollowRepository;
 import com.ssafy.bora.service.follow.IFollowService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ParameterizedPreparedStatementSetter;
 import org.springframework.scheduling.annotation.Async;
@@ -49,9 +51,11 @@ public class FollowServiceImpl implements IFollowService {
 
     @Override
     public void checkReq(RedisFollow redisFollow) {
+        // 구독(팔로우) 버튼을 누른 경우
         if (redisFollow.getReq().equals("follow")) {
             addRedisFollow(redisFollow);
-        } //
+        }
+        // 구독 취소(언팔로우) 버튼을 누른 경우
         else {
             String key = redisFollow.getId();
             String djId = redisFollow.getDjId();
@@ -80,7 +84,7 @@ public class FollowServiceImpl implements IFollowService {
 
     @Override
     @Async
-    @Scheduled(cron = "0 0 0 * * *")
+    @Scheduled(cron = "0 0 0/1 * * *")
     public void sendRedisDataToAddFollow() {
         List<ReqFollowDTO> redisFollowList = new ArrayList<>();
         Iterable<RedisFollow> iterable = redisFollowRepository.findAll();
@@ -90,9 +94,11 @@ public class FollowServiceImpl implements IFollowService {
         }
 
         addFollow(redisFollowList);
+        redisFollowRepository.deleteAll();
     }
 
     @Override
+    @Cacheable(value = "following", key = "#viewerId", cacheManager = "cacheManager")
     public List<ResFollowDTO> findAllFollowingList(String viewerId) {
         List<Follow> followingList = followRepository.findAllFollowingList(viewerId);
         List<ResFollowDTO> resFollowingList = new ArrayList<>();
@@ -106,6 +112,7 @@ public class FollowServiceImpl implements IFollowService {
     }
 
     @Override
+    @Cacheable(value = "follower", key = "#djId", cacheManager = "cacheManager")
     public List<ResFollowDTO> findAllFollowerList(String djId) {
         List<Follow> followerList = followRepository.findAllFollowerList(djId);
         List<ResFollowDTO> resFollowingList = new ArrayList<>();

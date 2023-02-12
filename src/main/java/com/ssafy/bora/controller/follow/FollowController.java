@@ -5,6 +5,7 @@ import com.ssafy.bora.dto.follow.ResFollowDTO;
 import com.ssafy.bora.entity.follow.RedisFollow;
 import com.ssafy.bora.service.follow.IFollowService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,6 +30,7 @@ public class FollowController {
         followService.checkReq(redisFollow);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
 
     @GetMapping("/dj/{viewer-id}")
     public ResponseEntity<?> findFollowingList(@PathVariable(value = "viewer-id") String viewerId){

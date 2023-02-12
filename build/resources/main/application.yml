@@ -20,7 +20,10 @@ spring:
       hibernate:
         globally_quoted_identifiers: true
         format_sql: true
-  cache: redis
+  cache:
+    type: redis
+    redis:
+
   redis:
     host: localhost
     port: 6379
