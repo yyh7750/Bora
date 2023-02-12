@@ -39,13 +39,14 @@ public class BroadcastServiceImpl implements IBroadcastService {
         List<BasicMainDTO>topTenList = new ArrayList<>();
         List<TopTenDTO>list = followRepository.countTopTen();
         for(TopTenDTO ttDto:list){
-            Station station =stationRepository.findStationByDjId(ttDto.getUserId());
+            Station station =stationRepository.findStationByDjId(ttDto.getDj_Id());
             BasicMainDTO bmDTO= BasicMainDTO.convertEntityToBasicMainDTO(station, ttDto);
             topTenList.add(bmDTO);
         }
         return topTenList;
     }
 
+    //TODO 일반인이 일반인 follow 못하게 해야함.
     @Override
     public List<MyFollowBroadcastDTO> findFollowBroadcast(String id) {
         List<MyFollowBroadcastDTO>mfbDtoList = new ArrayList<>();
@@ -96,12 +97,12 @@ public class BroadcastServiceImpl implements IBroadcastService {
     //TODO front는 세션만료를 이 과정 끝나고 해야한다는 것을 알려주기
     @Override
     public String removeBroadcast(BroadcastReqDTO broadcastReqDTO) {
-        Broadcast broadcast = broadcastRepository.findBySessionId(broadcastReqDTO.getSessionId());
+        Broadcast broadcast = broadcastRepository.findBySessionIdAndEndBroadIsNull(broadcastReqDTO.getSessionId());
         Station station = stationRepository.findStationByDjId(broadcastReqDTO.getUserId());
 
         Duration startDuration= Duration.between(broadcast.getStartBroad(), station.getStartTime());
-        Duration endDuration = Duration.between(broadcast.getEndBroad(), station.getEndTime());
-        boolean isOnTime = startDuration.getSeconds()<300&&endDuration.getSeconds()<300;
+        Duration endDuration = Duration.between(LocalDateTime.now(), station.getEndTime());
+        boolean isOnTime = Math.abs(startDuration.getSeconds())<300&&Math.abs(endDuration.getSeconds())<300;
 
         broadcast.deleteBroadcast(LocalDateTime.now(), broadcastReqDTO.getMaxViewer(), isOnTime);
         return broadcastReqDTO.getSessionId();

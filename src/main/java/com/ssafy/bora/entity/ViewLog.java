@@ -17,10 +17,10 @@ public class ViewLog {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "viewer_id")
     private User viewer;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "broadcast_id")
+    @JoinColumn(name = "dj_id")
     private User dj;
     @Column(name="heart_click")
     private int heartClick;

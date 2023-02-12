@@ -1,5 +1,6 @@
 package com.ssafy.bora.entity;
 
+import com.sun.istack.NotNull;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
@@ -36,8 +37,8 @@ public class Broadcast implements Serializable {
     @ColumnDefault("0")
     private int maxViewer;
 
+    //TODO 일
     @Column(name = "is_on_time")
-    @ColumnDefault("0")
     private boolean isOnTime;
 
     private String sessionId;

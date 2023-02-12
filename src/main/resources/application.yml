@@ -27,12 +27,16 @@ spring:
     password: b301
   profiles:
     include: oauth
+  # swagger오류때문
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
 
 cloud:
   aws:
     credentials:
-      accessKey: [key]
-      secretKey: [key]
+      accessKey: 123
+      secretKey: 123
     s3:
       bucket: woojin-test-bucket
       # dir: kwj

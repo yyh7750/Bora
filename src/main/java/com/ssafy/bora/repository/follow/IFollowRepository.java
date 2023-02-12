@@ -32,6 +32,6 @@ public interface IFollowRepository extends JpaRepository<Follow, Integer> {
     @Query(value = "select f from Follow f where f.dj.id=:djId and f.isDelete=false")
     List<Follow> findAllFollowerList(@Param("djId") String djId);
 
-    @Query(nativeQuery = true, value = "select f.dj_id, count(*) as a from follow f group by f.dj_id order by a desc limit 10")
+    @Query(nativeQuery = true, value = "select f.dj_id, count(*) as followcnt from follow f group by f.dj_id order by followcnt desc limit 10")
     List<TopTenDTO> countTopTen();
 }
