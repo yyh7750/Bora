@@ -1,4 +1,4 @@
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { motion } from "framer-motion";
 import { boardActions } from "../../../store/board";
@@ -10,11 +10,16 @@ import Button from "../../../UI/Button/Button";
 import MailBox from "../../../UI/MailBox/MailBox";
 
 const DjToDj = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const toggle = useSelector((state) => state.board.toggle);
 
   const isLetter = useSelector((state) => state.letter.isLetter);
+
+  const moveToCreate = () => {
+    navigate("/createRoom");
+  };
 
   const toggleHandler = () => {
     dispatch(boardActions.toggleBoard());
@@ -61,6 +66,11 @@ const DjToDj = () => {
               style={{ flex: 1 }}
               value={startBroadcast}
               name="방송하기"
+            />
+            <Button
+              style={{ flex: 1 }}
+              value={moveToCreate}
+              name="방송시작하기"
             />
           </div>
           <div>
