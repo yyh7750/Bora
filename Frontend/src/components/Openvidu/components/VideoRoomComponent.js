@@ -9,8 +9,6 @@ import "./VideoRoomComponent.scss";
 // import OpenViduLayout from "../layout/openvidu-layout";
 import UserModel from "../models/user-model";
 import SidebarComponent from "./sidebar/SidebarComponent";
-import thumbnail from "../../../assets/wallpaper.jpg";
-import GoButton from "../../../UI/Button/GoButton";
 
 const containerVariants = {
   hidden: {
@@ -30,30 +28,33 @@ const containerVariants = {
 };
 
 var localUser = new UserModel();
-const APPLICATION_SERVER_URL =
-  process.env.NODE_ENV === "production" ? "" : "http://localhost:5000/";
+// const APPLICATION_SERVER_URL = "http://localhost:5000/";
+const APPLICATION_SERVER_URL = "https://i8b301.p.ssafy.io:8445";
+const OPENVIDU_SERVER_SECRET = "MY_SECRET";
 
-const users = { user: "1", value: "디제이" };
-const participant = { user: "2", value: "Participant" };
-localStorage.setItem(users.user, users.value);
-localStorage.setItem(participant.user, participant.value);
+// const users = { user: "1", value: "디제이" };
+// const participant = { user: "2", value: "Participant" };
+// localStorage.setItem("djNickname", "DJ");
+// localStorage.setItem(participant.user, participant.value);
 
 class VideoRoomComponent extends Component {
   constructor(props) {
     super(props);
     this.hasBeenUpdated = false;
     // this.layout = new OpenViduLayout();
-    const sessionName = "a" + Math.floor(Math.random() * 10000000000);
+    // const sessionName = "a" + Math.floor(Math.random() * 10000000000);
     // let userName = localStorage.getItem("1");
-
+    // console.log(sessionName);
     this.remotes = [];
     this.localUserAccessAllowed = false;
     this.state = {
       //"세션 아이디는 영어+숫자조합 랜덤으로 부여"
-      mySessionId: sessionName,
-      myUserName: localStorage.getItem("1"),
-      myRoomName: "",
-      myRoomType: [],
+      mySessionId: "Bora",
+      myUserName: localStorage.getItem("nickname"),
+      myRoomName: localStorage.getItem("myRoomName"),
+      myRoomType: localStorage.getItem("myRoomType"),
+      isHost: localStorage.getItem("isHost"),
+      host: localStorage.getItem("djNickname"),
       session: undefined,
       localUser: undefined,
       subscribers: [],
@@ -67,10 +68,6 @@ class VideoRoomComponent extends Component {
       lazyRadius: 0,
     };
 
-    this.state = { dj: "" };
-    this.state = {};
-
-    this.handleChangeRoomName = this.handleChangeRoomName.bind(this);
     this.handleChangeSessionId = this.handleChangeSessionId.bind(this);
     this.joinSession = this.joinSession.bind(this);
     this.leaveSession = this.leaveSession.bind(this);
@@ -78,7 +75,7 @@ class VideoRoomComponent extends Component {
     // this.updateLayout = this.updateLayout.bind(this);
     this.camStatusChanged = this.camStatusChanged.bind(this);
     this.micStatusChanged = this.micStatusChanged.bind(this);
-    this.nicknameChanged = this.nicknameChanged.bind(this);
+    // this.nicknameChanged = this.nicknameChanged.bind(this);
     this.toggleFullscreen = this.toggleFullscreen.bind(this);
     this.screenShare = this.screenShare.bind(this);
     this.stopScreenShare = this.stopScreenShare.bind(this);
@@ -106,7 +103,22 @@ class VideoRoomComponent extends Component {
     window.addEventListener("beforeunload", this.onbeforeunload);
     // window.addEventListener("resize", this.updateLayout);
     // window.addEventListener("resize", this.checkSize);
-    // this.joinSession();
+    this.joinSession();
+
+    // URL이 이미 방이 존재하는지 체크
+    // window.addEventListener("load", function () {
+    //   const sessionId = window.location.hash.slice(1); // For 'https://myurl/#roomId', sessionId would be 'roomId'
+    //   if (sessionId) {
+    //     // URL이 session Id를 가지면, 방으로 바로 join
+    //     console.log("Joining to room " + sessionId);
+    //     // showSessionHideJoin();
+    //     this.joinSession();
+    //   } else {
+    //     // URL이 session id를 가지지 않으면, welcome page를 보여준다.
+    //     // showJoinHideSession();
+    //   }
+    // }
+    // )
   }
 
   componentWillUnmount() {
@@ -123,10 +135,16 @@ class VideoRoomComponent extends Component {
     this.leaveSession();
   }
 
+  // // 브라우저 창이 꺼지면 참가자 연결 끊기
+  // window.addEventListener("beforeunload", function () {
+  //   if (session) session.disconnect();
+  // });
+
   //세션에 참여
   joinSession() {
     this.OV = new OpenVidu(); //1)오픈비두 오브젝트 생성
     console.log("11");
+    console.log(this.state);
 
     this.setState(
       {
@@ -137,8 +155,6 @@ class VideoRoomComponent extends Component {
         await this.connectToSession();
       }
     );
-    //배열의 길이 출력하는거 확인해야함.
-    console.log(this.state.subscribers);
   }
 
   //session 연결
@@ -177,6 +193,36 @@ class VideoRoomComponent extends Component {
       .connect(token, { clientData: this.state.myUserName })
       .then(() => {
         this.connectWebCam();
+        //여기서 axios 처리
+        // const Info = {
+        //   id: id,
+        //   age: age,
+        //   gender: gender,
+        // };
+        // console.log(userInfo);
+
+        // const API_URL = `http://localhost:9999/userApi/백엔드 컨트롤러 경로`;
+        // axios({
+        //   url: API_URL,
+        //   method: "POST",
+        //   params: userInfo,
+        // })
+        //   .then(() => {
+        //     window.location.href = "메인페이지";
+        //   })
+        //   .catch((err) => {
+        //     console.log(err);
+        //   });
+        // console.log(arr);
+        console.log("!!");
+        //방 생성될 때 받아오는 sessionId(이걸로 접근 가능할듯)
+        console.log(this.state.session.sessionId);
+        console.log(this.state.mySessionId);
+        //방 생성될 때 넘겨줄 roomtype
+        console.log(this.state.myRoomType);
+        console.log(this.props);
+        //방 시작 시간
+        console.log(new Date());
       })
       .catch((error) => {
         if (this.props.error) {
@@ -206,6 +252,7 @@ class VideoRoomComponent extends Component {
     var videoDevices = devices.filter((device) => device.kind === "videoinput");
 
     let publisher = this.OV.initPublisher(undefined, {
+      nickname: localStorage.getItem("myNickname"),
       audioSource: undefined,
       videoSource: videoDevices[0].deviceId,
       publishAudio: localUser.isAudioActive(),
@@ -237,7 +284,10 @@ class VideoRoomComponent extends Component {
     });
 
     this.setState(
-      { currentVideoDevice: videoDevices[0], localUser: localUser },
+      {
+        currentVideoDevice: videoDevices[0],
+        localUser: localUser,
+      },
       () => {
         this.state.localUser.getStreamManager().on("streamPlaying", (e) => {
           // this.updateLayout();
@@ -264,6 +314,7 @@ class VideoRoomComponent extends Component {
             nickname: this.state.localUser.getNickname(),
             isScreenShareActive: this.state.localUser.isScreenShareActive(),
           });
+          console.log(this.state.localUser);
         }
         // this.updateLayout();
       }
@@ -278,6 +329,9 @@ class VideoRoomComponent extends Component {
       mySession.disconnect();
     }
 
+    console.log(mySession.sessionId);
+    console.log(new Date());
+
     this.OV = null;
     this.setState({
       session: undefined,
@@ -289,19 +343,17 @@ class VideoRoomComponent extends Component {
     if (this.props.leaveSession) {
       this.props.leaveSession();
     }
+
+    localStorage.removeItem("djNickname");
+    localStorage.removeItem("myRoomType");
+    localStorage.removeItem("myRoomName");
+    localStorage.removeItem("isHost");
+    localStorage.removeItem("DJ_session");
   }
 
   handleChangeSessionId(e) {
     this.setState({
       mySessionId: e.target.value,
-    });
-  }
-
-  handleChangeRoomName(e) {
-    console.log("바뀐건가?");
-    console.log(e.target.value);
-    this.setState({
-      myRoomName: e.target.value,
     });
   }
 
@@ -319,17 +371,18 @@ class VideoRoomComponent extends Component {
     localUser.getStreamManager().publishAudio(localUser.isAudioActive());
     this.sendSignalUserChanged({ isAudioActive: localUser.isAudioActive() });
     this.setState({ localUser: localUser });
+    console.log(this.state);
   }
 
   //닉네임 바꼈을 때 (없어도 될듯)
-  nicknameChanged(nickname) {
-    let localUser = this.state.localUser;
-    localUser.setNickname(nickname);
-    this.setState({ localUser: localUser });
-    this.sendSignalUserChanged({
-      nickname: this.state.localUser.getNickname(),
-    });
-  }
+  // nicknameChanged(nickname) {
+  //   let localUser = this.state.localUser;
+  //   localUser.setNickname(nickname);
+  //   this.setState({ localUser: localUser });
+  //   this.sendSignalUserChanged({
+  //     nickname: this.state.localUser.getNickname(),
+  //   });
+  // }
 
   //참여자가 사라졌을 때 배열에서 사람 없애주는 기능
   deleteSubscriber(stream) {
@@ -532,30 +585,10 @@ class VideoRoomComponent extends Component {
     // this.updateLayout();
   }
 
-  //체크박스 체크하면 화면에 띄우기
-  getCheckboxValue(event) {
-    console.log(event.target.checked);
-    // 선택된 목록 가져오기
-    const query = 'input[name="roomType"]:checked';
-    const selectedEls = document.querySelectorAll(query);
-
-    // 선택된 목록에서 value 찾기
-    let result = "";
-    selectedEls.forEach((el) => {
-      result += el.value + " ";
-    });
-    const arr = result.split(" ");
-    if (arr.length >= 2) {
-      arr.pop();
-    }
-    this.setState({ myRoomType: arr });
-    console.log(this.state.myRoomType);
-    //클래스형 함수에서 배열 setState로 복사해오는 방법
-  }
-
   render() {
     const mySessionId = this.state.mySessionId;
     const myRoomName = this.state.myRoomName;
+    const myRoomType = "#" + this.state.myRoomType.replaceAll(",", " #");
     const localUser = this.state.localUser;
     var chatDisplay = { display: this.state.chatDisplay };
 
@@ -566,157 +599,54 @@ class VideoRoomComponent extends Component {
         animate="visible"
         // exit="exit"
       >
-        {this.state.session === undefined ? (
-          <div id="joinRoom">
-            <h1 id="joinRoom_h1"> 방 만들기 </h1>
-            <div id="join-dialog" className="jumbotron vertical-center">
-              <div id="create_thumbnail">
-                <img src={thumbnail} alt="" />
-              </div>
-              <div id="create_room">
-                <form className="form-group" onSubmit={this.joinSession}>
-                  {/* <p>
-                    <label id="joinRoom_label">Participant: </label>
-                    <input
-                      className="form-control"
-                      type="text"
-                      id="createRooms userName"
-                      value={localStorage.getItem("1")}
-                      required
-                    />
-                  </p> */}
-                  <p>
-                    {/* <label id="joinRoom_label">RoomName: </label> */}
-                    <div className="form__group">
-                      {/* 방송 제목은 25자로 제한을 둘것 => 코드 처리 필요 */}
-                      <input
-                        className="form-control form__field"
-                        type="text"
-                        id="createRooms roomName"
-                        value={myRoomName || ""}
-                        onChange={this.handleChangeRoomName}
-                        required
-                      />
-                      <label for="name" class="form__label">
-                        방송 제목을 입력하세요
-                      </label>
-                    </div>
-                  </p>
-                  <br />
-                  <p>
-                    <label id="joinRoom_label">RoomType: </label>
-                    <input
-                      type="checkbox"
-                      name="roomType"
-                      value="잔잔한"
-                      onClick={this.getCheckboxValue}
-                    />
-                    <a id="checkbox_id">잔잔한</a>
-                    <input
-                      type="checkbox"
-                      name="roomType"
-                      value="신나는"
-                      onClick={this.getCheckboxValue}
-                    />
-                    <a id="checkbox_id">신나는</a>
-                    <input
-                      type="checkbox"
-                      name="roomType"
-                      value="조용한"
-                      onClick={this.getCheckboxValue}
-                    />
-                    <a id="checkbox_id">조용한</a>
-                    <input
-                      type="checkbox"
-                      name="roomType"
-                      value="활기찬"
-                      onClick={this.getCheckboxValue}
-                    />
-                    <a id="checkbox_id">활기찬</a>
-                    <input
-                      type="checkbox"
-                      name="roomType"
-                      value="교육적인"
-                      onClick={this.getCheckboxValue}
-                    />
-                    <a id="checkbox_id">교육적인</a>
-                  </p>
-                  <p>
-                    <div id="checkbox_result"></div>
-                  </p>
-                  {/* <p>
-                  <label>session: </label>
-                  <input
-                    className="form-control"
-                    type="text"
-                    id="sessionId"
-                    value={mySessionId || ""}
-                    onChange={this.handleChangeSessionId}
-                    required
-                  />
-                </p> */}
-                  <p className="text-center">
-                    <GoButton
-                      className="btn btn-lg btn-success"
-                      name="submit"
-                      type="submit"
-                      value="방송 생성하기"
-                      onClick={() =>
-                        (document.getElementById("session-roomtype").innerText =
-                          this.result)
-                      }
-                    />
-                  </p>
-                </form>
-              </div>
-            </div>
+        {/* {this.state.session !== undefined ? ( */}
+        <div className="container" id="container">
+          {/* {this.state.nickname === localStorage.getItem("1") && ( */}
+          <div className="sidebar">
+            {/* DJ가 publisher인지 확인이 필요함 => 값을 못가져왔음. */}
+            <SidebarComponent
+              sessionId={mySessionId}
+              myRoom={myRoomName}
+              user={localUser}
+              camStatusChanged={this.camStatusChanged}
+              micStatusChanged={this.micStatusChanged}
+              screenShare={this.screenShare}
+              stopScreenShare={this.stopScreenShare}
+              toggleFullscreen={this.toggleFullscreen}
+              leaveSession={this.leaveSession}
+              // toggleChat={this.toggleChat}
+            />
           </div>
-        ) : null}
-
-        {this.state.session !== undefined ? (
-          <div className="container" id="container">
-            {/* {this.state.nickname ===
-              localStorage.getItem("1")( */}
-            <div className="sidebar">
-              {/* 사이드바 => 얘 제어할 수 있는건 DJ만.. 제어판같은걸 넣어볼까.. */}
-              <SidebarComponent
-                sessionId={mySessionId}
-                myRoom={myRoomName}
-                user={localUser}
-                camStatusChanged={this.camStatusChanged}
-                micStatusChanged={this.micStatusChanged}
-                screenShare={this.screenShare}
-                stopScreenShare={this.stopScreenShare}
-                toggleFullscreen={this.toggleFullscreen}
-                leaveSession={this.leaveSession}
-                // toggleChat={this.toggleChat}
-              />
+          {/* )} ; */}
+          <h1 id="session-title" style={{ color: "white" }}>
+            {myRoomName + " "}
+          </h1>
+          <h3 id="session-nickname" style={{ color: "white" }}>
+            {localStorage.getItem("djNickname")}
+          </h3>
+          <div id="session-roomtype" style={{ color: "white" }}>
+            {myRoomType}
+          </div>
+          {/* )} */}
+          <div id="layout" className="bounds">
+            {/* publish => DJ */}
+            <div className="publish">
+              {localUser !== undefined &&
+                localUser.getStreamManager() !== undefined && (
+                  <div
+                    className="OT_root OT_publisher custom-class"
+                    id="localUser"
+                  >
+                    <StreamComponent
+                      user={localUser}
+                      // handleNickname={this.nicknameChanged}
+                    />
+                  </div>
+                )}
             </div>
-            <h2 id="session-title" style={{ color: "white" }}>
-              {myRoomName + " "}
-            </h2>
-            <h3 id="session-nickname" style={{ color: "white" }}>
-              {}
-            </h3>
-            <div id="session-roomtype" style={{ color: "white" }}></div>
-            {/* )} */}
-            <div id="layout" className="bounds">
-              {/* publish => DJ */}
-              <div className="publish">
-                {localUser !== undefined &&
-                  localUser.getStreamManager() !== undefined && (
-                    <div
-                      className="OT_root OT_publisher custom-class"
-                      id="localUser"
-                    >
-                      <StreamComponent
-                        user={localUser}
-                        // handleNickname={this.nicknameChanged}
-                      />
-                    </div>
-                  )}
-              </div>
-              {/* {this.state.subscribers.map((sub, i) => (
+            {/* 참여자가 없으면 undefined뜸. (참여자 있을 때에만 ) */}
+            {this.state.subscribers !== undefined &&
+              this.state.subscribers.map((sub, i) => (
                 <div
                   key={i}
                   className="OT_root OT_publisher custom-class"
@@ -727,26 +657,26 @@ class VideoRoomComponent extends Component {
                     streamId={sub.streamManager.stream.streamId}
                   />
                 </div>
-              ))} */}
-              {localUser !== undefined &&
-                localUser.getStreamManager() !== undefined && (
-                  <div
-                    className="OT_root OT_publisher custom-class"
-                    style={chatDisplay}
-                    id="chatBox"
-                  >
-                    {/* 채팅 컴포넌트 => 얘도 넓이 고정 위치 고정으로 수정. */}
-                    <ChatComponent
-                      user={localUser}
-                      chatDisplay={"display"}
-                      close={this.toggleChat}
-                      messageReceived={this.checkNotification}
-                    />
-                  </div>
-                )}
-            </div>
+              ))}
+            {localUser !== undefined &&
+              localUser.getStreamManager() !== undefined && (
+                <div
+                  className="OT_root OT_publisher custom-class"
+                  style={chatDisplay}
+                  id="chatBox"
+                >
+                  {/* 채팅 컴포넌트 => 얘도 넓이 고정 위치 고정으로 수정. */}
+                  <ChatComponent
+                    user={localUser}
+                    chatDisplay={"display"}
+                    close={this.toggleChat}
+                    messageReceived={this.checkNotification}
+                  />
+                </div>
+              )}
           </div>
-        ) : null}
+        </div>
+        {/* ) : null} */}
       </motion.div>
     );
   }
@@ -767,32 +697,71 @@ class VideoRoomComponent extends Component {
    * more about the integration of OpenVidu in your application server.
    */
 
-  //세션아이디 가져오는데, DJ는 따로 저장해놓은 다음 권한 부여해야할거같음.
   async getToken() {
     const sessionId = await this.createSession(this.state.mySessionId);
     return await this.createToken(sessionId);
   }
 
   async createSession(sessionId) {
-    const response = await axios.post(
-      APPLICATION_SERVER_URL + "api/sessions",
-      { customSessionId: sessionId },
-      {
-        headers: { "Content-Type": "application/json" },
-      }
-    );
-    return response.data; // The sessionId
+    return new Promise((resolve, reject) => {
+      const data = JSON.stringify({ customSessionId: sessionId });
+      axios
+        .post(`${APPLICATION_SERVER_URL}/openvidu/api/sessions`, data, {
+          headers: {
+            Authorization: `Basic ${btoa(
+              `OPENVIDUAPP:${OPENVIDU_SERVER_SECRET}`
+            )}`,
+            "Content-Type": "application/json",
+          },
+        })
+        .then((response) => {
+          resolve(response.data.id);
+        })
+        .catch((response) => {
+          const error = { ...response };
+          if (error?.response?.status === 409) {
+            resolve(sessionId);
+          } else {
+            console.warn(
+              `No connection to OpenVidu Server. This may be a certificate error at ${APPLICATION_SERVER_URL} OPENVIDU_SERVER_SECRET:${OPENVIDU_SERVER_SECRET}`
+            );
+            if (
+              window.confirm(
+                `No connection to OpenVidu Server. This may be a certificate error at "${APPLICATION_SERVER_URL}"\n\nClick OK to navigate and accept it. ` +
+                  `If no certificate warning is shown, then check that your OpenVidu Server is up and running at "${APPLICATION_SERVER_URL}"`
+              )
+            ) {
+              window.location.assign(
+                `${APPLICATION_SERVER_URL}/accept-certificate`
+              );
+            }
+          }
+        });
+    });
   }
 
   async createToken(sessionId) {
-    const response = await axios.post(
-      APPLICATION_SERVER_URL + "api/sessions/" + sessionId + "/connections",
-      {},
-      {
-        headers: { "Content-Type": "application/json" },
-      }
-    );
-    return response.data; // The token
+    let myRole = this.state.isHost === "true" ? "PUBLISHER" : "SUBSCRIBER";
+    return new Promise((resolve, reject) => {
+      const data = { role: myRole }; //오픈비두 서버에 요청하는 데이터
+      axios
+        .post(
+          `${APPLICATION_SERVER_URL}/openvidu/api/sessions/${sessionId}/connection`,
+          data,
+          {
+            headers: {
+              Authorization: `Basic ${btoa(
+                `OPENVIDUAPP:${OPENVIDU_SERVER_SECRET}`
+              )}`,
+              "Content-Type": "application/json",
+            },
+          }
+        )
+        .then((response) => {
+          resolve(response.data.token);
+        })
+        .catch((error) => reject(error));
+    });
   }
 }
 export default VideoRoomComponent;

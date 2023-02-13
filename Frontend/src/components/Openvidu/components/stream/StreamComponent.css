@@ -64,7 +64,7 @@ video {
 #heartIcons {
   position: absolute;
   bottom: 0;
-  z-index: 100;
+  z-index: 40;
   left: 117vh;
   cursor: pointer;
 }

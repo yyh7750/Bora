@@ -35,12 +35,12 @@ export default class StreamComponent extends Component {
   render() {
     return (
       <div className="OT_widget-container">
-        {/* <div className="pointer nickname"> */}
-        {/* <div onClick={this.toggleNicknameForm}>
+        <div className="pointer nickname">
+          <div onClick={this.toggleNicknameForm}>
             <span id="nickname">{this.props.user.getNickname()}</span>
             {this.props.user.isLocal() && <span id=""></span>}
           </div>
-        </div> */}
+        </div>
 
         {this.props.user !== undefined &&
         this.props.user.getStreamManager() !== undefined ? (

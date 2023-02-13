@@ -119,9 +119,16 @@
 
 #session-roomtype {
   position: fixed;
-  top: 80vh;
-  left: 13vh;
-  z-index: 100;
+  top: 89vh;
+  left: 40vh;
+  z-index: 10;
+}
+
+#session-nickname {
+  position: fixed;
+  top: 86.5vh;
+  left: 13.5vh;
+  z-index: 99;
 }
 
 #joinRoom {

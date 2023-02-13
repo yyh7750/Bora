@@ -68,6 +68,7 @@ body {
   background-color: rgba(0, 0, 0, 0.8);
   z-index: 50;
   position: fixed;
+  margin-top: -100px;
 }
 
 .nav-text {
