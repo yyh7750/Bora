@@ -15,7 +15,7 @@ spring:
     generate-ddl: true
     show-sql: true
     hibernate:
-      ddl-auto: update
+      ddl-auto: none
     properties:
       hibernate:
         globally_quoted_identifiers: true
@@ -32,8 +32,8 @@ spring:
 cloud:
   aws:
     credentials:
-      accessKey: ""
-      secretKey: ""
+      accessKey: AKIA4FYBPHWXAAKBP2MC
+      secretKey: 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
     s3:
       bucket: woojin-test-bucket
       # dir: kwj

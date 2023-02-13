@@ -110,8 +110,6 @@ public class FollowServiceImpl implements IFollowService {
     @Cacheable(value = "following", key = "#viewerId", cacheManager = "cacheManager")
     public List<ResFollowDTO> findAllFollowingList(String viewerId) {
 
-        Set<String> followingKeys = redisTemplate.keys("*+" + viewerId);
-
         List<Follow> followingList = followRepository.findAllFollowingList(viewerId);
         List<ResFollowDTO> resFollowingList = new ArrayList<>();
 
