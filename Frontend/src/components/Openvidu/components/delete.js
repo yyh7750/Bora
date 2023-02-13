@@ -6,7 +6,7 @@ const deleteRoom = async (roomId) => {
       data: { success },
     } = await axios({
       method: "delete",
-      url: "https://i8b301.p.ssafy.io:8445/main/broadcast" + roomId,
+      url: "https://i8b301.p.ssafy.io:8445/api/main/broadcast" + roomId,
     });
     if (success === true) {
       return true;

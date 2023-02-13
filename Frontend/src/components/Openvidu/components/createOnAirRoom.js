@@ -7,7 +7,7 @@ const createOnAirRoom = async (myRoomName, myRoomType, nickname, dispatch) => {
       data: { OnAirRoomId },
     } = await axios({
       method: "post",
-      url: "https://i8b301.p.ssafy.io:8445/api/rooms/" + nickname,
+      url: "https://i8b301.p.ssafy.io:8445/api/main/broadcast/" + nickname,
       data: {
         myRoomName,
         myRoomType,

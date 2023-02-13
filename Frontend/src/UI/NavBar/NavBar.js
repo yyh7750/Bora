@@ -3,12 +3,15 @@ import React, { useState } from "react";
 import * as FaIcons from "react-icons/fa"; //Now i get access to all the icons
 import * as AiIcons from "react-icons/ai";
 import { IconContext } from "react-icons";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { NavBarData } from "./NavBarData";
 import "./NavBar.css";
 import Logo from "../../assets/bora_logo.png";
+import { useDispatch } from "react-redux";
 
 export default function Navbar() {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [sidebar, setSidebar] = useState(false);
 
   const showSidebar = () => setSidebar(!sidebar);

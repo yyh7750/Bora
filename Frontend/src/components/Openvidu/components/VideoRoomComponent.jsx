@@ -143,6 +143,7 @@ const VideoRoomComponent = () => {
 
   // 세션 생성(KMS로 직접 쏨)
   const createSession = (sessionId) => {
+    console.log(sessionId);
     return new Promise((resolve, reject) => {
       let data = JSON.stringify({ customSessionId: sessionId });
       axios
