@@ -7,6 +7,7 @@ import com.ssafy.bora.entity.User;
 import com.ssafy.bora.entity.ViewLog;
 import com.ssafy.bora.entity.follow.Follow;
 import com.ssafy.bora.repository.broadcast.BroadcastRepositoryCustom;
+import com.ssafy.bora.repository.broadcast.BroadcastRepositoryCustomImpl;
 import com.ssafy.bora.repository.broadcast.IBroadcastRepository;
 import com.ssafy.bora.repository.broadcast.ViewLogRepository;
 import com.ssafy.bora.repository.follow.IFollowRepository;
@@ -28,6 +29,7 @@ import java.util.List;
 @Transactional
 public class BroadcastServiceImpl implements IBroadcastService {
 
+    private final BroadcastRepositoryCustomImpl broadcastRepositoryCustomImpl;
     private final IBroadcastRepository broadcastRepository;
     private final IFollowRepository followRepository;
     private final IStationRepository stationRepository;
@@ -66,7 +68,7 @@ public class BroadcastServiceImpl implements IBroadcastService {
     @Override
     public List<BroadcastResDTO> findAllLiveBroadcast(String category, List<String> mood, String sortBy) {
         SearchCondition searchCondition = new SearchCondition(category, mood);
-        if(sortBy.equals("recommend")){
+        if(sortBy!=null&&sortBy.equals("recommend")){
             sortBy=null;
         }
         return broadcastRepository.findAllByCategoryAndSort(searchCondition,sortBy);
@@ -115,7 +117,7 @@ public class BroadcastServiceImpl implements IBroadcastService {
         List<ViewLog>logList = new ArrayList<>();
         for(ViewLogDTO viewLogDTO : viewLogDTOList) {
             User viewer = userRepository.findById(viewLogDTO.getViewerId()).get();
-            Broadcast broadcast = broadcastRepository.findBySessionId(viewLogDTO.getSessionId());
+            Broadcast broadcast = broadcastRepository.findBySessionIdAndEndBroadIsNotNull(viewLogDTO.getSessionId());
             User dj = broadcast.getUser();
             //TODO 방송끝날때 다같이 보내는걸로 작성했음
             long airTime = Duration.between(broadcast.getEndBroad(), broadcast.getStartBroad()).getSeconds();

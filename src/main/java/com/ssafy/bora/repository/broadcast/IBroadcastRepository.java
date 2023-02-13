@@ -9,6 +9,7 @@ public interface IBroadcastRepository extends JpaRepository<Broadcast,Long> ,Bro
     Broadcast findByUserAndEndBroadIsNull(User viewer);
 
     Broadcast findBySessionIdAndEndBroadIsNull(String sessionId);
+    Broadcast findBySessionIdAndEndBroadIsNotNull(String sessionId);
     Broadcast findBySessionId(String sessionId);
 
 }

@@ -1,6 +1,7 @@
 package com.ssafy.bora.controller.main;
 
 import com.ssafy.bora.dto.main.BroadcastReqDTO;
+import com.ssafy.bora.dto.main.BroadcastResDTO;
 import com.ssafy.bora.dto.main.ViewLogDTO;
 import com.ssafy.bora.service.broadcast.IBroadcastService;
 import io.swagger.annotations.ApiOperation;
@@ -9,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 @RestController
@@ -25,7 +27,7 @@ public class MainController {
     }
 
     @ApiOperation(value = "메인 / 내가 팔로우한 방송들)")
-    @GetMapping("/follow-broad/{id}")
+    @GetMapping("/follow-broad/{userId}")
     public ResponseEntity<?> findFollowBroadcast(@PathVariable String userId){
         return new ResponseEntity<>(broadcastService.findFollowBroadcast(userId),HttpStatus.OK);
     }
@@ -53,6 +55,12 @@ public class MainController {
     @ApiOperation(value = "시청자 viewlog 저장")
     @PostMapping("/viewer")
     public ResponseEntity<?> createViewLog(@RequestBody List<ViewLogDTO> viewLogDTOList){
-        return new ResponseEntity<>(broadcastService.createViewLog(viewLogDTOList),HttpStatus.OK);
+        try {
+            return new ResponseEntity<>(broadcastService.createViewLog(viewLogDTOList), HttpStatus.OK);
+        }
+        catch (Exception e){
+            e.printStackTrace();;
+        }
+        return null;
     }
 }

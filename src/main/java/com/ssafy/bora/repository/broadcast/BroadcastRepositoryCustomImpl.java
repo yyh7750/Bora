@@ -26,7 +26,9 @@ public class BroadcastRepositoryCustomImpl implements BroadcastRepositoryCustom 
 
     @Override
     public List<BroadcastResDTO> findAllByCategoryAndSort(SearchCondition condition, String sortCondition) {
+        System.out.println("WErwerewrwerqfcxfg");
         BooleanBuilder searchBuilder = searchMoodByBuilder(condition);
+        System.out.println("ewrwerwer");
         OrderSpecifier[] orderSpecifiers = createOrderSpecifier(sortCondition);
         return queryFactory
                 .select(new QBroadcastResDTO(
@@ -62,25 +64,29 @@ public class BroadcastRepositoryCustomImpl implements BroadcastRepositoryCustom 
 //                .fetch();
 //    }
 
-    //    private BooleanExpression categoryEq(String category){
-//        return StringUtils.hasText(category)?station.category.eq(category) :null;
-//    }
-//    private BooleanExpression moodAEq(String moodA){
-//        return StringUtils.hasText(moodA)?broadcast.mood.contains(moodA) :null;
-//    }
-//    private BooleanExpression moodBEq(String moodB){
-//        return StringUtils.hasText(moodB)?broadcast.mood.contains(moodB) :null;
-//    }
-//    private BooleanExpression moodCEq(String moodC){
-//        return StringUtils.hasText(moodC)?broadcast.mood.contains(moodC) :null;
-//    }
+        private BooleanExpression categoryEq(String category){
+        return StringUtils.hasText(category)?station.category.eq(category) :null;
+    }
+    private BooleanExpression moodAEq(String moodA){
+        return StringUtils.hasText(moodA)?broadcast.mood.contains(moodA) :null;
+    }
+    private BooleanExpression moodBEq(String moodB){
+        return StringUtils.hasText(moodB)?broadcast.mood.contains(moodB) :null;
+    }
+    private BooleanExpression moodCEq(String moodC){
+        return StringUtils.hasText(moodC)?broadcast.mood.contains(moodC) :null;
+    }
     private BooleanBuilder searchMoodByBuilder(SearchCondition condition) {
         BooleanBuilder booleanBuilder = new BooleanBuilder();
         if (StringUtils.hasText(condition.getCategory()))
-            booleanBuilder.and(station.category.contains(condition.getCategory()));
-        for(String s : condition.getMood()){
-            booleanBuilder.or(broadcast.mood.contains(s));
+            booleanBuilder.and(station.category.eq(condition.getCategory()));
+        System.out.println("test");
+        if(condition.getMood()!=null) {
+            for (String s : condition.getMood()) {
+                booleanBuilder.or(broadcast.mood.contains(s));
+            }
         }
+        System.out.println("Test2");
         return booleanBuilder;
     }
 
