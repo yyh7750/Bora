@@ -1,11 +1,12 @@
 import React from "react";
 import logo from "../../../assets/bora_logo.png";
 import styled, { keyframes } from "styled-components";
+import classes from "./Loading.module.css";
 
 const StyledLoadingWrapper = styled.div`
   height: 100vh;
   width: 100vw;
-  background-color: white;
+  background-color: #13161f;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -28,7 +29,7 @@ const CircleDiv = styled.div`
   height: 200px;
   width: 200px;
   border-radius: 50%;
-  border: 5px solid #019267;
+  border: none;
 `;
 
 const logoMove = keyframes`
@@ -55,7 +56,7 @@ const logoMove = keyframes`
 `;
 
 const LogoImg = styled.img`
-  width: 41%;
+  width: 20%;
   height: 100px;
   position: absolute;
   z-index: 0;
@@ -65,23 +66,23 @@ const LogoImg = styled.img`
 
 const loading = keyframes`
   0% {
-    content: "Loading";
-    transform: translate(-55px, 0px);
+    content: "입장중";
+    transform: translate(-45px, 0px);
   }
 
   33% {
-    content: "Loading.";
-    transform: translate(-55px, 0px);
+    content: "입장중.";
+    transform: translate(-45px, 0px);
   }
 
   66% {
-    content: "Loading..";
-    transform: translate(-55px, 0px);
+    content: "입장중..";
+    transform: translate(-45px, 0px);
   }
 
   100% {
-    content: "Loading...";
-    transform: translate(-55px, 0px);
+    content: "입장중...";
+    transform: translate(-45px, 0px);
   }
 `;
 
@@ -91,9 +92,9 @@ const LoadingMessageDiv = styled.div`
   ::after {
     content: "로고를 터치하여 계속하세요";
     position: absolute;
-    color: #019267;
+    color: #fff;
     text-align: center;
-    transform: translate(-95px, 0px);
+    transform: translate(-170px, 0px);
     animation: ${loading} 1s linear;
     font-size: 28px;
     font-weight: bold;
@@ -108,7 +109,15 @@ const Loading = (props) => {
           <CircleDiv onClick={props.enterAuctionRoom}></CircleDiv>
           <LogoImg src={logo} alt=""></LogoImg>
         </StyledLoadingDiv>
-        <LoadingMessageDiv></LoadingMessageDiv>
+        <div id={classes.load}>
+          <div>G</div>
+          <div>N</div>
+          <div>I</div>
+          <div>D</div>
+          <div>A</div>
+          <div>O</div>
+          <div>L</div>
+        </div>
       </StyledLoadingWrapper>
     </div>
   );

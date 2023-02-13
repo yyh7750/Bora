@@ -116,7 +116,6 @@ const VideoRoomComponent = () => {
   const roomId = location.state !== null ? location.state.id : null;
   const roomTitle = location.state !== null ? location.state.myRoomName : null;
   const djNickname = location.state !== null ? location.state.nickname : null;
-  // const myNickname = useSelector((state) => state.login.value.id); //로그인 했을 때 내 닉네임 불러오기
   const isHost = useSelector((state) => state.host.value.host); // console.log(useSelector((state) => state.hostStatus.value.host));
 
   const [mySessionId, setMySessionId] = useState("SessionA");
@@ -128,24 +127,8 @@ const VideoRoomComponent = () => {
   const [publisher, setPublisher] = useState(undefined); // 자기 자신의 캠
   const [subscribers, setSubscribers] = useState([]); // 다른 유저의 스트림 정보를 저장할 배열
   const [messageList, setMessageList] = useState([]); // 메세지 정보를 담을 배열
-  // const [auctionsessionList, setAuctionSessionList] = useState([]); // 입찰 메세지를 담을 배열
   const [totalUsers, setTotalUsers] = useState(0); // 총 유저수
-  // const [toggleStart, setToggleStart] = useState(false); // 스타트 버튼 토글
-  // const [seconds, setSeconds] = useState(0); // 타이머 시작 시간
-  // const [displayBidding, setDisplayBidding] = useState(false); // 비딩칸 display on/off
-  // const [price, setPrice] = useState(items[0].startingPrice); // 나의 입찰(bidding) 가격
-  // const [highestPrice, setHighestPrice] = useState(0); // 최고 입찰 가격
-  // const [tempHighestPrice, setTempHighestPrice] = useState(0); // 현재 세션에만 보여줄 최고 입찰 가격
-  // const [bestBidder, setBestBidder] = useState(undefined); // 최고 입찰자
-  // const [bestBidderPhone, setBestBidderPhone] = useState(undefined); // 최고 입찰자의 핸드폰 번호
-  // const [tempBestBidder, setTempBestBidder] = useState(undefined); // 현재 세션에만 보여줄 최고 입찰자
-  // const [finArr, setFinArr] = useState(new Array(items.length).fill(0)); // 경매 회수(props의 길이와 같아지면 경매방 종료)
-  // const [sessionCount, setSessionCount] = useState(0); // 현재 경매의 세션 횟수(초깃값은 0, max는 2까지)
-  // const [itemIndex, setItemIndex] = useState(0); // 물품 목록 인덱스
   const [chatDisplay, setChatDisplay] = useState(true); // 채팅창 보이기(초깃값: true)
-  // const [isHost, setIsHost] = useState(false);
-  // const [itemDisplay, setItemDisplay] = useState(false); // 물품 목록을 확인할 수 있는 변수
-  // const [showCelebration, setShowCelebration] = useState(false); // 축하 메세지 토글링 변수
   const [profileImg, setProfileImg] = useState(basicImg);
   const [hostName, setHostName] = useState(undefined);
 
@@ -284,8 +267,6 @@ const VideoRoomComponent = () => {
 
     mySession.on("signal:onair", (event) => {
       // "onair"이라는 시그널을 받음(방송 시작)
-      // setToggleStart(event.data);
-      // setDisplayBidding(!displayBidding);
       setChatDisplay(false);
     });
 
