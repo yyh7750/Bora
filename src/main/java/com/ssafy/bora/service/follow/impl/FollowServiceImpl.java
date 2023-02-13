@@ -10,16 +10,20 @@ import com.ssafy.bora.repository.follow.IRedisFollowRepository;
 import com.ssafy.bora.service.follow.IFollowService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ParameterizedPreparedStatementSetter;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 @Service
 @Transactional
@@ -29,6 +33,7 @@ public class FollowServiceImpl implements IFollowService {
     private final JdbcTemplate jdbcTemplate;
     private final IFollowRepository followRepository;
     private final IRedisFollowRepository redisFollowRepository;
+    private final RedisTemplate redisTemplate;
 
     @Override
     public int[][] addFollow(List<ReqFollowDTO> reqFollowDtoList) {
@@ -94,12 +99,19 @@ public class FollowServiceImpl implements IFollowService {
         }
 
         addFollow(redisFollowList);
-        redisFollowRepository.deleteAll();
+
+        Set<String> followKeys = redisTemplate.keys("follow:*");
+        for (String key : followKeys) {
+            redisTemplate.delete(key);
+        }
     }
 
     @Override
     @Cacheable(value = "following", key = "#viewerId", cacheManager = "cacheManager")
     public List<ResFollowDTO> findAllFollowingList(String viewerId) {
+
+        Set<String> followingKeys = redisTemplate.keys("*+" + viewerId);
+
         List<Follow> followingList = followRepository.findAllFollowingList(viewerId);
         List<ResFollowDTO> resFollowingList = new ArrayList<>();
 

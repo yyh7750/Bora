@@ -37,6 +37,8 @@ public class StoryBox implements Serializable {
 
     private boolean isDelete;
 
+    private boolean isRead;
+
     public void deleteStoryBox() {
         this.isDelete = true;
     }
@@ -44,5 +46,9 @@ public class StoryBox implements Serializable {
     public void updateStoryBox(ReqStoryBoxDTO reqStoryBoxDTO) {
         this.title = reqStoryBoxDTO.getTitle();
         this.contents = reqStoryBoxDTO.getContents();
+    }
+
+    public void read() {
+        this.isRead = true;
     }
 }

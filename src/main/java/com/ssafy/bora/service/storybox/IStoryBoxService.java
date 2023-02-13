@@ -40,5 +40,5 @@ public interface IStoryBoxService {
     ResStoryBoxDTO updateStoryBox(ReqStoryBoxDTO updateStoryBoxDTO);
 
     // 사연함 전체 삭제 (방송 끝나는 시점에 일괄처리)
-
+    void deleteAllAtEndBroadcast(String djId);
 }

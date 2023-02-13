@@ -7,12 +7,14 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 import java.util.NoSuchElementException;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/storybox")
+@CrossOrigin(origins = "*")
 public class StoryboxController {
 
     private final IStoryBoxService storyBoxService;
@@ -61,5 +63,11 @@ public class StoryboxController {
     public ResponseEntity<?> updateStoryBox(@RequestBody ReqStoryBoxDTO reqStoryBoxDTO) {
         ResStoryBoxDTO resStoryBoxDTO = storyBoxService.updateStoryBox(reqStoryBoxDTO);
         return new ResponseEntity<>(resStoryBoxDTO, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{dj-id}")
+    public ResponseEntity<?> deleteAllAtEndBroadcast(@PathVariable(name = "dj-id") String djId) {
+        storyBoxService.deleteAllAtEndBroadcast(djId);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
