@@ -8,6 +8,7 @@ const initialBoardState = {
   boardContent: "",
   boardRegdate: "",
   userId: "",
+
   toggleList: false,
   subscribe: false,
   subscribeCnt: 0,
@@ -19,6 +20,7 @@ const boardSlice = createSlice({
   reducers: {
     writeBoard(state, action) {
       state.emptyBoard = false;
+
       state.userId = action.payload.viewerId;
       state.boardTitle = action.payload.title;
       state.boardContent = action.payload.contents;
@@ -29,6 +31,7 @@ const boardSlice = createSlice({
     toggleBoard(state) {
       state.toggle = !state.toggle;
     },
+
     toggleBoardList(state) {
       state.toggleList = !state.toggleList;
     },

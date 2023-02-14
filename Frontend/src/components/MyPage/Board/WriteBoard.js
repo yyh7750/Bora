@@ -6,7 +6,9 @@ import { letterActions } from "../../../store/letter";
 
 import "./WriteBoard.scss";
 import Button from "../../../UI/Button/Button";
+
 import axios from "axios";
+
 const WriteBoard = () => {
   const dispatch = useDispatch();
 

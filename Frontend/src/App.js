@@ -30,6 +30,7 @@ import ModifySchedule from "./components/Schedule/ModifySchedule";
 import ModifyBroadcast from "./components/MyPage/Broadcast/ModifyBroadcast";
 import ModifyProfile from "./components/MyPage/ModifyProfile/ModifyProfile";
 
+import CreateRoom from "./components/Openvidu/components/CreateRoom";
 import VideoRoomComponent from "./components/Openvidu/components/VideoRoomComponent";
 
 // import VideoRoomComponent from "./components/Openvidu/components/VideoRoomComponent";
@@ -84,7 +85,11 @@ const App = () => {
         <Route path="/modifySchedule" element={<ModifySchedule />} />
 
         {/* 오픈비두 */}
+
         <Route path="/createRoom" element={<VideoRoomComponent />} />
+
+        <Route path="/createRoom" element={<CreateRoom />} />
+        <Route path="/enterRoom" element={<VideoRoomComponent />} />
       </Routes>
     </AnimatePresence>
   );

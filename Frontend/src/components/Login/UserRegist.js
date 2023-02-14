@@ -88,6 +88,11 @@ const UserRegist = () => {
       .catch((err) => {
         console.log(err);
       });
+
+    localStorage.setItem(
+      "userNickname",
+      document.getElementById("inputNickname").value
+    );
   };
 
   return (

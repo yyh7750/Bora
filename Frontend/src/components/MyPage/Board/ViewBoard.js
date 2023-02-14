@@ -36,6 +36,7 @@ const ViewBoard = () => {
 
   const boardTitle = useSelector((state) => state.board.boardTitle);
   const boardContent = useSelector((state) => state.board.boardContent);
+
   // const userId = useSelector((state) => state.board.userId);
   return (
     <motion.div
@@ -45,7 +46,9 @@ const ViewBoard = () => {
     >
       <fieldset id="writeBoard">
         <legend>내가 보낸 사연 확인하기</legend>
+
         <input type="text" id="title" readOnly defaultValue={title} />
+
         <br />
         <textarea
           id="content"

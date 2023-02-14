@@ -21,13 +21,16 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.2.6",
     "framer-motion": "^9.0.0",
+
     "jquery": "^3.6.3",
     "moment": "^2.29.4",
+
     "node-sass": "^7.0.3",
     "node-scss": "^7.0.3",
     "openvidu-browser": "^2.25.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+
     "react-helmet": "^6.1.0",
     "react-hook-form": "^7.43.0",
     "react-icons": "^4.7.1",
@@ -40,6 +43,8 @@
     "simplebar-react": "^3.2.0",
     "swiper": "^9.0.1",
     "uuid": "^9.0.0",
+    "react-lodash": "^0.1.2",
+    "styled-components": "^5.3.6",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -71,4 +76,5 @@
   "author": "",
   "license": "ISC",
   "proxy": "http://localhost:8080"
+
 }

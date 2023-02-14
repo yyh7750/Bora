@@ -29,20 +29,6 @@ const ModifyBroadcast = () => {
         dayArr.push(false);
       }
     }
-    var monthNames = [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-      "August",
-      "September",
-      "October",
-      "November",
-      "December",
-    ];
     const dateController = new Date();
     let year = dateController.getFullYear(); // 년도
     let month = dateController.getMonth() + 1; // 월
@@ -58,7 +44,6 @@ const ModifyBroadcast = () => {
     if (parseInt(end[0]) < 10) {
       end = "0" + end;
     }
-    console.log(document.getElementById("modifyDesc").value);
     //2007-12-03 10:15
     const startTime = `${year}-${month}-${date} ${start}`;
     const endTime = `${year}-${month}-${date} ${end}`;
@@ -142,7 +127,7 @@ const ModifyBroadcast = () => {
             id="modifyBroadcastTitle"
           />
           <p id="resTitle"></p>
-          <Button onClick={checkBroadcastTitle}>중복확인</Button>
+          <Button value={checkBroadcastTitle} name="중복확인"></Button>
         </div>
         <hr />
         <div style={{ float: "left" }}>

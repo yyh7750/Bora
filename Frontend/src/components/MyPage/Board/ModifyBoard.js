@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { boardActions } from "../../../store/board";
 import Button from "../../../UI/Button/Button";
 import "./WriteBoard.scss";
+
 import axios from "axios";
 
 const ModifyBoard = () => {
@@ -11,6 +12,7 @@ const ModifyBoard = () => {
 
   const userId = window.localStorage.getItem("userId");
   const djId = "3";
+
   const boardTitle = useSelector((state) => state.board.boardTitle);
   const boardContent = useSelector((state) => state.board.boardContent);
 
@@ -44,6 +46,8 @@ const ModifyBoard = () => {
       .catch((err) => {
         console.log(err);
       });
+
+    dispatch(boardActions.writeBoard(message));
   };
   return (
     <motion.div

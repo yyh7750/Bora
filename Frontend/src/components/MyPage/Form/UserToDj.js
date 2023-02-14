@@ -2,11 +2,14 @@ import { Link, Outlet } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useSelector, useDispatch } from "react-redux";
 import { boardActions } from "../../../store/board";
+
 import "./DjToDj.scss";
+
 import profileImg from "../../../assets/mori.png";
 import radio from "../../../assets/radio.png";
 import Button from "../../../UI/Button/Button";
 import MailBox from "../../../UI/MailBox/MailBox";
+
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { profileActions } from "../../../store/profile";

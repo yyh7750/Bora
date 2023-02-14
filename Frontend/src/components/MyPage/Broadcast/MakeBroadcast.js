@@ -18,31 +18,21 @@ const MakeBroadcast = () => {
     const arr = [];
     const query = 'input[name="day"]:checked';
     const selectedEls = document.querySelectorAll(query);
-    var monthNames = [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-      "August",
-      "September",
-      "October",
-      "November",
-      "December",
-    ];
     const dateController = new Date();
     let year = dateController.getFullYear(); // 년도
     let month = dateController.getMonth() + 1; // 월
+    if (parseInt(month) < 10) {
+      month = "0" + month;
+    }
     let date = dateController.getDate(); // 날짜
+
     //2007-12-03 10:15
-    const startTime = new Date(
-      `${year}-${month}-${date} ${document.getElementById("startTime").value}`
-    );
-    const endTime = new Date(
-      `${year}-${month}-${date} ${document.getElementById("endTime").value}`
-    );
+    const startTime = `${year}-${month}-${date} ${
+      document.getElementById("startTime").value
+    }`;
+    const endTime = `${year}-${month}-${date} ${
+      document.getElementById("endTime").value
+    }`;
     selectedEls.forEach((el) => {
       arr.push(el.value);
       // result += el.value + " ";

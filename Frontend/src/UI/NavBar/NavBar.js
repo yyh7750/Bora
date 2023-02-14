@@ -1,22 +1,28 @@
 import React, { useState, useEffect } from "react";
+
 // import { useSelector, useDispatch } from "react-redux";
 import * as FaIcons from "react-icons/fa"; //Now i get access to all the icons
 import * as AiIcons from "react-icons/ai";
 import { IconContext } from "react-icons";
-import { Link } from "react-router-dom";
+
+import { Link, useNavigate } from "react-router-dom";
 import { NavBarData } from "./NavBarData";
 import "./NavBar.css";
 import Logo from "../../assets/bora_logo.png";
 import axios from "axios";
 import { Helmet } from "react-helmet";
+import { useDispatch } from "react-redux";
 
 export default function Navbar() {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [sidebar, setSidebar] = useState(false);
+
+  const showSidebar = () => setSidebar(!sidebar);
 
   const [profileImg, setProfileImg] = useState("");
   const [follow, setFollow] = useState([]);
 
-  const showSidebar = () => setSidebar(!sidebar);
   const userId = window.localStorage.getItem("userId");
   useEffect(() => {
     const API_URL = `http://localhost:8080/api/follow/dj/${userId}`;
@@ -25,6 +31,7 @@ export default function Navbar() {
       method: "GET",
     })
       .then((res) => {
+        console.log(res);
         for (let i = 0; i < res.data.length; i++) {
           setFollow(follow.concat(res.data[i]));
         }
@@ -78,17 +85,10 @@ export default function Navbar() {
     document.cookie =
       "authorize-access-token=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;";
   };
+
   return (
     <>
       <IconContext.Provider value={{ color: "#FFF" }}>
-        <Helmet>
-          <script
-            src="https://t1.kakaocdn.net/kakao_js_sdk/2.1.0/kakao.min.js"
-            integrity="sha384-dpu02ieKC6NUeKFoGMOKz6102CLEWi9+5RQjWSV0ikYSFFd8M3Wp2reIcquJOemx"
-            crossorigin="anonymous"
-          ></script>
-          <script>Kakao.init('de1728094127555c46cc75f2be924bfa')</script>
-        </Helmet>
         <div className="navbar">
           <div className="menu-bars">
             <FaIcons.FaBars onClick={showSidebar} />
@@ -96,10 +96,25 @@ export default function Navbar() {
           <a href="/main">
             <img id="mainLogo" src={Logo} alt="" />
           </a>
+
           <button onClick={logout}>로그아웃</button>
           <button onClick={unLink}>탈퇴</button>
 
           <div className="wrap"></div>
+
+          {/* <div class="wrap">
+            <div class="search">
+              <input
+                type="text"
+                class="searchTerm"
+                placeholder="What are you looking for?"
+              />
+              <button type="submit" class="searchButton">
+                <FaIcons.FaSearch />
+              </button>
+            </div>
+          </div> */}
+
           <div
             className={sidebar ? "menu-bars-blocking" : ""}
             onClick={showSidebar}
@@ -124,6 +139,7 @@ export default function Navbar() {
                 </li>
               );
             })}
+
             {/**여기서 구독자 목록이 나타나야함 */}
             {follow.map((item, index) => {
               return (

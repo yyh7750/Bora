@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Pagination from "./Pagination";
@@ -8,7 +9,7 @@ import { boardActions } from "../../../store/board";
 
 const ViewBoardList = () => {
   const dispatch = useDispatch();
-  const userId = window.localStorage.getItem("userId");
+  const userId = "3";
   const [checkedItems, setCheckedItems] = useState([]);
   const [posts, setPosts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -72,12 +73,14 @@ const ViewBoardList = () => {
   //사연가리기
   const deleteBoards = () => {
     console.log(checkItems);
+
     //1.사연가리기 버튼 false
     //2.사연함 우측상단에 가리기 버튼 새로생성
     //3.checkbox 생성
     //4.가리기버튼누르면 모달창 생성
     //5.모달창 "예" -> axios 요청해서 새로운 사연리스트 받아서 리렌더링
     //6.모달창 "아니오" -> 모달창 false
+
     const API_URL = `http://localhost:8080/api/storybox/list`;
     axios({
       url: API_URL,
@@ -163,7 +166,7 @@ const ViewBoardList = () => {
                   <td>{post.viewerId}</td>
                   <td>{post.is_read ? "읽음" : "읽지않음"}</td>
                   <td>
-                    {moment(post.regDateTime).format("YYYY-MM-DD hh:mm:ss")}
+                    {`${post.regDateTime[0]}-${post.regDateTime[1]}-${post.regDateTime[2]} ${post.regDateTime[3]}:${post.regDateTime[4]}:${post.regDateTime[5]}`}
                   </td>
                 </tr>
               ))}

@@ -119,9 +119,21 @@
 
 #session-roomtype {
   position: fixed;
+
   top: 80vh;
   left: 13vh;
   z-index: 100;
+
+  top: 89vh;
+  left: 40vh;
+  z-index: 10;
+}
+
+#session-nickname {
+  position: fixed;
+  top: 86.5vh;
+  left: 13.5vh;
+  z-index: 99;
 }
 
 #joinRoom {
@@ -504,32 +516,32 @@
   -webkit-animation-iteration-count: infinite;
 }
 
-@-webkit-keyframes OT_pulse {
-  0% {
-    -webkit-box-shadow: 0 0 0px 0px #c70019;
-    box-shadow: 0 0 0px 0px #c70019;
-  }
+// @-webkit-keyframes OT_pulse {
+//   0% {
+//     -webkit-box-shadow: 0 0 0px 0px #c70019;
+//     box-shadow: 0 0 0px 0px #c70019;
+//   }
 
-  30% {
-    -webkit-box-shadow: 0 0 5px 1px #c70019;
-    box-shadow: 0 0 5px 1px #c70019;
-  }
+//   30% {
+//     -webkit-box-shadow: 0 0 5px 1px #c70019;
+//     box-shadow: 0 0 5px 1px #c70019;
+//   }
 
-  50% {
-    -webkit-box-shadow: 0 0 5px 1px #c70019;
-    box-shadow: 0 0 5px 1px #c70019;
-  }
+//   50% {
+//     -webkit-box-shadow: 0 0 5px 1px #c70019;
+//     box-shadow: 0 0 5px 1px #c70019;
+//   }
 
-  80% {
-    -webkit-box-shadow: 0 0 0px 0px #c70019;
-    box-shadow: 0 0 0px 0px #c70019;
-  }
+//   80% {
+//     -webkit-box-shadow: 0 0 0px 0px #c70019;
+//     box-shadow: 0 0 0px 0px #c70019;
+//   }
 
-  100% {
-    -webkit-box-shadow: 0 0 0px 0px #c70019;
-    box-shadow: 0 0 0px 0px #c70019;
-  }
-}
+//   100% {
+//     -webkit-box-shadow: 0 0 0px 0px #c70019;
+//     box-shadow: 0 0 0px 0px #c70019;
+//   }
+// }
 
 @-webkit-keyframes OT_pulse {
   0% {

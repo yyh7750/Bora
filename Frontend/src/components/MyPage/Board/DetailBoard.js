@@ -14,6 +14,9 @@ const DetailBoard = () => {
   const [title, setTitle] = useState("");
   const [contents, setContents] = useState("");
 
+  const boardTitle = useSelector((state) => state.board.boardTitle);
+  const boardContent = useSelector((state) => state.board.boardContent);
+
   useEffect(() => {
     //1.axios요청으로 사연리스트 객체 받아오기
     const API_URL = `http://localhost:8080/api/storybox/list/${djId}/${storyboxId}`;
@@ -32,13 +35,12 @@ const DetailBoard = () => {
       });
   }, []);
 
-  const boardTitle = useSelector((state) => state.board.boardTitle);
-  const boardContent = useSelector((state) => state.board.boardContent);
   const deleteBoard = () => {
     //모달창 띄우기
     //예 누르면 모달창 false하고 사연리스트로 이동
     //이때 axios요청해서 해당 사연이 가려진 새로운 사연리스트 받아서 페이지에 세팅
     //아니오 누르면 모달창 false하고 사연리스트 이동x
+
     const API_URL = `http://localhost:8080/api/storybox/list/${storyboxId}`;
     axios
       .delete(API_URL)
@@ -53,8 +55,10 @@ const DetailBoard = () => {
   return (
     <fieldset>
       <span>프로필사진</span>
+
       <span>{writer}</span>
       <input type="text" id="title" readOnly defaultValue={title} />
+
       <br />
       <textarea
         id="content"
@@ -67,9 +71,14 @@ const DetailBoard = () => {
       <Link to="/viewBoardList">
         <button>목록</button>
       </Link>
+
       {/* <Link to="/modifyBoard"> */}
       <button onClick={deleteBoard}>사연가리기</button>
       {/* </Link> */}
+
+      <Link to="/modifyBoard">
+        <button onClick={deleteBoard}>사연가리기</button>
+      </Link>
     </fieldset>
   );
 };
