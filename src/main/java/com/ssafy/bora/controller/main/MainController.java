@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/main")
+@RequestMapping("/main")
 public class MainController {
 
     private final IBroadcastService broadcastService;
