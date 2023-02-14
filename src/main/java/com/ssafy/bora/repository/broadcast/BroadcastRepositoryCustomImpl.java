@@ -3,13 +3,14 @@ package com.ssafy.bora.repository.broadcast;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.Order;
 import com.querydsl.core.types.OrderSpecifier;
+import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import com.ssafy.bora.dto.main.BroadcastResDTO;
-import com.ssafy.bora.dto.main.QBroadcastResDTO;
-import com.ssafy.bora.dto.main.SearchCondition;
+import com.ssafy.bora.dto.main.*;
+import com.ssafy.bora.entity.Broadcast;
 import lombok.RequiredArgsConstructor;
 import org.springframework.util.StringUtils;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -25,13 +26,16 @@ public class BroadcastRepositoryCustomImpl implements BroadcastRepositoryCustom 
 
     @Override
     public List<BroadcastResDTO> findAllByCategoryAndSort(SearchCondition condition, String sortCondition) {
+        System.out.println("WErwerewrwerqfcxfg");
         BooleanBuilder searchBuilder = searchMoodByBuilder(condition);
+        System.out.println("ewrwerwer");
         OrderSpecifier[] orderSpecifiers = createOrderSpecifier(sortCondition);
         return queryFactory
                 .select(new QBroadcastResDTO(
                         broadcast.user.id,
                         broadcast.user.nickName,
                         station.name,
+//TODO station.imgUrl,
                         broadcast.title,
                         broadcast.mood,
                         station.category,
@@ -47,25 +51,43 @@ public class BroadcastRepositoryCustomImpl implements BroadcastRepositoryCustom 
                 .fetch();
     }
 
-    //    private BooleanExpression categoryEq(String category){
-//        return StringUtils.hasText(category)?station.category.eq(category) :null;
+//    @Override
+//    public List<AirtimeDTO> findByStartDate(LocalDateTime dateTime) {
+//        return queryFactory
+//                .select(new QAirtimeDTO(
+//                        broadcast.startBroad,
+//                        broadcast.endBroad
+//                ))
+//                .from(broadcast)
+//                .where(broadcast.startBroad.year().eq(dateTime.getYear()),
+//                        broadcast.startBroad.dayOfMonth().eq(dateTime.getDayOfMonth()),
+//                        broadcast.startBroad.month().eq(dateTime.getMonthValue()))
+//                .fetch();
 //    }
-//    private BooleanExpression moodAEq(String moodA){
-//        return StringUtils.hasText(moodA)?broadcast.mood.contains(moodA) :null;
-//    }
-//    private BooleanExpression moodBEq(String moodB){
-//        return StringUtils.hasText(moodB)?broadcast.mood.contains(moodB) :null;
-//    }
-//    private BooleanExpression moodCEq(String moodC){
-//        return StringUtils.hasText(moodC)?broadcast.mood.contains(moodC) :null;
-//    }
+
+        private BooleanExpression categoryEq(String category){
+        return StringUtils.hasText(category)?station.category.eq(category) :null;
+    }
+    private BooleanExpression moodAEq(String moodA){
+        return StringUtils.hasText(moodA)?broadcast.mood.contains(moodA) :null;
+    }
+    private BooleanExpression moodBEq(String moodB){
+        return StringUtils.hasText(moodB)?broadcast.mood.contains(moodB) :null;
+    }
+    private BooleanExpression moodCEq(String moodC){
+        return StringUtils.hasText(moodC)?broadcast.mood.contains(moodC) :null;
+    }
     private BooleanBuilder searchMoodByBuilder(SearchCondition condition) {
         BooleanBuilder booleanBuilder = new BooleanBuilder();
         if (StringUtils.hasText(condition.getCategory()))
-            booleanBuilder.and(station.category.contains(condition.getCategory()));
-        for(String s : condition.getMood()){
-            booleanBuilder.or(broadcast.mood.contains(s));
+            booleanBuilder.and(station.category.eq(condition.getCategory()));
+        System.out.println("test");
+        if(condition.getMood()!=null) {
+            for (String s : condition.getMood()) {
+                booleanBuilder.or(broadcast.mood.contains(s));
+            }
         }
+        System.out.println("Test2");
         return booleanBuilder;
     }
 

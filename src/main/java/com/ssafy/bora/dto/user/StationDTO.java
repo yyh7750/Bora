@@ -39,6 +39,7 @@ public class StationDTO {
 
     private boolean sun;
 
+    //Fixme starttime, endtime 이거 맞음?
     public static StationDTO convertStationToDTO(Station station) {
         StationDTO stationDTO = new StationDTO();
         stationDTO.userId = station.getUser().getId();

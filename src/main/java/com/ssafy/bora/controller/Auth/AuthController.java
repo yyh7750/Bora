@@ -2,6 +2,7 @@ package com.ssafy.bora.controller.Auth;
 
 import com.ssafy.bora.service.auth.AuthService;
 import com.ssafy.bora.util.CookieUtils;
+import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,6 +22,7 @@ public class AuthController {
     // 생성자 주입
     private final AuthService authService;
 
+    @ApiOperation(value = "토큰 재발급")
     @GetMapping //토큰 재발급 메서드
     public String reissueAccessToken(HttpServletRequest request, @RequestHeader("Authorization") String oldAccessToken) {
         oldAccessToken = oldAccessToken.substring(7); // 헤더부분(토큰 정보)
