@@ -15,6 +15,7 @@ const Button = (props) => {
         onClick={props.value}
         style={{
           marginTop: `${props.margin}`,
+          marginLeft: `${props.marginLeft}`,
           fontSize: `${props.fontsize}`,
           width: `${props.width}`,
         }}

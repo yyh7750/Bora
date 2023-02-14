@@ -84,22 +84,27 @@ const DjToDj = () => {
   };
   return (
     <motion.div variants={containerVariants} initial="hidden" animate="visible">
-      <fieldset className="profile">
+      <fieldset className="profile" style={{ marginTop: "30px" }}>
         <img src={profileImg} alt="프로필이미지" className="circle" />
         <div className="trainerInfo">
           <div className="infoTop">
             <span className="nickname" style={{ marginRight: "20px", flex: 1 }}>
-              {nickname}
+              {nickname}닉네임
             </span>
             <Button
               style={{ flex: 1 }}
               value={profileOpenHandeler}
               name="프로필 수정"
+              id="mypage_btn"
+              margin="30px"
             />
             <Button
               style={{ flex: 1 }}
               value={startBroadcast}
               name="방송하기"
+              id="mypage_btn"
+              margin="30px"
+              marginLeft="10px"
             />
           </div>
           <div>

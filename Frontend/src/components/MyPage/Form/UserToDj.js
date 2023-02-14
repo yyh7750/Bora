@@ -2,7 +2,7 @@ import { Link, Outlet } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useSelector, useDispatch } from "react-redux";
 import { boardActions } from "../../../store/board";
-import "./UserToDj.scss";
+import "./DjToDj.scss";
 import profileImg from "../../../assets/mori.png";
 import radio from "../../../assets/radio.png";
 import Button from "../../../UI/Button/Button";

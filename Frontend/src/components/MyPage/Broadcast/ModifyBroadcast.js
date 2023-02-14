@@ -142,7 +142,7 @@ const ModifyBroadcast = () => {
             id="modifyBroadcastTitle"
           />
           <p id="resTitle"></p>
-          <button onClick={checkBroadcastTitle}>중복확인</button>
+          <Button onClick={checkBroadcastTitle}>중복확인</Button>
         </div>
         <hr />
         <div style={{ float: "left" }}>
