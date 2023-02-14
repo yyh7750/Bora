@@ -89,18 +89,20 @@ public class FollowServiceImpl implements IFollowService {
 
     @Override
     @Async
-    @Scheduled(cron = "0 0 0/1 * * *")
+    @Scheduled(cron = "0 0/1 * * * *")
     public void sendRedisDataToAddFollow() {
         List<ReqFollowDTO> redisFollowList = new ArrayList<>();
         Iterable<RedisFollow> iterable = redisFollowRepository.findAll();
+        Set<String> followKeys = redisTemplate.keys("follow:*");
 
-        for (RedisFollow redisFollow : iterable) {
-            redisFollowList.add(ReqFollowDTO.convertRedisDataToDTO(redisFollow));
+        while (iterable.iterator().hasNext()) {
+            redisFollowList.add(ReqFollowDTO.convertRedisDataToDTO(iterable.iterator().next()));
         }
 
-        addFollow(redisFollowList);
+        if (redisFollowList.size() > 0) {
+            addFollow(redisFollowList);
+        }
 
-        Set<String> followKeys = redisTemplate.keys("follow:*");
         for (String key : followKeys) {
             redisTemplate.delete(key);
         }
