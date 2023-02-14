@@ -9,7 +9,7 @@ const room_info = async () => {
       data: { content },
     } = await axios({
       method: "GET",
-      url: "https://i8b301.p.ssafy.io:8445/live-broad/{category}",
+      url: "https://i8b301.p.ssafy.io/api/live-broad",
     });
     console.log(content);
     return content;

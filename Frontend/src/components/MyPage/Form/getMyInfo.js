@@ -4,7 +4,7 @@ const getMyInfo = async (nickname) => {
   try {
     const { data } = await axios({
       method: "GET",
-      url: "https://i8b301.p.ssafy.io:8445/users/" + nickname,
+      url: "https://i8b301.p.ssafy.io/api/users/" + nickname,
     });
     // console.log(data);
     return data;
