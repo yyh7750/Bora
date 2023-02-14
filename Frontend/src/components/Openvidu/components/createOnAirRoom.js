@@ -8,15 +8,15 @@ const createOnAirRoom = async (myRoomName, myRoomType, nickname, dispatch) => {
     } = await axios({
       method: "post",
       url: "https://i8b301.p.ssafy.io:8445/api/main/broadcast",
-      headers: {
-        "Content-type": "application/x-www-form-urlencoded;charset=utf-8",
-      },
       data: {
         title: myRoomName,
-        mood: myRoomType,
+        moods: myRoomType,
         userId: nickname,
+        maxViewer: 0,
+        sessionId: "값",
       },
     });
+    console.log(myRoomName);
     if (OnAirRoomId !== 0) {
       dispatch(changeStatus(true));
     }

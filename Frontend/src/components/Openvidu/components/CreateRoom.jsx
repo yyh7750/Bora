@@ -1,8 +1,8 @@
-import "./VideoRoomComponent";
+// import "./VideoRoomComponent";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import GoButton from "../../../UI/Button/GoButton";
+// import GoButton from "../../../UI/Button/GoButton";
 import { useDispatch } from "react-redux";
 import thumbnail from "../../../assets/wallpaper.jpg";
 import createOnAirRoom from "./createOnAirRoom";
@@ -53,6 +53,9 @@ const CreateRoom = () => {
       nickname,
       dispatch
     );
+    console.log(myRoomName);
+    console.log(myRoomType);
+    console.log(nickname);
     console.log(roomId);
     if (roomId !== false) {
       console.log("방송 생성 성공");

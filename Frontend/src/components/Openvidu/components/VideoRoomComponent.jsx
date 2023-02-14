@@ -136,6 +136,7 @@ const VideoRoomComponent = () => {
 
   // 토큰 받아오기(KMS로 직접 쏨)
   const getToken = useCallback(() => {
+    // console.log(mySessionId);
     return createSession(mySessionId).then((sessionId) =>
       createToken(sessionId)
     );
@@ -394,9 +395,9 @@ const VideoRoomComponent = () => {
 
   const getUserInfo = async () => {
     const res1 = await getMyInfo(djNickname);
-    const ownerPicturePath = res1.picturePath;
+    // const ownerPicturePath = res1.picturePath;
     const ownerName = res1.name;
-    setProfileImg(ownerPicturePath);
+    // setProfileImg(ownerPicturePath);
     setHostName(ownerName);
   };
 
