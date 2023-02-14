@@ -35,6 +35,7 @@ public class BroadcastRepositoryCustomImpl implements BroadcastRepositoryCustom 
                         broadcast.user.id,
                         broadcast.user.nickName,
                         station.name,
+//TODO station.imgUrl,
                         broadcast.title,
                         broadcast.mood,
                         station.category,

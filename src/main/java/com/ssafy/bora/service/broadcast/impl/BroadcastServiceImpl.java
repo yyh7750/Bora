@@ -121,12 +121,15 @@ public class BroadcastServiceImpl implements IBroadcastService {
             User dj = broadcast.getUser();
             //TODO 방송끝날때 다같이 보내는걸로 작성했음
             long airTime = Duration.between(broadcast.getEndBroad(), broadcast.getStartBroad()).getSeconds();
-            long keepTime = Duration.between(viewLogDTO.getEntrance(), viewLogDTO.getExit()).getSeconds();
+            long keepTime = Duration.between(viewLogDTO.getExit(), viewLogDTO.getEntrance()).getSeconds();
             ViewLog viewLog = ViewLog.convertDtoToEntity(viewer, dj, viewLogDTO, keepTime * 100 / airTime);
             logList.add(viewLog);
         }
         viewLogRepository.saveAll(logList);
         return logList.size();
+    }
+    public void recommendStation(){
+
     }
 
 }

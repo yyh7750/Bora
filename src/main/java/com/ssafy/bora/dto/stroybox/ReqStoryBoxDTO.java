@@ -16,4 +16,5 @@ public class ReqStoryBoxDTO {
     private String title;
 
     private String contents;
+    private boolean is_read;
 }
