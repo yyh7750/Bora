@@ -22,7 +22,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @EnableWebSecurity
 @RequiredArgsConstructor
-public class SecurityConfig implements WebMvcConfigurer {
+public class SecurityConfig  {
 
     private final LoginRepository privacyRepository;
     private final JwtProvider jwtProvider;
@@ -66,10 +66,10 @@ public class SecurityConfig implements WebMvcConfigurer {
 
         return http.build();
     }
-    @Override
-    public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**")
-                .allowedOrigins("*")
-                .allowedMethods("GET", "POST","DELETE","PUT");
-    }
+//    @Override
+//    public void addCorsMappings(CorsRegistry registry) {
+//        registry.addMapping("/**")
+//                .allowedOrigins("*")
+//                .allowedMethods("GET", "POST","DELETE","PUT");
+//    }
 }

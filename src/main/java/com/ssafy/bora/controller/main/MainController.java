@@ -2,6 +2,7 @@ package com.ssafy.bora.controller.main;
 
 import com.ssafy.bora.dto.main.BroadcastReqDTO;
 import com.ssafy.bora.service.broadcast.IBroadcastService;
+import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
