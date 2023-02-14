@@ -15,16 +15,15 @@ spring:
     generate-ddl: true
     show-sql: true
     hibernate:
-      ddl-auto: none
+      ddl-auto: update
     properties:
       hibernate:
         globally_quoted_identifiers: true
         format_sql: true
-        use_sql_comments: true
   cache: redis
   redis:
-    host: localhost
-    port: 6379
+    host: i8b301.p.ssafy.io
+    port: 8379
     password: b301
   profiles:
     include: oauth
@@ -36,8 +35,8 @@ spring:
 cloud:
   aws:
     credentials:
-      accessKey: 123
-      secretKey: 123
+      accessKey: AKIA4FYBPHWXAAKBP2MC
+      secretKey: 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
     s3:
       bucket: woojin-test-bucket
       # dir: kwj

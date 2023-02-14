@@ -4,7 +4,6 @@ import com.ssafy.bora.dto.follow.ReqFollowDTO;
 import com.ssafy.bora.dto.follow.ResFollowDTO;
 import com.ssafy.bora.entity.follow.RedisFollow;
 import com.ssafy.bora.service.follow.IFollowService;
-import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

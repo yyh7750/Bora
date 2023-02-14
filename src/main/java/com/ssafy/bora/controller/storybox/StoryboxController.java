@@ -70,5 +70,9 @@ public class StoryboxController {
         return new ResponseEntity<>(resStoryBoxDTO, HttpStatus.OK);
     }
 
-    //TODO api명세서에는 방송 끝나고 사연함 전체삭제가 있음.
+    @DeleteMapping("/{dj-id}")
+    public ResponseEntity<?> deleteAllAtEndBroadcast(@PathVariable(name = "dj-id") String djId) {
+        storyBoxService.deleteAllAtEndBroadcast(djId);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }

@@ -1,5 +1,6 @@
 package com.ssafy.bora.repository.follow;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.ssafy.bora.dto.main.TopTenDTO;
 import com.ssafy.bora.entity.follow.Follow;
 import org.springframework.data.jpa.repository.JpaRepository;

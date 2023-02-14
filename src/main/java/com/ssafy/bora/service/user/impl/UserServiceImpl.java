@@ -1,7 +1,6 @@
 package com.ssafy.bora.service.user.impl;
 
 import com.ssafy.bora.dto.sign_up.SignUpDTO;
-import com.ssafy.bora.dto.user.StationDTO;
 import com.ssafy.bora.dto.user.UserDTO;
 import com.ssafy.bora.entity.Privacy;
 import com.ssafy.bora.entity.User;
@@ -11,7 +10,6 @@ import com.ssafy.bora.service.user.IUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.Optional;
 
 @Service

@@ -21,6 +21,8 @@ public class ResStoryBoxDTO {
 
     private LocalDateTime regDateTime;
 
+    private boolean isRead;
+
     public static ResStoryBoxDTO convertEntityToResDTO(StoryBox registeredStoryBox) {
         ResStoryBoxDTO resStoryBoxDTO = new ResStoryBoxDTO();
         resStoryBoxDTO.id = registeredStoryBox.getId();
@@ -29,6 +31,7 @@ public class ResStoryBoxDTO {
         resStoryBoxDTO.title = registeredStoryBox.getTitle();
         resStoryBoxDTO.contents = registeredStoryBox.getContents();
         resStoryBoxDTO.regDateTime = registeredStoryBox.getRegDateTime();
+        resStoryBoxDTO.isRead = registeredStoryBox.isRead();
         return resStoryBoxDTO;
     }
 }

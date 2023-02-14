@@ -10,6 +10,7 @@ import com.ssafy.bora.service.storybox.IStoryBoxService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +40,8 @@ public class StoryBoxServiceImpl implements IStoryBoxService {
                     .title(reqStoryBoxDTO.getTitle())
                     .contents(reqStoryBoxDTO.getContents())
                     .regDateTime(LocalDateTime.now())
+                    .isDelete(false)
+                    .isRead(false)
                     .build();
 
             // DB에 넣고 Response DTO로 변환
@@ -71,6 +74,7 @@ public class StoryBoxServiceImpl implements IStoryBoxService {
         User dj = userRepository.findById(djId).get();
         StoryBox findStoryBox = storyBoxRepository.findByDjAndIdAndIsDeleteFalse(dj, storyBoxId);
         if (findStoryBox != null) {
+            findStoryBox.read();
             ResStoryBoxDTO resStoryBoxDTO = ResStoryBoxDTO.convertEntityToResDTO(findStoryBox);
             return resStoryBoxDTO;
         }
@@ -121,5 +125,19 @@ public class StoryBoxServiceImpl implements IStoryBoxService {
             return resStoryBoxDTO;
         }
         return null;
+    }
+
+    @Override
+    public void deleteAllAtEndBroadcast(String djId) {
+        User dj = userRepository.findById(djId).get();
+        List<StoryBox> storyBoxList = storyBoxRepository.findByDjAndIsDeleteFalse(dj);
+
+        List<Integer> deleteStoryBoxList = new ArrayList<>();
+        for (StoryBox storyBox : storyBoxList) {
+            deleteStoryBoxList.add(storyBox.getId());
+        }
+
+        Iterable<Integer> iterable = new ArrayList<>(deleteStoryBoxList);
+        storyBoxRepository.deleteAllByIdInBatch(iterable);
     }
 }
