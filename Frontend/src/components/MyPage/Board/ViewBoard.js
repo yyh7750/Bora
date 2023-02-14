@@ -1,15 +1,41 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import axios from "axios";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import Button from "../../../UI/Button/Button";
+import { boardActions } from "../../../store/board";
 
 import "./WriteBoard.scss";
 
 const ViewBoard = () => {
+  const dispatch = useDispatch();
+  const [title, setTitle] = useState("");
+  const [contents, setContents] = useState("");
+
+  const userId = window.localStorage.getItem("userId");
+  const djId = "3";
+
+  useEffect(() => {
+    //1.axios요청으로 사연리스트 객체 받아오기
+    const API_URL = `http://localhost:8080/api/storybox/${djId}/${userId}`;
+    axios({
+      url: API_URL,
+      method: "GET",
+    })
+      .then((res) => {
+        setTitle(res.data.title);
+        setContents(res.data.contents);
+        dispatch(boardActions.writeBoard(res.data));
+        // window.location.reload();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [title, contents]);
+
   const boardTitle = useSelector((state) => state.board.boardTitle);
   const boardContent = useSelector((state) => state.board.boardContent);
-  console.log(boardTitle);
-  console.log(boardContent);
   // const userId = useSelector((state) => state.board.userId);
   return (
     <motion.div
@@ -19,14 +45,14 @@ const ViewBoard = () => {
     >
       <fieldset id="writeBoard">
         <legend>내가 보낸 사연 확인하기</legend>
-        <input type="text" id="title" readOnly defaultValue={boardTitle} />
+        <input type="text" id="title" readOnly defaultValue={title} />
         <br />
         <textarea
           id="content"
           cols="70"
           rows="20"
           readOnly
-          defaultValue={boardContent}
+          defaultValue={contents}
         ></textarea>
         <br />
         <div>

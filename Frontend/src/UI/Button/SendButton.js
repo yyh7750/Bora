@@ -193,7 +193,7 @@ const SendButton = () => {
         cy="540"
         r="97.516"
         fill="#C23F3F"
-        class="hidden"
+        className="hidden"
       />
       <circle
         id="cTop"
@@ -201,7 +201,7 @@ const SendButton = () => {
         cy="502.365"
         r="107.898"
         fill="#C23F3F"
-        class="hidden"
+        className="hidden"
       />
       <circle
         id="cCenter"
@@ -209,7 +209,7 @@ const SendButton = () => {
         cy="540"
         r="123"
         fill="#A74C4C"
-        class="hidden"
+        className="hidden"
       />
       <circle
         id="cEnd"
@@ -217,7 +217,7 @@ const SendButton = () => {
         cy="540"
         r="98"
         fill="#F1F3FF"
-        class="hidden"
+        className="hidden"
       />
       <path
         id="tickMark"
@@ -225,7 +225,7 @@ const SendButton = () => {
         clip-rule="evenodd"
         d="M597.3 489.026C595.179 487.257 592.026 487.541 590.257 489.662L550.954 536.768L534.647 522.965C532.539 521.181 529.384 521.444 527.6 523.551L519.096 533.598C517.312 535.706 517.575 538.861 519.682 540.645L538.606 556.662C538.893 557.162 539.272 557.621 539.74 558.012L549.847 566.445C551.967 568.214 555.12 567.929 556.889 565.809L608.042 504.501C609.811 502.38 609.527 499.227 607.406 497.458L597.3 489.026Z"
         fill="#4E67E8"
-        class="hidden"
+        className="hidden"
       />
       <defs>
         <clipPath id="clipPath">

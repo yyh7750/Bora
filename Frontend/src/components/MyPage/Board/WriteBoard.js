@@ -22,65 +22,30 @@ const WriteBoard = () => {
   };
 
   const sendMessage = () => {
+    const userId = window.localStorage.getItem("userId");
     const message = {
-      userId: 0,
-      boardTitle: document.getElementById("title").value,
-      boardContent: document.getElementById("content").value,
+      djId: "3",
+      viewerId: userId,
+      title: document.getElementById("title").value,
+      contents: document.getElementById("content").value,
+      regDateTime: new Date(),
     };
     // window.localStorage.setItem("board", message);
     dispatch(letterActions.writeLetter());
     dispatch(boardActions.writeBoard(message));
 
-    const data = {
-      djId: "dummydj",
-      viewerId: "dummyuser",
-      title: message.boardTitle,
-      contents: message.boardContent,
-      regDateTime: "220101",
-    };
-
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-      },
-      withCredentials: false,
-    };
-    axios
-      .post(
-        "http://localhost:8080/storybox",
-        {
-          djId: "dummydj",
-          viewerId: "dummyuser",
-          title: message.boardTitle,
-          contents: message.boardContent,
-          // regDateTime: "220101",
-        },
-        {
-          Headers: {
-            "Content-Type": "application/json",
-            // Accept: "application/json",
-          },
-        }
-      )
-      .then((response) => {
-        console.log(response.data);
+    const API_URL = `http://localhost:8080/api/storybox`;
+    axios({
+      url: API_URL,
+      method: "POST",
+      data: message,
+    })
+      .then((res) => {
+        console.log(res);
       })
-      .catch((response) => {
-        console.log(response);
-        console.log("Error!");
+      .catch((err) => {
+        console.log(err);
       });
-    // axios
-    //   .post(`/api/storybox/listA`, null, {
-    //     data: data,
-    //     config,
-    //   })
-    //   .then((res) => {
-    //     console.log(res);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
   };
 
   return (

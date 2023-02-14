@@ -8,11 +8,7 @@ const NavProfile = (props) => {
     <Fragment>
       <div className="navContainer">
         <img src={younha} className="profileImg" />
-<<<<<<< HEAD
-        <div className="userName">{value}</div>
-=======
         <div className="userNickname">{value}</div>
->>>>>>> 0d332a30007a7644bec0b32b7bdad84670085bae
       </div>
     </Fragment>
   );

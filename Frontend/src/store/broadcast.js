@@ -1,12 +1,34 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialBroadcastState = {};
+const initialBroadcastState = {
+  category: "",
+  description: "",
+  starttime: "",
+  endtime: "",
+  name: "",
+  notice: "",
+  day: "",
+};
 
-//로그인 관련된 state요소들을 최신화 하는 slice (initialLoginState에 있는 state들을 최신화하는 코드)
 const broadcastSlice = createSlice({
   name: "broadcast",
   initialState: initialBroadcastState,
-  reducers: {},
+  reducers: {
+    setBroadcast(state, action) {
+      state.category = action.payload.category;
+      state.description = action.payload.description;
+      state.starttime = action.payload.startTime;
+      state.endtime = action.payload.endTime;
+      state.name = action.payload.name;
+      state.notice = action.payload.notice;
+      console.log(state.starttime);
+      console.log(state.endtime);
+    },
+    setDay(state, action) {
+      state.day = action.payload;
+      console.log(state.day);
+    },
+  },
 });
 
 export const broadcastActions = broadcastSlice.actions;

@@ -1,12 +1,43 @@
 import { Outlet } from "react-router-dom";
 import "./UserToDj.scss";
+import { useSelector, useDispatch } from "react-redux";
 
 import profileImg from "../../../assets/mori.png";
 import Button from "../../../UI/Button/Button";
 
+import ModifyProfile from "../ModifyProfile/ModifyProfile";
+
+import { profileActions } from "../../../store/profile";
+import { useEffect, useState } from "react";
+import axios from "axios";
+
 const UserToUser = () => {
-  const profileHandeler = () => {
-    console.log("프로필정보수정");
+  const dispatch = useDispatch();
+  const [nickname, setNickname] = useState();
+  const [desc, setDesc] = useState();
+  const userId = window.localStorage.getItem("userId");
+  useEffect(() => {
+    const API_URL = `http://localhost:8080/api/users/${userId}`;
+    axios({
+      url: API_URL,
+      method: "GET",
+    })
+      .then((res) => {
+        setNickname(res.data.nickName);
+        setDesc(res.data.desc);
+        dispatch(profileActions.setProfile(res.data));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [userId]);
+
+  const showModifyProfile = useSelector(
+    (state) => state.profile.showProfileModal
+  );
+
+  const profileOpenHandeler = () => {
+    dispatch(profileActions.openModifyProfile());
   };
 
   return (
@@ -16,11 +47,11 @@ const UserToUser = () => {
         <div className="trainerInfo">
           <div className="infoTop">
             <span className="nickname" style={{ marginRight: "20px", flex: 1 }}>
-              DJ이름
+              {nickname}
             </span>
             <Button
               style={{ flex: 1 }}
-              value={profileHandeler}
+              value={profileOpenHandeler}
               name="프로필 수정"
             />
           </div>
@@ -29,8 +60,9 @@ const UserToUser = () => {
             <span className="listercnt">100k</span>
           </div>
           <div>
-            <p className="content">유저의 한마디입니다.</p>
+            <p className="content">{desc}</p>
           </div>
+          {showModifyProfile && <ModifyProfile />}
         </div>
       </fieldset>
       <hr />

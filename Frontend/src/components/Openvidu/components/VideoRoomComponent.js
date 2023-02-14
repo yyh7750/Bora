@@ -590,7 +590,7 @@ class VideoRoomComponent extends Component {
                         onChange={this.handleChangeRoomName}
                         required
                       />
-                      <label for="name" class="form__label">
+                      <label for="name" className="form__label">
                         방송 제목을 입력하세요
                       </label>
                     </div>
@@ -709,18 +709,7 @@ class VideoRoomComponent extends Component {
                     </div>
                   )}
               </div>
-              {/* {this.state.subscribers.map((sub, i) => (
-                <div
-                  key={i}
-                  className="OT_root OT_publisher custom-class"
-                  id="remoteUsers"
-                >
-                  <StreamComponent
-                    user={sub}
-                    streamId={sub.streamManager.stream.streamId}
-                  />
-                </div>
-              ))} */}
+
               {localUser !== undefined &&
                 localUser.getStreamManager() !== undefined && (
                   <div

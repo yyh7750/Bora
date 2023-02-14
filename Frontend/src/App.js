@@ -65,7 +65,7 @@ const App = () => {
             <Route path="/broadcast" element={<Broadcast />} />
             <Route path="/modifyBroadcast" element={<ModifyBroadcast />} />
 
-            <Route path="/broadcast" element={<Broadcast />} />
+            <Route path="/broadcasts" element={<Broadcast />} />
           </Route>
         </Route>
 

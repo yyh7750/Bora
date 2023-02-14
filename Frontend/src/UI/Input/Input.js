@@ -2,16 +2,16 @@ import "./Input.scss";
 
 const Input = () => {
   return (
-    <div class="form__group">
+    <div className="form__group">
       <input
         type="input"
-        class="form__field"
+        className="form__field"
         placeholder="Name"
         name="name"
         id="name"
         required
       />
-      <label for="name" class="form__label">
+      <label for="name" className="form__label">
         Name
       </label>
     </div>

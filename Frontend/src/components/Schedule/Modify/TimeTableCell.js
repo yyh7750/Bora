@@ -38,7 +38,6 @@ function TimeTableCell({ day, timeNum, Edit, products }) {
   // }, [djname]);
 
   const confirmDelete = useCallback(() => {
-    // dispatch(scheduleActions.searchDjName());
     settimeTableData((oldtimeTableData) => {
       const newDayData = oldtimeTableData[day].filter(
         (data) => data.id !== timeData.id
