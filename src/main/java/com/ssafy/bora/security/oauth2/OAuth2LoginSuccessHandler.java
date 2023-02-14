@@ -23,7 +23,7 @@ public class OAuth2LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHan
     private final LoginRepository privacyRepository;
     private final JwtProvider jwtProvider;
 
-    private final String redirectUrl = "http://localhost:3000/regist";
+    private final String redirectUrl = "https://i8b301.p.ssafy.io/regist";
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
