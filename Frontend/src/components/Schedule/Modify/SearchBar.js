@@ -97,13 +97,15 @@ const SearchBar = ({
         djName: dj,
       };
       dispatch(scheduleActions.setArr(returnData));
+      console.log(arr2);
 
       settimeTableData((oldTimeData) => ({
         ...oldTimeData,
         [day]: [...oldTimeData[day], data],
       }));
-
       handleClose();
+      // window.location.reload();
+      console.log(arr2);
     },
     [handleClose, settimeTableData, timeTableData]
   );

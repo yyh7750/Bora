@@ -10,17 +10,24 @@ const scheduleSlice = createSlice({
   initialState: initialScheduleState,
   reducers: {
     setArr(state, action) {
-      state.arr.push(action.payload);
+      console.log(action.payload);
+      const newArr = [...state.arr];
+      newArr.push(action.payload);
+      state.arr = newArr;
     },
     deleteArr(state, action) {
-      for (let i = 0; i < state.arr.length; i++) {
-        if (current(state.arr[i]).djName === action.payload) {
-          state.arr = state.arr.filter(
-            (element) => element.djName != action.payload
-          );
-        }
-        console.log(current(state.arr[i]));
-      }
+      const newArr = state.arr.filter((e) => e.djName !== action.payload);
+      state.arr = newArr;
+      console.log(current(state.arr[0]));
+      // console.log(current(state.arr));
+      // for (let i = 0; i < current(state.arr).length; i++) {
+      //   if (current(state.arr[i]).djName === action.payload) {
+      //     state.arr = state.arr.filter(
+      //       (element) => element.djName != action.payload
+      //     );
+      //   }
+      //   console.log(current(state.arr[i]));
+      // }
     },
   },
 });

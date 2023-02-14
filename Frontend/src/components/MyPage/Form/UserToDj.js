@@ -7,20 +7,75 @@ import profileImg from "../../../assets/mori.png";
 import radio from "../../../assets/radio.png";
 import Button from "../../../UI/Button/Button";
 import MailBox from "../../../UI/MailBox/MailBox";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { profileActions } from "../../../store/profile";
+import { Subscriber } from "openvidu-browser";
 
 const UserToDj = () => {
   const dispatch = useDispatch();
 
+  const [nickname, setNickname] = useState();
+
+  const userId = window.localStorage.getItem("userId");
+  const djId = "3";
+  useEffect(() => {
+    const API_URL = `http://localhost:8080/api/users/${djId}`;
+    axios({
+      url: API_URL,
+      method: "GET",
+    })
+      .then((res) => {
+        setNickname(res.data.nickName);
+        dispatch(profileActions.setProfile(res.data));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [userId]);
+
   const toggle = useSelector((state) => state.board.toggle);
 
   const isLetter = useSelector((state) => state.letter.isLetter);
+
+  const subscribe = useSelector((state) => state.board.subscribe);
+
+  const subscribeCnt = useSelector((state) => state.board.subscribeCnt);
 
   const toggleHandler = () => {
     dispatch(boardActions.toggleBoard());
   };
 
   const subscribeHandler = () => {
-    console.log("하이");
+    dispatch(boardActions.toggleSubscribe());
+    const API_URL = `http://localhost:8080/api/follow/redis`;
+    let DATA = {};
+    if (subscribe) {
+      DATA = {
+        id: "2+3",
+        req: "follow",
+        djId: djId,
+        viewerId: userId,
+      };
+    } else {
+      DATA = {
+        id: "2+3",
+        req: "unfollow",
+        djId: djId,
+        viewerId: userId,
+      };
+    }
+    axios({
+      url: API_URL,
+      method: "POST",
+      data: DATA,
+    })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const containerVariants = {
@@ -52,20 +107,32 @@ const UserToDj = () => {
         <div className="trainerInfo">
           <div className="infoTop">
             <span className="nickname" style={{ marginRight: "20px", flex: 1 }}>
-              DJ이름
+              {nickname}
             </span>
-            <Button
-              style={{ flex: 1 }}
-              value={subscribeHandler}
-              name="구독"
-              margin="30px"
-              fontsize="0.8em"
-              width="70px"
-            />
+            {!subscribe && (
+              <Button
+                style={{ flex: 1 }}
+                value={subscribeHandler}
+                name="구독"
+                margin="30px"
+                fontsize="0.8em"
+                width="70px"
+              />
+            )}
+            {subscribe && (
+              <Button
+                style={{ flex: 1 }}
+                value={subscribeHandler}
+                name="구독중"
+                margin="30px"
+                fontsize="0.8em"
+                width="70px"
+              />
+            )}
           </div>
           <div>
             <span className="lister">청취자</span>
-            <span className="listercnt">100k</span>
+            <span className="listercnt">{subscribeCnt}</span>
           </div>
           <div>
             <p className="content">유저의 한마디입니다.</p>

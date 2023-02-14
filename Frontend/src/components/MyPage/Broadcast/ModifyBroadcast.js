@@ -1,5 +1,7 @@
 import "./ModifyBroadcast.scss";
+import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { profileActions } from "../../../store/profile";
 
 import left from "../../../assets/left.png";
 import right from "../../../assets/right.png";
@@ -8,10 +10,110 @@ import Button from "../../../UI/Button/Button";
 import bannerImg from "../../../assets/2.jpg";
 import thumbnailImg from "../../../assets/4.jpg";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const ModifyBroadcast = () => {
+  const dispatch = useDispatch();
+  const userId = window.localStorage.getItem("userId");
+  const category = useSelector((state) => state.broadcast.category);
+  const starttime = useSelector((state) => state.broadcast.starttime);
+  const endtime = useSelector((state) => state.broadcast.endtime);
+  const day = useSelector((state) => state.broadcast.day);
   const modifyBroadcast = () => {
-    //방송정보 수정한 양식 객체에 담에서 broadcast.js에 전달
+    const dayArr = [];
+    const arr = ["월", "화", "수", "목", "금", "토", "일"];
+    for (let i = 0; i < arr.length; i++) {
+      if (arr[i] === day) {
+        dayArr.push(true);
+      } else {
+        dayArr.push(false);
+      }
+    }
+    var monthNames = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
+    const dateController = new Date();
+    let year = dateController.getFullYear(); // 년도
+    let month = dateController.getMonth() + 1; // 월
+    if (parseInt(month) < 10) {
+      month = "0" + month;
+    }
+    let date = dateController.getDate(); // 날짜
+    let start = starttime.substring(3);
+    let end = endtime.substring(3);
+    if (parseInt(start[0]) < 10) {
+      start = "0" + start;
+    }
+    if (parseInt(end[0]) < 10) {
+      end = "0" + end;
+    }
+    console.log(document.getElementById("modifyDesc").value);
+    //2007-12-03 10:15
+    const startTime = `${year}-${month}-${date} ${start}`;
+    const endTime = `${year}-${month}-${date} ${end}`;
+    const stationInfo = {
+      userId: userId,
+      name: document.getElementById("modifyBroadcastTitle").value,
+      startTime: startTime,
+      endTime: endTime,
+      description: document.getElementById("modifyDesc").value,
+      notice: document.getElementById("modifyBroadcastNotice").value,
+      category: category,
+      mon: dayArr[0],
+      tue: dayArr[1],
+      wen: dayArr[2],
+      thu: dayArr[3],
+      fri: dayArr[4],
+      sat: dayArr[5],
+      sun: dayArr[6],
+    };
+    const API_URL = `http://localhost:8080/api/stations`;
+    console.log(stationInfo);
+    axios({
+      url: API_URL,
+      method: "PATCH",
+      data: stationInfo,
+    })
+      .then((res) => {
+        console.log(res);
+        window.location.reload();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const checkBroadcastTitle = () => {
+    const modifytitle = document.getElementById("modifyBroadcastTitle").value;
+    const API_URL = `http://localhost:8080/api/stations/check/${modifytitle}`;
+    axios({
+      url: API_URL,
+      method: "GET",
+    })
+      .then((res) => {
+        console.log(res);
+        if (res.data) {
+          document.getElementById("resTitle").innerHTML =
+            "사용가능한 방송국명입니다.";
+        } else {
+          document.getElementById("resTitle").innerHTML =
+            "이미 사용중인 방송국명입니다.";
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
@@ -24,6 +126,7 @@ const ModifyBroadcast = () => {
           type="text"
           placeholder="공지를 입력해주세요"
           className="modifyBroadcastNotice"
+          id="modifyBroadcastNotice"
         />
         <img src={right} alt="오른쪽확성기" className="bannerIcon" />
       </div>
@@ -36,15 +139,18 @@ const ModifyBroadcast = () => {
             type="text"
             placeholder="방송국명을 입력해주세요"
             className="modifyBroadcastTitle"
+            id="modifyBroadcastTitle"
           />
+          <p id="resTitle"></p>
+          <button onClick={checkBroadcastTitle}>중복확인</button>
         </div>
         <hr />
         <div style={{ float: "left" }}>
-          방송요일자리 방송시간자리
+          {day} {starttime}~{endtime}
           <br />
-          방송태그자리
+          {category}
           <br />
-          <input type="text" className="desc" />
+          <input type="text" className="desc" id="modifyDesc" />
           <br />
           <Link to="/broadcast">
             <Button

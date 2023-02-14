@@ -6,6 +6,7 @@ import boardReducer from "./board";
 import blacklistReducer from "./blacklist";
 import letterReducer from "./letter";
 import scheduleReducer from "./schedule";
+import profileReducer from "./profile";
 
 const store = configureStore({
   reducer: {
@@ -15,6 +16,7 @@ const store = configureStore({
     blacklist: blacklistReducer,
     letter: letterReducer,
     schedule: scheduleReducer,
+    profile: profileReducer,
   },
 });
 

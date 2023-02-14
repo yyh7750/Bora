@@ -1,12 +1,13 @@
 import React, { Fragment, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { blacklistActions } from "../../../store/blacklist";
 import "./ModifyProfile.scss";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Profile from "../../../UI/Profile/Profile";
 import FilterBox from "../../../UI/FilterBox/FilterBox";
 import bannerImg from "../../../assets/2.jpg";
+import { profileActions } from "../../../store/profile";
+import axios from "axios";
 
 const ModifyProfile = (props) => {
   const dispatch = useDispatch();
@@ -31,16 +32,32 @@ const ModifyProfile = (props) => {
     }
   };
 
-  const showBlacklistModal = useSelector(
-    (state) => state.blacklist.showBlacklistModal
-  );
+  const profileCloseHandeler = () => {
+    dispatch(profileActions.closeModifyProfile());
+  };
+  const userId = window.localStorage.getItem("userId");
+  const modifyProfileInfo = () => {
+    const DATA = {
+      id: userId,
+      nickName: document.getElementById("nickNameInput").value,
+      desc: document.getElementById("userSayInput").value,
+    };
+    const API_URL = `http://localhost:8080/api/users`;
+    axios({
+      url: API_URL,
+      method: "PATCH",
+      data: DATA,
+    })
+      .then((res) => {
+        console.log(res);
+        dispatch(profileActions.closeModifyProfile());
+        window.location.reload();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
-  const closeBlacklist = () => {
-    dispatch(blacklistActions.closeBlacklist());
-  };
-  const showModal = () => {
-    dispatch(blacklistActions.openBlacklistModal());
-  };
   return (
     <Fragment>
       {/* <FilterBox /> */}
@@ -48,7 +65,7 @@ const ModifyProfile = (props) => {
         <FontAwesomeIcon
           icon={faXmark}
           className="closeButton"
-          onClick={closeBlacklist}
+          onClick={profileCloseHandeler}
         />
         <div className="profileModalInfo">
           <span className="profileTitle">{props.name}</span>
@@ -69,13 +86,27 @@ const ModifyProfile = (props) => {
                 />
               </div>
             </div>
-            <span style={{ marginRight: "10px" }}>블랙된사람1</span>
+            <br />
+            <label>
+              <span style={{ marginRight: "30px" }}>닉네임</span>
+              <input type="text" id="nickNameInput" />
+            </label>
+            <br />
+            <label>
+              <span style={{ marginRight: "30px" }}>유저 한마디</span>
+              <input
+                type="text"
+                id="userSayInput"
+                // className="profileModifyDesc"
+              />
+            </label>
+            <br />
             <button
               className="profileButton"
               style={{ marginRight: "10px" }}
-              onClick={showModal}
+              onClick={modifyProfileInfo}
             >
-              해제
+              수정하기
             </button>
           </div>
         </div>
