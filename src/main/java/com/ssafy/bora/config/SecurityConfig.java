@@ -5,7 +5,6 @@ import com.ssafy.bora.repository.user.IUserRepository;
 import com.ssafy.bora.security.jwt.*;
 import com.ssafy.bora.security.oauth2.CustomOAuth2UserService;
 import com.ssafy.bora.security.oauth2.OAuth2LoginSuccessHandler;
-import com.ssafy.bora.repository.login.LoginRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
@@ -15,6 +14,9 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 @EnableWebSecurity // 보안 관련 어노테이션
 @RequiredArgsConstructor
@@ -30,8 +32,6 @@ public class SecurityConfig {
     private final IPrivacyRepository iPrivacyRepository;
 
     private final IUserRepository userRepository;
-
-
 
     @Bean
     public AuthenticationSuccessHandler authenticationSuccessHandler() {
@@ -90,7 +90,6 @@ public class SecurityConfig {
 
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
-
 
         CorsConfiguration config = new CorsConfiguration();
 

@@ -21,7 +21,6 @@ public class SignUpController {
     }
 
 
-    @ApiOperation(value = "닉네임 중복체크")
     @GetMapping("/{nick-name}")
     public ResponseEntity<?> checkDuplicateNickName(@PathVariable(name = "nick-name") String nickName){
         return new ResponseEntity<>(userService.checkDuplicateNickName(nickName), HttpStatus.OK);
