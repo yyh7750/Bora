@@ -9,7 +9,7 @@ spring:
             redirect-uri: https://i8b301.p.ssafy.io/login/oauth2/code/kakao
             client-authentication-method: POST
             authorization-grant-type: authorization_code
-            scope: profile_nickname, account_email
+            scope: profile_nickname
             client-name: Kakao
         provider:
           kakao:
