@@ -89,7 +89,7 @@ public class FollowServiceImpl implements IFollowService {
 
     @Override
     @Async
-    @Scheduled(cron = "0 0/1 * * * *")
+    //@Scheduled(cron = "0 0/1 * * * *")
     public void sendRedisDataToAddFollow() {
         List<ReqFollowDTO> redisFollowList = new ArrayList<>();
         Iterable<RedisFollow> iterable = redisFollowRepository.findAll();
