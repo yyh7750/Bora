@@ -8,7 +8,8 @@ const send = async (payload) => {
       data: { success },
     } = await axios({
       method: "post",
-      url: "https://i8b301.p.ssafy.io/api/main/broadcast/" + createId,
+      // url: "https://i8b301.p.ssafy.io/api/main/broadcast/" + createId,
+      url: "http://localhost:8080/api/main/broadcast/" + createId,
       // 줘야하는 데이터를 전달
       data: {
         ...payload,

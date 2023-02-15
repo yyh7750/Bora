@@ -4,7 +4,9 @@ import "./Button.scss";
 
 const Button = (props) => {
   const value = props.name;
+
   console.log(props.margin);
+
   return (
     <motion.div
       className="buttonBox"
@@ -16,6 +18,9 @@ const Button = (props) => {
         onClick={props.value}
         style={{
           marginTop: `${props.margin}`,
+
+          marginLeft: `${props.marginLeft}`,
+
           fontSize: `${props.fontsize}`,
           width: `${props.width}`,
         }}

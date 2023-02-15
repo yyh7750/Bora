@@ -6,6 +6,9 @@ import { letterActions } from "../../../store/letter";
 
 import "./WriteBoard.scss";
 import Button from "../../../UI/Button/Button";
+
+import axios from "axios";
+
 const WriteBoard = () => {
   const dispatch = useDispatch();
 
@@ -21,14 +24,30 @@ const WriteBoard = () => {
   };
 
   const sendMessage = () => {
+    const userId = window.localStorage.getItem("userId");
     const message = {
-      userId: 0,
-      boardTitle: document.getElementById("title").value,
-      boardContent: document.getElementById("content").value,
+      djId: "3",
+      viewerId: userId,
+      title: document.getElementById("title").value,
+      contents: document.getElementById("content").value,
+      regDateTime: new Date(),
     };
     // window.localStorage.setItem("board", message);
     dispatch(letterActions.writeLetter());
     dispatch(boardActions.writeBoard(message));
+
+    const API_URL = `http://localhost:8080/api/storybox`;
+    axios({
+      url: API_URL,
+      method: "POST",
+      data: message,
+    })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (

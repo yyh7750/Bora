@@ -5,8 +5,13 @@ import { boardActions } from "../../../store/board";
 import Button from "../../../UI/Button/Button";
 import "./WriteBoard.scss";
 
+import axios from "axios";
+
 const ModifyBoard = () => {
   const dispatch = useDispatch();
+
+  const userId = window.localStorage.getItem("userId");
+  const djId = "3";
 
   const boardTitle = useSelector((state) => state.board.boardTitle);
   const boardContent = useSelector((state) => state.board.boardContent);
@@ -22,10 +27,26 @@ const ModifyBoard = () => {
 
   const sendMessage = () => {
     const message = {
-      userId: 0,
-      boardTitle: document.getElementById("title").value,
-      boardContent: document.getElementById("content").value,
+      djId: djId,
+      viewerId: userId,
+      title: document.getElementById("title").value,
+      contents: document.getElementById("content").value,
+      regDateTime: new Date(),
     };
+    // dispatch(boardActions.writeBoard(message));
+    const API_URL = `http://localhost:8080/api/storybox`;
+    axios({
+      url: API_URL,
+      method: "PATCH",
+      data: message,
+    })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
     dispatch(boardActions.writeBoard(message));
   };
   return (

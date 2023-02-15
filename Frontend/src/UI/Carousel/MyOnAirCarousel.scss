@@ -1,0 +1,41 @@
+.myOnAirSwiper {
+  width: 90%;
+  height: 310px;
+  top: 0;
+  z-index: 1;
+}
+
+.MyOnAirSlide {
+  text-align: center;
+  font-size: 18px;
+  //   border-radius: 20px;
+  background: #d8a3ff;
+  /* Center slide text vertically */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.swiper-slide:hover {
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+
+.nowViewer {
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.6), 0 10px 10px rgba(0, 0, 0, 0.4);
+  position: fixed;
+  background: red;
+  width: 70px;
+  height: 30px;
+  z-index: 1;
+  right: 20px;
+  top: 20px;
+  text-align: center;
+  border-radius: 20px;
+  color: #000;
+  padding-top: 5px;
+}
+// #swiper-slide {
+//   background: rgb(255, 255, 255);
+// }

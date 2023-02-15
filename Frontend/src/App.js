@@ -27,58 +27,68 @@ import Navbar from "./UI/NavBar/NavBar";
 import MySchedule from "./components/Schedule/MySchedule";
 import ModifySchedule from "./components/Schedule/ModifySchedule";
 
+import ModifyBroadcast from "./components/MyPage/Broadcast/ModifyBroadcast";
+import ModifyProfile from "./components/MyPage/ModifyProfile/ModifyProfile";
+
 import CreateRoom from "./components/Openvidu/components/CreateRoom";
 import VideoRoomComponent from "./components/Openvidu/components/VideoRoomComponent";
+import { Fragment } from "react";
 
 // import VideoRoomComponent from "./components/Openvidu/components/VideoRoomComponent";
 const App = () => {
   // const location = useLocation();
   return (
     <AnimatePresence>
-      <Navbar />
       <Routes>
-        {/**redirect = Navigate */}
-        <Route path="/" element={<Navigate to="/makeBroadcast" />} />
-        <Route path="/main" element={<MainPageForm />} />
         <Route path="/login" element={<Login />} />
         <Route path="/regist" element={<UserRegist />} />
-
-        {/**유저가 보는 DJ */}
-        <Route element={<UserToDj />}>
-          <Route element={<OnAir />}>
-            <Route path="/emptyBoard" element={<EmptyBoard />} />
-            <Route path="/viewBoard" element={<ViewBoard />} />
-            <Route path="/writeBoard" element={<WriteBoard />} />
-            <Route path="/modifyBoard" element={<ModifyBoard />} />
-            <Route path="/broadcast" element={<Broadcast />} />
-          </Route>
-        </Route>
-
-        {/**DJ가 보는 DJ */}
-        <Route element={<DjToDj />}>
-          <Route element={<OnAir />}>
-            <Route path="/viewBoardList" element={<ViewBoardList />} />
-            <Route path="/detailBoard" element={<DetailBoard />} />
-
-            <Route path="/broadcasts" element={<Broadcast />} />
-          </Route>
-        </Route>
-
-        {/**유저가 보는 유저 */}
-        <Route element={<UserToUser />}>
-          <Route element={<OnAir />}>
-            <Route path="/emptyBroadcast" element={<EmptyBroadcast />} />
-            <Route path="/makeBroadcast" element={<MakeBroadcast />} />
-          </Route>
-        </Route>
-
-        {/**편성표 */}
-        <Route path="/mySchedule" element={<MySchedule />} />
-        <Route path="/modifySchedule" element={<ModifySchedule />} />
-
-        {/* 오픈비두 */}
-        <Route path="/createRoom" element={<CreateRoom />} />
         <Route path="/enterRoom" element={<VideoRoomComponent />} />
+        <Route element={<Navbar />}>
+          {/**redirect = Navigate */}
+          <Route path="/" element={<Navigate to="/makeBroadcast" />} />
+          <Route path="/main" element={<MainPageForm />} />
+          {/**유저가 보는 DJ */}
+          <Route element={<UserToDj />}>
+            <Route element={<OnAir />}>
+              <Route path="/emptyBoard" element={<EmptyBoard />} />
+              <Route path="/viewBoard" element={<ViewBoard />} />
+              <Route path="/writeBoard" element={<WriteBoard />} />
+              <Route path="/modifyBoard" element={<ModifyBoard />} />
+              <Route path="/broadcast" element={<Broadcast />} />
+            </Route>
+          </Route>
+
+          {/**DJ가 보는 DJ */}
+          <Route element={<DjToDj />}>
+            <Route element={<OnAir />}>
+              <Route path="/viewBoardList" element={<ViewBoardList />} />
+              <Route path="/detailBoard" element={<DetailBoard />} />
+
+              <Route path="/broadcast" element={<Broadcast />} />
+              <Route path="/modifyBroadcast" element={<ModifyBroadcast />} />
+
+              <Route path="/broadcasts" element={<Broadcast />} />
+            </Route>
+          </Route>
+
+          {/**유저가 보는 유저 */}
+          <Route element={<UserToUser />}>
+            <Route element={<OnAir />}>
+              <Route path="/emptyBroadcast" element={<EmptyBroadcast />} />
+              <Route path="/makeBroadcast" element={<MakeBroadcast />} />
+            </Route>
+          </Route>
+
+          {/* <Route path="/modifyProfile" element={<ModifyProfile />} /> */}
+
+          {/**편성표 */}
+          <Route path="/mySchedule" element={<MySchedule />} />
+          <Route path="/modifySchedule" element={<ModifySchedule />} />
+
+          {/* 오픈비두 */}
+
+          <Route path="/createRoom" element={<CreateRoom />} />
+        </Route>
       </Routes>
     </AnimatePresence>
   );

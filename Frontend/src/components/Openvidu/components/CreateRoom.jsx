@@ -1,11 +1,14 @@
 // import "./VideoRoomComponent";
+import { useDispatch } from "react-redux";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 // import GoButton from "../../../UI/Button/GoButton";
-import { useDispatch } from "react-redux";
 import thumbnail from "../../../assets/wallpaper.jpg";
 import createOnAirRoom from "./createOnAirRoom";
+import "./VideoRoomComponent.scss";
+import { v4 as uuidv4 } from "uuid";
+// import { sessionIdActions } from "../../../store/session";
 
 const containerVariants = {
   hidden: {
@@ -32,7 +35,10 @@ const CreateRoom = () => {
   // const [isLogin, setIsLogin] = useState(localStorage.getItem("isLogin"));
 
   // const nickname = useSelector((state) => state.login.value.id);
-  const nickname = "dj";
+  // 1명은 방송을 하나만 킬 수 있음. 같은 nickname으로 방송 킬 경우 저장 안됨
+  // 방송국을 만들지 않은 일반 user이면 방송 저장 안됨.
+  const nickname = "3";
+  const mainImg = thumbnail;
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -46,25 +52,27 @@ const CreateRoom = () => {
   };
 
   const createRoom = async () => {
+    const sessionId = uuidv4();
+    console.log(sessionId);
     console.log("!!");
-    const roomId = await createOnAirRoom(
+    const roomIs = await createOnAirRoom(
+      mainImg,
+      sessionId,
       myRoomName,
       myRoomType,
       nickname,
       dispatch
     );
-    console.log(myRoomName);
-    console.log(myRoomType);
-    console.log(nickname);
-    console.log(roomId);
-    if (roomId !== false) {
+    if (roomIs !== false) {
       console.log("방송 생성 성공");
       navigate("/enterRoom", {
         state: {
-          id: roomId,
+          id: sessionId,
+          roomIs: roomIs,
           myRoomName: myRoomName,
           myRoomType: myRoomType,
           nickname: nickname,
+          thumbnail: mainImg,
         },
       });
     }
@@ -138,35 +146,35 @@ const CreateRoom = () => {
               <input
                 type="checkbox"
                 name="roomType"
-                value="잔잔한"
+                value="calm"
                 onClick={getCheckboxValue}
               />
               <a id="checkbox_id">잔잔한</a>
               <input
                 type="checkbox"
                 name="roomType"
-                value="신나는"
+                value="exciting"
                 onClick={getCheckboxValue}
               />
               <a id="checkbox_id">신나는</a>
               <input
                 type="checkbox"
                 name="roomType"
-                value="조용한"
+                value="quite"
                 onClick={getCheckboxValue}
               />
               <a id="checkbox_id">조용한</a>
               <input
                 type="checkbox"
                 name="roomType"
-                value="기쁜"
+                value="lively"
                 onClick={getCheckboxValue}
               />
-              <a id="checkbox_id">기쁜</a>
+              <a id="checkbox_id">활기찬</a>
               <input
                 type="checkbox"
                 name="roomType"
-                value="교육적인"
+                value="education"
                 onClick={getCheckboxValue}
               />
               <a id="checkbox_id">교육적인</a>

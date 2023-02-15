@@ -48,7 +48,7 @@ const UserRegist = () => {
     // };
     // console.log(userInfo);
 
-    const API_URL = `https://i8b301.p.ssafy.io/api/sign-up`;
+    const API_URL = `http://localhost:8080/api/sign-up`;
     axios({
       url: API_URL,
       method: "POST",
@@ -63,6 +63,27 @@ const UserRegist = () => {
         console.log(res);
         window.localStorage.setItem("userId", res.data.id);
         window.location.href = "http://localhost:3000/main";
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const checkNickname = () => {
+    const nickname = document.getElementById("inputNickname").value;
+    const API_URL = `http://localhost:8080/api/sign-up/${nickname}`;
+    axios({
+      url: API_URL,
+      method: "GET",
+    })
+      .then((res) => {
+        if (res.data) {
+          document.getElementById("resTitle").innerHTML =
+            "사용 가능한 닉네임입니다.";
+        } else {
+          document.getElementById("resTitle").innerHTML =
+            "이미 사용중인 닉네임입니다.";
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -84,6 +105,8 @@ const UserRegist = () => {
       <br />
       <label>
         닉네임 <input type="text" id="inputNickname" />
+        <button onClick={checkNickname}>중복체크</button>
+        <p id="resTitle"></p>
       </label>
       <br />
       <div>회원가입</div>
