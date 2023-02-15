@@ -33,11 +33,13 @@ public class Broadcast implements Serializable {
     @Column(name = "end_time")
     private LocalDateTime endBroad;
 
+    @Column(name="broadcast_img")
+    private String broadcastImg;
+
     @Column(name = "max_viewer")
     @ColumnDefault("0")
     private int maxViewer;
 
-    //TODO 일
     @Column(name = "is_on_time")
     private boolean isOnTime;
 

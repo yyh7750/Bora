@@ -11,8 +11,7 @@ import java.time.LocalDateTime;
 public class BroadcastResDTO {
     private String userId;
     private String nickName;
-
-    //TODO private String imgUrl;
+    private String imgUrl;
     private String stationName;
     private String title;
     private String mood;
@@ -37,11 +36,11 @@ public class BroadcastResDTO {
 //    }
 
     @QueryProjection
-    public BroadcastResDTO(String userId,String nickName, String stationName, String title, String mood, String category, String sessionId, LocalDateTime startTime){
+    public BroadcastResDTO(String userId,String nickName, String imgUrl,String stationName, String title, String mood, String category, String sessionId, LocalDateTime startTime){
         this.userId=userId;
         this.nickName=nickName;
+        this.imgUrl=imgUrl;
         this.stationName=stationName;
-        //TODO this.imgUrl=imgUrl;
         this.title=title;
         this.mood=mood;
         this.category=category;

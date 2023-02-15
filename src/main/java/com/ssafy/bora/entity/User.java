@@ -26,6 +26,7 @@ public class User {
 
     private boolean isDelete;
 
+    private String profile_img;
     private boolean status;
 
     private String desc;
