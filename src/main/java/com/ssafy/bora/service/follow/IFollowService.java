@@ -32,7 +32,7 @@ public interface IFollowService {
      * @param redisFollow
      * @return
      */
-    RedisFollow addRedisFollow(RedisFollow redisFollow);
+    void addRedisFollow(RedisFollow redisFollow);
 
     /**
      * desc : 스케줄링에 필요한 메소드.

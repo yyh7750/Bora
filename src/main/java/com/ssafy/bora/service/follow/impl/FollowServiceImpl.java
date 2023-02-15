@@ -10,7 +10,10 @@ import com.ssafy.bora.repository.follow.IRedisFollowRepository;
 import com.ssafy.bora.service.follow.IFollowService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.redis.core.ListOperations;
+import org.springframework.data.redis.core.RedisOperations;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ParameterizedPreparedStatementSetter;
 import org.springframework.scheduling.annotation.Async;
@@ -83,13 +86,15 @@ public class FollowServiceImpl implements IFollowService {
     }
 
     @Override
-    public RedisFollow addRedisFollow(RedisFollow redisFollow) {
-        return redisFollowRepository.save(redisFollow);
+    public void addRedisFollow(RedisFollow redisFollow) {
+        StringBuilder keyBuilder = new StringBuilder();
+        keyBuilder.append("follow:").append(redisFollow.getDjId()).append("+").append(redisFollow.getViewerId());
+        redisTemplate.opsForValue().set(keyBuilder.toString(), redisFollow);
     }
 
     @Override
     @Async
-    @Scheduled(cron = "0 0/1 * * * *")
+//    @Scheduled(cron = "0 0 0 * * *")
     public void sendRedisDataToAddFollow() {
         List<ReqFollowDTO> redisFollowList = new ArrayList<>();
         Iterable<RedisFollow> iterable = redisFollowRepository.findAll();
@@ -109,18 +114,41 @@ public class FollowServiceImpl implements IFollowService {
     }
 
     @Override
-    @Cacheable(value = "following", key = "#viewerId", cacheManager = "cacheManager")
     public List<ResFollowDTO> findAllFollowingList(String viewerId) {
 
-        List<Follow> followingList = followRepository.findAllFollowingList(viewerId);
-        List<ResFollowDTO> resFollowingList = new ArrayList<>();
+        // Redis에서 key 목록 가져오기
+        StringBuilder keyBuilder = new StringBuilder();
+        keyBuilder.append("*+").append(viewerId);
+        Set<String> keySet = redisTemplate.keys(keyBuilder.toString());
+        Iterator<String> keyIter = keySet.iterator();
 
-        for (Follow followingInfo : followingList) {
-            String djNickName = followingInfo.getDj().getNickName();
-            String viewerNickName = followingInfo.getViewer().getNickName();
-            resFollowingList.add(ResFollowDTO.addDTO(djNickName, viewerNickName));
+        // RedisFollow Entity List 생성
+        ValueOperations valueOperations = redisTemplate.opsForValue();
+        List<RedisFollow> redisFollowList = new ArrayList<>();
+        while (keyIter.hasNext()) {
+            String key = keyIter.next();
+            RedisFollow redisFollow = (RedisFollow) valueOperations.get(key);
+            redisFollowList.add(redisFollow);
         }
-        return resFollowingList;
+
+        // 리턴할 리스트 생성 및 값 초기화
+        List<ResFollowDTO> resFollowDTOList = new ArrayList<>();
+        for (RedisFollow redisFollow : redisFollowList) {
+            String djNickName = redisFollow.getDjId();
+            String viewerNickName = redisFollow.getViewerId();
+            resFollowDTOList.add(ResFollowDTO.addDTO(djNickName, viewerNickName));
+        }
+
+//        List<Follow> followingList = followRepository.findAllFollowingList(viewerId);
+//        List<ResFollowDTO> resFollowingList = new ArrayList<>();
+//
+//        for (Follow followingInfo : followingList) {
+//            String djNickName = followingInfo.getDj().getNickName();
+//            String viewerNickName = followingInfo.getViewer().getNickName();
+//            resFollowingList.add(ResFollowDTO.addDTO(djNickName, viewerNickName));
+//        }
+//        return resFollowingList;
+        return resFollowDTOList;
     }
 
     @Override

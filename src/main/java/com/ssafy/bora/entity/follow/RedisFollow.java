@@ -2,6 +2,7 @@ package com.ssafy.bora.entity.follow;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.springframework.data.redis.core.RedisHash;
 import javax.persistence.Id;
 import java.io.Serializable;
@@ -9,6 +10,7 @@ import java.io.Serializable;
 @Getter
 @NoArgsConstructor
 @RedisHash("follow")
+@ToString
 public class RedisFollow implements Serializable {
 
     // 요청으로 id 값을 'djId+viewerId'로 받는다.
