@@ -10,17 +10,14 @@ class BoraApplicationTests {
 
     @Test
     void jasypt(){
-        String url = "jdbc:mariadb://i8b301.p.ssafy.io:8306/bora?serverTimezone=UTC&characterEncoding=UTF-8";
-        String username = "ssafy";
-        String password = "ssafi";
+        String username = "AKIA4FYBPHWXKW4M4GXX";
+        String password = "C+Yr0KXoLDfUle5sPJ1B+LPlL1RylDgRl6F+IK48";
 
-//        String encryptUrl = jasyptEncrypt(host);
-//        String encryptUsername = jasyptEncrypt(port);
-//        String encryptPassword = jasyptEncrypt(pwd);
+        String encryptUrl = jasyptEncrypt(username);
+        String encryptUsername = jasyptEncrypt(password);
 
-//        System.out.println("encryptUrl : " + encryptUrl);
-//        System.out.println("encryptUsername : " + encryptUsername);
-//        System.out.println("encryptPassword : " + encryptPassword);
+        System.out.println("encryptUrl : " + encryptUrl);
+        System.out.println("encryptUsername : " + encryptUsername);
 
     }
 

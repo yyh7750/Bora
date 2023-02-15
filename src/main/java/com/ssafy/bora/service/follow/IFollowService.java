@@ -1,6 +1,5 @@
 package com.ssafy.bora.service.follow;
 
-import com.ssafy.bora.dto.follow.ReqFollowDTO;
 import com.ssafy.bora.dto.follow.ResFollowDTO;
 import com.ssafy.bora.entity.follow.RedisFollow;
 
@@ -12,10 +11,10 @@ public interface IFollowService {
      * desc: 팔로우 추가 또는 취소 상태를 추가 상태로 업데이트하는 메소드.
      * jdbcTemplate의 batchUpdate를 이용한 batch insert 전략 사용
      * 
-     * @param reqFollowDtoList
+     * @param resFollowDtoList
      * @return
      */
-    int[][] addFollow(List<ReqFollowDTO> reqFollowDtoList);
+    int[][] addFollow(List<ResFollowDTO> resFollowDtoList);
 
     /**
      * desc: req 값이 follow, unfollow 인지 판단하여
@@ -32,7 +31,7 @@ public interface IFollowService {
      * @param redisFollow
      * @return
      */
-    RedisFollow addRedisFollow(RedisFollow redisFollow);
+    void addRedisFollow(RedisFollow redisFollow);
 
     /**
      * desc : 스케줄링에 필요한 메소드.
@@ -51,10 +50,26 @@ public interface IFollowService {
     List<ResFollowDTO> findAllFollowingList(String viewerId);
 
     /**
+     * desc: redis에서 keyPattern에 해당하는 목록을 조회하여 List로 반환받기 위한 메소드
+     *
+     * @param keyPattern
+     * @return
+     */
+    List<ResFollowDTO> getFollowDTOList(String keyPattern);
+
+    /**
      * desc: 나(Dj)를 팔로우한 시청자 목록 조회
      * 
      * @param djId
      * @return
      */
     List<ResFollowDTO> findAllFollowerList(String djId);
+
+    /**
+     * desc: 나를 팔로우한 사람들 수 조회
+     *
+     * @param djId
+     * @return
+     */
+    int findAllFollowerCnt(String djId);
 }

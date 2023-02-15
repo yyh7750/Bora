@@ -5,6 +5,7 @@ import com.ssafy.bora.entity.Station;
 import com.ssafy.bora.entity.User;
 import com.ssafy.bora.repository.station.IStationRepository;
 import com.ssafy.bora.repository.user.IUserRepository;
+import com.ssafy.bora.service.follow.IFollowService;
 import com.ssafy.bora.service.station.IStationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,7 @@ public class StationServiceImpl implements IStationService {
 
     private final IUserRepository userRepository;
     private final IStationRepository stationRepository;
+    private final IFollowService followService;
 
     @Override
     public StationDTO createStation(StationDTO stationDTO) {
@@ -42,7 +44,7 @@ public class StationServiceImpl implements IStationService {
                 dj.createStation();
                 updateStation.createStation();
 
-                StationDTO registeredStationDTO = StationDTO.convertStationToDTO(updateStation);
+                StationDTO registeredStationDTO = StationDTO.convertStationToDTO(updateStation, 0);
                 return registeredStationDTO;
             }
             // user status 및 방송국 생성상태 변경 및 save
@@ -51,7 +53,7 @@ public class StationServiceImpl implements IStationService {
             station.createStation();
             Station registeredStation = stationRepository.save(station);
             // DTO로 변환
-            StationDTO registeredStationDTO = StationDTO.convertStationToDTO(registeredStation);
+            StationDTO registeredStationDTO = StationDTO.convertStationToDTO(registeredStation, 0);
             return registeredStationDTO;
         }
 
@@ -61,7 +63,8 @@ public class StationServiceImpl implements IStationService {
     @Override
     public StationDTO findStationByDjId(String djId) {
         Station findStation = stationRepository.findStationByDjId(djId);
-        StationDTO findStationDTO = StationDTO.convertStationToDTO(findStation);
+        int followCnt = followService.findAllFollowerCnt(djId);
+        StationDTO findStationDTO = StationDTO.convertStationToDTO(findStation, followCnt);
         return findStationDTO;
     }
 
@@ -75,7 +78,8 @@ public class StationServiceImpl implements IStationService {
         oldStation.changeStation(newStation);
 
         // 업데이트 된 엔티티를 DTO로 변환하여 반환
-        StationDTO newStationDTO = StationDTO.convertStationToDTO(oldStation);
+        int followCnt = followService.findAllFollowerCnt(djId);
+        StationDTO newStationDTO = StationDTO.convertStationToDTO(oldStation, followCnt);
         return newStationDTO;
     }
 

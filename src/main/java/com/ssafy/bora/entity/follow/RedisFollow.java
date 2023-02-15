@@ -20,4 +20,13 @@ public class RedisFollow implements Serializable {
     private String djId;
 
     private String viewerId;
+
+    public static RedisFollow convertRdbToRedis(String key, Follow follow) {
+        RedisFollow redisFollow = new RedisFollow();
+        redisFollow.id = key;
+        redisFollow.req = "follow";
+        redisFollow.djId = follow.getDj().getNickName();
+        redisFollow.viewerId = follow.getViewer().getNickName();
+        return redisFollow;
+    }
 }

@@ -31,7 +31,7 @@ public class FileUploadService {
     private String bucket;
 
     // 파일을 업로드하는 메서드
-    public FileVO fileUpload(MultipartFile file, String userId){
+    public FileVO fileUpload(MultipartFile file, String userId) {
         log.info("저장된 아이디:{} ", userId);
 
         // 파일 크기 보기
@@ -43,7 +43,7 @@ public class FileUploadService {
         // FileVO 객체를 생성하여 S3에 저장된 파일의 URL을 저장한다.
         FileVO fileVO = null;
 
-        try{
+        try {
             //업로드할 파일의 원래 이름과 확장자를 가져와서 저장될 파일 이름을 생성한다.
             String originalName = file.getOriginalFilename();
             String extension = originalName.substring(originalName.lastIndexOf("."));
@@ -54,7 +54,7 @@ public class FileUploadService {
             ObjectMetadata objMeta = new ObjectMetadata();
             objMeta.setContentLength(file.getSize()); //크기 
             objMeta.setContentType(file.getContentType()); // 타입
-            
+
             // 파일을 s3에 저장하고 s3 URL을 FileVO 객체에 저장한다.
             amazonS3.putObject(bucket, savedName, file.getInputStream(), objMeta);
 
@@ -69,7 +69,7 @@ public class FileUploadService {
             userRepository.save(user);
 
             log.info(fileVO.toString());
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return fileVO;

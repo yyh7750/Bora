@@ -6,6 +6,7 @@ import com.ssafy.bora.entity.Privacy;
 import com.ssafy.bora.entity.User;
 import com.ssafy.bora.repository.privacy.IPrivacyRepository;
 import com.ssafy.bora.repository.user.IUserRepository;
+import com.ssafy.bora.service.follow.IFollowService;
 import com.ssafy.bora.service.user.IUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -21,13 +22,15 @@ public class UserServiceImpl implements IUserService {
 
     private final IUserRepository userRepository;
     private final IPrivacyRepository privacyRepository;
+    private final IFollowService followService;
 
     @Override
     public UserDTO findUserById(String id) {
         User findUser = userRepository.findById(id).get();
         UserDTO userDTO = UserDTO.convertEntityToDTO(findUser);
         if (findUser.isStatus()) {
-            userDTO.getStation(findUser);
+            int followCnt = followService.findAllFollowerCnt(userDTO.getId());
+            userDTO.getStation(findUser, followCnt);
         }
         return userDTO;
     }

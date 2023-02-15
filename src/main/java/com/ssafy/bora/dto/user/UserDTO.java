@@ -25,8 +25,6 @@ public class UserDTO {
 
     private String profileImg;
 
-
-
     public static UserDTO convertEntityToDTO(User findUser) {
         UserDTO userDTO = new UserDTO();
         userDTO.id = findUser.getId();
@@ -36,7 +34,6 @@ public class UserDTO {
         userDTO.desc = findUser.getDesc();
         return userDTO;
     }
-
 
     @Builder
     public UserDTO(String id, String nickName, boolean isDelete, boolean status, String desc, StationDTO stationDTO, String profileImg) {
@@ -49,7 +46,7 @@ public class UserDTO {
         this.profileImg = profileImg;
     }
 
-    public void getStation(User findUser) {
-        this.stationDTO = StationDTO.convertStationToDTO(findUser.getStation());
+    public void getStation(User findUser, int followCnt) {
+        this.stationDTO = StationDTO.convertStationToDTO(findUser.getStation(), followCnt);
     }
 }

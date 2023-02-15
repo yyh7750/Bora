@@ -39,8 +39,10 @@ public class StationDTO {
 
     private boolean sun;
 
+    private int followCnt;
+
     //Fixme starttime, endtime 이거 맞음?
-    public static StationDTO convertStationToDTO(Station station) {
+    public static StationDTO convertStationToDTO(Station station, int followCnt) {
         StationDTO stationDTO = new StationDTO();
         stationDTO.userId = station.getUser().getId();
         stationDTO.category = station.getCategory();
@@ -56,6 +58,7 @@ public class StationDTO {
         stationDTO.fri = station.isFri();
         stationDTO.sat = station.isSat();
         stationDTO.sun = station.isSun();
+        stationDTO.followCnt = followCnt;
         return stationDTO;
     }
 }

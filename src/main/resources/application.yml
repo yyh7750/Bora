@@ -1,5 +1,4 @@
 server:
-  address: localhost
   port: 8080
   servlet:
     context-path: /api
@@ -33,8 +32,8 @@ spring:
 cloud:
   aws:
     credentials:
-      accessKey: ENC(O4x+LFHQgUPoFpJ6KiFLpPjNRt2O0/tzfN+xhdipSNY=)
-      secretKey: ENC(cvepBrnVGu7YauXISaMoTZ3WLf8tjgpbG595TrTxWBRT6ptqEzG8gLZYK4IxMvNFAHv5h0+biYI=)
+      accessKey: ENC(G3SnF+/APsKh3EDjgWs73YgtA5vFzcRfJYisABrluCg=)
+      secretKey: ENC(WJD4vE/sSRqbmBTsdzh4/HV3mbwop5lV71XNxNW/TXpOrZ8GnTrQjcPQ7BDWpudd52MnyethM5w=)
     s3:
       bucket: woojin-test-bucket
       # dir: kwj
