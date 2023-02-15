@@ -4,9 +4,12 @@ import com.ssafy.bora.dto.stroybox.ReqStoryBoxDTO;
 import com.ssafy.bora.dto.stroybox.ResStoryBoxDTO;
 import com.ssafy.bora.service.storybox.IStoryBoxService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -24,13 +27,13 @@ public class StoryboxController {
     }
 
     @GetMapping("/list/{dj-id}")
-    public ResponseEntity<?> findAllStoryBox(@PathVariable(name = "dj-id") String djId) {
-        List<ResStoryBoxDTO> storyBoxDtoList = storyBoxService.findAllStoryBox(djId);
+    public ResponseEntity<List<ResStoryBoxDTO>> findAllStoryBox(@PathVariable(name = "dj-id") String djId, Pageable pageable) {
+        List<ResStoryBoxDTO> storyBoxDtoList = storyBoxService.findAllStoryBox(djId, pageable);
 
         if (storyBoxDtoList != null && !storyBoxDtoList.isEmpty()) {
-            return new ResponseEntity<>(storyBoxDtoList, HttpStatus.OK);
+            return ResponseEntity.ok(storyBoxDtoList);
         }
-        throw new NoSuchElementException();
+        return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/list/{dj-id}/{storybox-id}")

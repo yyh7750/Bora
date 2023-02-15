@@ -8,6 +8,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
@@ -15,35 +16,48 @@ import java.util.Base64;
 import java.util.Collection;
 import java.util.Date;
 import java.util.stream.Collectors;
-
+/*
+JWT를 생성/ 검증/ 인증 및 파싱하는 기능을 구현한다.
+ */
 @Component
 @Slf4j
 public class JwtProvider {
 
     private final String SECRET_KEY;
 
-    private static final Long ACCESS_TOKEN_VALIDATE_TIME = 1000L;
-    public static final Long REFRESH_TOKEN_VALIDATE_TIME = 1000L * 60 * 60 * 24 * 7;
+    private static final Long ACCESS_TOKEN_VALIDATE_TIME = 1000L * 60 * 60 * 24 * 10; // 10일
+    public static final Long REFRESH_TOKEN_VALIDATE_TIME = 1000L * 60 * 60 * 24 * 7; // 7일
     private final String AUTHORITIES_KEY = "role";
 
     public JwtProvider(@Value("${app.auth.jwt.secret-key}") String secretKey) {
         this.SECRET_KEY = Base64.getEncoder().encodeToString(secretKey.getBytes());
     }
 
-    public String createAccessToken(Authentication authentication) {
+    public String createAccessToken(Authentication authentication, String uId, String role) {
         Date now = new Date();
         Date validity = new Date(now.getTime() + ACCESS_TOKEN_VALIDATE_TIME);
 
-        CustomOAuth2User oAuth2User = (CustomOAuth2User) authentication.getPrincipal();
+        log.info("createAccessToken start");
+//        if(authentication.getPrincipal() != null)
+//            log.info(((CustomOAuth2User) authentication.getPrincipal()).getUId().toString());
+        String email = authentication.getName();
+        log.info("email getName() {} ", email);
+        if(!email.contains("@")){
+            email = ((CustomOAuth2User) authentication.getPrincipal()).getEmail();
+        }
 
-        String email = oAuth2User.getEmail();
-        String role = authentication.getAuthorities().stream()
-                .map(GrantedAuthority::getAuthority)
-                .collect(Collectors.joining(","));
+//        String role = authentication.getAuthorities().stream()
+//                .map(GrantedAuthority::getAuthority)
+//                .collect(Collectors.joining(","));
+
+        log.info("createAccessToken {} ", authentication.getPrincipal() );
+
+        log.info("createAccessToken with " + email + " " + role + " " + uId);
 
         return Jwts.builder()
                 .signWith(SignatureAlgorithm.HS512, SECRET_KEY)
                 .setSubject(email)
+                .setAudience(uId)
                 .claim(AUTHORITIES_KEY, role)
                 .setIssuer("issuer")
                 .setIssuedAt(now)
@@ -70,9 +84,10 @@ public class JwtProvider {
                 Arrays.stream(claims.get(AUTHORITIES_KEY).toString().split(","))
                         .map(SimpleGrantedAuthority::new).collect(Collectors.toList());
 
+        User principal = new User(claims.getSubject(), claims.getAudience(), authorities);
 
 
-        return new UsernamePasswordAuthenticationToken(new CustomOAuth2User(claims.getSubject()), "", authorities);
+        return new UsernamePasswordAuthenticationToken(principal, accessToken, authorities);
     }
 
     private Claims parseClaims(String accessToken) {

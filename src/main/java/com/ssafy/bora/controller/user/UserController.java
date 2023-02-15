@@ -1,6 +1,7 @@
 package com.ssafy.bora.controller.user;
 
 import com.ssafy.bora.dto.blacklist.ReqBlacklistDTO;
+import com.ssafy.bora.dto.sign_up.SignUpDTO;
 import com.ssafy.bora.dto.user.UserDTO;
 import com.ssafy.bora.service.user.IBlacklistService;
 import com.ssafy.bora.service.user.IUserService;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/users")
+@RequestMapping("/users")
 public class UserController {
 
     private final IBlacklistService blacklistService;

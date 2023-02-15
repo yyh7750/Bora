@@ -7,11 +7,12 @@ public interface IUserService {
 
     UserDTO findUserById(String id);
 
-    UserDTO createUser(SignUpDTO signUpDTO);
-
     UserDTO updateUserNickNameById(UserDTO userDTO);
 
     UserDTO deleteUserById(String id);
 
     boolean checkDuplicateNickName(String nickName);
+
+    void createUserInfo(SignUpDTO signUpDTO);
+
 }
