@@ -1,20 +1,28 @@
 package com.ssafy.bora.service.auth;
 
-import com.ssafy.bora.entity.LoginUser;
+import com.ssafy.bora.dto.UserExtraInfoReq;
+import com.ssafy.bora.entity.User;
+import com.ssafy.bora.entity.enums.Role;
+import com.ssafy.bora.repository.user.IUserRepository;
 import com.ssafy.bora.security.jwt.JwtProvider;
 import com.ssafy.bora.security.oauth2.CustomOAuth2User;
-import com.ssafy.bora.repository.login.LoginRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
 @Slf4j
 @RequiredArgsConstructor
 public class AuthService {
 
-    private final LoginRepository privacyRepository;
+    private final IUserRepository userRepository;
     private final JwtProvider jwtProvider;
 
     // 새로 발급된 토큰 로직 (오래된 것 하고 refresh 받아오기)
@@ -31,14 +39,52 @@ public class AuthService {
         log.info("access token reissue 대상: {}", email);
 
         // 유저메일을 찾기
-        LoginUser findUser = privacyRepository.findByEmail(email)
+        User findUser = userRepository.findById(email)
                 .orElseThrow(() -> new RuntimeException("Not found user"));
         // 찾는 정보의 리프레쉬 토큰이 없다면 날리기.
-        if (!refreshToken.equals(findUser.getRefreshToken())) {
-            throw new RuntimeException("invalid refresh token");
-        }
+//        if (!refreshToken.equals(findUser.getRefreshToken())) {
+//            throw new RuntimeException("invalid refresh token");
+//        }
 
         // jwt에서 생성된 권한의 토큰 날리기
-        return jwtProvider.createAccessToken(authentication);
+        return jwtProvider.createAccessToken(authentication, findUser.getId().toString(), findUser.getRole().toString());
+    }
+
+    public String createUserExtraInfo(UserExtraInfoReq userExtraInfoReq, Map<String, String> authInfo){
+        String email = authInfo.get("email");
+        // 닉네임, 전화번호 저장 및 Role CUSTOMER로 바꾸기
+        User user = userRepository.findById(email)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+
+        user = user.builder()
+                .id(email)
+                .role(Role.CUSTOMER)
+                .build();
+
+        final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String accessToken = jwtProvider.createAccessToken(authentication, user.getId().toString(), user.getRole().toString());
+
+        userRepository.save(user);
+
+        return accessToken;
+    }
+
+
+    public Map<String, String> getLoginInfo(Map<String,  String> authInfo) {
+        Map<String, String> map = new HashMap<>();
+
+        log.info(String.valueOf(Long.parseLong(authInfo.get("uId"))));
+        User user = userRepository.findById(authInfo.get(authInfo))
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        log.info(authInfo.get("role"));
+
+        if(authInfo.get("role").equals("[[ROLE_CUSTOMER]]")){
+            map.put("role", authInfo.get("role"));
+        }else{
+            Long uId = Long.parseLong(authInfo.get("uId"));
+
+            map.put("role", authInfo.get("role"));
+        }
+        return map;
     }
 }

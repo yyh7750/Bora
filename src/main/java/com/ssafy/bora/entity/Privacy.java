@@ -1,17 +1,23 @@
 package com.ssafy.bora.entity;
 
 import com.ssafy.bora.dto.sign_up.SignUpDTO;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
 @Getter
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Privacy implements Serializable {
 
     @Id
+    @Column(name = "user_id")
     private String id;
 
     @MapsId
@@ -24,15 +30,30 @@ public class Privacy implements Serializable {
     @Column(length = 1)
     private String gender;
 
-    @Column(length = 32)
-    private String authenticationKey;
+    @Column
+    private String refreshToken;
 
-    public static Privacy createPrivacy(User user, SignUpDTO signUpDTO) {
+    public static Privacy createPrivacy(User user, SignUpDTO signUpDTO, String refreshToken) {
         Privacy privacy = new Privacy();
         privacy.user = user;
         privacy.age = signUpDTO.getAge();
         privacy.gender = signUpDTO.getGender();
-        // TODO authenticationKey에 대한 처리 필요
+        privacy.refreshToken = refreshToken;
         return privacy;
+    }
+
+    public void updatePrivacy(int age, String gender){
+        this.age = age;
+        this.gender = gender;
+    }
+
+    @Override
+    public String toString() {
+        return "Privacy{" +
+                ", user=" + user +
+                ", age=" + age +
+                ", gender='" + gender + '\'' +
+                ", refreshToken='" + refreshToken + '\'' +
+                '}';
     }
 }

@@ -8,12 +8,14 @@ import com.ssafy.bora.repository.storybox.IStoryBoxRepository;
 import com.ssafy.bora.repository.user.IUserRepository;
 import com.ssafy.bora.service.storybox.IStoryBoxService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 @RequiredArgsConstructor
@@ -53,10 +55,13 @@ public class StoryBoxServiceImpl implements IStoryBoxService {
     }
 
     @Override
-    public List<ResStoryBoxDTO> findAllStoryBox(String djId) {
+    public Page<ResStoryBoxDTO> findAllStoryBox(String djId, Pageable pageable) {
         // Entity List 조회
         User dj = userRepository.findById(djId).get();
-        List<StoryBox> storyBoxList = storyBoxRepository.findByDjAndIsDeleteFalse(dj);
+
+        pageable = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize());
+
+        Page<StoryBox> storyBoxList = storyBoxRepository.findByDjAndIsDeleteFalse(dj, pageable);
 
         if (storyBoxList != null && !storyBoxList.isEmpty()) {
             // Entity List를 DTO List로 변환
@@ -64,10 +69,13 @@ public class StoryBoxServiceImpl implements IStoryBoxService {
             for (StoryBox storyBox : storyBoxList) {
                 resStoryBoxDtoList.add(ResStoryBoxDTO.convertEntityToResDTO(storyBox));
             }
-            return resStoryBoxDtoList;
+
+            return new PageImpl<ResStoryBoxDTO>(resStoryBoxDtoList, pageable, storyBoxList.getTotalElements());
+//            return resStoryBoxDtoList;
         }
         return null;
     }
+
 
     @Override
     public ResStoryBoxDTO findByDjIdAndStoryBoxId(String djId, int storyBoxId) {

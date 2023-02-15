@@ -5,14 +5,12 @@ import com.ssafy.bora.util.CookieUtils;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import javax.servlet.http.Cookie;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import com.ssafy.bora.dto.UserExtraInfoReq;
 import javax.servlet.http.HttpServletRequest;
-import java.util.Optional;
+import java.util.Map;
 
 @RestController //json 형태로 반환을 위해서
 @RequestMapping("/auth") // 각각의 value를 설정 안하기위해
@@ -44,5 +42,28 @@ public class AuthController {
 
         // 새로 발급된 토큰 넘겨주기
         return newAccessToken;
+    }
+
+    @GetMapping("/role")
+    public Map<String, String> getLoginInfo(){
+        Map<String, String> authInfo = CookieUtils.getCurrentUser();
+        Map<String, String> loginInfo = authService.getLoginInfo(authInfo);
+        return loginInfo;
+    }
+
+    @GetMapping("/users")
+    public void getUsers(){
+//      log.info(SecurityUtil.getCurrentUser().toString());
+        log.info("AuthController /users GET 성공");
+    }
+
+
+    @PutMapping("/users")
+//    @PreAuthorize("hasRole('ROLE_GUEST')")
+    public ResponseEntity<?> createUserExtraInfo(@RequestBody UserExtraInfoReq userExtraInfoReq){
+        Map<String, String> authInfo = CookieUtils.getCurrentUser();
+        String accessToken = authService.createUserExtraInfo(userExtraInfoReq, authInfo);
+        log.info("현재 위치 : {}", accessToken );
+        return new ResponseEntity<>(accessToken, HttpStatus.CREATED);
     }
 }

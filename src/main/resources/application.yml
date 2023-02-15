@@ -1,5 +1,5 @@
 server:
-  address:
+  address: localhost
   port: 8080
   servlet:
     context-path: /api
@@ -29,11 +29,7 @@ spring:
     password: ENC(71dZ7p+B8r0mcHdbH4omRw==)
   profiles:
     include: oauth
-  # swagger오류때문
-  mvc:
-    pathmatch:
-      matching-strategy: ant_path_matcher
-  #jasypt 설정
+
 cloud:
   aws:
     credentials:
