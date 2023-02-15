@@ -9,7 +9,7 @@ spring:
     driver-class-name: org.mariadb.jdbc.Driver
     url: ENC(Tx5el3fEYTPfs1cAmTKgHcBtItxzKkcddEuhstNoGvYcKHrgi638tjt4oNeJVxje918Jj61SMYx+qmi9iQQq523EiTRMPWYCVoxpcOf60veJZx+QKyMbpuinLo/ZMQZb)
     username: ENC(9nNRWPZjt3edL7LlxhHSJA==)
-    password: ENC(5EgZjzO+eZJ7+t2pz1u8uw==)
+    password: ENC(2TzYHQKa1YpLhnZA2/V5rg==)
   jpa:
     open-in-view: false
     generate-ddl: true
