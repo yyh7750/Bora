@@ -59,19 +59,19 @@ const DjToDj = () => {
     dispatch(profileActions.openModifyProfile());
   };
 
-  const startBroadcast = () => {
-    const API_URL = `http://localhost:8080/api/stations/${userId}`;
-    axios({
-      url: API_URL,
-      method: "GET",
-    })
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+  // const startBroadcast = () => {
+  //   const API_URL = `http://localhost:8080/api/stations/${userId}`;
+  //   axios({
+  //     url: API_URL,
+  //     method: "GET",
+  //   })
+  //     .then((res) => {
+  //       console.log(res);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // };
   const containerVariants = {
     hidden: {
       opacity: 0,
@@ -105,17 +105,19 @@ const DjToDj = () => {
               margin="30px"
               DJ이름
             />
-            <Button
+            {/* <Button
               style={{ flex: 1 }}
               value={startBroadcast}
               name="방송하기"
               id="mypage_btn"
               margin="30px"
               marginLeft="10px"
-            />
+            /> */}
             <Button
               style={{ flex: 1 }}
               value={moveToCreate}
+              margin="30px"
+              marginLeft="10px"
               name="방송시작하기"
             />
           </div>

@@ -47,7 +47,7 @@ function TimeTableCell({ day, timeNum, Edit, products }) {
         [day]: newDayData,
       };
     });
-    dispatch(scheduleActions.deleteArr("dj2"));
+    dispatch(scheduleActions.deleteArr(timeData.djName));
   }, [day, settimeTableData, timeData?.id]);
   return (
     <>

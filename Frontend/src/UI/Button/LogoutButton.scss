@@ -1,0 +1,17 @@
+.cls-1 {
+  fill: #a639d0;
+}
+
+#Icone_LogIn:hover #Fleche {
+  -webkit-transform: translate(6px, 0px);
+  -moz-transform: translate(6px, 0px);
+  -o-transform: translate(6px, 0px);
+  -ms-transform: translate(6px, 0px);
+  transform: translate(6px, 0px);
+
+  -webkit-transition: all 100ms ease-out;
+  -moz-transition: all 100ms ease-out;
+  -ms-transition: all 100ms ease-out;
+  -o-transition: all 100ms ease-out;
+  transition: all 100ms ease-out;
+}

@@ -20,7 +20,7 @@ import axios from "axios";
 const Broadcast = () => {
   const dispatch = useDispatch();
 
-  const userId = window.localStorage.getItem("userId");
+  const userId = "3";
   const [category, setCategory] = useState("");
   const [description, setDescription] = useState("");
   const [starttime, setStarttime] = useState("");
@@ -70,6 +70,17 @@ const Broadcast = () => {
 
   const showblackList = () => {
     dispatch(blacklistActions.openBlacklist());
+    const API_URL = `http://localhost:8080/api/users/blacklist/${userId}`;
+    axios({
+      url: API_URL,
+      method: "GET",
+    })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (

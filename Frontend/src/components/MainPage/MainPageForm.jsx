@@ -9,8 +9,8 @@ const MainPageForm = () => {
   const dispatch = useDispatch();
 
   const moveToOnAir = () => {
-    navigate('')
-  }
+    navigate("");
+  };
   const containerVariants = {
     hidden: {
       opacity: 0,
@@ -31,7 +31,7 @@ const MainPageForm = () => {
     <motion.div variants={containerVariants} initial="hidden" animate="visible">
       <Carousel />
       <Carousel />
-      {roomInfos ? (
+      {/* {roomInfos ? (
         <Carousel>
           {roomInfos.map((roominfo, index) => (
             <Div pl={0.5} pr={0.5} key={index}>
@@ -43,7 +43,7 @@ const MainPageForm = () => {
         <Text font="Jua" fontSize="xxxl">
           isLoading
         </Text>
-      )}
+      )} */}
     </motion.div>
   );
 };

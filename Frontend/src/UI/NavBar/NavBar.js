@@ -5,13 +5,14 @@ import * as FaIcons from "react-icons/fa"; //Now i get access to all the icons
 import * as AiIcons from "react-icons/ai";
 import { IconContext } from "react-icons";
 
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import { NavBarData } from "./NavBarData";
 import "./NavBar.css";
 import Logo from "../../assets/bora_logo.png";
 import axios from "axios";
 import { Helmet } from "react-helmet";
 import { useDispatch } from "react-redux";
+import LogoutButton from "../Button/LogoutButton";
 
 export default function Navbar() {
   const navigate = useNavigate();
@@ -31,7 +32,6 @@ export default function Navbar() {
       method: "GET",
     })
       .then((res) => {
-        console.log(res);
         for (let i = 0; i < res.data.length; i++) {
           setFollow(follow.concat(res.data[i]));
         }
@@ -54,18 +54,8 @@ export default function Navbar() {
   }
 
   const logout = () => {
-    const API_URL = `http://localhost:8080/api/log-out`;
-    axios({
-      url: API_URL,
-      method: "POST",
-      data: {},
-    })
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    window.localStorage.clear();
+    window.location.href = "http://localhost:3000/login";
   };
 
   const unLink = () => {
@@ -97,8 +87,9 @@ export default function Navbar() {
             <img id="mainLogo" src={Logo} alt="" />
           </a>
 
-          <button onClick={logout}>로그아웃</button>
-          <button onClick={unLink}>탈퇴</button>
+          <div style={{ marginLeft: "auto", marginRight: "20px" }}>
+            <LogoutButton onClick={logout} />
+          </div>
 
           <div className="wrap"></div>
 
@@ -152,6 +143,7 @@ export default function Navbar() {
         </nav>
         <div className={sidebar ? "blocking" : ""} onClick={showSidebar}></div>
       </IconContext.Provider>
+      <Outlet />
     </>
   );
 }
