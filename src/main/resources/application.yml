@@ -24,7 +24,7 @@ spring:
   redis:
     host: i8b301.p.ssafy.io
     port: 8379
-    password: 71dZ7p+B8r0mcHdbH4omRw==
+    password: ENC(71dZ7p+B8r0mcHdbH4omRw==)
   profiles:
     include: oauth
   # swagger오류때문
@@ -35,8 +35,8 @@ spring:
 cloud:
   aws:
     credentials:
-      accessKey: X4sMkfC++bSxiOdOzBbIcrTdca/qx9lVfaeI59j3jE8=
-      secretKey: H6eJqeIN42gFZfNpQPJto+tbREs/KM+zcDpDmg4S8D2WkF5vAvNB7+RuJeaAw02em0HY6b57OC8=
+      accessKey: ENC(O4x+LFHQgUPoFpJ6KiFLpPjNRt2O0/tzfN+xhdipSNY=)
+      secretKey: ENC(cvepBrnVGu7YauXISaMoTZ3WLf8tjgpbG595TrTxWBRT6ptqEzG8gLZYK4IxMvNFAHv5h0+biYI=)
     s3:
       bucket: woojin-test-bucket
       # dir: kwj
