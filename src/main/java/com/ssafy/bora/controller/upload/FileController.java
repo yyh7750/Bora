@@ -26,27 +26,6 @@ public class FileController {
     private final UserServiceImpl userService;
 
 
-
-//    @PostMapping("/upload")
-//    public FileVO upload(@RequestParam("file") MultipartFile multipartFile, SignUpDTO signUpDTO){
-//        FileVO fileName = fileUploadService.fileUpload(multipartFile, authoInfo);
-//        return fileName;
-//    }
-
-
-//    @PostMapping("/imgUp")
-//    public ResponseEntity<?> createImg(
-//            @RequestPart(value = "file", required = false) MultipartFile file){
-//
-//        Map<String, String> authInfo = cookieUtils.getCurrentUser();
-//
-//
-//        fileUploadService.fileUpload(file, authInfo);
-//
-//        return new ResponseEntity<>(HttpStatus.CREATED);
-//    }
-
-
     @PostMapping("/file-upload")
 
     public ResponseEntity<?> FileUpload(@RequestParam("file") MultipartFile file, @RequestParam String userId) {

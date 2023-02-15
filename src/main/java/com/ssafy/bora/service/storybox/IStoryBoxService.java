@@ -18,7 +18,7 @@ public interface IStoryBoxService {
      * @param djId
      * @return
      */
-    List<ResStoryBoxDTO> findAllStoryBox(String djId, Pageable pageable);
+    Page<ResStoryBoxDTO> findAllStoryBox(String djId, Pageable pageable);
 
     /**
      * desc: 사연함 상세 조회 (dj)

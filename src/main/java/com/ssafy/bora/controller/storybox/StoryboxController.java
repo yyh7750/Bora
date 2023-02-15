@@ -27,8 +27,8 @@ public class StoryboxController {
     }
 
     @GetMapping("/list/{dj-id}")
-    public ResponseEntity<List<ResStoryBoxDTO>> findAllStoryBox(@PathVariable(name = "dj-id") String djId, Pageable pageable) {
-        List<ResStoryBoxDTO> storyBoxDtoList = storyBoxService.findAllStoryBox(djId, pageable);
+    public ResponseEntity<Page<ResStoryBoxDTO>> findAllStoryBox(@PathVariable(name = "dj-id") String djId, Pageable pageable) {
+        Page<ResStoryBoxDTO> storyBoxDtoList = storyBoxService.findAllStoryBox(djId, pageable);
 
         if (storyBoxDtoList != null && !storyBoxDtoList.isEmpty()) {
             return ResponseEntity.ok(storyBoxDtoList);

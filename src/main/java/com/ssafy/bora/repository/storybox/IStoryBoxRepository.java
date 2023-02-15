@@ -27,7 +27,10 @@ public interface IStoryBoxRepository extends JpaRepository<StoryBox, Integer>{
     StoryBox findByDjAndIdAndIsDeleteFalse(User dj, int storyBoxId);
 
 
-    Page<StoryBox> findAllByContents(User dj, Pageable pageable);
+    Page<StoryBox> findByDjAndIsDeleteFalse(User dj, Pageable pageable);
+
+
+    //Page<StoryBox> findAllByContents(User dj, Pageable pageable);
 
 
 

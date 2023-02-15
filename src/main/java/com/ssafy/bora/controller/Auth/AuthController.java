@@ -8,10 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.ssafy.bora.dto.UserExtraInfoReq;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
-import java.util.Optional;
 
 @RestController //json 형태로 반환을 위해서
 @RequestMapping("/api/auth") // 각각의 value를 설정 안하기위해
