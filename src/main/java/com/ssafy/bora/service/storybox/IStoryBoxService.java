@@ -2,6 +2,8 @@ package com.ssafy.bora.service.storybox;
 
 import com.ssafy.bora.dto.stroybox.ReqStoryBoxDTO;
 import com.ssafy.bora.dto.stroybox.ResStoryBoxDTO;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
@@ -16,7 +18,7 @@ public interface IStoryBoxService {
      * @param djId
      * @return
      */
-    List<ResStoryBoxDTO> findAllStoryBox(String djId);
+    Page<ResStoryBoxDTO> findAllStoryBox(String djId, Pageable pageable);
 
     /**
      * desc: 사연함 상세 조회 (dj)

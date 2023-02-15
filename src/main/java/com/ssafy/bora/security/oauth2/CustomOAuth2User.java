@@ -1,49 +1,25 @@
 package com.ssafy.bora.security.oauth2;
 
 
+import com.ssafy.bora.entity.enums.Role;
+import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.oauth2.core.user.OAuth2User;
+import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
 
 import java.util.Collection;
 import java.util.Map;
 
-public class CustomOAuth2User implements OAuth2User {
 
-    private Map<String, Object> attributes;
-    private Collection<? extends GrantedAuthority> authorities;
-    private String name;
-    private String email;
-    private String nickname;
+@Getter
+public class CustomOAuth2User extends DefaultOAuth2User {
+        private String nickname;
+        private String email;
+        private Role role;
 
-    public CustomOAuth2User(Map<String, Object> attributes, Collection<? extends GrantedAuthority> authorities, String name) {
-        this.attributes = attributes;
-        this.authorities = authorities;
-        this.name = name;
-    }
-
-    public CustomOAuth2User(String email) {
+    public CustomOAuth2User(Collection<? extends GrantedAuthority> authorities, Map<String, Object> attributes, String nameAttributeKey,  String email, Role role) {
+        super(authorities, attributes, nameAttributeKey);
+        this.nickname = nickname;
         this.email = email;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-    public String getNickname() {
-        return nickname;
-    }
-
-    @Override
-    public Map<String, Object> getAttributes() {
-        return attributes;
-    }
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return authorities;
-    }
-
-    @Override
-    public String getName() {
-        return getEmail();
+        this.role = role;
     }
 }

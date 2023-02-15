@@ -5,6 +5,8 @@ import com.ssafy.bora.dto.stroybox.ResStoryBoxDTO;
 import com.ssafy.bora.service.storybox.IStoryBoxService;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,13 +31,13 @@ public class StoryboxController {
 
     @ApiOperation(value = "사연함 조회(dj)")
     @GetMapping("/list/{dj-id}")
-    public ResponseEntity<?> findAllStoryBox(@PathVariable(name = "dj-id") String djId) {
-        List<ResStoryBoxDTO> storyBoxDtoList = storyBoxService.findAllStoryBox(djId);
+    public ResponseEntity<Page<ResStoryBoxDTO>> findAllStoryBox(@PathVariable(name = "dj-id") String djId, Pageable pageable) {
+        Page<ResStoryBoxDTO> storyBoxDtoList = storyBoxService.findAllStoryBox(djId, pageable);
 
         if (storyBoxDtoList != null && !storyBoxDtoList.isEmpty()) {
-            return new ResponseEntity<>(storyBoxDtoList, HttpStatus.OK);
+            return ResponseEntity.ok(storyBoxDtoList);
         }
-        throw new NoSuchElementException();
+        return ResponseEntity.noContent().build();
     }
     @ApiOperation(value = "사연함 상세조회(dj)")
     @GetMapping("/list/{dj-id}/{storybox-id}")

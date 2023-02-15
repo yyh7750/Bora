@@ -2,7 +2,6 @@ package com.ssafy.bora.controller.sign_up;
 
 import com.ssafy.bora.dto.sign_up.SignUpDTO;
 import com.ssafy.bora.service.user.IUserService;
-import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,11 +14,12 @@ public class SignUpController {
 
     private final IUserService userService;
 
-    @ApiOperation(value = "회원가입")
-    @PostMapping
-    public ResponseEntity<?> createUser(@RequestBody SignUpDTO signUpDTO){
-        return new ResponseEntity<>(userService.createUser(signUpDTO), HttpStatus.CREATED);
+    @PatchMapping
+    public ResponseEntity<?> updateUserInfo(@RequestBody SignUpDTO signUpDTO){ // 업데이트 해야할 사용자 정보
+        userService.createUserInfo(signUpDTO);
+        return new ResponseEntity<>(HttpStatus.CREATED); // 리소스가 성공적으로 생성되었음을 나타냄
     }
+
 
     @ApiOperation(value = "닉네임 중복체크")
     @GetMapping("/{nick-name}")

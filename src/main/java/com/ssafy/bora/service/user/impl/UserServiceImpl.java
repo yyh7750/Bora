@@ -1,15 +1,20 @@
 package com.ssafy.bora.service.user.impl;
 
 import com.ssafy.bora.dto.sign_up.SignUpDTO;
+import com.ssafy.bora.dto.user.StationDTO;
 import com.ssafy.bora.dto.user.UserDTO;
 import com.ssafy.bora.entity.Privacy;
 import com.ssafy.bora.entity.User;
 import com.ssafy.bora.repository.privacy.IPrivacyRepository;
 import com.ssafy.bora.repository.user.IUserRepository;
+import com.ssafy.bora.service.fileupload.FileUploadService;
 import com.ssafy.bora.service.user.IUserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
+
 import java.util.Optional;
 
 @Service
@@ -20,18 +25,7 @@ public class UserServiceImpl implements IUserService {
     private final IUserRepository userRepository;
     private final IPrivacyRepository privacyRepository;
 
-    @Override
-    public UserDTO createUser(SignUpDTO signUpDTO) {
-        Optional<User> findUser = userRepository.findById(signUpDTO.getUserId());
-
-        if (!findUser.isPresent()) {
-            User user = userRepository.save(User.createUser(signUpDTO));
-            privacyRepository.save(Privacy.createPrivacy(user, signUpDTO));
-            UserDTO registeredUser = UserDTO.convertEntityToDTO(user);
-            return registeredUser;
-        }
-        return null;
-    }
+    private final FileUploadService fileUploadService;
 
     @Override
     public UserDTO findUserById(String id) {
@@ -70,4 +64,47 @@ public class UserServiceImpl implements IUserService {
         }
         return false;
     }
+
+    @Override
+    public void createUserInfo(SignUpDTO signUpDTO) {
+        // user 호출
+        // User user = userRepository.findById(userDTO.getId()).get();
+        User user = userRepository.findById(signUpDTO.getUserId())
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+
+        Privacy privacy = privacyRepository.findById(signUpDTO.getUserId())
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+
+        //user 닉네임 변경
+        user.updateNickname(signUpDTO.getNickName());
+
+        user.updateRole();
+
+        //user age 변경
+        privacy.updatePrivacy(signUpDTO.getAge(), signUpDTO.getGender());
+
+    }
+
+//    public void uploadImg(MultipartFile file, UserDTO userDTO) {
+//
+//        User user = userRepository.findById(userDTO.getId())
+//                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+//
+//
+//        FileVO fileVO = null;
+//        // 이미지 저장
+//        if (!file.isEmpty()) {
+//            try {
+//                fileVO = fileUploadService.fileUpload(file);
+//            } catch (IOException e) {
+//                throw new RuntimeException(e);
+//            }
+//        }
+//
+//        userRepository.save(User.builder().id(String.valueOf(user))
+//                .profileImg(fileVO != null ? fileVO.getImgPath() : null)
+//                .build()
+//        );
+//    }
+
 }
