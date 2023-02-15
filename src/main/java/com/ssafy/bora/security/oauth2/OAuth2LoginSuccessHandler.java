@@ -95,7 +95,7 @@ public class OAuth2LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHan
             if (oAuth2User.getRole() == Role.GUEST) {
                 log.info("GUEST");
                 // http://localhost:3000/signup?token={accessToken}
-                targetUrl = UriComponentsBuilder.fromUriString("http://localhost:3000/signup")
+                targetUrl = UriComponentsBuilder.fromUriString("https:i8b301.p.ssafy.io/regist")
                         .queryParam("token", accessToken)
                         .build().toUriString();
             } else {
