@@ -19,8 +19,8 @@ const Login = () => {
     dispatch(loginActions.toggleLogin());
   };
 
-  const CLIENT_ID = "506dd048e8b6d28b22eaf5dce091b0df";
-  const REDIRECT_URI = "http://localhost:8080/oauth2/authorization/kakao";
+  const CLIENT_ID = "6994198e0a1efb1a987463241de95a65";
+  const REDIRECT_URI = "http://i8b301.p.ssafy.io/oauth2/authorization/kakao";
   let URL = `https://kauth.kakao.com/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code`;
 
   return (

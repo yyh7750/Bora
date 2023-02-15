@@ -50,6 +50,7 @@ const UserRegist = () => {
     // console.log(userInfo);
 
     const API_URL = `http://localhost:8080/sign-up`;
+
     axios({
       url: API_URL,
       method: "POST",
