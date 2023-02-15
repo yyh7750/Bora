@@ -20,6 +20,7 @@ import Loading from "./Loading";
 import { useDispatch } from "react-redux";
 import { changeStatus } from "../../../store/host";
 import Button from "../../../UI/Button/Button";
+import heart from "../../../assets/yesheart.png";
 
 const ContainerDiv = styled.div`
   height: 100vh;
@@ -36,7 +37,6 @@ const SessionHeaderDiv2 = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 2px;
   margin-bottom: 2px;
   padding: 5px;
 `;
@@ -79,6 +79,7 @@ const MainVideoDiv = styled.div`
   position: relative;
   top: 0px;
   left: 0px;
+  margin-top: -60px;
 `;
 
 const containerVariants = {
@@ -114,7 +115,8 @@ const VideoRoomComponent = () => {
   const location = useLocation(); //이전 페이지에서 데이터 받아올 때 사용
   const roomId = location.state !== null ? location.state.id : null;
   const roomTitle = location.state !== null ? location.state.myRoomName : null;
-  const djNickname = location.state !== null ? location.state.nickname : null;
+  const roomType = location.state !== null ? location.state.myRoomType : null;
+  const nickname = location.state !== null ? location.state.nickname : null;
   const isHost = useSelector((state) => state.host.value.host); // console.log(useSelector((state) => state.hostStatus.value.host));
 
   const [mySessionId, setMySessionId] = useState("SessionA");
@@ -127,6 +129,8 @@ const VideoRoomComponent = () => {
   const [subscribers, setSubscribers] = useState([]); // 다른 유저의 스트림 정보를 저장할 배열
   const [messageList, setMessageList] = useState([]); // 메세지 정보를 담을 배열
   const [totalUsers, setTotalUsers] = useState(0); // 총 유저수
+  const [maxUsers, setMaxUsers] = useState(0); // 방송에 들어온 참여자 max값
+  const [sumHeart, setSumHeart] = useState(0); // 방송 좋아요 수
   const [chatDisplay, setChatDisplay] = useState(true); // 채팅창 보이기(초깃값: true)
   const [profileImg, setProfileImg] = useState(basicImg);
   const [hostName, setHostName] = useState(undefined);
@@ -231,8 +235,9 @@ const VideoRoomComponent = () => {
 
     mySession.on("streamCreated", (event) => {
       // 스트림이 생길 때마다
-      const subscriber = mySession.subscribe(event.stream, "publisher"); // 퍼블리셔를 구독자로 넣어줌
+      const subscriber = mySession.subscribe(event.stream, "SUBSCRIBER"); // 퍼블리셔를 구독자로 넣어줌
       setSubscribers(subscriber);
+      console.log(subscriber);
     });
 
     mySession.on("streamDestroyed", (event) => {
@@ -250,6 +255,9 @@ const VideoRoomComponent = () => {
       setTotalUsers((prevTotalUsers) => {
         return prevTotalUsers + 1;
       });
+      if (maxUsers < totalUsers) {
+        setMaxUsers(totalUsers);
+      }
     });
 
     mySession.on("connectionDestroyed", ({ stream }) => {
@@ -306,17 +314,36 @@ const VideoRoomComponent = () => {
     });
   };
 
+  //하트 수 증가
+  const heartCnt = () => {
+    setSumHeart(sumHeart + 1);
+
+    const element = document.getElementById("heart");
+    element.classList.remove("heart");
+    element.offsetWidth = element.offsetWidth;
+    element.classList.add("heart");
+  };
+
   // 방 삭제 요청 api
   const deleteRoomRequest = async () => {
     if (isHost) {
       dispatch(changeStatus(false));
+      await deleteRoom(
+        roomId,
+        roomTitle,
+        maxUsers,
+        roomType,
+        nickname,
+        dispatch
+      );
+      const reqeustResponse = true;
       // setIsHost(false) // isHost를 false로 설정함
-      const reqeustResponse = await deleteRoom(roomId);
       if (reqeustResponse) {
         console.log("Room Deleted Successfully!");
       } else {
         console.log("Room Deleted Failed!");
       }
+      navigate("/broadcast");
     }
   };
 
@@ -393,7 +420,7 @@ const VideoRoomComponent = () => {
   };
 
   const getUserInfo = async () => {
-    const res1 = await getMyInfo(djNickname);
+    const res1 = await getMyInfo(nickname);
     // const ownerPicturePath = res1.picturePath;
     const ownerName = res1.name;
     // setProfileImg(ownerPicturePath);
@@ -405,14 +432,14 @@ const VideoRoomComponent = () => {
   }, []);
 
   // 로딩 페이지를 통한 방 입장
-  const enterAuctionRoom = () => {
+  const enterOnAirRoom = () => {
     joinSession();
   };
 
   return (
     <motion.div variants={containerVariants} initial="hidden" animate="visible">
       {session === undefined && roomId !== null && (
-        <Loading enterAuctionRoom={enterAuctionRoom}></Loading>
+        <Loading enterOnAirRoom={enterOnAirRoom}></Loading>
       )}
       {roomId == null && <NotFound></NotFound>}
       {session !== undefined ? (
@@ -426,7 +453,7 @@ const VideoRoomComponent = () => {
               )}
               {!isHost && (
                 <UserVideoComponent
-                  streamManager={subscribers}
+                  streamManager={publisher}
                 ></UserVideoComponent>
               )}
             </MainVideoDiv>
@@ -445,8 +472,11 @@ const VideoRoomComponent = () => {
                   }}
                 >
                   <AuctionRoomTitle>{roomTitle}</AuctionRoomTitle>
-                  <WhiteDiv style={{ margin: "5px" }}>{hostName}</WhiteDiv>
+                  {isHost && (
+                    <WhiteDiv style={{ margin: "5px" }}>{nickname}</WhiteDiv>
+                  )}
                 </div>
+                <Button value={deleteRoomRequest} name="방송종료"></Button>
               </div>
               <div>
                 <div
@@ -467,11 +497,65 @@ const VideoRoomComponent = () => {
                     {/* <Person style={{ color: "red" }} /> */}
                     <span style={{ color: "white" }}>{totalUsers}</span>
                   </div>
-                  <Button></Button>
+                  <Button name="LIVE"></Button>
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "base",
+                      alignItems: "center",
+                      marginRight: "5px",
+                    }}
+                  >
+                    {/* <Person style={{ color: "red" }} /> */}
+                    <span style={{ color: "white" }}>{sumHeart}</span>
+                  </div>
+                  <motion.img
+                    whileHover={{ scale: 1.12 }}
+                    transition={{ type: "spring", stiffness: 100, damping: 10 }}
+                    src={heart}
+                    alt="총 좋아요 수"
+                    style={{ width: "40px", height: "40px", cursor: "pointer" }}
+                    onClick={heartCnt}
+                  />
                 </div>
               </div>
             </SessionHeaderDiv2>
           </SessionHeaderDiv1>
+          <div className="heart_container">
+            <div className="heart">
+              <svg
+                className="heart_svg"
+                width="80"
+                height="80"
+                viewBox="0 0 800 700"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="m263.42 235.15c-66.24 0-120 53.76-120 120 0 134.76 135.93 170.09 228.56 303.31 87.574-132.4 228.56-172.86 228.56-303.31 0-66.24-53.76-120-120-120-48.048 0-89.402 28.37-108.56 69.188-19.161-40.817-60.514-69.188-108.56-69.188z" />
+              </svg>
+            </div>
+            <div className="heart">
+              <svg
+                className="heart_svg"
+                width="70"
+                height="70"
+                viewBox="0 0 800 700"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="m263.42 235.15c-66.24 0-120 53.76-120 120 0 134.76 135.93 170.09 228.56 303.31 87.574-132.4 228.56-172.86 228.56-303.31 0-66.24-53.76-120-120-120-48.048 0-89.402 28.37-108.56 69.188-19.161-40.817-60.514-69.188-108.56-69.188z" />
+              </svg>
+            </div>
+            <div className="heart">
+              <svg
+                className="heart_svg"
+                width="68"
+                height="68"
+                viewBox="0 0 800 700"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="m263.42 235.15c-66.24 0-120 53.76-120 120 0 134.76 135.93 170.09 228.56 303.31 87.574-132.4 228.56-172.86 228.56-303.31 0-66.24-53.76-120-120-120-48.048 0-89.402 28.37-108.56 69.188-19.161-40.817-60.514-69.188-108.56-69.188z" />
+              </svg>
+            </div>
+          </div>
           {chatDisplay && (
             <MessageDiv>
               <ChattingList messageList={messageList}></ChattingList>

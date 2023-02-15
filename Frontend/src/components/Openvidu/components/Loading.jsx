@@ -106,7 +106,7 @@ const Loading = (props) => {
     <div>
       <StyledLoadingWrapper>
         <StyledLoadingDiv>
-          <CircleDiv onClick={props.enterAuctionRoom}></CircleDiv>
+          <CircleDiv onClick={props.enterOnAirRoom}></CircleDiv>
           <LogoImg src={logo} alt=""></LogoImg>
         </StyledLoadingDiv>
         <div id={classes.load}>
@@ -118,6 +118,7 @@ const Loading = (props) => {
           <div>O</div>
           <div>L</div>
         </div>
+        <p>로고를 클릭하면 입장합니다 !</p>
       </StyledLoadingWrapper>
     </div>
   );

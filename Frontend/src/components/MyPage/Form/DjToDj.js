@@ -90,7 +90,7 @@ const DjToDj = () => {
   };
   return (
     <motion.div variants={containerVariants} initial="hidden" animate="visible">
-      <fieldset className="profile">
+      <fieldset className="profile" style={{ marginTop: "10px" }}>
         <img src={profileImg} alt="프로필이미지" className="circle" />
         <div className="trainerInfo">
           <div className="infoTop">
@@ -119,6 +119,8 @@ const DjToDj = () => {
               margin="30px"
               marginLeft="10px"
               name="방송시작하기"
+              margin="30px"
+              marginLeft="10px"
             />
           </div>
           <div>

@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import Carousel from "../../UI/Carousel/Carousel";
-import { useNavigate, createSearchParams } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import "./MainPageForm.scss";
+import MyOnAir from "../MyOnAir/MyOnAir";
+import { useNavigate } from "react-router-dom";
 
 const MainPageForm = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   const moveToOnAir = () => {
     navigate("");
@@ -27,10 +28,13 @@ const MainPageForm = () => {
       transition: { ease: "easeInOut" },
     },
   };
+
+  localStorage.setItem("userId", "2");
+
   return (
     <motion.div variants={containerVariants} initial="hidden" animate="visible">
       <Carousel />
-      <Carousel />
+      <MyOnAir />
       {/* {roomInfos ? (
         <Carousel>
           {roomInfos.map((roominfo, index) => (
