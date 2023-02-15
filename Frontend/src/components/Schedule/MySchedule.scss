@@ -1,34 +1,41 @@
-// .myScheduleSwiper {
-//   min-width: 500px;
-//   min-height: 620px;
-// }
+.MyScheduleFormTitle {
+  margin-top: 30px;
+  margin-left: 116px;
+  margin-bottom: 20px;
+  font-size: 30px;
+  font-weight: bold;
+  // color: #d8a3ff;
+}
 
-// .schedules {
-//   display: flex;
-//   margin-top: 20px;
-// }
+.MyScheduleLine {
+  background-color: #d8a3ff;
+  height: 2px;
+}
 
-// .schedule_img {
-//   margin-left: 200px;
-//   margin-right: 100px;
-//   width: 300px;
-//   height: 200px;
-// }
-
-// .schedule_img > img {
-//   border-radius: 50px;
-//   border-width: 5px;
-// }
-
-// #schedule_descs {
-//   color: #fff;
-// }
+.MyScheduleVerticalLine {
+  border-left: 2px solid #d8a3ff;
+  height: 150%;
+  position: absolute;
+  left: 210px;
+}
 
 .myScheduleSwiper > .swiper-slide {
   background-position: center;
   background-size: cover;
   width: 500px;
   height: 620px;
+}
+
+.myScheduleSwiper > .swiper-button-prev {
+  color: #d8a3ff;
+  position: absolute;
+  left: 0%;
+}
+
+.myScheduleSwiper > .swiper-button-next {
+  color: #d8a3ff;
+  position: absolute;
+  right: 0%;
 }
 
 .myScheduleSwiper > .swiper-slide img {

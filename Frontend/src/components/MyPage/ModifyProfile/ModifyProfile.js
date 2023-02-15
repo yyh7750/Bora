@@ -29,6 +29,28 @@ const ModifyProfile = (props) => {
         image_file: e.target.files[0],
         preview_URL: preview_URL,
       }));
+      const formData = new FormData();
+      formData.append("files", e.target.files[0]);
+      for (let value of formData.values()) {
+        console.log(value);
+      }
+      //이미지 axios요청
+      const IMG_URL = `http://localhost:8080/img/file-upload`;
+      axios({
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+        url: IMG_URL,
+        method: "POST",
+        data: formData,
+      })
+        .then((res) => {
+          console.log(res);
+          // window.location.reload();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     }
   };
 
@@ -36,13 +58,14 @@ const ModifyProfile = (props) => {
     dispatch(profileActions.closeModifyProfile());
   };
   const userId = window.localStorage.getItem("userId");
+
   const modifyProfileInfo = () => {
     const DATA = {
-      id: userId,
+      id: "13",
       nickName: document.getElementById("nickNameInput").value,
       desc: document.getElementById("userSayInput").value,
     };
-    const API_URL = `http://localhost:8080/api/users`;
+    const API_URL = `http://localhost:8080/users`;
     axios({
       url: API_URL,
       method: "PATCH",
@@ -51,7 +74,7 @@ const ModifyProfile = (props) => {
       .then((res) => {
         console.log(res);
         dispatch(profileActions.closeModifyProfile());
-        window.location.reload();
+        // window.location.reload();
       })
       .catch((err) => {
         console.log(err);
@@ -80,10 +103,7 @@ const ModifyProfile = (props) => {
                 style={{ display: "none" }}
               />
               <div className="img-wrapper">
-                <img
-                  src={bannerImg.preview_URL}
-                  onClick={() => inputRef.click()}
-                />
+                <img src={image.preview_URL} onClick={() => inputRef.click()} />
               </div>
             </div>
             <br />

@@ -9,7 +9,7 @@ const DetailBoard = () => {
   const location = useLocation();
   const storyboxId = location.state.storyboxId;
   const userId = window.localStorage.getItem("userId");
-  const djId = "hello";
+  const djId = "3";
   const [writer, setWriter] = useState("");
   const [title, setTitle] = useState("");
   const [contents, setContents] = useState("");
@@ -52,11 +52,30 @@ const DetailBoard = () => {
         console.log(err);
       });
   };
+
+  const addBlacklist = () => {
+    const DATA = {
+      djId: "3",
+      viewerId: writer,
+    };
+    const API_URL = `http://localhost:8080/api/users/blacklist`;
+    axios({
+      url: API_URL,
+      method: "POST",
+      data: DATA,
+    })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   return (
     <fieldset>
-      <span>프로필사진</span>
+      <span style={{ paddingTop: "30px" }}>프로필사진</span>
 
-      <span>{writer}</span>
+      <div>{writer}</div>
       <input type="text" id="title" readOnly defaultValue={title} />
 
       <br />
@@ -72,13 +91,9 @@ const DetailBoard = () => {
         <button>목록</button>
       </Link>
 
-      {/* <Link to="/modifyBoard"> */}
       <button onClick={deleteBoard}>사연가리기</button>
-      {/* </Link> */}
 
-      <Link to="/modifyBoard">
-        <button onClick={deleteBoard}>사연가리기</button>
-      </Link>
+      <button onClick={addBlacklist}>블랙리스트추가</button>
     </fieldset>
   );
 };

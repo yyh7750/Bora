@@ -2,65 +2,81 @@ import React from "react";
 import "./ModifySchedule.scss";
 import TimeTable from "./Modify/TimeTable";
 import { RecoilRoot } from "recoil";
+import { useEffect } from "react";
+import axios from "axios";
+import { useState } from "react";
 function ModifySchedule() {
-  let subject = "My React";
+  // const [searchItems, setSearchItems] = useState([]);
+  useEffect(() => {
+    const API_URL = `http://localhost:8080/api/users/playlist`;
+    axios({
+      url: API_URL,
+      method: "GET",
+    })
+      .then((res) => {
+        // setSearchItems(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [localStorage.getItem("atk")]);
 
   //이거 대신에 전체리스트 백엔드에서 받기
   const searchItems = [
     {
-      name: "desktop",
-      dj: "dj1",
+      stationName: "desktop",
+      djName: "dj1",
       day: "mon",
-      start: "10",
-      end: "11",
-      userId: "user1",
+      startTime: "10",
+      endTime: "11",
     },
     {
-      name: "notebook",
-      dj: "dj2",
+      stationName: "notebook",
+      djName: "dj2",
       day: "tue",
-      start: "11",
-      end: "12",
-      userId: "user2",
+      startTime: "11",
+      endTime: "12",
     },
     {
-      name: "smart phone",
-      dj: "dj3",
+      stationName: "smart phone",
+      djName: "dj3",
       day: "wed",
-      start: "12",
-      end: "13",
-      userId: "user3",
+      startTime: "12",
+      endTime: "13",
     },
     {
-      name: "clock",
-      dj: "dj4",
+      stationName: "clock",
+      djName: "dj4",
       day: "thu",
-      start: "13",
-      end: "14",
-      userId: "user4",
+      startTime: "13",
+      endTime: "14",
     },
     {
-      name: "chair",
-      dj: "dj5",
+      stationName: "chair",
+      djName: "dj5",
       day: "fri",
-      start: "14",
-      end: "15",
-      userId: "user5",
+      startTime: "14",
+      endTime: "15",
     },
     {
-      name: "iPad",
-      dj: "dj6",
+      stationName: "iPad",
+      djName: "dj6",
       day: "sat",
-      start: "15",
-      end: "17",
-      userId: "user6",
+      startTime: "15",
+      endTime: "17",
+    },
+    {
+      stationName: "airPot",
+      djName: "dj7",
+      day: "sat",
+      startTime: "09",
+      endTime: "10",
     },
   ];
 
   return (
     <RecoilRoot>
       <div className="App">
-        {subject}
         <TimeTable searchItems={searchItems} />
       </div>
     </RecoilRoot>

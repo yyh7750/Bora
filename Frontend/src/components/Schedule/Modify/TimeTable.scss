@@ -7,3 +7,35 @@ html {
   font-weight: bold;
   font-size: 15px;
 }
+
+.ModifyScheduleFormTitle {
+  margin-top: 30px;
+  margin-left: 116px;
+  margin-bottom: 20px;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.ModifyScheduleLine {
+  background-color: #d8a3ff;
+  height: 2px;
+}
+
+.modifyScheduleBtn {
+  background: #d8a3ff;
+  border-radius: 20px;
+  color: #000;
+  cursor: pointer;
+  font-family: "Lato", sans-serif;
+  text-align: center;
+  height: 40px;
+  padding: 0px 30px 0px 30px;
+  font-weight: bold;
+  font-size: 15px;
+  float: right;
+}
+
+.modifyScheduleBtn:hover {
+  background: #000;
+  color: #d8a3ff;
+}

@@ -5,8 +5,6 @@ import "./Button.scss";
 const Button = (props) => {
   const value = props.name;
 
-  console.log(props.margin);
-
   return (
     <motion.div
       className="buttonBox"
