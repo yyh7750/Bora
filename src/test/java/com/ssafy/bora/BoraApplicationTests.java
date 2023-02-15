@@ -10,9 +10,9 @@ class BoraApplicationTests {
 
     @Test
     void jasypt(){
-        String url = "";
-        String username = "";
-        String password = "";
+        String url = "jdbc:mariadb://i8b301.p.ssafy.io:8306/bora?serverTimezone=UTC&characterEncoding=UTF-8";
+        String username = "ssafy";
+        String password = "ssafi";
 
         String encryptUrl = jasyptEncrypt(url);
         String encryptUsername = jasyptEncrypt(username);
@@ -26,7 +26,7 @@ class BoraApplicationTests {
     }
 
     private String jasyptEncrypt(String input) {
-        String key="";
+        String key="0836895";
         StandardPBEStringEncryptor encryptor = new StandardPBEStringEncryptor();
         encryptor.setAlgorithm("PBEWithMD5AndDES");
         encryptor.setPassword(key);
@@ -34,8 +34,7 @@ class BoraApplicationTests {
     }
 
     private String jasyptDecryt(String input){
-        String key="";
-
+        String key="0836895";
         StandardPBEStringEncryptor encryptor = new StandardPBEStringEncryptor();
         encryptor.setAlgorithm("PBEWithMD5AndDES");
         encryptor.setPassword(key);
