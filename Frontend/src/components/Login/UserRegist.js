@@ -7,8 +7,8 @@ import "./UserRegist.scss";
 const UserRegist = () => {
   useEffect(() => {
     const urlSearch = new URLSearchParams(window.location.search);
-    const accessToken = urlSearch.get("atk");
-    window.localStorage.setItem("atk", accessToken);
+    const accessToken = urlSearch.get("token");
+    window.localStorage.setItem("token", accessToken);
   }, []);
   // axios.get(`/users/dummyuser`).then((res) => console.log(res));
 
@@ -49,7 +49,7 @@ const UserRegist = () => {
     // };
     // console.log(userInfo);
 
-    const API_URL = `http://localhost:8080/sign-up`;
+    const API_URL = `https://i8b301.p.ssafy.io/api/sign-up`;
 
     axios({
       url: API_URL,
@@ -64,7 +64,7 @@ const UserRegist = () => {
       .then((res) => {
         console.log(res);
         window.localStorage.setItem("userId", res.data.id);
-        window.location.href = "http://localhost:3000/main";
+        window.location.href = "https://i8b301.p.ssafy.io/main";
       })
       .catch((err) => {
         console.log(err);
@@ -73,7 +73,7 @@ const UserRegist = () => {
 
   const checkNickname = () => {
     const nickname = document.getElementById("inputNickname").value;
-    const API_URL = `http://localhost:8080/sign-up/${nickname}`;
+    const API_URL = `https://i8b301.p.ssafy.io/api/sign-up/${nickname}`;
     axios({
       url: API_URL,
       method: "GET",
