@@ -24,9 +24,9 @@ spring:
         format_sql: true
   cache: redis
   redis:
-    host: i8b301.p.ssafy.io
-    port: 8379
-    password: ENC(71dZ7p+B8r0mcHdbH4omRw==)
+    host: ENC(Q9p0fgKLEttpqkOJfkUl3Ni3EPatbaBWWNjOT1zFhQw=)
+    port: 33016
+    password: ENC(SySkQP5FyENHyJzugAE3AbsAHK8GtOMM)
   profiles:
     include: oauth
 

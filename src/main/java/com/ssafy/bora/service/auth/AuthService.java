@@ -1,6 +1,6 @@
 package com.ssafy.bora.service.auth;
 
-import com.ssafy.bora.dto.UserExtraInfoReq;
+import com.ssafy.bora.dto.user.UserExtraInfoReq;
 import com.ssafy.bora.entity.User;
 import com.ssafy.bora.entity.enums.Role;
 import com.ssafy.bora.repository.user.IUserRepository;
@@ -41,10 +41,6 @@ public class AuthService {
         // 유저메일을 찾기
         User findUser = userRepository.findById(email)
                 .orElseThrow(() -> new RuntimeException("Not found user"));
-        // 찾는 정보의 리프레쉬 토큰이 없다면 날리기.
-//        if (!refreshToken.equals(findUser.getRefreshToken())) {
-//            throw new RuntimeException("invalid refresh token");
-//        }
 
         // jwt에서 생성된 권한의 토큰 날리기
         return jwtProvider.createAccessToken(authentication, findUser.getId().toString(), findUser.getRole().toString());

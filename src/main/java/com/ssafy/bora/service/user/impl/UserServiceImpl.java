@@ -63,17 +63,14 @@ public class UserServiceImpl implements IUserService {
     @Override
     public void createUserInfo(SignUpDTO signUpDTO) {
         // user 호출
-        // User user = userRepository.findById(userDTO.getId()).get();
         User user = userRepository.findById(signUpDTO.getUserId())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
         Privacy privacy = privacyRepository.findById(signUpDTO.getUserId())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
-        //user 닉네임 변경
-        user.updateNickname(signUpDTO.getNickName());
-
-        user.updateRole();
+        //user 정보 생성
+        user.createUser(signUpDTO);
 
         //user age 변경
         privacy.updatePrivacy(signUpDTO.getAge(), signUpDTO.getGender());

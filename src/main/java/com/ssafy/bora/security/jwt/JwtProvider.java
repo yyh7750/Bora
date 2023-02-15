@@ -38,17 +38,13 @@ public class JwtProvider {
         Date validity = new Date(now.getTime() + ACCESS_TOKEN_VALIDATE_TIME);
 
         log.info("createAccessToken start");
-//        if(authentication.getPrincipal() != null)
-//            log.info(((CustomOAuth2User) authentication.getPrincipal()).getUId().toString());
+
         String email = authentication.getName();
         log.info("email getName() {} ", email);
+
         if(!email.contains("@")){
             email = ((CustomOAuth2User) authentication.getPrincipal()).getEmail();
         }
-
-//        String role = authentication.getAuthorities().stream()
-//                .map(GrantedAuthority::getAuthority)
-//                .collect(Collectors.joining(","));
 
         log.info("createAccessToken {} ", authentication.getPrincipal() );
 

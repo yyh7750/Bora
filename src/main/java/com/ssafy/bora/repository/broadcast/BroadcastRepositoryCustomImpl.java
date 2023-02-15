@@ -26,16 +26,14 @@ public class BroadcastRepositoryCustomImpl implements BroadcastRepositoryCustom 
 
     @Override
     public List<BroadcastResDTO> findAllByCategoryAndSort(SearchCondition condition, String sortCondition) {
-        System.out.println("WErwerewrwerqfcxfg");
         BooleanBuilder searchBuilder = searchMoodByBuilder(condition);
-        System.out.println("ewrwerwer");
         OrderSpecifier[] orderSpecifiers = createOrderSpecifier(sortCondition);
         return queryFactory
                 .select(new QBroadcastResDTO(
-                        broadcast.user.id,
                         broadcast.user.nickName,
+                        broadcast.user.id,
+                        broadcast.broadcastImg,
                         station.name,
-//TODO station.imgUrl,
                         broadcast.title,
                         broadcast.mood,
                         station.category,

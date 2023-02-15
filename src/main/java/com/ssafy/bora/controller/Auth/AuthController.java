@@ -8,7 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import com.ssafy.bora.dto.UserExtraInfoReq;
+import com.ssafy.bora.dto.user.UserExtraInfoReq;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
@@ -53,13 +53,11 @@ public class AuthController {
 
     @GetMapping("/users")
     public void getUsers(){
-//      log.info(SecurityUtil.getCurrentUser().toString());
         log.info("AuthController /users GET 성공");
     }
 
 
     @PutMapping("/users")
-//    @PreAuthorize("hasRole('ROLE_GUEST')")
     public ResponseEntity<?> createUserExtraInfo(@RequestBody UserExtraInfoReq userExtraInfoReq){
         Map<String, String> authInfo = CookieUtils.getCurrentUser();
         String accessToken = authService.createUserExtraInfo(userExtraInfoReq, authInfo);

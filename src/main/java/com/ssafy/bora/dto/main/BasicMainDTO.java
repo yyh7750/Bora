@@ -8,14 +8,20 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 public class BasicMainDTO {
+
     private String userId;
+
     private String stationName;
 
-    //private 어떠한 ++이미지
+    private String bannerUrl;
+
     private String nickName;
+
     private Long followCnt;
+
     public static BasicMainDTO convertEntityToBasicMainDTO(Station station, TopTenDTO ttDto){
         BasicMainDTO bmDto = new BasicMainDTO();
+        bmDto.bannerUrl=station.getUser().getProfileImg();
         bmDto.userId=station.getUser().getId();
         bmDto.nickName=station.getUser().getNickName();
         bmDto.stationName=station.getName();

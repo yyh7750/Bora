@@ -2,8 +2,6 @@ package com.ssafy.bora.service.fileupload;
 
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.ObjectMetadata;
-import com.ssafy.bora.dto.sign_up.SignUpDTO;
-
 import com.ssafy.bora.entity.User;
 import com.ssafy.bora.repository.user.IUserRepository;
 import com.ssafy.bora.vo.FileVO;
@@ -15,12 +13,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
-
-
-
 import java.time.LocalDateTime;
 import java.util.UUID;
-
 
 /*
 전달받은 파일을 S3에 저장하고 S3에 저장된 파일의 URL을 담은 FileVO 객체를 반환하는 기능이다.
@@ -32,7 +26,6 @@ import java.util.UUID;
 public class FileUploadService {
 
     private final AmazonS3 amazonS3;
-    private final SignUpDTO signUpDTO;
     private final IUserRepository userRepository;
     @Value("${cloud.aws.s3.bucket}")
     private String bucket;
@@ -41,14 +34,9 @@ public class FileUploadService {
     public FileVO fileUpload(MultipartFile file, String userId){
         log.info("저장된 아이디:{} ", userId);
 
-
-
         // 파일 크기 보기
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-
-
-        //로그인한 유저
 
         log.info(String.valueOf(file.getSize()));
 
@@ -86,5 +74,4 @@ public class FileUploadService {
         }
         return fileVO;
     }
-
 }

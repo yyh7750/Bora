@@ -48,7 +48,6 @@ public class BroadcastServiceImpl implements IBroadcastService {
         return topTenList;
     }
 
-    //TODO 일반인이 일반인 follow 못하게 해야함.
     @Override
     public List<MyFollowBroadcastDTO> findFollowBroadcast(String id) {
         List<MyFollowBroadcastDTO>mfbDtoList = new ArrayList<>();
@@ -59,7 +58,7 @@ public class BroadcastServiceImpl implements IBroadcastService {
             //방송중인 유저
             Broadcast broadcast = broadcastRepository.findByUserAndEndBroadIsNull(follow.getDj());
             boolean isLive= broadcast!=null;
-            MyFollowBroadcastDTO mfbDTO = MyFollowBroadcastDTO.convertEntityToMyFollowBroadcastDTO(isLive,station);
+            MyFollowBroadcastDTO mfbDTO = MyFollowBroadcastDTO.convertEntityToMyFollowBroadcastDTO(isLive,broadcast.getSessionId(),station);
             mfbDtoList.add(mfbDTO);
         }
         return mfbDtoList;
@@ -86,6 +85,7 @@ public class BroadcastServiceImpl implements IBroadcastService {
 
         Broadcast broadcast = Broadcast.builder()
                 .user(dj)
+                .broadcastImg(broadcastReqDTO.getImgUrl())
                 .title(broadcastReqDTO.getTitle())
                 .mood(moodStr)
                 .startBroad(LocalDateTime.now())

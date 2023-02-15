@@ -31,8 +31,6 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         // registraion 및 userNameAttributeName을 검색한다.
         String registrationId = userRequest.getClientRegistration().getRegistrationId(); // 소셜 정보 가져옴
         String userNameAttributeName = userRequest.getClientRegistration().getProviderDetails().getUserInfoEndpoint().getUserNameAttributeName();
-//        log.info("========" + registrationId + " " + userNameAttributeName + "========");
-
 
         // 기본 사용자 정보가 OAuthAttributes.of 메서드로 전달되어 객체 생성
         OAuthAttributes attributes = OAuthAttributes.of(registrationId, userNameAttributeName, oAuth2User.getAttributes());

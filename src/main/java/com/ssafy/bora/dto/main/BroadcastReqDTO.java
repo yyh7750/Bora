@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class BroadcastReqDTO {
     private String userId;
+    private String imgUrl;
     private String title;
     private String[] moods;
     private int maxViewer;

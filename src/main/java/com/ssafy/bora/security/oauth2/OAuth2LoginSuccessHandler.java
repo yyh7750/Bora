@@ -37,8 +37,6 @@ public class OAuth2LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHan
     public static final String AUTH_HEADER = "Authorization";
     public static final String TOKEN_TYPE = "Bearer";
 
-    //private final String redirectUrl = "http://localhost:3000/regist";
-
     @Transactional
     @Override
     // 사용자가 OAuth2를 통해 로그인 하면 메서드가 작동한다.
@@ -89,7 +87,6 @@ public class OAuth2LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHan
 
             response.addHeader(AUTH_HEADER, TOKEN_TYPE + " " + accessToken);
             response.addHeader("Set-Cookie", cookie.toString());
-//            response.getWriter().write(accessToken);
 
             // 사용자의 ROLE에 따라 리다이렉션 URL을 결정한다.
             // 쿼리 매게변수로 액세스 토큰과 함께 대상 URL로 사용자를 리다이렉션한다.

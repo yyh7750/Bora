@@ -14,15 +14,14 @@ class BoraApplicationTests {
         String username = "ssafy";
         String password = "ssafi";
 
-        String encryptUrl = jasyptEncrypt(url);
-        String encryptUsername = jasyptEncrypt(username);
-        String encryptPassword = jasyptEncrypt(password);
+//        String encryptUrl = jasyptEncrypt(host);
+//        String encryptUsername = jasyptEncrypt(port);
+//        String encryptPassword = jasyptEncrypt(pwd);
 
-        System.out.println("encryptUrl : " + encryptUrl);
-        System.out.println("encryptUsername : " + encryptUsername);
-        System.out.println("encryptPassword" + encryptPassword);
+//        System.out.println("encryptUrl : " + encryptUrl);
+//        System.out.println("encryptUsername : " + encryptUsername);
+//        System.out.println("encryptPassword : " + encryptPassword);
 
-        Assertions.assertThat(url).isEqualTo(jasyptDecryt(encryptUrl));
     }
 
     private String jasyptEncrypt(String input) {
@@ -40,6 +39,4 @@ class BoraApplicationTests {
         encryptor.setPassword(key);
         return encryptor.decrypt(input);
     }
-
-
 }

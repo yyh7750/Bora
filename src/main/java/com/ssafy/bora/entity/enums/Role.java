@@ -9,7 +9,5 @@ public enum Role {
     GUEST("ROLE_GUEST"),
     CUSTOMER("ROLE_CUSTOMER");
 
-
-
     private final String key;
 }

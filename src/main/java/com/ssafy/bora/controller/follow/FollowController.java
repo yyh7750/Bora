@@ -19,7 +19,6 @@ public class FollowController {
 
     private final IFollowService followService;
 
-    //FIXME 이거
     @ApiOperation(value = ",,,")
     @PostMapping
     public ResponseEntity<?> addFollow(@RequestBody List<ReqFollowDTO> reqFollowDtoList){
