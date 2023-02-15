@@ -14,6 +14,7 @@ class BoraApplicationTests {
         String username = "ssafy";
         String password = "ssafi";
 
+
         String encryptUrl = jasyptEncrypt(url);
         String encryptUsername = jasyptEncrypt(username);
         String encryptPassword = jasyptEncrypt(password);

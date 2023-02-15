@@ -24,7 +24,6 @@ public class Station implements Serializable {
 
     @Column(length = 32)
     private String name;
-
     private LocalDateTime startTime;
 
     private LocalDateTime endTime;
