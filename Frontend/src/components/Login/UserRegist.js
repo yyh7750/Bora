@@ -48,7 +48,7 @@ const UserRegist = () => {
     // };
     // console.log(userInfo);
 
-    const API_URL = `http://localhost:8080/api/sign-up`;
+    const API_URL = `https://i8b301.p.ssafy.io/api/sign-up`;
     axios({
       url: API_URL,
       method: "POST",
