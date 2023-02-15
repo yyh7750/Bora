@@ -36,7 +36,7 @@ const WriteBoard = () => {
     dispatch(letterActions.writeLetter());
     dispatch(boardActions.writeBoard(message));
 
-    const API_URL = `https://i8b301.p.ssafy.io/api/storybox`;
+    const API_URL = `http://localhost:8080/api/storybox`;
     axios({
       url: API_URL,
       method: "POST",

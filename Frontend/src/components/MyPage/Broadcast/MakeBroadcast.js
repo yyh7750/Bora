@@ -47,7 +47,6 @@ const MakeBroadcast = () => {
       arr.includes("sat"),
       arr.includes("sun"),
     ];
-
     const stationInfo = {
       userId: userId,
       name: document.getElementById("broadcastTitle").value,
@@ -148,6 +147,7 @@ const MakeBroadcast = () => {
     <div>
       <div className="uploader-wrapper">
         <input
+          id="makeBroadcastInput"
           type="file"
           accept="image/*"
           onChange={saveImage}

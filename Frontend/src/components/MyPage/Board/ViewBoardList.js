@@ -150,7 +150,6 @@ const ViewBoardList = () => {
                           handleSingleCheck(e.target.checked, post.id)
                         }
                         checked={checkItems.includes(post.id) ? true : false}
-                        // onClick={toggleRead}
                       />
                     </td>
                   )}

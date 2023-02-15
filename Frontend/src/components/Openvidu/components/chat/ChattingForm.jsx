@@ -40,6 +40,7 @@ const ChattingForm = (props) => {
           border: "1px solid rgba(177, 177, 177)",
           borderRadius: "5px",
           padding: "5px",
+          color: "black",
         }}
       ></Input>
       <Tooltip title="메세지 보내기">

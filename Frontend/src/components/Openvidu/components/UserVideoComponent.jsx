@@ -26,7 +26,7 @@ export default class UserVideoComponent extends Component {
             {/* <div><p>{this.getNicknameTag()}</p></div> */}
           </div>
         ) : (
-          <VideoNotFoundDiv>호스트가 업습니다</VideoNotFoundDiv>
+          <VideoNotFoundDiv>DJ가 없습니다</VideoNotFoundDiv>
         )}
       </div>
     );
