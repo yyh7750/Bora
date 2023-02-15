@@ -21,6 +21,7 @@ public class User {
     @Column(name = "nick_name", length = 10)
     private String nickName;
 
+    @Column(name = "is_delete")
     private boolean isDelete;
 
     @Enumerated(EnumType.STRING)

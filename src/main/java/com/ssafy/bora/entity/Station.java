@@ -105,14 +105,11 @@ public class Station implements Serializable {
         this.sat = station.isSat();
         this.sun = station.isSun();
     }
-    @Builder
-    public Station(String thumbnail, String banner) {
-        this.thumbnail = thumbnail;
-        this.banner = banner;
-    }
+
     public void updateThumbNailImg(String thumbnail) {
         this.thumbnail = thumbnail;
     }
+
     public void updateBannerImg(String banner) {
         this.banner = banner;
     }

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import java.util.HashMap;
 import java.util.Map;
+
 @RequiredArgsConstructor
 @RestController
 @Slf4j
@@ -27,7 +28,7 @@ public class FileController {
 
         FileVO fileVO = fileUploadService.fileUpload(file,userId,"profile");
 
-        return new ResponseEntity<>(fileVO,HttpStatus.CREATED);
+        return new ResponseEntity<>(fileVO, HttpStatus.CREATED);
     }
 
     @PostMapping("/file-upload/thumbnail")
@@ -40,7 +41,7 @@ public class FileController {
 
         FileVO fileVO = fileUploadService.fileUpload(file,userId, "thumbnail");
 
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        return new ResponseEntity<>(fileVO, HttpStatus.CREATED);
     }
 
     @PostMapping("/file-upload/banner")
@@ -53,6 +54,6 @@ public class FileController {
 
         FileVO fileVO = fileUploadService.fileUpload(file,userId, "banner");
 
-        return new ResponseEntity<>(fileVO,HttpStatus.CREATED);
+        return new ResponseEntity<>(fileVO, HttpStatus.CREATED);
     }
 }
