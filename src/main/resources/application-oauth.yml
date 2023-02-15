@@ -6,7 +6,7 @@ spring:
           kakao:
             client-id: 506dd048e8b6d28b22eaf5dce091b0df
             client-secret: Vt2tpawo77d5tEkgJGV9WjBolfMfBv1r
-            redirect-uri: https://i8b301.p.ssafy.io/login/oauth2/code/kakao
+            redirect-uri: https://i8b301.p.ssafy.io/api/login/oauth2/code/kakao
             client-authentication-method: POST
             authorization-grant-type: authorization_code
             scope: profile_nickname, account_email
