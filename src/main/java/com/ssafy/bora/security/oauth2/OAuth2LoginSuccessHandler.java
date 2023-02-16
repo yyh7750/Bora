@@ -100,7 +100,7 @@ public class OAuth2LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHan
                         .build().toUriString();
             } else {
                 log.info("CUSTOMER");
-                targetUrl = UriComponentsBuilder.fromUriString(redirectUri.orElse("http://localhost:3000"))
+                targetUrl = UriComponentsBuilder.fromUriString(redirectUri.orElse("https://i8b301.p.ssafy.io"))
                         .queryParam("token", accessToken)
                         .build().toUriString();
             }
@@ -155,7 +155,7 @@ public class OAuth2LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHan
     private boolean isAuthorizedRedirectUri(String uri) {
 
         URI clientRedirectUri = URI.create(uri);
-        if (clientRedirectUri.getHost().equals("http://localhost:8080")) {
+        if (clientRedirectUri.getHost().equals("https://i8b301.p.ssafy.io/api")) {
             return true;
         }
         return false;
