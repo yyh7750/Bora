@@ -63,15 +63,14 @@ const ModifyBroadcast = () => {
       sat: dayArr[5],
       sun: dayArr[6],
     };
-    const API_URL = `http://localhost:8080/api/stations`;
-    console.log(stationInfo);
+    const API_URL = `http://localhost:8080/stations`;
     axios({
       url: API_URL,
       method: "PATCH",
       data: stationInfo,
     })
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         window.location.reload();
       })
       .catch((err) => {

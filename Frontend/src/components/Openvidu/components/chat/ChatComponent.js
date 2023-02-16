@@ -30,7 +30,7 @@ export default class ChatComponent extends Component {
         let messageList = this.state.messageList;
         messageList.push({
           connectionId: event.from.connectionId,
-          nickname: data.nickname,
+          nickname: localStorage.getItem("nickname"),
           message: data.message,
         });
         // const document = window.document;

@@ -9185,17 +9185,10 @@
     "react-fast-compare" "^3.1.1"
     "react-side-effect" "^2.1.0"
 
-<<<<<<< HEAD
-"react-hook-form@^7.43.0":
-  "integrity" "sha512-/rVEz7T0gLdSFwPqutJ1kn2e0sQNyb9ci/hmwEYr2YG0KF/LSuRLvNrf9QWJM+gj88CjDpDW5Bh/1AD7B2+z9Q=="
-  "resolved" "https://registry.npmjs.org/react-hook-form/-/react-hook-form-7.43.0.tgz"
-  "version" "7.43.0"
-=======
 "react-hook-form@^7.43.1":
   "integrity" "sha512-+s3+s8LLytRMriwwuSqeLStVjRXFGxgjjx2jED7Z+wz1J/88vpxieRQGvJVvzrzVxshZ0BRuocFERb779m2kNg=="
   "resolved" "https://registry.npmjs.org/react-hook-form/-/react-hook-form-7.43.1.tgz"
   "version" "7.43.1"
->>>>>>> 8ffcfe66fa3c254281584969b0e0b2d5bf77cb14
 
 "react-icons@^4.7.1":
   "integrity" "sha512-yHd3oKGMgm7zxo3EA7H2n7vxSoiGmHk5t6Ou4bXsfcgWyhfDKMpyKfhHR6Bjnn63c+YXBLBPUql9H4wPJM6sXw=="
@@ -9407,11 +9400,7 @@
   dependencies:
     "picomatch" "^2.2.1"
 
-<<<<<<< HEAD
-"recoil@0.7.3":
-=======
 "recoil@^0.7.3":
->>>>>>> 8ffcfe66fa3c254281584969b0e0b2d5bf77cb14
   "integrity" "sha512-WaPppk3Hz5/V9nOVmu1X/o3cJyf/rLXw/YsEENvMzEDk+LKqMiGfFgZ3Gg51TKWccpCZCyrSBXn2O4L1E2WDPQ=="
   "resolved" "https://registry.npmjs.org/recoil/-/recoil-0.7.3.tgz"
   "version" "0.7.3"
@@ -10968,16 +10957,12 @@
   "resolved" "https://registry.npmjs.org/uuid/-/uuid-8.3.2.tgz"
   "version" "8.3.2"
 
-<<<<<<< HEAD
 "uuid@^9.0.0":
   "integrity" "sha512-MXcSTerfPa4uqyzStbRoTgt5XIe3x5+42+q1sDuy3R5MDk66URdLMOZe5aPX/SQd+kuYAh0FdP/pO28IkQyTeg=="
   "resolved" "https://registry.npmjs.org/uuid/-/uuid-9.0.0.tgz"
   "version" "9.0.0"
 
 "uuid@9.0.0":
-=======
-"uuid@^9.0.0", "uuid@9.0.0":
->>>>>>> 8ffcfe66fa3c254281584969b0e0b2d5bf77cb14
   "integrity" "sha512-MXcSTerfPa4uqyzStbRoTgt5XIe3x5+42+q1sDuy3R5MDk66URdLMOZe5aPX/SQd+kuYAh0FdP/pO28IkQyTeg=="
   "resolved" "https://registry.npmjs.org/uuid/-/uuid-9.0.0.tgz"
   "version" "9.0.0"

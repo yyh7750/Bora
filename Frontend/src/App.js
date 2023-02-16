@@ -64,7 +64,6 @@ const App = () => {
               <Route path="/viewBoardList" element={<ViewBoardList />} />
               <Route path="/detailBoard" element={<DetailBoard />} />
 
-              <Route path="/broadcast" element={<Broadcast />} />
               <Route path="/modifyBroadcast" element={<ModifyBroadcast />} />
 
               <Route path="/broadcasts" element={<Broadcast />} />

@@ -64,9 +64,7 @@ const MakeBroadcast = () => {
       sun: dayArr[6],
     };
 
-    console.log(stationInfo);
-
-    const API_URL = `http://localhost:8080/api/stations`;
+    const API_URL = `http://localhost:8080/stations`;
     axios({
       headers: {
         "Content-Type": "multipart/form-data",
@@ -298,7 +296,7 @@ const MakeBroadcast = () => {
           <br />
           <input type="text" id="broadcastDesc" className="desc" />
           <br />
-          <Link to="/broadcast">
+          <Link to="/broadcasts">
             <Button2
               name="생성하기"
               value={createBroadcast}

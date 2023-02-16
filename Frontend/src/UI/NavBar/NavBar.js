@@ -26,7 +26,7 @@ export default function Navbar() {
 
   const userId = window.localStorage.getItem("userId");
   useEffect(() => {
-    const API_URL = `http://localhost:8080/api/follow/dj/${userId}`;
+    const API_URL = `http://localhost:8080/follow/dj/${userId}`;
     axios({
       url: API_URL,
       method: "GET",
@@ -76,6 +76,25 @@ export default function Navbar() {
       "authorize-access-token=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;";
   };
 
+  const [isbroadcast, setIsbroadcast] = useState(false);
+
+  const isBroadcast = () => {
+    const API_URL = `http://localhost:8080/users/${userId}`;
+    console.log(userId);
+    axios({
+      url: API_URL,
+      method: "GET",
+    })
+      .then((res) => {
+        if (res.data.stationDTO !== null) {
+          setIsbroadcast(true);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <>
       <IconContext.Provider value={{ color: "#FFF" }}>
@@ -83,12 +102,15 @@ export default function Navbar() {
           <div className="menu-bars">
             <FaIcons.FaBars onClick={showSidebar} />
           </div>
-          <a href="/main">
+          <Link to="/main">
             <img id="mainLogo" src={Logo} alt="" />
-          </a>
+          </Link>
 
-          <div style={{ marginLeft: "auto", marginRight: "20px" }}>
-            <LogoutButton onClick={logout} />
+          <div
+            onClick={logout}
+            style={{ marginLeft: "auto", marginRight: "20px" }}
+          >
+            <LogoutButton />
           </div>
 
           <div className="wrap"></div>
@@ -121,12 +143,28 @@ export default function Navbar() {
 
             {NavBarData.map((item, index) => {
               return (
-                <li key={index} className={item.cName}>
-                  <Link to={item.path}>
-                    {item.icon}
+                <li key={index} className={item.cName} onClick={isBroadcast}>
+                  {item.title == "마이페이지" && isbroadcast && (
+                    <Link to="/broadcasts">
+                      {item.icon}
 
-                    <span id="item_titl">{item.title}</span>
-                  </Link>
+                      <span id="item_titl">{item.title}</span>
+                    </Link>
+                  )}
+                  {item.title == "마이페이지" && !isbroadcast && (
+                    <Link to="/emptyBroadcast">
+                      {item.icon}
+
+                      <span id="item_titl">{item.title}</span>
+                    </Link>
+                  )}
+                  {item.title != "마이페이지" && (
+                    <Link to={item.path}>
+                      {item.icon}
+
+                      <span id="item_titl">{item.title}</span>
+                    </Link>
+                  )}
                 </li>
               );
             })}

@@ -38,6 +38,15 @@ input:focus {
   border: 2px solid #000;
 }
 
+input[placeholder] {
+  text-align: center;
+  color: #fff;
+}
+
+::placeholder {
+  color: lightgray;
+}
+
 .space {
   height: 30px;
 }

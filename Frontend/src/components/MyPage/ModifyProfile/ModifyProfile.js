@@ -21,9 +21,12 @@ const ModifyProfile = (props) => {
 
   const saveImage = (e) => {
     e.preventDefault();
+    //사진파일에 대한 객체정보
     if (e.target.files[0]) {
       // 새로운 이미지를 올리면 createObjectURL()을 통해 생성한 기존 URL을 폐기
       URL.revokeObjectURL(image.preview_URL);
+      const userId = window.localStorage.getItem("userId");
+      console.log(userId);
       const preview_URL = URL.createObjectURL(e.target.files[0]);
       setImage(() => ({
         image_file: e.target.files[0],
@@ -31,22 +34,22 @@ const ModifyProfile = (props) => {
       }));
       const formData = new FormData();
       console.log(e.target.files[0]);
-      formData.append("files", e.target.files[0]);
+      formData.append("file", e.target.files[0]);
+
       for (let value of formData.values()) {
         console.log(value);
       }
-      const userId = window.localStorage.getItem("userId");
       const HEADERS = {
         "Content-Type": "multipart/form-data",
-        "Access-Control-Allow-Origin": "*",
+        // "Access-Control-Allow-Origin": "http://localhost:3000",
       };
       //이미지 axios요청
-      const IMG_URL = `http://localhost:8080/img/file-upload/profile`;
+      const IMG_URL = `http://localhost:8080/img/file-upload/profile/${userId}`;
       axios({
         headers: HEADERS,
         url: IMG_URL,
         method: "POST",
-        params: { file: formData, userId: userId },
+        data: formData,
       })
         .then((res) => {
           console.log(res);

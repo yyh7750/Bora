@@ -15,7 +15,11 @@ const Pagination = ({ postsPerPage, totalPosts, currentPage, paginate }) => {
             <a
               onClick={() => paginate(number)}
               className="page-link"
-              style={currentPage == number ? { color: "#17a2b8" } : null}
+              style={
+                currentPage == number
+                  ? { color: "#b969df", marginLeft: "130px" }
+                  : null
+              }
             >
               {number}
             </a>

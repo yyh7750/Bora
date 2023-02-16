@@ -13,7 +13,7 @@ const createOnAirRoom = async (
     await axios({
       method: "post",
       // url: "https://i8b301.p.ssafy.io/api/main/broadcast",
-      url: "http://localhost:8080/api/main/broadcast",
+      url: "http://localhost:8080/main/broadcast",
       data: {
         imgUrl: mainImg,
         title: myRoomName,
