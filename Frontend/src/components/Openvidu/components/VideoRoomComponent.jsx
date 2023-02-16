@@ -117,12 +117,11 @@ const VideoRoomComponent = () => {
   const roomTitle = location.state !== null ? location.state.myRoomName : null;
   const roomType = location.state !== null ? location.state.myRoomType : null;
   const nickname = location.state !== null ? location.state.nickname : null;
+  // const isHost = location.state === true ? true : false;
+  const myName = localStorage.getItem("nickname");
   const isHost = useSelector((state) => state.host.value.host); // console.log(useSelector((state) => state.hostStatus.value.host));
-
   const [mySessionId, setMySessionId] = useState("SessionA");
-  const [myUserName, setMyUserName] = useState(
-    "Participant" + Math.floor(Math.random() * 100)
-  );
+  const [myUserName, setMyUserName] = useState();
   const [session, setSession] = useState(undefined);
   const [mainStreamManager, setMainStreamManager] = useState(undefined); // 페이지의 메인 비디오 화면(퍼블리셔 또는 참가자의 화면 중 하나)
   const [publisher, setPublisher] = useState(undefined); // 자기 자신의 캠
@@ -235,7 +234,7 @@ const VideoRoomComponent = () => {
 
     mySession.on("streamCreated", (event) => {
       // 스트림이 생길 때마다
-      const subscriber = mySession.subscribe(event.stream, "SUBSCRIBER"); // 퍼블리셔를 구독자로 넣어줌
+      const subscriber = mySession.subscribe(event.stream, "PUBLISHER"); // 퍼블리셔를 구독자로 넣어줌
       setSubscribers(subscriber);
       console.log(subscriber);
     });
@@ -314,6 +313,8 @@ const VideoRoomComponent = () => {
     });
   };
 
+  console.log(subscribers);
+
   //하트 수 증가
   const heartCnt = () => {
     setSumHeart(sumHeart + 1);
@@ -343,7 +344,7 @@ const VideoRoomComponent = () => {
       } else {
         console.log("Room Deleted Failed!");
       }
-      navigate("/broadcast");
+      navigate("/");
     }
   };
 
@@ -352,7 +353,7 @@ const VideoRoomComponent = () => {
     const mySession = session;
     if (mySession) {
       mySession.disconnect();
-      navigate("/"); // 메인페이지로 이동
+      navigate("/main"); // 메인페이지로 이동
     }
     // 속성을 초기화함(필요한 속성은 초기화하면 안 됨)
     OV = null;
@@ -421,8 +422,10 @@ const VideoRoomComponent = () => {
 
   const getUserInfo = async () => {
     const res1 = await getMyInfo(nickname);
+    console.log(res1);
     // const ownerPicturePath = res1.picturePath;
-    const ownerName = res1.name;
+    const ownerName = res1.nickName;
+    console.log(ownerName);
     // setProfileImg(ownerPicturePath);
     setHostName(ownerName);
   };
@@ -476,7 +479,9 @@ const VideoRoomComponent = () => {
                     <WhiteDiv style={{ margin: "5px" }}>{nickname}</WhiteDiv>
                   )}
                 </div>
-                <Button value={deleteRoomRequest} name="방송종료"></Button>
+                {isHost ? (
+                  <Button value={deleteRoomRequest} name="방송종료"></Button>
+                ) : null}
               </div>
               <div>
                 <div
@@ -560,7 +565,7 @@ const VideoRoomComponent = () => {
             <MessageDiv>
               <ChattingList messageList={messageList}></ChattingList>
               <ChattingForm
-                myUserName={myUserName}
+                myUserName={myName}
                 onMessage={sendMsg}
                 currentSession={session}
               ></ChattingForm>

@@ -21,9 +21,12 @@ const ModifyProfile = (props) => {
 
   const saveImage = (e) => {
     e.preventDefault();
+    //사진파일에 대한 객체정보
     if (e.target.files[0]) {
       // 새로운 이미지를 올리면 createObjectURL()을 통해 생성한 기존 URL을 폐기
       URL.revokeObjectURL(image.preview_URL);
+      const userId = window.localStorage.getItem("userId");
+      console.log(userId);
       const preview_URL = URL.createObjectURL(e.target.files[0]);
       setImage(() => ({
         image_file: e.target.files[0],
@@ -35,7 +38,6 @@ const ModifyProfile = (props) => {
       for (let value of formData.values()) {
         console.log(value);
       }
-      const userId = window.localStorage.getItem("userId");
       const HEADERS = {
         "Content-Type": "multipart/form-data",
         "Access-Control-Allow-Origin": "*",

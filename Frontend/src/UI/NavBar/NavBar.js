@@ -23,7 +23,6 @@ export default function Navbar() {
 
   const [profileImg, setProfileImg] = useState("");
   const [follow, setFollow] = useState([]);
-  const [isbroadcast, setIsbroadcast] = useState(false);
 
   const userId = window.localStorage.getItem("userId");
   useEffect(() => {
@@ -92,6 +91,25 @@ export default function Navbar() {
       "authorize-access-token=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;";
   };
 
+  const [isbroadcast, setIsbroadcast] = useState(false);
+
+  const isBroadcast = () => {
+    const API_URL = `https://i8b301.p.ssafy.io/api/users/${userId}`;
+    console.log(userId);
+    axios({
+      url: API_URL,
+      method: "GET",
+    })
+      .then((res) => {
+        if (res.data.stationDTO !== null) {
+          setIsbroadcast(true);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <>
       <IconContext.Provider value={{ color: "#FFF" }}>
@@ -140,7 +158,7 @@ export default function Navbar() {
 
             {NavBarData.map((item, index) => {
               return (
-                <li key={index} className={item.cName}>
+                <li key={index} className={item.cName} onClick={isBroadcast}>
                   {item.title == "마이페이지" && isbroadcast && (
                     <Link to="/broadcasts">
                       {item.icon}

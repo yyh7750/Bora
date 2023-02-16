@@ -4,6 +4,7 @@ import Carousel from "../../UI/Carousel/Carousel";
 import "./MainPageForm.scss";
 import MyOnAir from "../MyOnAir/MyOnAir";
 import { useNavigate } from "react-router-dom";
+import VideoList from "../VideoList/VideoList";
 import axios from "axios";
 
 const MainPageForm = () => {
@@ -30,11 +31,6 @@ const MainPageForm = () => {
     },
   };
 
-  const [userid, setUserid] = useState("");
-  const [atk, setAtk] = useState("");
-
-  // useEffect(() => {}, [userid, atk]);
-
   useEffect(() => {
     const urlSearch = new URLSearchParams(window.location.search);
     if (window.localStorage.getItem("userId") === null) {
@@ -48,25 +44,29 @@ const MainPageForm = () => {
       // setAtk(accessToken);
       console.log(accessToken);
     }
+
+    //닉네임 저장하기 위해서 받아오는 get 요청
+    const id = localStorage.getItem("userId");
+    const API_URL = `http://localhost:8080/users/${id}`;
+    axios({
+      url: API_URL,
+      method: "GET",
+    })
+      .then((res) => {
+        console.log(res.data);
+        localStorage.setItem("nickname", res.data.nickName);
+        localStorage.setItem("isState", res.data.status);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }, []);
 
   return (
     <motion.div variants={containerVariants} initial="hidden" animate="visible">
-      <Carousel />
+      <Carousel></Carousel>
       <MyOnAir />
-      {/* {roomInfos ? (
-        <Carousel>
-          {roomInfos.map((roominfo, index) => (
-            <Div pl={0.5} pr={0.5} key={index}>
-              <RoomCard {...roominfo} />
-            </Div>
-          ))}
-        </Carousel>
-      ) : (
-        <Text font="Jua" fontSize="xxxl">
-          isLoading
-        </Text>
-      )} */}
+      <VideoList />
     </motion.div>
   );
 };

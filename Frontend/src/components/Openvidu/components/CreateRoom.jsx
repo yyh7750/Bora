@@ -37,7 +37,8 @@ const CreateRoom = () => {
   // const nickname = useSelector((state) => state.login.value.id);
   // 1명은 방송을 하나만 킬 수 있음. 같은 nickname으로 방송 킬 경우 저장 안됨
   // 방송국을 만들지 않은 일반 user이면 방송 저장 안됨.
-  const nickname = "3";
+
+  const nickname = localStorage.getItem("nickname");
   const mainImg = thumbnail;
 
   const navigate = useNavigate();
@@ -73,6 +74,7 @@ const CreateRoom = () => {
           myRoomType: myRoomType,
           nickname: nickname,
           thumbnail: mainImg,
+          isHost: true,
         },
       });
     }
@@ -146,35 +148,35 @@ const CreateRoom = () => {
               <input
                 type="checkbox"
                 name="roomType"
-                value="calm"
+                value="cal"
                 onClick={getCheckboxValue}
               />
               <a id="checkbox_id">잔잔한</a>
               <input
                 type="checkbox"
                 name="roomType"
-                value="exciting"
+                value="exc"
                 onClick={getCheckboxValue}
               />
               <a id="checkbox_id">신나는</a>
               <input
                 type="checkbox"
                 name="roomType"
-                value="quite"
+                value="qut"
                 onClick={getCheckboxValue}
               />
               <a id="checkbox_id">조용한</a>
               <input
                 type="checkbox"
                 name="roomType"
-                value="lively"
+                value="liv"
                 onClick={getCheckboxValue}
               />
               <a id="checkbox_id">활기찬</a>
               <input
                 type="checkbox"
                 name="roomType"
-                value="education"
+                value="edu"
                 onClick={getCheckboxValue}
               />
               <a id="checkbox_id">교육적인</a>

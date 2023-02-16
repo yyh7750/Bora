@@ -22,7 +22,7 @@ const Login = () => {
   const CLIENT_ID = "6994198e0a1efb1a987463241de95a65";
   const REDIRECT_URI =
     "https://i8b301.p.ssafy.io/api/oauth2/authorization/kakao";
-  let URL = `https://kauth.kakao.com/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code`;
+  // let URL = `https://kauth.kakao.com/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code`;
 
   // const login = () => {
   //   axios.post(`/users/dummyuser`).then((res) => console.log(res));
