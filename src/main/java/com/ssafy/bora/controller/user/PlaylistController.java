@@ -21,25 +21,19 @@ public class PlaylistController {
     @GetMapping
     public ResponseEntity<?> getPlaylistAll() {
         List<ResPlaylistDTO> playlist = playlistService.getPlaylistAll();
-        if (!playlist.isEmpty() && playlist != null) {
-            return new ResponseEntity<>(playlist, HttpStatus.OK);
-        }
-        return new ResponseEntity<>("추가할 수 있는 방송 정보가 없습니다.", HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(playlist, HttpStatus.OK);
     }
+
     @ApiOperation(value = "플레이 리스트 등록(수정 포함)")
     @PostMapping
     public ResponseEntity<?> createOrUpdatePlaylist(@RequestBody List<ReqPlaylistDTO> reqPlaylistDtoList) {
         int result = playlistService.createOrUpdatePlaylist(reqPlaylistDtoList);
-
-        if (result >= 1) {
-            return new ResponseEntity<>(result + ": 플레이리스트가 등록되었습니다.", HttpStatus.CREATED);
-        }
-        return new ResponseEntity<>("플레이리스트 등록 실패", HttpStatus.OK);
+        return new ResponseEntity<>(result, HttpStatus.CREATED);
     }
 
     @ApiOperation(value = "내 플레이 리스트 조회")
     @GetMapping("/{user-id}")
-    public ResponseEntity<?> findMyPlaylist(@PathVariable(name = "user-id") String userId){
+    public ResponseEntity<?> findMyPlaylist(@PathVariable(name = "user-id") String userId) {
         return new ResponseEntity<>(playlistService.findByUserId(userId), HttpStatus.OK);
     }
 }

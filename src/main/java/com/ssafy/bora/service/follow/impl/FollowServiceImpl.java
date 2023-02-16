@@ -127,7 +127,7 @@ public class FollowServiceImpl implements IFollowService {
 
         // Redis에서 key 목록 가져오기
         StringBuilder keyBuilder = new StringBuilder();
-        keyBuilder.append(djId).append("+*");
+        keyBuilder.append("following:").append(djId).append("+*");
 
         List<ResFollowDTO> resFollowDTOList = getFollowDTOList(keyBuilder.toString());
 

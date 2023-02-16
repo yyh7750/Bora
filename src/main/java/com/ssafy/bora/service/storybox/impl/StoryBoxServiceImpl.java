@@ -9,9 +9,13 @@ import com.ssafy.bora.repository.user.IUserRepository;
 import com.ssafy.bora.service.storybox.IStoryBoxService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.*;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.ParameterizedPreparedStatementSetter;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +28,7 @@ public class StoryBoxServiceImpl implements IStoryBoxService {
 
     private final IStoryBoxRepository storyBoxRepository;
     private final IUserRepository userRepository;
+    private final JdbcTemplate jdbcTemplate;
 
     @Override
     public ResStoryBoxDTO createStoryBox(ReqStoryBoxDTO reqStoryBoxDTO) {
@@ -71,7 +76,6 @@ public class StoryBoxServiceImpl implements IStoryBoxService {
             }
 
             return new PageImpl<ResStoryBoxDTO>(resStoryBoxDtoList, pageable, storyBoxList.getTotalElements());
-//            return resStoryBoxDtoList;
         }
         return null;
     }
@@ -102,8 +106,7 @@ public class StoryBoxServiceImpl implements IStoryBoxService {
 
     @Override
     public void deleteStoryBoxListByDj(List<Integer> storyBoxList) {
-        Iterable<Integer> iterable = new ArrayList<>(storyBoxList);
-        storyBoxRepository.deleteAllByIdInBatch(iterable);
+        deleteBatch(storyBoxList);
     }
 
     @Override
@@ -145,7 +148,24 @@ public class StoryBoxServiceImpl implements IStoryBoxService {
             deleteStoryBoxList.add(storyBox.getId());
         }
 
-        Iterable<Integer> iterable = new ArrayList<>(deleteStoryBoxList);
-        storyBoxRepository.deleteAllByIdInBatch(iterable);
+        deleteBatch(deleteStoryBoxList);
+    }
+
+    @Override
+    public void deleteBatch(List<Integer> storyBoxList) {
+        jdbcTemplate.batchUpdate(
+                "insert into storybox" +
+                        "(id, is_read) " +
+                        "value (?, 1) " +
+                        "on duplicate key update is_delete = 1;",
+                storyBoxList,
+                storyBoxList.size(),
+                new ParameterizedPreparedStatementSetter<Integer>() {
+                    @Override
+                    public void setValues(PreparedStatement ps, Integer id) throws SQLException {
+                        ps.setInt(1, id);
+                    }
+                }
+        );
     }
 }
