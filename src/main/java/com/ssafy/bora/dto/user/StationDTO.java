@@ -3,6 +3,8 @@ package com.ssafy.bora.dto.user;
 import com.ssafy.bora.entity.Station;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import javax.persistence.Column;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
@@ -27,6 +29,10 @@ public class StationDTO {
 
     private String day;
 
+    private String thumbnail;
+
+    private String banner;
+
     private int followCnt;
 
     //Fixme starttime, endtime 이거 맞음?
@@ -41,6 +47,8 @@ public class StationDTO {
         stationDTO.notice = station.getNotice();
         stationDTO.day = station.getDay();
         stationDTO.followCnt = followCnt;
+        stationDTO.banner = station.getBanner();
+        stationDTO.thumbnail = station.getThumbnail();
         return stationDTO;
     }
 }
