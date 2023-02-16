@@ -18,6 +18,8 @@ public class MyFollowBroadcastDTO {
     public static MyFollowBroadcastDTO convertEntityToMyFollowBroadcastDTO(Boolean isLive,String sessionId, Station station){
         MyFollowBroadcastDTO mfbDTO = new MyFollowBroadcastDTO();
         mfbDTO.sessionId=sessionId;
+        mfbDTO.bannerUrl=station.getBanner();
+        mfbDTO.userUrl=station.getUser().getProfileImg();
         mfbDTO.userId=station.getUser().getId();
         mfbDTO.nickName=station.getUser().getNickName();
         mfbDTO.stationName=station.getName();

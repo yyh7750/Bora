@@ -7,6 +7,8 @@ import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.ssafy.bora.dto.main.*;
 import com.ssafy.bora.entity.Broadcast;
+import com.ssafy.bora.entity.QBroadcast;
+import com.ssafy.bora.entity.QUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.util.StringUtils;
 
@@ -28,10 +30,11 @@ public class BroadcastRepositoryCustomImpl implements BroadcastRepositoryCustom 
     public List<BroadcastResDTO> findAllByCategoryAndSort(SearchCondition condition, String sortCondition) {
         BooleanBuilder searchBuilder = searchMoodByBuilder(condition);
         OrderSpecifier[] orderSpecifiers = createOrderSpecifier(sortCondition);
+        QUser broadUser= broadcast.user;
         return queryFactory
                 .select(new QBroadcastResDTO(
-                        broadcast.user.nickName,
-                        broadcast.user.id,
+                        broadUser.nickName,
+                        broadUser.id,
                         broadcast.broadcastImg,
                         station.name,
                         broadcast.title,
@@ -40,8 +43,7 @@ public class BroadcastRepositoryCustomImpl implements BroadcastRepositoryCustom 
                         broadcast.sessionId,
                         broadcast.startBroad))
                 .from(broadcast)
-                .join(station).on(broadcast.user.eq(station.user))
-                .join(follow).on(broadcast.user.eq(follow.dj))
+                .join(station).on(broadUser.eq(station.user))
                 .where(
                         broadcast.endBroad.isNull(),
                         searchBuilder)
@@ -79,13 +81,11 @@ public class BroadcastRepositoryCustomImpl implements BroadcastRepositoryCustom 
         BooleanBuilder booleanBuilder = new BooleanBuilder();
         if (StringUtils.hasText(condition.getCategory()))
             booleanBuilder.and(station.category.eq(condition.getCategory()));
-        System.out.println("test");
         if(condition.getMood()!=null) {
             for (String s : condition.getMood()) {
                 booleanBuilder.or(broadcast.mood.contains(s));
             }
         }
-        System.out.println("Test2");
         return booleanBuilder;
     }
 

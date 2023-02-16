@@ -31,6 +31,6 @@ public interface IFollowRepository extends JpaRepository<Follow, Integer> {
      */
     List<Follow> findAllByIsDeleteFalse();
 
-    @Query(nativeQuery = true, value = "select f.dj_id, count(*) as followcnt from follow f group by f.dj_id order by followcnt desc limit 10")
+    @Query(nativeQuery = true, value = "select f.dj_id, count(*) as followcnt from follow f where is_delete=0 group by f.dj_id order by followcnt desc limit 10")
     List<TopTenDTO> countTopTen();
 }
