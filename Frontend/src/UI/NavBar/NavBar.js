@@ -26,7 +26,7 @@ export default function Navbar() {
 
   const userId = window.localStorage.getItem("userId");
   useEffect(() => {
-    const API_URL = `http://localhost:8080/api/follow/dj/${userId}`;
+    const API_URL = `http://localhost:8080/follow/dj/${userId}`;
     axios({
       url: API_URL,
       method: "GET",
@@ -87,8 +87,11 @@ export default function Navbar() {
             <img id="mainLogo" src={Logo} alt="" />
           </a>
 
-          <div style={{ marginLeft: "auto", marginRight: "20px" }}>
-            <LogoutButton onClick={logout} />
+          <div
+            onClick={logout}
+            style={{ marginLeft: "auto", marginRight: "20px" }}
+          >
+            <LogoutButton />
           </div>
 
           <div className="wrap"></div>

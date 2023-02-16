@@ -9,6 +9,9 @@ const UserRegist = () => {
     const urlSearch = new URLSearchParams(window.location.search);
     const accessToken = urlSearch.get("token");
     window.localStorage.setItem("token", accessToken);
+    const userId = urlSearch.get("userId");
+    window.localStorage.setItem("userId", userId);
+
   }, []);
   // axios.get(`/users/dummyuser`).then((res) => console.log(res));
 
@@ -49,22 +52,28 @@ const UserRegist = () => {
     // };
     // console.log(userInfo);
 
-    const API_URL = `https://i8b301.p.ssafy.io/api/sign-up`;
+
+    const API_URL = `http://localhost:8080/sign-up`;
+    const userId = window.localStorage.getItem("userId");
+    const DATA = {
+      userId: userId,
+      nickName: document.getElementById("inputNickname").value,
+      age: age,
+      gender: gender,
+    };
+    console.log(DATA);
+
 
     axios({
       url: API_URL,
-      method: "POST",
-      data: {
-        userId: document.getElementById("inputEmail").value,
-        nickName: document.getElementById("inputNickname").value,
-        gender: gender,
-        age: age,
-      },
+      method: "PATCH",
+      data: DATA,
     })
       .then((res) => {
         console.log(res);
         window.localStorage.setItem("userId", res.data.id);
-        window.location.href = "https://i8b301.p.ssafy.io/main";
+        // window.location.href = "http://localhost:3000/main";
+
       })
       .catch((err) => {
         console.log(err);
@@ -103,16 +112,7 @@ const UserRegist = () => {
       <div className="registBlackBox"></div>
       <div className="registForm">
         <div className="registTitle">회원가입</div>
-        <label>
-          이메일{" "}
-          <input
-            type="text"
-            style={{ marginBottom: "10px" }}
-            id="inputEmail"
-            className="registInput"
-          />
-        </label>
-        <br />
+
         <label>
           <div>
             닉네임{" "}

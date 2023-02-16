@@ -22,22 +22,39 @@ const DjToDj = () => {
   const dispatch = useDispatch();
 
   const [nickname, setNickname] = useState();
+  const [desc, setDesc] = useState();
 
   const userId = window.localStorage.getItem("userId");
+
+  //DJ정보렌더링(본인)
   useEffect(() => {
-    const API_URL = `http://localhost:8080/api/users/${userId}`;
+    console.log(userId);
+    const API_URL = `http://localhost:8080/users/${userId}`;
     axios({
       url: API_URL,
       method: "GET",
     })
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         setNickname(res.data.nickName);
+        setDesc(res.data.desc);
         dispatch(profileActions.setProfile(res.data));
       })
       .catch((err) => {
         console.log(err);
       });
+
+    // const URL = `http://localhost:8080/follow/viewer/${djId}`;
+    // axios({
+    //   url: URL,
+    //   method: "GET",
+    // })
+    //   .then((res) => {
+    //     console.log(res);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
   }, [userId]);
 
   const showModifyProfile = useSelector(
@@ -95,7 +112,7 @@ const DjToDj = () => {
         <div className="trainerInfo">
           <div className="infoTop">
             <span className="nickname" style={{ marginRight: "20px", flex: 1 }}>
-              {nickname}닉네임
+              {nickname}
             </span>
             <Button
               style={{ flex: 1 }}
@@ -119,8 +136,6 @@ const DjToDj = () => {
               margin="30px"
               marginLeft="10px"
               name="방송시작하기"
-              margin="30px"
-              marginLeft="10px"
             />
           </div>
           <div>
@@ -128,7 +143,7 @@ const DjToDj = () => {
             <span className="listercnt">100k</span>
           </div>
           <div>
-            <p className="content">유저의 한마디입니다.</p>
+            <p className="content">{desc}</p>
           </div>
         </div>
 
