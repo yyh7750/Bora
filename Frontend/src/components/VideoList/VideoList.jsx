@@ -36,7 +36,7 @@ const VideoList = () => {
 
   //-------------- 버튼 선택시 렌더링 ---------------
   useEffect(() => {
-    const API_URL = `http://localhost:8080/api/main/live-broad/`;
+    const API_URL = `https://i8b301.p.ssafy.io/api/main/live-broad/`;
     axios({
       url: API_URL,
       method: "GET",
