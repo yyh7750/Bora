@@ -29,18 +29,49 @@ public interface IStoryBoxService {
      */
     ResStoryBoxDTO findByDjIdAndStoryBoxId(String djId, int storyBoxId);
 
-    // 사연함 단일 삭제 (공통)
+    /**
+     * desc: 사연함 단일 삭제 (공통)
+     *
+     * @param storyBoxId
+     * @return
+     */
     ResStoryBoxDTO deleteOneStoryBoxByDj(int storyBoxId);
 
-    // 사연함 여러 개 삭제 (dj) - 보류 (데이터 받아오는게 확실해질 경우 진행)
+    /**
+     * desc: 사연함 여러 개 삭제 (dj) - 보류 (데이터 받아오는게 확실해질 경우 진행)
+     *
+     * @param storyBoxList
+     */
     void deleteStoryBoxListByDj(List<Integer> storyBoxList);
 
-    // 사연함 조회 (시청자)
+    /**
+     * desc: 사연함 조회 (시청자)
+     *
+     * @param djId
+     * @param viewerId
+     * @return
+     */
     ResStoryBoxDTO findMyStoryBoxOfDj(String djId, String viewerId);
 
-    // 사연함 수정 (시청자)
+    /**
+     * desc: 사연함 수정 (시청자)
+     *
+     * @param updateStoryBoxDTO
+     * @return
+     */
     ResStoryBoxDTO updateStoryBox(ReqStoryBoxDTO updateStoryBoxDTO);
 
-    // 사연함 전체 삭제 (방송 끝나는 시점에 일괄처리)
+    /**
+     * desc: 사연함 전체 삭제 (방송 끝나는 시점에 일괄처리)
+     *
+     * @param djId
+     */
     void deleteAllAtEndBroadcast(String djId);
+
+    /**
+     * desc: 사연함 여러개 삭제(DJ기능), 방송 직후 전체 사연함 삭제에 사용되는 메소드
+     *
+     * @param storyBoxList
+     */
+    void deleteBatch(List<Integer> storyBoxList);
 }

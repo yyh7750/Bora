@@ -49,7 +49,7 @@ public class BlacklistServiceImpl implements IBlacklistService {
     }
 
     @Override
-    public List<Optional<Blacklist>> findAllBlacklist(String id) {
+    public List<ResBlacklistDTO> findAllBlacklist(String id) {
         // DJ에 해당하는 블랙리스트 목록 찾기
         User dj = userRepository.findById(id).get();
         List<Optional<Blacklist>> blacklist = blacklistRepository.findByDjAndIsDeleteFalse(dj);
@@ -60,7 +60,7 @@ public class BlacklistServiceImpl implements IBlacklistService {
             resBlacklist.add(ResBlacklistDTO.convertEntityToResDTO(black.get()));
         }
 
-        return blacklist;
+        return resBlacklist;
     }
 
     @Override

@@ -10,7 +10,7 @@ class BoraApplicationTests {
 
     @Test
     void jasypt(){
-        String username = "AKIA4FYBPHWXKW4M4GXX";
+        String username = "jdbc:mariadb://i8b301.p.ssafy.io:8306/bora?serverTimezone=UTC&characterEncoding=UTF-8";
         String password = "C+Yr0KXoLDfUle5sPJ1B+LPlL1RylDgRl6F+IK48";
 
         String encryptUrl = jasyptEncrypt(username);

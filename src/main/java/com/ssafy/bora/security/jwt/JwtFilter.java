@@ -27,6 +27,7 @@ OncePerRequestFilter를 상속 받아서 구현 되었고, 이 필터는 매 요
 @Slf4j
 @RequiredArgsConstructor
 public class JwtFilter extends OncePerRequestFilter {
+
     public static final String AUTHORIZATION_HEADER = "Authorization";
 
     private final JwtProvider jwtProvider;

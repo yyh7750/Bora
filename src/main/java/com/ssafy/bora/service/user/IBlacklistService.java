@@ -23,7 +23,7 @@ public interface IBlacklistService {
      * @param id : 블랙리스트를 조회할 dj id
      * @return List<Optional<Blacklist>> : dj id에 해당하는 블랙리스트 목록
      */
-    List<Optional<Blacklist>> findAllBlacklist(String id);
+    List<ResBlacklistDTO> findAllBlacklist(String id);
 
     /**
      * desc : DJ가 시청자를 블랙리스트 목록에 해제하는 메소드

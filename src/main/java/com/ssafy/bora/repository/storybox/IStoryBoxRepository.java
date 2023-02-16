@@ -5,6 +5,7 @@ import com.ssafy.bora.entity.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
@@ -26,16 +27,7 @@ public interface IStoryBoxRepository extends JpaRepository<StoryBox, Integer>{
      */
     StoryBox findByDjAndIdAndIsDeleteFalse(User dj, int storyBoxId);
 
-
     Page<StoryBox> findByDjAndIsDeleteFalse(User dj, Pageable pageable);
-
-
-    //Page<StoryBox> findAllByContents(User dj, Pageable pageable);
-
-
-
-
-
 
     StoryBox findById(int storyBoxId);
 }
