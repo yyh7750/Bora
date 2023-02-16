@@ -19,11 +19,13 @@ public class Follow implements Serializable {
     // DJ (시청자가 DJ 팔로우)
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "dj_id")
+    @Column(length = 32)
     private User dj;
 
     // 시청자 (팔로우한 시청자)
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "viewer_id")
+    @Column(length = 32)
     private User viewer;
 
     private boolean isDelete;

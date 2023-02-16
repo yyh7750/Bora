@@ -25,8 +25,8 @@ public class RedisFollow implements Serializable {
         RedisFollow redisFollow = new RedisFollow();
         redisFollow.id = key;
         redisFollow.req = "follow";
-        redisFollow.djId = follow.getDj().getNickName();
-        redisFollow.viewerId = follow.getViewer().getNickName();
+        redisFollow.djId = follow.getDj().getId();
+        redisFollow.viewerId = follow.getViewer().getId();
         return redisFollow;
     }
 }
