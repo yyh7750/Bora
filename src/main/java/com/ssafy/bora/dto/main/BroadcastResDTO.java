@@ -1,6 +1,8 @@
 package com.ssafy.bora.dto.main;
 
 import com.querydsl.core.annotations.QueryProjection;
+import com.ssafy.bora.entity.Broadcast;
+import com.ssafy.bora.entity.Station;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -18,25 +20,25 @@ public class BroadcastResDTO {
     private String category;
     private String sessionId;
     private LocalDateTime startTime;
+    private LocalDateTime endTime;
 
-//    public static BroadcastDTO convertEntityToBroadcastDTO(Broadcast broadcast, Station station ){
-//        BroadcastDTO bmDto = new BroadcastDTO();
-//        String[] moods = broadcast.getMood().split(",");
-//        bmDto.userId=station.getUser().getId();
-//        bmDto.nickName=station.getUser().getNickName();
-//        bmDto.stationName=station.getName();
-//        bmDto.title = broadcast.getTitle();
-//        bmDto.mood1 = moods[0];
-//        bmDto.mood2 = moods[1];
-//        bmDto.mood3 = moods[2];
-//        bmDto.category = station.getCategory();
-//        bmDto.sessionId = broadcast.getSessionId();
-//        bmDto.startTime = broadcast.getStartBroad();
-//        return bmDto;
-//    }
+
+    public static BroadcastResDTO convertEntityToBroadcastDTO(Broadcast broadcast, Station station ){
+        BroadcastResDTO bmDto = new BroadcastResDTO();
+        bmDto.userId=station.getUser().getId();
+        bmDto.nickName=station.getUser().getNickName();
+        bmDto.stationName=station.getName();
+        bmDto.title = broadcast.getTitle();
+        bmDto.mood=broadcast.getMood();
+        bmDto.category = station.getCategory();
+        bmDto.sessionId = broadcast.getSessionId();
+        bmDto.startTime = station.getStartTime();
+        bmDto.endTime=station.getEndTime();
+        return bmDto;
+    }
 
     @QueryProjection
-    public BroadcastResDTO(String userId,String nickName, String imgUrl,String stationName, String title, String mood, String category, String sessionId, LocalDateTime startTime){
+    public BroadcastResDTO(String userId,String nickName, String imgUrl,String stationName, String title, String mood, String category, String sessionId, LocalDateTime startTime, LocalDateTime endTime){
         this.userId=userId;
         this.nickName=nickName;
         this.imgUrl=imgUrl;
@@ -46,5 +48,6 @@ public class BroadcastResDTO {
         this.category=category;
         this.sessionId=sessionId;
         this.startTime=startTime;
+        this.endTime=endTime;
     }
 }

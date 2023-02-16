@@ -1,7 +1,11 @@
 package com.ssafy.bora.entity;
 
+import com.ssafy.bora.dto.user.MaxViewerDTO;
 import com.ssafy.bora.dto.user.StationDTO;
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicInsert;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -9,7 +13,7 @@ import java.time.format.DateTimeFormatter;
 
 @Entity
 @Getter
-@Setter
+@DynamicInsert
 @NoArgsConstructor
 public class Station implements Serializable {
 
@@ -43,6 +47,10 @@ public class Station implements Serializable {
     @Column(length = 16)
     private String category;
 
+    @Column(name = "max_viewer")
+    @ColumnDefault("0")
+    private long maxViewer;
+
     private boolean isDelete;
 
     private boolean mon;
@@ -62,7 +70,6 @@ public class Station implements Serializable {
     public static Station convertDtoToStation(User dj, StationDTO stationDTO) {
         Station station = new Station();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-
         station.user = dj;
         station.category = stationDTO.getCategory();
         station.startTime = LocalDateTime.parse(stationDTO.getStartTime(), formatter);
@@ -105,6 +112,9 @@ public class Station implements Serializable {
         this.sun = station.isSun();
     }
 
+    public void updateMaxViewer(MaxViewerDTO maxViewerDTO){
+        this.maxViewer=maxViewerDTO.getViewerSum()/maxViewerDTO.getNum();
+    }
     public void updateThumbNailImg(String thumbnail) {
         this.thumbnail = thumbnail;
     }

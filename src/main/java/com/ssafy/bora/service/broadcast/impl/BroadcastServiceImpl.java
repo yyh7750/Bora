@@ -1,6 +1,7 @@
 package com.ssafy.bora.service.broadcast.impl;
 
 import com.ssafy.bora.dto.main.*;
+import com.ssafy.bora.dto.user.MaxViewerDTO;
 import com.ssafy.bora.entity.Broadcast;
 import com.ssafy.bora.entity.Station;
 import com.ssafy.bora.entity.User;
@@ -49,8 +50,8 @@ public class BroadcastServiceImpl implements IBroadcastService {
     }
 
     @Override
-    public List<MyFollowBroadcastDTO> findFollowBroadcast(String id) {
-        List<MyFollowBroadcastDTO>mfbDtoList = new ArrayList<>();
+    public List<BroadcastResDTO> findFollowBroadcast(String id) {
+        List<BroadcastResDTO>mfbDtoList = new ArrayList<>();
         List<Follow>list =followRepository.findAllFollowingList(id);
         for(Follow follow : list){
             //내가 팔로우하는 방송국
@@ -59,7 +60,7 @@ public class BroadcastServiceImpl implements IBroadcastService {
             //방송중인 유저
             Broadcast broadcast = broadcastRepository.findByUserAndEndBroadIsNull(follow.getDj());
             if(broadcast==null) continue;
-            MyFollowBroadcastDTO mfbDTO = MyFollowBroadcastDTO.convertEntityToMyFollowBroadcastDTO(broadcast.getSessionId(),station);
+            BroadcastResDTO mfbDTO = BroadcastResDTO.convertEntityToBroadcastDTO(broadcast,station);
             mfbDtoList.add(mfbDTO);
         }
         return mfbDtoList;
@@ -102,7 +103,8 @@ public class BroadcastServiceImpl implements IBroadcastService {
     public String removeBroadcast(BroadcastReqDTO broadcastReqDTO) {
         Broadcast broadcast = broadcastRepository.findBySessionIdAndEndBroadIsNull(broadcastReqDTO.getSessionId());
         Station station = stationRepository.findStationByDjId(broadcastReqDTO.getUserId());
-
+        MaxViewerDTO maxViewerDTO = broadcastRepository.countMaxView(broadcastReqDTO.getUserId());
+        station.updateMaxViewer(maxViewerDTO);
         Duration startDuration= Duration.between(broadcast.getStartBroad(), station.getStartTime());
         Duration endDuration = Duration.between(LocalDateTime.now(), station.getEndTime());
         boolean isOnTime = Math.abs(startDuration.getSeconds())<300&&Math.abs(endDuration.getSeconds())<300;

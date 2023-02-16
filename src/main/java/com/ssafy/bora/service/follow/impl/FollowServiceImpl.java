@@ -1,8 +1,11 @@
 package com.ssafy.bora.service.follow.impl;
 
 import com.ssafy.bora.dto.follow.ResFollowDTO;
+import com.ssafy.bora.dto.main.TopTenDTO;
+import com.ssafy.bora.entity.BroadcastOrder;
 import com.ssafy.bora.entity.follow.Follow;
 import com.ssafy.bora.entity.follow.RedisFollow;
+import com.ssafy.bora.repository.broadcast.BroadcastOrderRepository;
 import com.ssafy.bora.repository.follow.IFollowRepository;
 import com.ssafy.bora.repository.follow.IRedisFollowRepository;
 import com.ssafy.bora.service.follow.IFollowService;
@@ -30,10 +33,25 @@ public class FollowServiceImpl implements IFollowService {
     private final JdbcTemplate jdbcTemplate;
     private final IFollowRepository followRepository;
     private final IRedisFollowRepository redisFollowRepository;
+    private final BroadcastOrderRepository broadcastOrderRepository;
     private final RedisTemplate redisTemplate;
 
     @Override
     public int[][] addFollow(List<ResFollowDTO> resFollowDtoList) {
+
+        List<TopTenDTO>orderList = followRepository.sortConditon();
+
+        jdbcTemplate.batchUpdate("insert into broadcast_order (user_id, cnt) values(?,?) on duplicate key update user_id=values(user_id),cnt=values(cnt);",
+                orderList,
+                orderList.size(),
+                new ParameterizedPreparedStatementSetter<TopTenDTO>() {
+                    @Override
+                    public void setValues(PreparedStatement ps, TopTenDTO bo) throws SQLException {
+                        ps.setString(1, bo.getDj_Id());
+                        ps.setLong(2, bo.getFollowCnt());
+
+                    }
+                });
         return jdbcTemplate.batchUpdate(
                 "insert into follow " +
                         "(dj_id, viewer_id, is_delete) " +
@@ -88,7 +106,7 @@ public class FollowServiceImpl implements IFollowService {
 
     @Override
     @Async
-    @Scheduled(cron = "0 0 0 * * *")
+    @Scheduled(cron = "0 0/1 * * * *")
     public void sendRedisDataToAddFollow() {
 
         // redis에서 값을 RDB에 옮겨준다.

@@ -1,6 +1,8 @@
 package com.ssafy.bora.repository.broadcast;
 
 import com.querydsl.core.BooleanBuilder;
+import com.querydsl.core.annotations.QueryProjection;
+import com.querydsl.core.types.Expression;
 import com.querydsl.core.types.Order;
 import com.querydsl.core.types.OrderSpecifier;
 import com.querydsl.core.types.dsl.BooleanExpression;
@@ -19,6 +21,7 @@ import java.util.Objects;
 
 import static com.ssafy.bora.entity.QBroadcast.broadcast;
 import static com.ssafy.bora.entity.QStation.station;
+import static com.ssafy.bora.entity.QBroadcastOrder.broadcastOrder;
 import static com.ssafy.bora.entity.follow.QFollow.follow;
 
 @RequiredArgsConstructor
@@ -41,9 +44,11 @@ public class BroadcastRepositoryCustomImpl implements BroadcastRepositoryCustom 
                         broadcast.mood,
                         station.category,
                         broadcast.sessionId,
-                        broadcast.startBroad))
+                        station.startTime,
+                        station.endTime))
                 .from(broadcast)
                 .join(station).on(broadUser.eq(station.user))
+                .join(broadcastOrder).on(broadUser.eq(broadcastOrder.user))
                 .where(
                         broadcast.endBroad.isNull(),
                         searchBuilder)
@@ -92,9 +97,8 @@ public class BroadcastRepositoryCustomImpl implements BroadcastRepositoryCustom 
     private OrderSpecifier[] createOrderSpecifier(String condition) {
         List<OrderSpecifier> orderSpecifiers = new ArrayList<>();
         if (Objects.isNull(condition)) orderSpecifiers.add(new OrderSpecifier(Order.DESC, broadcast.startBroad));
-        else if (condition.equals("maxview"))
-            orderSpecifiers.add((new OrderSpecifier(Order.DESC, broadcast.maxViewer)));
-//        else if(condition.equals("follow")) orderSpecifiers.add((new OrderSpecifier(Order.DESC, ));
+        else if (condition.equals("maxview")) orderSpecifiers.add((new OrderSpecifier(Order.DESC, station.maxViewer)));
+        else if(condition.equals("follow")) orderSpecifiers.add((new OrderSpecifier(Order.DESC, broadcastOrder.cnt)));
         return orderSpecifiers.toArray(new OrderSpecifier[orderSpecifiers.size()]);
     }
 }

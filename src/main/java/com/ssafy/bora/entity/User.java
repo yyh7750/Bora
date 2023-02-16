@@ -46,6 +46,7 @@ public class User {
     private Station station;
 
 
+
     public void renewUser() {
         this.isDelete = false;
     }
