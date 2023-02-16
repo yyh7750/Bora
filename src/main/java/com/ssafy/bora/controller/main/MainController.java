@@ -13,7 +13,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @CrossOrigin("*")
-@RequestMapping("/api/main")
+@RequestMapping("/main")
 public class MainController {
 
     private final IBroadcastService broadcastService;

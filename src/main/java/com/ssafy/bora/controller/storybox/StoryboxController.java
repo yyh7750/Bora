@@ -30,7 +30,7 @@ public class StoryboxController {
     }
 
     @ApiOperation(value = "사연함 조회(dj)")
-    @GetMapping("/list/{dj-id}")
+    @GetMapping("/list/{dj-id}/{storybox}")
     public ResponseEntity<Page<ResStoryBoxDTO>> findAllStoryBox(@PathVariable(name = "dj-id") String djId, Pageable pageable) {
         Page<ResStoryBoxDTO> storyBoxDtoList = storyBoxService.findAllStoryBox(djId, pageable);
 
