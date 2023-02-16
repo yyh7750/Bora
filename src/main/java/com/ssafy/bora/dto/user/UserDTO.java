@@ -32,6 +32,7 @@ public class UserDTO {
         userDTO.isDelete = findUser.isDelete();
         userDTO.status = findUser.isStatus();
         userDTO.desc = findUser.getDesc();
+        userDTO.profileImg = findUser.getProfileImg();
         return userDTO;
     }
 
