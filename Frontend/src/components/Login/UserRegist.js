@@ -11,6 +11,7 @@ const UserRegist = () => {
     window.localStorage.setItem("token", accessToken);
     const userId = urlSearch.get("userId");
     window.localStorage.setItem("userId", userId);
+
   }, []);
   // axios.get(`/users/dummyuser`).then((res) => console.log(res));
 
@@ -51,6 +52,7 @@ const UserRegist = () => {
     // };
     // console.log(userInfo);
 
+
     const API_URL = `http://localhost:8080/sign-up`;
     const userId = window.localStorage.getItem("userId");
     const DATA = {
@@ -60,6 +62,8 @@ const UserRegist = () => {
       gender: gender,
     };
     console.log(DATA);
+
+
     axios({
       url: API_URL,
       method: "PATCH",
@@ -69,6 +73,7 @@ const UserRegist = () => {
         console.log(res);
         window.localStorage.setItem("userId", res.data.id);
         // window.location.href = "http://localhost:3000/main";
+
       })
       .catch((err) => {
         console.log(err);
@@ -77,7 +82,7 @@ const UserRegist = () => {
 
   const checkNickname = () => {
     const nickname = document.getElementById("inputNickname").value;
-    const API_URL = `http://localhost:8080/sign-up/${nickname}`;
+    const API_URL = `https://i8b301.p.ssafy.io/api/sign-up/${nickname}`;
     axios({
       url: API_URL,
       method: "GET",

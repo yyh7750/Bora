@@ -43,7 +43,7 @@ const Login = () => {
         )}
 
         {show && (
-          <a href={URL} style={{ marginTop: "100px" }}>
+          <a href={REDIRECT_URI} style={{ marginTop: "100px" }}>
             <img
               src={kakaoLoginBtn}
               alt="카카오로그인버튼"
