@@ -41,7 +41,7 @@ const CreateRoom = () => {
   //원래는 닉네임을 가져와서 사용해야하는데, 일단 고정으로.
   // const nickname = localStorage.getItem("nickname");
 
-  const nickname = "7";
+  const nickname = localStorage.getItem("nickname");
   const mainImg = thumbnail;
 
   const navigate = useNavigate();
