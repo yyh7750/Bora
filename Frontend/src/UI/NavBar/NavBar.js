@@ -27,7 +27,7 @@ export default function Navbar() {
 
   const userId = window.localStorage.getItem("userId");
   useEffect(() => {
-    const API_URL = `http://localhost:8080/follow/dj/${userId}`;
+    const API_URL = `https://i8b301.p.ssafy.io/api/follow/dj/${userId}`;
     axios({
       url: API_URL,
       method: "GET",
@@ -41,7 +41,7 @@ export default function Navbar() {
         console.log(err);
       });
 
-    const API_URL2 = `http://localhost:8080/users/${userId}`;
+    const API_URL2 = `https://i8b301.p.ssafy.io/api/users/${userId}`;
     axios({
       url: API_URL2,
       method: "GET",
@@ -71,7 +71,7 @@ export default function Navbar() {
 
   const logout = () => {
     window.localStorage.clear();
-    window.location.href = "http://localhost:3000/login";
+    window.location.href = "https://i8b301.p.ssafy.io/login";
   };
 
   const unLink = () => {

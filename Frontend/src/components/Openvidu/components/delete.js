@@ -15,7 +15,7 @@ const deleteRoom = async (
     } = await axios({
       method: "delete",
       // url: "https://i8b301.p.ssafy.io:8080/api/main/broadcast/" + roomId,
-      url: "http://localhost:8080/api/main/broadcast/",
+      url: "https://i8b301.p.ssafy.io/api/main/broadcast/",
       data: {
         title: roomTitle,
         moods: roomType,

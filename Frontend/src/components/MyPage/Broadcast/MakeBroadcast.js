@@ -63,7 +63,7 @@ const MakeBroadcast = () => {
       sun: dayArr[6],
     };
 
-    const API_URL = `http://localhost:8080/api/stations`;
+    const API_URL = `https://i8b301.p.ssafy.io/api/stations`;
     axios({
       url: API_URL,
       method: "POST",
@@ -109,7 +109,7 @@ const MakeBroadcast = () => {
         "Access-Control-Allow-Origin": "*",
       };
       //이미지 axios요청
-      const IMG_URL = `http://localhost:8080/api/img/file-upload/banner/${userId}`;
+      const IMG_URL = `https://i8b301.p.ssafy.io/api/img/file-upload/banner/${userId}`;
       axios({
         headers: HEADERS,
         url: IMG_URL,
@@ -118,7 +118,7 @@ const MakeBroadcast = () => {
       })
         .then((res) => {
           console.log(res);
-          // window.location.reload();
+          window.location.reload();
         })
         .catch((err) => {
           console.log(err);
@@ -144,7 +144,7 @@ const MakeBroadcast = () => {
         "Access-Control-Allow-Origin": "*",
       };
       //이미지 axios요청
-      const IMG_URL = `http://localhost:8080/api/img/file-upload/thumbnail/${userId}`;
+      const IMG_URL = `https://i8b301.p.ssafy.io/api/img/file-upload/thumbnail/${userId}`;
       axios({
         headers: HEADERS,
         url: IMG_URL,
@@ -153,7 +153,7 @@ const MakeBroadcast = () => {
       })
         .then((res) => {
           console.log(res);
-          // window.location.reload();
+          window.location.reload();
         })
         .catch((err) => {
           console.log(err);

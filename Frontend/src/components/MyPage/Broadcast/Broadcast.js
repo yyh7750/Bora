@@ -32,7 +32,7 @@ const Broadcast = () => {
   const [thumbnailimg, setThumbnail] = useState("");
   useEffect(() => {
     const resarr = ["월", "화", "수", "목", "금", "토", "일"];
-    const API_URL = `http://localhost:8080/api/stations/${userId}`;
+    const API_URL = `https://i8b301.p.ssafy.io/api/stations/${userId}`;
     axios({
       url: API_URL,
       method: "GET",
@@ -74,7 +74,7 @@ const Broadcast = () => {
 
   const showblackList = () => {
     dispatch(blacklistActions.openBlacklist());
-    const API_URL = `http://localhost:8080/api/users/blacklist/${userId}`;
+    const API_URL = `https://i8b301.p.ssafy.io/api/users/blacklist/${userId}`;
     axios({
       url: API_URL,
       method: "GET",

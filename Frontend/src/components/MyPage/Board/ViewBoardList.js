@@ -19,7 +19,7 @@ const ViewBoardList = () => {
 
   useEffect(() => {
     //1.axios요청으로 사연리스트 객체 받아오기
-    const API_URL = `http://localhost:8080/api/storybox/list/${userId}`;
+    const API_URL = `https://i8b301.p.ssafy.io/api/storybox/list/${userId}`;
     axios({
       url: API_URL,
       method: "GET",
@@ -82,7 +82,7 @@ const ViewBoardList = () => {
     //5.모달창 "예" -> axios 요청해서 새로운 사연리스트 받아서 리렌더링
     //6.모달창 "아니오" -> 모달창 false
 
-    const API_URL = `http://localhost:8080/api/storybox/list`;
+    const API_URL = `https://i8b301.p.ssafy.io/api/storybox/list`;
     axios({
       url: API_URL,
       method: "DELETE",

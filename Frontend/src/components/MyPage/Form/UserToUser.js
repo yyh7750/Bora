@@ -21,7 +21,7 @@ const UserToUser = () => {
 
   //유저정보렌더링(본인)
   useEffect(() => {
-    const API_URL = `http://localhost:8080/users/${userId}`;
+    const API_URL = `https://i8b301.p.ssafy.io/api/users/${userId}`;
     axios({
       url: API_URL,
       method: "GET",

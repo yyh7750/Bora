@@ -34,7 +34,7 @@ const ModifyBoard = () => {
       regDateTime: new Date(),
     };
     // dispatch(boardActions.writeBoard(message));
-    const API_URL = `http://localhost:8080/storybox`;
+    const API_URL = `https://i8b301.p.ssafy.io/api/storybox`;
     axios({
       url: API_URL,
       method: "PATCH",

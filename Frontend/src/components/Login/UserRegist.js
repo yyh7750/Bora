@@ -45,7 +45,7 @@ const UserRegist = () => {
 
   const checkNickname = () => {
     const nickname = document.getElementById("inputNickname").value;
-    const API_URL = `https://localhost:8080/sign-up/${nickname}`;
+    const API_URL = `https://i8b301.p.ssafy.io/api/sign-up/${nickname}`;
     axios({
       url: API_URL,
       method: "GET",
@@ -79,7 +79,7 @@ const UserRegist = () => {
         "회원정보를 다시 입력해주세요.";
       document.getElementById("resModify").style.color = "red";
 
-      const API_URL = `http://localhost:8080/sign-up`;
+      const API_URL = `https://i8b301.p.ssafy.io/api/sign-up`;
       const userId = window.localStorage.getItem("userId");
       const DATA = {
         userId: userId,
@@ -97,7 +97,7 @@ const UserRegist = () => {
         .then((res) => {
           console.log(res);
           window.localStorage.setItem("userId", res.data.id);
-          // window.location.href = "http://localhost:3000/main";
+          window.location.href = "https://i8b301.p.ssafy.io/main";
         })
         .catch((err) => {
           console.log(err);

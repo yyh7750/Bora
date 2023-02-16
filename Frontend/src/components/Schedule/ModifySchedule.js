@@ -8,7 +8,7 @@ import { useState } from "react";
 function ModifySchedule() {
   const [searchItems, setSearchItems] = useState([]);
   useEffect(() => {
-    const API_URL = `http://localhost:8080/users/playlist`;
+    const API_URL = `https://i8b301.p.ssafy.io/api/users/playlist`;
     axios({
       url: API_URL,
       method: "GET",

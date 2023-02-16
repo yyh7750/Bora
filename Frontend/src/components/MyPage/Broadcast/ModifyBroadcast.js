@@ -26,7 +26,7 @@ const ModifyBroadcast = () => {
   const [day, setDay] = useState("");
   useEffect(() => {
     const resarr = ["월", "화", "수", "목", "금", "토", "일"];
-    const API_URL = `http://localhost:8080/api/stations/${userId}`;
+    const API_URL = `https://i8b301.p.ssafy.io/api/stations/${userId}`;
     axios({
       url: API_URL,
       method: "GET",
@@ -95,7 +95,7 @@ const ModifyBroadcast = () => {
         "Access-Control-Allow-Origin": "*",
       };
       //이미지 axios요청
-      const IMG_URL = `http://localhost:8080/api/img/file-upload/banner/${userId}`;
+      const IMG_URL = `https://i8b301.p.ssafy.io/api/img/file-upload/banner/${userId}`;
       axios({
         headers: HEADERS,
         url: IMG_URL,
@@ -104,7 +104,7 @@ const ModifyBroadcast = () => {
       })
         .then((res) => {
           console.log(res);
-          // window.location.reload();
+          window.location.reload();
         })
         .catch((err) => {
           console.log(err);
@@ -130,7 +130,7 @@ const ModifyBroadcast = () => {
         "Access-Control-Allow-Origin": "*",
       };
       //이미지 axios요청
-      const IMG_URL = `http://localhost:8080/api/img/file-upload/thumbnail/${userId}`;
+      const IMG_URL = `https://i8b301.p.ssafy.io/api/img/file-upload/thumbnail/${userId}`;
       axios({
         headers: HEADERS,
         url: IMG_URL,
@@ -139,7 +139,7 @@ const ModifyBroadcast = () => {
       })
         .then((res) => {
           console.log(res);
-          // window.location.reload();
+          window.location.reload();
         })
         .catch((err) => {
           console.log(err);
@@ -150,7 +150,7 @@ const ModifyBroadcast = () => {
   //타이틀유효성검사
   const checkBroadcastTitle = () => {
     const modifytitle = document.getElementById("modifyBroadcastTitle").value;
-    const API_URL = `http://localhost:8080/api/stations/check/${modifytitle}`;
+    const API_URL = `https://i8b301.p.ssafy.io/api/stations/check/${modifytitle}`;
     axios({
       url: API_URL,
       method: "GET",
@@ -234,7 +234,7 @@ const ModifyBroadcast = () => {
         sat: dayArr[5],
         sun: dayArr[6],
       };
-      const API_URL = `http://localhost:8080/api/stations`;
+      const API_URL = `https://i8b301.p.ssafy.io/api/stations`;
       axios({
         url: API_URL,
         method: "PATCH",
@@ -243,7 +243,7 @@ const ModifyBroadcast = () => {
         .then((res) => {
           // console.log(res);
           window.location.reload();
-          window.location.href = "http://localhost:3000/broadcasts";
+          window.location.href = "https://i8b301.p.ssafy.io/broadcasts";
         })
         .catch((err) => {
           console.log(err);
