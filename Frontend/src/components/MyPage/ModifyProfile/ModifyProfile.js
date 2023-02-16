@@ -45,6 +45,7 @@ const ModifyProfile = (props) => {
       };
       //이미지 axios요청
       const IMG_URL = `https://i8b301.p.ssafy.io/api/img/file-upload/profile/${userId}`;
+
       axios({
         // headers: HEADERS,
         url: IMG_URL,

@@ -19,7 +19,8 @@ const DetailBoard = () => {
 
   useEffect(() => {
     //1.axios요청으로 사연리스트 객체 받아오기
-    const API_URL = `https://i8b301.p.ssafy.io/api/api/storybox/list/${djId}/${storyboxId}`;
+
+    const API_URL = `https://i8b301.p.ssafy.io/api/storybox/list/${djId}/${storyboxId}`;
     axios({
       url: API_URL,
       method: "GET",

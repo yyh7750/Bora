@@ -63,6 +63,7 @@ const MakeBroadcast = () => {
       sat: dayArr[5],
       sun: dayArr[6],
     };
+
     const API_URL = `https://i8b301.p.ssafy.io/api/stations`;
     axios({
       url: API_URL,

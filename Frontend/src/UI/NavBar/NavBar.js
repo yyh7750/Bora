@@ -55,7 +55,7 @@ export default function Navbar() {
 
   const logout = () => {
     window.localStorage.clear();
-    window.location.href = "http://localhost:3000/login";
+    window.location.href = "https://i8b301.p.ssafy.io/login";
   };
 
   const unLink = () => {
