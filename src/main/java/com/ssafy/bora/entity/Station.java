@@ -45,19 +45,7 @@ public class Station implements Serializable {
 
     private boolean isDelete;
 
-    private boolean mon;
-
-    private boolean tue;
-
-    private boolean wen;
-
-    private boolean thu;
-
-    private boolean fri;
-
-    private boolean sat;
-
-    private boolean sun;
+    private String day;
 
     public static Station convertDtoToStation(User dj, StationDTO stationDTO) {
         Station station = new Station();
@@ -70,13 +58,7 @@ public class Station implements Serializable {
         station.description = stationDTO.getDescription();
         station.name = stationDTO.getName();
         station.notice = stationDTO.getNotice();
-        station.mon = stationDTO.isMon();
-        station.tue = stationDTO.isTue();
-        station.wen = stationDTO.isWen();
-        station.thu = stationDTO.isThu();
-        station.fri = stationDTO.isFri();
-        station.sat = stationDTO.isSat();
-        station.sun = stationDTO.isSun();
+        station.day = stationDTO.getDay();
         return station;
     }
 
@@ -96,13 +78,7 @@ public class Station implements Serializable {
         this.description = station.getDescription();
         this.name = station.getName();
         this.notice = station.getNotice();
-        this.mon = station.isMon();
-        this.tue = station.isTue();
-        this.wen = station.isWen();
-        this.thu = station.isThu();
-        this.fri = station.isFri();
-        this.sat = station.isSat();
-        this.sun = station.isSun();
+        this.day = station.getDay();
     }
 
     public void updateThumbNailImg(String thumbnail) {

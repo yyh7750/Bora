@@ -25,19 +25,7 @@ public class StationDTO {
 
     private String category;
 
-    private boolean mon;
-
-    private boolean tue;
-
-    private boolean wen;
-
-    private boolean thu;
-
-    private boolean fri;
-
-    private boolean sat;
-
-    private boolean sun;
+    private String day;
 
     private int followCnt;
 
@@ -51,13 +39,7 @@ public class StationDTO {
         stationDTO.description = station.getDescription();
         stationDTO.name = station.getName();
         stationDTO.notice = station.getNotice();
-        stationDTO.mon = station.isMon();
-        stationDTO.tue = station.isTue();
-        stationDTO.wen = station.isWen();
-        stationDTO.thu = station.isThu();
-        stationDTO.fri = station.isFri();
-        stationDTO.sat = station.isSat();
-        stationDTO.sun = station.isSun();
+        stationDTO.day = station.getDay();
         stationDTO.followCnt = followCnt;
         return stationDTO;
     }

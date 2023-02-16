@@ -40,6 +40,7 @@ public class ResPlaylistDTO {
         resPlaylistDTO.stationName = playlist.getStationName();
         resPlaylistDTO.startTime = playlist.getStartTime();
         resPlaylistDTO.endTime = playlist.getEndTime();
+
         resPlaylistDTO.day = playlist.getDay();
         return resPlaylistDTO;
     }
