@@ -1,0 +1,49 @@
+.MyScheduleFormTitle {
+  margin-top: 30px;
+  margin-left: 116px;
+  margin-bottom: 20px;
+  font-size: 30px;
+  font-weight: bold;
+  // color: #d8a3ff;
+}
+
+.MyScheduleLine {
+  background-color: #d8a3ff;
+  height: 2px;
+}
+
+.MyScheduleVerticalLine {
+  border-left: 2px solid #d8a3ff;
+  height: 150%;
+  position: absolute;
+  left: 210px;
+}
+
+.myScheduleSwiper > .swiper-slide {
+  background-position: center;
+  background-size: cover;
+  width: 500px;
+  height: 620px;
+}
+
+.myScheduleSwiper > .swiper-button-prev {
+  color: #d8a3ff;
+  position: absolute;
+  left: 0%;
+}
+
+.myScheduleSwiper > .swiper-button-next {
+  color: #d8a3ff;
+  position: absolute;
+  right: 0%;
+}
+
+.myScheduleSwiper > .swiper-slide img {
+  display: block;
+  width: 100%;
+}
+
+.schedule_img {
+  width: 300px;
+  height: 200px;
+}

@@ -1,0 +1,93 @@
+.profileModal {
+  display: block;
+  position: absolute;
+  z-index: 2;
+  width: 400px;
+  height: 500px;
+  border: 2px solid #000;
+  border-radius: 15px;
+  color: #13161f;
+  overflow: hidden;
+  background-color: #000;
+  transition: color 0s 0.1s;
+  text-align: center;
+  margin-top: 500px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.profileImgChange {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  .img-wrapper {
+    // width: 100%;
+    margin: 50px 0 20px 0;
+    img {
+      width: 200px;
+      height: 200px;
+    }
+  }
+  .upload-button {
+    button {
+      margin: 0 5px;
+    }
+  }
+}
+.profileTitle {
+  font-size: 20px;
+  font-weight: bold;
+  color: #d8a3ff;
+}
+
+.profileModalInfo {
+  padding-top: 7%;
+  font-weight: bold;
+}
+
+.profileModalInfo2 {
+  padding-top: 20px;
+  margin-left: 6.5%;
+  margin-top: 3%;
+  background-color: white;
+  width: 350px;
+  height: 700px;
+  border-radius: 15px;
+}
+
+.profileButton {
+  width: 70px;
+  height: 35px;
+  border: none;
+  border-radius: 15px;
+  background-color: #c9c9c9;
+  color: black;
+  font-weight: bold;
+  margin-top: 10px;
+  margin-left: 10px;
+  box-shadow: 0 6px 10px -2px gray;
+}
+
+.closeButton {
+  float: right;
+  color: white;
+  margin-right: 5px;
+  margin-top: 3px;
+}
+.profileImg {
+  margin-left: 10px;
+  width: 100px;
+  height: 100px;
+}
+
+.profileModifyDesc {
+  color: #fff;
+  margin-right: 100px;
+  width: 108%;
+  height: 50px;
+  font-weight: bold;
+  border-radius: 5px;
+  border: 2px solid #e2b8ff;
+  background-color: #13161f;
+}

@@ -1,0 +1,201 @@
+.register {
+  margin-top: 100px;
+}
+
+.registBody {
+  background-image: url(../../assets/radio.gif);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  position: absolute;
+  margin-top: -50px;
+  height: 100vh;
+  width: 100vw;
+  z-index: 1;
+}
+
+.registBody2 {
+  background-image: url(../../assets/noise.gif);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  position: absolute;
+  opacity: 0.15;
+  background-color: rgba(255, 255, 255, 1);
+  height: 100vh;
+  width: 100vw;
+  z-index: 2;
+}
+
+.registBody2::before {
+  position: absolute;
+  content: "";
+  top: 0px;
+  left: 0px;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.registBlackBox {
+  position: color;
+  width: 100%;
+  height: 100%;
+  z-index: 3;
+  background-color: black;
+  opacity: 0.5;
+}
+
+.registForm {
+  padding: 40px 50px 40px 50px;
+  background-color: #000;
+  color: #e2b8ff;
+  position: absolute;
+  left: 490px;
+  top: 150px;
+  z-index: 4;
+  border-radius: 20px;
+  font-weight: bold;
+  font-size: 20px;
+  width: 500px;
+}
+
+.registTitle {
+  text-align: center;
+  font-weight: bold;
+  font-size: 30px;
+  color: #fff;
+  margin-bottom: 30px;
+}
+
+input[type="radio"] {
+  position: relative;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  border: 2px solid #b969df;
+  appearance: none;
+  cursor: pointer;
+  transition: background 0.5s;
+  margin-right: 10px;
+  margin-left: 15px;
+  vertical-align: text-top;
+  width: 13px;
+  height: 13px;
+}
+
+input[type="radio"]:checked {
+  background: #e2b8ff;
+  border: none;
+}
+
+.registInput {
+  color: #fff;
+  width: 330px;
+  font-size: 23px;
+  font-weight: bold;
+  border-radius: 5px;
+  border: 2px solid #b969df;
+  background-color: #13161f;
+}
+.registcheckBtn {
+  display: block;
+  position: relative;
+  padding: 5px 10px 5px 10px;
+  border: 2px solid #b969df;
+  color: #fff;
+  overflow: hidden;
+  background-color: transparent;
+  transition: color 0s 0.1s;
+  font-weight: bold;
+  font-size: 15px;
+  float: right;
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    transform: translateX(-100%);
+    transition: transform 0.25s cubic-bezier(0.65, 0.05, 0.36, 1);
+    color: #b969df;
+
+    z-index: -1;
+  }
+  &::before {
+    background-color: #b969df;
+    transition-delay: 0.025s;
+  }
+  &::after {
+    background-color: #b969df;
+  }
+  &:hover {
+    animation: ctButton 1s ease infinite;
+    -moz-animation: ctButton 1s ease infinite;
+    -webkit-animation: ctButton 1s ease infinite;
+    color: #000;
+    &::before,
+    &::after {
+      transform: translateY(0%);
+      transition: transform 0.25s cubic-bezier(0.65, 0.05, 0.36, 1);
+    }
+    &::after {
+      transition-delay: 0.025s;
+    }
+  }
+}
+
+.registBtn {
+  display: block;
+  position: relative;
+  padding: 5px 20px 5px 20px;
+  border: 3px solid #b969df;
+  border-radius: 30px;
+  color: #fff;
+  overflow: hidden;
+  background-color: transparent;
+  transition: color 0s 0.1s;
+  font-weight: bold;
+  font-size: 20px;
+  width: 100%;
+  margin-top: 10px;
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    transform: translateX(-100%);
+    transition: transform 0.25s cubic-bezier(0.65, 0.05, 0.36, 1);
+    color: #b969df;
+
+    z-index: -1;
+  }
+  &::before {
+    background-color: #b969df;
+    transition-delay: 0.025s;
+  }
+  &::after {
+    background-color: #b969df;
+  }
+  &:hover {
+    animation: ctButton 1s ease infinite;
+    -moz-animation: ctButton 1s ease infinite;
+    -webkit-animation: ctButton 1s ease infinite;
+    color: #000;
+    &::before,
+    &::after {
+      transform: translateY(0%);
+      transition: transform 0.25s cubic-bezier(0.65, 0.05, 0.36, 1);
+    }
+    &::after {
+      transition-delay: 0.025s;
+    }
+  }
+}
