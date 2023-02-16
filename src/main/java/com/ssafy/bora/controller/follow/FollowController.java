@@ -1,6 +1,5 @@
 package com.ssafy.bora.controller.follow;
 
-import com.ssafy.bora.dto.follow.ReqFollowDTO;
 import com.ssafy.bora.dto.follow.ResFollowDTO;
 import com.ssafy.bora.entity.follow.RedisFollow;
 import com.ssafy.bora.service.follow.IFollowService;
@@ -9,7 +8,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -18,13 +16,6 @@ import java.util.List;
 public class FollowController {
 
     private final IFollowService followService;
-
-    @ApiOperation(value = ",,,")
-    @PostMapping
-    public ResponseEntity<?> addFollow(@RequestBody List<ReqFollowDTO> reqFollowDtoList){
-        int[][] result = followService.addFollow(reqFollowDtoList);
-        return new ResponseEntity<>(result, HttpStatus.OK);
-    }
 
     @ApiOperation(value = "팔로우/언팔로우")
     @PostMapping("/redis")

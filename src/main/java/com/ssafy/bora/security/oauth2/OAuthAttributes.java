@@ -2,10 +2,8 @@ package com.ssafy.bora.security.oauth2;
 
 import com.ssafy.bora.entity.User;
 import com.ssafy.bora.entity.enums.Role;
-
 import lombok.Builder;
 import lombok.Getter;
-
 import java.util.Map;
 
 // 카카오에서 받아오는 사용자 정보를 담는 역할을 하는 클래스

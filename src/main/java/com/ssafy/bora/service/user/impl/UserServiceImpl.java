@@ -6,6 +6,7 @@ import com.ssafy.bora.entity.Privacy;
 import com.ssafy.bora.entity.User;
 import com.ssafy.bora.repository.privacy.IPrivacyRepository;
 import com.ssafy.bora.repository.user.IUserRepository;
+import com.ssafy.bora.service.follow.IFollowService;
 import com.ssafy.bora.service.user.IUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -21,13 +22,15 @@ public class UserServiceImpl implements IUserService {
 
     private final IUserRepository userRepository;
     private final IPrivacyRepository privacyRepository;
+    private final IFollowService followService;
 
     @Override
     public UserDTO findUserById(String id) {
         User findUser = userRepository.findById(id).get();
         UserDTO userDTO = UserDTO.convertEntityToDTO(findUser);
         if (findUser.isStatus()) {
-            userDTO.getStation(findUser);
+            int followCnt = followService.findAllFollowerCnt(userDTO.getId());
+            userDTO.getStation(findUser, followCnt);
         }
         return userDTO;
     }
@@ -63,17 +66,14 @@ public class UserServiceImpl implements IUserService {
     @Override
     public void createUserInfo(SignUpDTO signUpDTO) {
         // user 호출
-        // User user = userRepository.findById(userDTO.getId()).get();
         User user = userRepository.findById(signUpDTO.getUserId())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
         Privacy privacy = privacyRepository.findById(signUpDTO.getUserId())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
-        //user 닉네임 변경
-        user.updateNickname(signUpDTO.getNickName());
-
-        user.updateRole();
+        //user 정보 생성
+        user.createUser(signUpDTO);
 
         //user age 변경
         privacy.updatePrivacy(signUpDTO.getAge(), signUpDTO.getGender());

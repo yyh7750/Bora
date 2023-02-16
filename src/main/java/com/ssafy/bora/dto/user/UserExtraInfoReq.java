@@ -1,4 +1,4 @@
-package com.ssafy.bora.dto;
+package com.ssafy.bora.dto.user;
 
 import lombok.Getter;
 import lombok.ToString;
@@ -7,5 +7,4 @@ import lombok.ToString;
 @ToString
 public class UserExtraInfoReq {
     private String nickname;
-
 }

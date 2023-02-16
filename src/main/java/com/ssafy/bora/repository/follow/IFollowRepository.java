@@ -25,13 +25,11 @@ public interface IFollowRepository extends JpaRepository<Follow, Integer> {
     List<Follow> findAllFollowingList(@Param("viewerId") String viewerId);
 
     /**
-     * desc: 나를 팔로우한 시청자 목록 조회
-     * 
-     * @param djId
+     * desc: RDB에서 Redis로 모든 팔로우 정보를 보내는 메소드
+     *
      * @return
      */
-    @Query(value = "select f from Follow f where f.dj.id=:djId and f.isDelete=false")
-    List<Follow> findAllFollowerList(@Param("djId") String djId);
+    List<Follow> findAllByIsDeleteFalse();
 
     @Query(nativeQuery = true, value = "select f.dj_id, count(*) as followcnt from follow f group by f.dj_id order by followcnt desc limit 10")
     List<TopTenDTO> countTopTen();

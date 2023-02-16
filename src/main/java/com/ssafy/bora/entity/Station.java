@@ -22,6 +22,12 @@ public class Station implements Serializable {
     @JoinColumn(name = "user_id")
     private User user;
 
+    @Column(name = "thumbnail_img")
+    private String thumbnail;
+
+    @Column(name = "banner_img")
+    private String banner;
+
     @Column(length = 32)
     private String name;
     private LocalDateTime startTime;
@@ -97,5 +103,13 @@ public class Station implements Serializable {
         this.fri = station.isFri();
         this.sat = station.isSat();
         this.sun = station.isSun();
+    }
+
+    public void updateThumbNailImg(String thumbnail) {
+        this.thumbnail = thumbnail;
+    }
+
+    public void updateBannerImg(String banner) {
+        this.banner = banner;
     }
 }

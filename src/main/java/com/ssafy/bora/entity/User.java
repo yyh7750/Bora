@@ -16,10 +16,7 @@ import javax.persistence.*;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-@TypeDef(name = "json", typeClass = JsonType.class)
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-@DynamicUpdate
-@DynamicInsert
 @Builder
 public class User {
 
@@ -30,21 +27,21 @@ public class User {
     @Column(name = "nick_name", length = 10)
     private String nickName;
 
+    @Column(name = "is_delete")
     private boolean isDelete;
 
+<<<<<<<<< Temporary merge branch 1
     @Enumerated(EnumType.STRING)
     @Column(name = "role")
     private Role role;
 
+    private boolean status;
+
     @Column(length = 200)
     private String desc;
 
-    @Column
-    @JoinColumn(name = "profile_img")
+    @Column(name = "profile_img")
     private String profileImg;
-
-    @Column(name = "status", unique = true)
-    private boolean status;
 
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "user")
     private Station station;
@@ -54,13 +51,9 @@ public class User {
         this.isDelete = false;
     }
 
-    public static User createUser(SignUpDTO signUpDTO) {
-        User user = new User();
-        user.id = signUpDTO.getUserId();
-        user.nickName = signUpDTO.getNickName();
-        user.isDelete = false;
-        user.status = false;
-        return user;
+    public void createUser(SignUpDTO signUpDTO) {
+        this.nickName = signUpDTO.getNickName();
+        this.role = Role.CUSTOMER;
     }
 
     public User updateUser(String nickName, String desc) {
@@ -74,14 +67,6 @@ public class User {
         return this;
     }
 
-    public void updateNickname(String nickname) {
-        this.nickName = nickname;
-    }
-
-    public void updateDesc(String desc) {
-        this.desc = desc;
-    }
-
     public void updateProfileImg(String profileImg) {
         this.profileImg = profileImg;
     }
@@ -93,10 +78,5 @@ public class User {
 
     public void deleteStation() {
         this.status = false;
-    }
-
-
-    public void updateRole() {
-        this.role = Role.CUSTOMER;
     }
 }

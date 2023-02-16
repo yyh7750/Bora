@@ -44,7 +44,6 @@ public class JwtFilter extends OncePerRequestFilter {
         log.info(jwt);
         log.info("jwt filter");
 
-
         // 토큰이 정상적이면 SecurityContext에 set.
         if (StringUtils.hasText(jwt) && jwtProvider.validateToken(jwt)) {
             Authentication authentication = jwtProvider.getAuthentication(jwt);
