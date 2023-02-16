@@ -16,7 +16,7 @@ import java.util.NoSuchElementException;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/storybox")
+@RequestMapping("/storybox")
 @CrossOrigin(origins = "*")
 public class StoryboxController {
 
@@ -30,7 +30,7 @@ public class StoryboxController {
     }
 
     @ApiOperation(value = "사연함 조회(dj)")
-    @GetMapping("/list/{dj-id}/{storybox}")
+    @GetMapping("/list/{dj-id}")
     public ResponseEntity<Page<ResStoryBoxDTO>> findAllStoryBox(@PathVariable(name = "dj-id") String djId, Pageable pageable) {
         Page<ResStoryBoxDTO> storyBoxDtoList = storyBoxService.findAllStoryBox(djId, pageable);
 
