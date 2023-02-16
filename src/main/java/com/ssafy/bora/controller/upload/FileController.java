@@ -14,12 +14,12 @@ import java.util.Map;
 @RequiredArgsConstructor
 @RestController
 @Slf4j
-@RequestMapping("api/img")
+@RequestMapping("/img")
 public class FileController {
     private final FileUploadService fileUploadService;
 
-    @PostMapping("/file-upload/profile")
-    public ResponseEntity<?> ProfileUpload(@RequestParam("file") MultipartFile file, @RequestParam String userId) {
+    @PostMapping("/file-upload/profile/{userId}")
+    public ResponseEntity<?> ProfileUpload(@RequestBody MultipartFile file, @PathVariable String userId) {
         if (file.isEmpty()) {
             throw new RuntimeException("File is empty");
         }
@@ -31,10 +31,11 @@ public class FileController {
         return new ResponseEntity<>(fileVO, HttpStatus.CREATED);
     }
 
-    @PostMapping("/file-upload/thumbnail")
-    public ResponseEntity<?> thumbnailUpload(@RequestParam("file") MultipartFile file, @RequestParam String userId) {
+    @PostMapping("/file-upload/thumbnail/{userId}")
+    public ResponseEntity<?> thumbnailUpload(@RequestBody MultipartFile file, @PathVariable String userId) {
         if (file.isEmpty()) {
             throw new RuntimeException("File is empty");
+
         }
         log.info("file 들어 왔는가 ?:{}",file );
         Map<String, String> authInfo = new HashMap<>();
@@ -44,8 +45,8 @@ public class FileController {
         return new ResponseEntity<>(fileVO, HttpStatus.CREATED);
     }
 
-    @PostMapping("/file-upload/banner")
-    public ResponseEntity<?> bannerUpload(@RequestParam("file") MultipartFile file, @RequestParam String userId) {
+    @PostMapping("/file-upload/banner/{userId}")
+    public ResponseEntity<?> bannerUpload(@RequestBody MultipartFile file, @PathVariable String userId) {
         if (file.isEmpty()) {
             throw new RuntimeException("File is empty");
         }
