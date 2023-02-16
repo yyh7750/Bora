@@ -10,7 +10,7 @@ const room_info = async (userId) => {
     } = await axios({
       method: "GET",
       // url: "https://i8b301.p.ssafy.io:8445/follow-broad/" + { userId },
-      url: "http://localhost:8080/api/follow-broad/" + { userId },
+      url: "https://i8b301.p.ssafy.io/api/follow-broad/" + { userId },
     });
     console.log(content);
     return content;

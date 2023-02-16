@@ -36,7 +36,7 @@ const VideoList = () => {
 
   //-------------- 버튼 선택시 렌더링 ---------------
   useEffect(() => {
-    const API_URL = `http://localhost:8080/api/main/live-broad/`;
+    const API_URL = `https://i8b301.p.ssafy.io/api/main/live-broad/`;
     axios({
       url: API_URL,
       method: "GET",
@@ -102,28 +102,7 @@ const VideoList = () => {
           <option>팔로워순</option>
         </select>
       </div>
-      <div className="container">
-        <label>
-          <input type="radio" value="cal" />
-          <span>잔잔한</span>
-        </label>
-        <label>
-          <input type="radio" value="exc" />
-          <span>신나는</span>
-        </label>
-        <label>
-          <input type="radio" value="qut" />
-          <span>조용한</span>
-        </label>
-        <label>
-          <input type="radio" value="liv" />
-          <span>활기찬</span>
-        </label>
-        <label>
-          <input type="radio" value="edu" />
-          <span>교육적인</span>
-        </label>
-      </div>
+      <div></div>
     </>
   );
 };

@@ -19,7 +19,7 @@ const DetailBoard = () => {
 
   useEffect(() => {
     //1.axios요청으로 사연리스트 객체 받아오기
-    const API_URL = `http://localhost:8080/api/storybox/list/${djId}/${storyboxId}`;
+    const API_URL = `https://i8b301.p.ssafy.io/api/storybox/list/${djId}/${storyboxId}`;
     axios({
       url: API_URL,
       method: "GET",
@@ -41,7 +41,7 @@ const DetailBoard = () => {
     //이때 axios요청해서 해당 사연이 가려진 새로운 사연리스트 받아서 페이지에 세팅
     //아니오 누르면 모달창 false하고 사연리스트 이동x
 
-    const API_URL = `http://localhost:8080/api/storybox/list/${storyboxId}`;
+    const API_URL = `https://i8b301.p.ssafy.io/api/api/storybox/list/${storyboxId}`;
     axios
       .delete(API_URL)
       .then((res) => {
@@ -58,7 +58,7 @@ const DetailBoard = () => {
       djId: "3",
       viewerId: writer,
     };
-    const API_URL = `http://localhost:8080/api/users/blacklist`;
+    const API_URL = `https://i8b301.p.ssafy.io/api/users/blacklist`;
     axios({
       url: API_URL,
       method: "POST",

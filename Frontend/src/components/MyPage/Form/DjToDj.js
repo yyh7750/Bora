@@ -29,7 +29,7 @@ const DjToDj = () => {
   //DJ정보렌더링(본인)
   useEffect(() => {
     console.log(userId);
-    const API_URL = `http://localhost:8080/users/${userId}`;
+    const API_URL = `https://i8b301.p.ssafy.io/api/users/${userId}`;
     axios({
       url: API_URL,
       method: "GET",

@@ -63,7 +63,7 @@ const ModifyBroadcast = () => {
       sat: dayArr[5],
       sun: dayArr[6],
     };
-    const API_URL = `http://localhost:8080/stations`;
+    const API_URL = `https://i8b301.p.ssafy.io/api/stations`;
     axios({
       url: API_URL,
       method: "PATCH",
@@ -80,7 +80,7 @@ const ModifyBroadcast = () => {
 
   const checkBroadcastTitle = () => {
     const modifytitle = document.getElementById("modifyBroadcastTitle").value;
-    const API_URL = `http://localhost:8080/stations/check/${modifytitle}`;
+    const API_URL = `https://i8b301.p.ssafy.io/api/stations/check/${modifytitle}`;
     axios({
       url: API_URL,
       method: "GET",

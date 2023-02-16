@@ -72,7 +72,7 @@ const ModifyProfile = (props) => {
       nickName: document.getElementById("nickNameInput").value,
       desc: document.getElementById("userSayInput").value,
     };
-    const API_URL = `http://localhost:8080/users`;
+    const API_URL = `https://i8b301.p.ssafy.io/api/users`;
     axios({
       url: API_URL,
       method: "PATCH",
