@@ -30,7 +30,6 @@ public class User {
     @Column(name = "is_delete")
     private boolean isDelete;
 
-<<<<<<<<< Temporary merge branch 1
     @Enumerated(EnumType.STRING)
     @Column(name = "role")
     private Role role;
