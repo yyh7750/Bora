@@ -52,13 +52,14 @@ public class BroadcastServiceImpl implements IBroadcastService {
     public List<MyFollowBroadcastDTO> findFollowBroadcast(String id) {
         List<MyFollowBroadcastDTO>mfbDtoList = new ArrayList<>();
         List<Follow>list =followRepository.findAllFollowingList(id);
-        for(Follow follow :list){
+        for(Follow follow : list){
             //내가 팔로우하는 방송국
             Station station = stationRepository.findStationByDjId(follow.getDj().getId());
+            if(station==null) continue;
             //방송중인 유저
             Broadcast broadcast = broadcastRepository.findByUserAndEndBroadIsNull(follow.getDj());
-            boolean isLive= broadcast!=null;
-            MyFollowBroadcastDTO mfbDTO = MyFollowBroadcastDTO.convertEntityToMyFollowBroadcastDTO(isLive,broadcast.getSessionId(),station);
+            if(broadcast==null) continue;
+            MyFollowBroadcastDTO mfbDTO = MyFollowBroadcastDTO.convertEntityToMyFollowBroadcastDTO(broadcast.getSessionId(),station);
             mfbDtoList.add(mfbDTO);
         }
         return mfbDtoList;

@@ -3,7 +3,13 @@ package com.ssafy.bora.entity;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.ssafy.bora.dto.sign_up.SignUpDTO;
 import com.ssafy.bora.entity.enums.Role;
+import com.ssafy.bora.vo.FileVO;
+import com.vladmihalcea.hibernate.type.json.JsonType;
 import lombok.*;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.TypeDef;
+
 import javax.persistence.*;
 
 @Entity
@@ -39,6 +45,7 @@ public class User {
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "user")
     private Station station;
 
+
     public void renewUser() {
         this.isDelete = false;
     }
@@ -62,6 +69,7 @@ public class User {
     public void updateProfileImg(String profileImg) {
         this.profileImg = profileImg;
     }
+
 
     public void createStation() {
         this.status = true;

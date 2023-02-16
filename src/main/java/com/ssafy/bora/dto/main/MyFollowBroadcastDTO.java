@@ -14,14 +14,14 @@ public class MyFollowBroadcastDTO {
     private String userUrl;
     private String nickName;
     private String stationName;
-    private boolean isLive;
-    public static MyFollowBroadcastDTO convertEntityToMyFollowBroadcastDTO(Boolean isLive,String sessionId, Station station){
+    public static MyFollowBroadcastDTO convertEntityToMyFollowBroadcastDTO(String sessionId, Station station){
         MyFollowBroadcastDTO mfbDTO = new MyFollowBroadcastDTO();
         mfbDTO.sessionId=sessionId;
+        mfbDTO.bannerUrl=station.getBanner();
+        mfbDTO.userUrl=station.getUser().getProfileImg();
         mfbDTO.userId=station.getUser().getId();
         mfbDTO.nickName=station.getUser().getNickName();
         mfbDTO.stationName=station.getName();
-        mfbDTO.isLive=isLive;
         return mfbDTO;
     }
 

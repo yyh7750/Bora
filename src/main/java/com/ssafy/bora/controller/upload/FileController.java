@@ -18,41 +18,42 @@ import java.util.Map;
 public class FileController {
     private final FileUploadService fileUploadService;
 
-    @PostMapping("/file-upload/profile")
-    public ResponseEntity<?> ProfileUpload(@RequestBody MultipartFile file, @RequestBody String userId) {
+    @PostMapping("/file-upload/profile/{userId}")
+    public ResponseEntity<?> ProfileUpload(@RequestBody MultipartFile file, @PathVariable String userId) {
         if (file.isEmpty()) {
             throw new RuntimeException("File is empty");
         }
-        log.info("file 들어 왔는가 ?:{}", file);
+        log.info("file 들어 왔는가 ?:{}",file );
         Map<String, String> authInfo = new HashMap<>();
 
-        FileVO fileVO = fileUploadService.fileUpload(file, userId, "profile");
+        FileVO fileVO = fileUploadService.fileUpload(file,userId,"profile");
 
         return new ResponseEntity<>(fileVO, HttpStatus.CREATED);
     }
 
-    @PostMapping("/file-upload/thumbnail")
-    public ResponseEntity<?> thumbnailUpload(@RequestParam("file") MultipartFile file, @RequestParam String userId) {
+    @PostMapping("/file-upload/thumbnail/{userId}")
+    public ResponseEntity<?> thumbnailUpload(@RequestBody MultipartFile file, @PathVariable String userId) {
         if (file.isEmpty()) {
             throw new RuntimeException("File is empty");
+
         }
-        log.info("file 들어 왔는가 ?:{}", file);
+        log.info("file 들어 왔는가 ?:{}",file );
         Map<String, String> authInfo = new HashMap<>();
 
-        FileVO fileVO = fileUploadService.fileUpload(file, userId, "thumbnail");
+        FileVO fileVO = fileUploadService.fileUpload(file,userId, "thumbnail");
 
         return new ResponseEntity<>(fileVO, HttpStatus.CREATED);
     }
 
-    @PostMapping("/file-upload/banner")
-    public ResponseEntity<?> bannerUpload(@RequestParam("file") MultipartFile file, @RequestParam String userId) {
+    @PostMapping("/file-upload/banner/{userId}")
+    public ResponseEntity<?> bannerUpload(@RequestBody MultipartFile file, @PathVariable String userId) {
         if (file.isEmpty()) {
             throw new RuntimeException("File is empty");
         }
-        log.info("file 들어 왔는가 ?:{}", file);
+        log.info("file 들어 왔는가 ?:{}",file );
         Map<String, String> authInfo = new HashMap<>();
 
-        FileVO fileVO = fileUploadService.fileUpload(file, userId, "banner");
+        FileVO fileVO = fileUploadService.fileUpload(file,userId, "banner");
 
         return new ResponseEntity<>(fileVO, HttpStatus.CREATED);
     }
