@@ -63,15 +63,14 @@ const ModifyBroadcast = () => {
       sat: dayArr[5],
       sun: dayArr[6],
     };
-    const API_URL = `http://localhost:8080/api/stations`;
-    console.log(stationInfo);
+    const API_URL = `http://localhost:8080/stations`;
     axios({
       url: API_URL,
       method: "PATCH",
       data: stationInfo,
     })
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         window.location.reload();
       })
       .catch((err) => {
@@ -81,7 +80,7 @@ const ModifyBroadcast = () => {
 
   const checkBroadcastTitle = () => {
     const modifytitle = document.getElementById("modifyBroadcastTitle").value;
-    const API_URL = `http://localhost:8080/api/stations/check/${modifytitle}`;
+    const API_URL = `http://localhost:8080/stations/check/${modifytitle}`;
     axios({
       url: API_URL,
       method: "GET",
@@ -137,7 +136,7 @@ const ModifyBroadcast = () => {
           <br />
           <input type="text" className="desc" id="modifyDesc" />
           <br />
-          <Link to="/broadcast">
+          <Link to="/broadcasts">
             <Button
               name="방송정보 수정"
               style={{ float: "left" }}

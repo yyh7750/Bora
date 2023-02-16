@@ -15,7 +15,7 @@ import thumbnailImg from "../../../assets/4.jpg";
 const MakeBroadcast = () => {
   const formData = new FormData();
   const createBroadcast = () => {
-    const userId = "3";
+    const userId = window.localStorage.getItem("userId");
     const arr = [];
     const query = 'input[name="day"]:checked';
     const selectedEls = document.querySelectorAll(query);
@@ -64,14 +64,8 @@ const MakeBroadcast = () => {
       sun: dayArr[6],
     };
 
-    console.log(stationInfo);
-
-    const API_URL = `http://localhost:8080/api/stations`;
+    const API_URL = `http://localhost:8080/stations`;
     axios({
-      headers: {
-        "Content-Type": "multipart/form-data",
-        "Access-Control-Allow-Origin": "*",
-      },
       url: API_URL,
       method: "POST",
       data: stationInfo,
@@ -298,7 +292,7 @@ const MakeBroadcast = () => {
           <br />
           <input type="text" id="broadcastDesc" className="desc" />
           <br />
-          <Link to="/broadcast">
+          <Link to="/broadcasts">
             <Button2
               name="생성하기"
               value={createBroadcast}

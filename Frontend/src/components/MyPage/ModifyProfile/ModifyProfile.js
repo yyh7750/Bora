@@ -30,19 +30,23 @@ const ModifyProfile = (props) => {
         preview_URL: preview_URL,
       }));
       const formData = new FormData();
+      console.log(e.target.files[0]);
       formData.append("files", e.target.files[0]);
       for (let value of formData.values()) {
         console.log(value);
       }
+      const userId = window.localStorage.getItem("userId");
+      const HEADERS = {
+        "Content-Type": "multipart/form-data",
+        "Access-Control-Allow-Origin": "*",
+      };
       //이미지 axios요청
-      const IMG_URL = `http://localhost:8080/img/file-upload`;
+      const IMG_URL = `http://localhost:8080/img/file-upload/profile`;
       axios({
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
+        headers: HEADERS,
         url: IMG_URL,
         method: "POST",
-        data: formData,
+        params: { file: formData, userId: userId },
       })
         .then((res) => {
           console.log(res);
@@ -61,7 +65,7 @@ const ModifyProfile = (props) => {
 
   const modifyProfileInfo = () => {
     const DATA = {
-      id: "13",
+      id: userId,
       nickName: document.getElementById("nickNameInput").value,
       desc: document.getElementById("userSayInput").value,
     };
@@ -72,9 +76,9 @@ const ModifyProfile = (props) => {
       data: DATA,
     })
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         dispatch(profileActions.closeModifyProfile());
-        // window.location.reload();
+        window.location.reload();
       })
       .catch((err) => {
         console.log(err);

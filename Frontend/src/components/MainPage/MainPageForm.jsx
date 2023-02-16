@@ -29,7 +29,13 @@ const MainPageForm = () => {
     },
   };
 
-  localStorage.setItem("userId", "2");
+  useEffect(() => {
+    const urlSearch = new URLSearchParams(window.location.search);
+    const accessToken = urlSearch.get("token");
+    window.localStorage.setItem("token", accessToken);
+    const userId = urlSearch.get("userId");
+    window.localStorage.setItem("userId", userId);
+  }, []);
 
   return (
     <motion.div variants={containerVariants} initial="hidden" animate="visible">
