@@ -2,12 +2,13 @@ import { useSelector, useDispatch } from "react-redux";
 import { loginActions } from "../../store/login";
 import axios from "axios";
 import { useEffect } from "react";
+import "./UserRegist.scss";
 
 const UserRegist = () => {
   useEffect(() => {
     const urlSearch = new URLSearchParams(window.location.search);
-    const accessToken = urlSearch.get("atk");
-    window.localStorage.setItem("atk", accessToken);
+    const accessToken = urlSearch.get("token");
+    window.localStorage.setItem("token", accessToken);
   }, []);
   // axios.get(`/users/dummyuser`).then((res) => console.log(res));
 
@@ -48,7 +49,8 @@ const UserRegist = () => {
     // };
     // console.log(userInfo);
 
-    const API_URL = `http://localhost:8080/api/sign-up`;
+    const API_URL = `https://i8b301.p.ssafy.io/api/sign-up`;
+
     axios({
       url: API_URL,
       method: "POST",
@@ -62,7 +64,7 @@ const UserRegist = () => {
       .then((res) => {
         console.log(res);
         window.localStorage.setItem("userId", res.data.id);
-        window.location.href = "http://localhost:3000/main";
+        window.location.href = "https://i8b301.p.ssafy.io/main";
       })
       .catch((err) => {
         console.log(err);
@@ -71,7 +73,7 @@ const UserRegist = () => {
 
   const checkNickname = () => {
     const nickname = document.getElementById("inputNickname").value;
-    const API_URL = `http://localhost:8080/api/sign-up/${nickname}`;
+    const API_URL = `https://i8b301.p.ssafy.io/api/sign-up/${nickname}`;
     axios({
       url: API_URL,
       method: "GET",
@@ -96,40 +98,70 @@ const UserRegist = () => {
   };
 
   return (
-    <div>
-      <div style={{ marginBottom: "100px" }}>회원가입</div>
-      <label>
-        이메일
-        <input type="text" id="inputEmail" />
-      </label>
-      <br />
-      <label>
-        닉네임 <input type="text" id="inputNickname" />
-        <button onClick={checkNickname}>중복체크</button>
-        <p id="resTitle"></p>
-      </label>
-      <br />
-      <div>회원가입</div>
-      <label>
-        <input type="radio" value="m" name="gender" onClick={genderHandler} />
-        남성
-        <input type="radio" value="f" name="gender" onClick={genderHandler} />
-        여성
-      </label>
+    <div className="registBody">
+      <div className="registBody2"></div>
+      <div className="registBlackBox"></div>
+      <div className="registForm">
+        <div className="registTitle">회원가입</div>
+        <label>
+          이메일{" "}
+          <input
+            type="text"
+            style={{ marginBottom: "10px" }}
+            id="inputEmail"
+            className="registInput"
+          />
+        </label>
+        <br />
+        <label>
+          <div>
+            닉네임{" "}
+            <input type="text" id="inputNickname" className="registInput" />
+            <button onClick={checkNickname} className="registcheckBtn">
+              중복체크
+            </button>
+          </div>
+          <p id="resTitle"></p>
+        </label>
+        <label style={{ verticalAlign: "-1px" }}>
+          성별
+          <div style={{ marginBottom: "10px", marginTop: "5px" }}>
+            <input
+              type="radio"
+              value="m"
+              name="gender"
+              onClick={genderHandler}
+            />
+            남성
+            <input
+              type="radio"
+              value="f"
+              name="gender"
+              onClick={genderHandler}
+            />
+            여성
+          </div>
+        </label>
 
-      <br />
-
-      <label>
-        <input type="radio" value="1" name="age" onClick={ageHandler} />
-        10대 이하
-        <input type="radio" value="2" name="age" onClick={ageHandler} />
-        20대
-        <input type="radio" value="3" name="age" onClick={ageHandler} />
-        30대
-        <input type="radio" value="4" name="age" onClick={ageHandler} />
-        40대 이상
-      </label>
-      <button onClick={sendUserInfo}>제출</button>
+        <label>
+          나이
+          <br />
+          <div style={{ marginBottom: "10px", marginTop: "5px" }}>
+            <input type="radio" value="1" name="age" onClick={ageHandler} />
+            10대 이하
+            <input type="radio" value="2" name="age" onClick={ageHandler} />
+            20대
+            <input type="radio" value="3" name="age" onClick={ageHandler} />
+            30대
+            <input type="radio" value="4" name="age" onClick={ageHandler} />
+            40대 이상
+          </div>
+        </label>
+        <br />
+        <button onClick={sendUserInfo} className="registBtn">
+          제출
+        </button>
+      </div>
     </div>
   );
 };

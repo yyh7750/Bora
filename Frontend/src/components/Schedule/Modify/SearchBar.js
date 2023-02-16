@@ -22,12 +22,14 @@ const SearchBar = ({
   colorData = "#FFFFFF",
   // idNum,
 }) => {
+  const userId = localStorage.getItem("userId");
   const [searchValue, setSearchValue] = useState("");
   const handleInputChange = (event) => {
     setSearchValue(event.target.value);
   };
   const arr = [];
   const arr2 = useSelector((state) => state.schedule.arr);
+  const [playlist, setPlaylist] = useState([]);
   const {
     formState: {},
     reset,
@@ -55,7 +57,7 @@ const SearchBar = ({
   ]);
 
   const filteredProducts = products.filter((product) => {
-    return product.name.includes(searchValue);
+    return product.stationName.includes(searchValue);
   });
   const dispatch = useDispatch();
   const Submit = useCallback(
@@ -96,16 +98,15 @@ const SearchBar = ({
         userId: userId,
         djName: dj,
       };
-      dispatch(scheduleActions.setArr(returnData));
-      console.log(arr2);
-
+      setPlaylist(playlist.concat(returnData));
       settimeTableData((oldTimeData) => ({
         ...oldTimeData,
         [day]: [...oldTimeData[day], data],
       }));
       handleClose();
-      // window.location.reload();
-      console.log(arr2);
+      window.location.reload();
+      console.log(playlist);
+      dispatch(scheduleActions.setArr(playlist));
     },
     [handleClose, settimeTableData, timeTableData]
   );
@@ -121,19 +122,21 @@ const SearchBar = ({
                   type="button"
                   onClick={() =>
                     Submit(
-                      product.name,
+                      product.stationName,
                       product.day,
-                      product.start,
-                      product.end,
-                      product.dj,
-                      product.userId
+                      product.startTime,
+                      product.endTime,
+                      product.djName,
+                      userId
                     )
                   }
                 >
-                  <p id={`name${index}`}>{product.name}</p>
-                  <p id={`day${index}`}>{product.day}</p>
-                  <p id={`start${index}`}>{product.start}</p>
-                  <p id={`end${index}`}>{product.end}</p>
+                  방송국명 : <p id={`name${index}`}>{product.stationName}</p>
+                  <br />
+                  요일 : <p id={`day${index}`}>{product.day}</p>
+                  <br />
+                  시간 : <p id={`start${index}`}>{product.startTime}</p> ~
+                  <p id={`end${index}`}>{product.endTime}</p>
                 </Button>
               </form>
             </li>

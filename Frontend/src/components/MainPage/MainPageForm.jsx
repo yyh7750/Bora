@@ -3,8 +3,16 @@ import { motion } from "framer-motion";
 import Carousel from "../../UI/Carousel/Carousel";
 import "./MainPageForm.scss";
 import MyOnAir from "../MyOnAir/MyOnAir";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const MainPageForm = () => {
+  const navigate = useNavigate();
+  // const dispatch = useDispatch();
+
+  const moveToOnAir = () => {
+    navigate("");
+  };
   const containerVariants = {
     hidden: {
       opacity: 0,
@@ -21,6 +29,20 @@ const MainPageForm = () => {
       transition: { ease: "easeInOut" },
     },
   };
+
+  useEffect(() => {
+    const API_URL = `http://localhost:8080/api/main/top-ten`;
+    axios({
+      url: API_URL,
+      method: "GET",
+    })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   localStorage.setItem("userId", "2");
 

@@ -1,0 +1,44 @@
+.timeCircle {
+  background-color: #d8a3ff;
+  color: #fff;
+  width: 75px;
+  height: 75px;
+  border-radius: 75px;
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 75px;
+  margin-top: 2rem;
+  margin-bottom: 1.5rem;
+  margin-left: 1.3rem;
+  //   float: left;
+}
+
+.schedule_img {
+  width: 600px;
+  height: 400px;
+  left: 337px;
+  top: 606px;
+  //   float: left;
+}
+
+.scheduleImg {
+  border-radius: 20px;
+  border: 8px solid #e2b8ff;
+  border-style: double;
+  border-radius: 20px;
+  //   float: left;
+  width: 50%;
+}
+
+.schedule_desc {
+  //   float: left;
+  width: 50%;
+}
+
+#schedule_descs {
+  //   float: left;
+  font-size: 20px;
+  font-weight: bold;
+  color: #d8a3ff;
+}

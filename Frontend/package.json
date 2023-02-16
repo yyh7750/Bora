@@ -21,8 +21,10 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.2.6",
     "framer-motion": "^9.0.0",
+
     "jquery": "^3.6.3",
     "moment": "^2.29.4",
+
     "node-sass": "^7.0.3",
     "node-scss": "^7.0.3",
     "openvidu-browser": "^2.25.0",
@@ -31,17 +33,17 @@
     "react-helmet": "^6.1.0",
     "react-hook-form": "^7.43.1",
     "react-icons": "^4.7.1",
-    "react-lodash": "^0.1.2",
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.0.0",
     "react-scripts": "5.0.1",
-    "recoil": "^0.7.3",
+    "recoil": "0.7.3",
     "redux": "^4.2.1",
     "redux-persist": "^6.0.0",
     "simplebar-react": "^3.2.0",
-    "styled-components": "^5.3.6",
     "swiper": "^9.0.1",
     "uuid": "^9.0.0",
+    "react-lodash": "^0.1.2",
+    "styled-components": "^5.3.6",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -71,6 +73,5 @@
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
   "main": "index.js",
   "author": "",
-  "license": "ISC",
-  "proxy": "http://localhost:8080"
+  "license": "ISC"
 }

@@ -16,14 +16,15 @@ const UserToUser = () => {
   const dispatch = useDispatch();
   const [nickname, setNickname] = useState();
   const [desc, setDesc] = useState();
-  const userId = window.localStorage.getItem("userId");
+  const userId = "13";
   useEffect(() => {
-    const API_URL = `http://localhost:8080/api/users/${userId}`;
+    const API_URL = `http://localhost:8080/users/${userId}`;
     axios({
       url: API_URL,
       method: "GET",
     })
       .then((res) => {
+        console.log(res);
         setNickname(res.data.nickName);
         setDesc(res.data.desc);
         dispatch(profileActions.setProfile(res.data));

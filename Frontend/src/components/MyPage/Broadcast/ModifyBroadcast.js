@@ -81,7 +81,7 @@ const ModifyBroadcast = () => {
 
   const checkBroadcastTitle = () => {
     const modifytitle = document.getElementById("modifyBroadcastTitle").value;
-    const API_URL = `http://localhost:8080/api/stations/check/${modifytitle}`;
+    const API_URL = `http://localhost:8080/stations/check/${modifytitle}`;
     axios({
       url: API_URL,
       method: "GET",
@@ -91,9 +91,11 @@ const ModifyBroadcast = () => {
         if (res.data) {
           document.getElementById("resTitle").innerHTML =
             "사용가능한 방송국명입니다.";
+          document.getElementById("resTitle").style.color = "green";
         } else {
           document.getElementById("resTitle").innerHTML =
             "이미 사용중인 방송국명입니다.";
+          document.getElementById("resTitle").style.color = "red";
         }
       })
       .catch((err) => {
@@ -119,32 +121,35 @@ const ModifyBroadcast = () => {
         <img src={thumbnailImg} alt="썸네일이미지" className="thumbnailImg" />
       </div>
       <div className="broadcastInfo">
-        <div className="titleLine">
+        <div className="titleLine" style={{ display: "flex" }}>
           <input
             type="text"
             placeholder="방송국명을 입력해주세요"
             className="modifyBroadcastTitle"
             id="modifyBroadcastTitle"
+            style={{ flex: "2" }}
           />
-          <p id="resTitle"></p>
-          <Button value={checkBroadcastTitle} name="중복확인"></Button>
+          <Button
+            value={checkBroadcastTitle}
+            name="중복확인"
+            style={{ flex: "1" }}
+          ></Button>
         </div>
-        <hr />
-        <div style={{ float: "left" }}>
+        <p id="resTitle"></p>
+        <div id="modifyTime">
           {day} {starttime}~{endtime}
-          <br />
-          {category}
-          <br />
-          <input type="text" className="desc" id="modifyDesc" />
-          <br />
-          <Link to="/broadcast">
-            <Button
-              name="방송정보 수정"
-              style={{ float: "left" }}
-              value={modifyBroadcast}
-            ></Button>
-          </Link>
         </div>
+        {/* <div style={{ float: "left" }}> */}
+        <div id="modifyCategory">{category} 일단 넣어둠 </div>
+        <input type="text" className="desc" id="modifyDesc" />
+        <Link to="/broadcast">
+          <Button
+            name="방송정보 수정"
+            style={{ float: "left" }}
+            value={modifyBroadcast}
+          ></Button>
+        </Link>
+        {/* </div> */}
       </div>
     </div>
   );

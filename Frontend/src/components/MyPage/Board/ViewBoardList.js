@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Pagination from "./Pagination";
-// import moment from "moment";
+import moment from "moment";
 import { useDispatch, useSelector } from "react-redux";
 import { boardActions } from "../../../store/board";
 

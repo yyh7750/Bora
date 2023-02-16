@@ -11,12 +11,6 @@ const GoButton = (props) => {
         </span>
         <span className="button-text">{props.value}</span>
       </button>
-      <button id="goButton" class="learn-more">
-        <span class="circle" aria-hidden="true">
-          <span class="icon arrow"></span>
-        </span>
-        <span class="button-text">{props.value}</span>
-      </button>
     </div>
   );
 };
