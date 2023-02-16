@@ -42,11 +42,15 @@ public class BroadcastServiceImpl implements IBroadcastService {
     @Override
     public List<BasicMainDTO> findTopTenBroadcast() {
         List<BasicMainDTO>topTenList = new ArrayList<>();
-        List<TopTenDTO>list = followRepository.countTopTen();
-        for(TopTenDTO ttDto:list){
-            Station station =stationRepository.findStationByDjId(ttDto.getDj_Id());
-            BasicMainDTO bmDTO= BasicMainDTO.convertEntityToBasicMainDTO(station, ttDto);
-            topTenList.add(bmDTO);
+        try {
+            List<TopTenDTO> list = followRepository.countTopTen();
+            for (TopTenDTO ttDto : list) {
+                Station station = stationRepository.findStationByDjId(ttDto.getDj_Id());
+                BasicMainDTO bmDTO = BasicMainDTO.convertEntityToBasicMainDTO(station, ttDto);
+                topTenList.add(bmDTO);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
         }
         return topTenList;
     }
