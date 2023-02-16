@@ -9,10 +9,8 @@ import org.springframework.http.HttpStatus;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ErrorResponse {
-
     private String message;
-
     private String error;
-
     private int status;
+
 }

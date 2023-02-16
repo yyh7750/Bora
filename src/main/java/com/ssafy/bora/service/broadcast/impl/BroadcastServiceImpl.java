@@ -16,6 +16,7 @@ import com.ssafy.bora.repository.station.IStationRepository;
 import com.ssafy.bora.repository.user.IUserRepository;
 import com.ssafy.bora.service.broadcast.IBroadcastService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,6 +29,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 @Transactional
+@Slf4j
 public class BroadcastServiceImpl implements IBroadcastService {
 
     private final BroadcastRepositoryCustomImpl broadcastRepositoryCustomImpl;
@@ -68,9 +70,13 @@ public class BroadcastServiceImpl implements IBroadcastService {
 
     @Override
     public List<BroadcastResDTO> findAllLiveBroadcast(String category, List<String> mood, String sortBy) {
-        SearchCondition searchCondition = new SearchCondition(category, mood);
-        if(sortBy!=null&&sortBy.equals("recommend")){
-            sortBy=null;
+            SearchCondition searchCondition = new SearchCondition(category, mood);
+        try {
+            if (sortBy != null && sortBy.equals("recommend")) {
+                sortBy = null;
+            }
+        }catch(Exception e){
+            e.printStackTrace();
         }
         return broadcastRepository.findAllByCategoryAndSort(searchCondition,sortBy);
     }

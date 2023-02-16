@@ -4,16 +4,19 @@ import com.ssafy.bora.dto.main.BroadcastReqDTO;
 import com.ssafy.bora.service.broadcast.IBroadcastService;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 @RestController
 @RequiredArgsConstructor
 @CrossOrigin("*")
 @RequestMapping("/main")
+@Slf4j
 public class MainController {
 
     private final IBroadcastService broadcastService;
@@ -21,7 +24,12 @@ public class MainController {
     @ApiOperation(value = "메인 / TOPTEN")
     @GetMapping("/top-ten")
     public ResponseEntity<?> findTopTen() {
-        return new ResponseEntity<>(broadcastService.findTopTenBroadcast(), HttpStatus.OK);
+        try {
+            return new ResponseEntity<>(broadcastService.findTopTenBroadcast(), HttpStatus.OK);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
     }
 
     @ApiOperation(value = "메인 / 내가 팔로우한 방송들)")
