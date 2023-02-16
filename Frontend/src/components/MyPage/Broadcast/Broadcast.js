@@ -20,7 +20,7 @@ import axios from "axios";
 const Broadcast = () => {
   const dispatch = useDispatch();
 
-  const userId = window.localStorage.getItem("userId");
+  const userId = "3";
   const [category, setCategory] = useState("");
   const [description, setDescription] = useState("");
   const [starttime, setStarttime] = useState("");

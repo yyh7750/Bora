@@ -6,14 +6,14 @@ $mailColor: #ffffff;
 
   &:hover .mail {
     top: 100%;
-    transform: translate(500%, 220%);
+    transform: translate(510%, 220%);
   }
 
   .mail {
     position: absolute;
     top: 70%;
     left: 50%;
-    transform: translate(500%, 240%);
+    transform: translate(510%, 240%);
     width: 80px;
     height: 40px;
     background: darken($mailColor, 5%);
@@ -29,7 +29,7 @@ $mailColor: #ffffff;
       left: 50%;
       width: 60%;
       height: 140%;
-      transform: translate(-50%, -70%) rotate(-45deg) skewX(20deg) skewY(20deg);
+      transform: translate(-52%, -70%) rotate(-45deg) skewX(20deg) skewY(20deg);
       border: 2px solid $boxColor;
       border-radius: inherit;
       background: $mailColor;
@@ -40,7 +40,7 @@ $mailColor: #ffffff;
     position: absolute;
     bottom: 100%;
     left: 50%;
-    transform: translate(400%, 620%);
+    transform: translate(408%, 620%);
     width: 100px;
     height: 25px;
     background: $boxColor;
@@ -66,7 +66,7 @@ $mailColor: #ffffff;
     position: absolute;
     top: 100%;
     left: 50%;
-    transform: translate(400%, 430%);
+    transform: translate(408%, 430%);
     width: 100px;
     height: 25px;
     overflow: hidden;

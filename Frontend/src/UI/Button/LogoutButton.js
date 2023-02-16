@@ -7,6 +7,7 @@ const LogoutButton = () => {
       viewBox="0 0 81 78.74"
       width="40px"
       height="40px"
+      style={{ cursor: "pointer" }}
     >
       <defs></defs>
       <g id="Icone_LogIn" data-name="Icone LogIn">

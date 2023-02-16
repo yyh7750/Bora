@@ -11,7 +11,6 @@ const UserRegist = () => {
     window.localStorage.setItem("token", accessToken);
     const userId = urlSearch.get("userId");
     window.localStorage.setItem("userId", userId);
-
   }, []);
   // axios.get(`/users/dummyuser`).then((res) => console.log(res));
 
@@ -52,7 +51,6 @@ const UserRegist = () => {
     // };
     // console.log(userInfo);
 
-
     const API_URL = `http://localhost:8080/sign-up`;
     const userId = window.localStorage.getItem("userId");
     const DATA = {
@@ -63,7 +61,6 @@ const UserRegist = () => {
     };
     console.log(DATA);
 
-
     axios({
       url: API_URL,
       method: "PATCH",
@@ -73,7 +70,6 @@ const UserRegist = () => {
         console.log(res);
         window.localStorage.setItem("userId", res.data.id);
         // window.location.href = "http://localhost:3000/main";
-
       })
       .catch((err) => {
         console.log(err);

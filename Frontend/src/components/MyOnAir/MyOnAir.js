@@ -27,7 +27,7 @@ const MyOnAir = (props) => {
   // const userId = localStorage.getItem("userId");
   const userId = "1";
   useEffect(() => {
-    const API_URL = `http://localhost:8080/main/follow-broad/${userId}`;
+    const API_URL = `http://localhost:8080/api/main/follow-broad/${userId}`;
     axios({
       url: API_URL,
       method: "GET",

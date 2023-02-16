@@ -18,6 +18,10 @@
   }
 }
 
+input:focus {
+  outline: none;
+}
+
 .bannerImg {
   width: 100%;
   height: 500px;
@@ -64,12 +68,18 @@ input[placeholder] {
 }
 
 .modifyBroadcastNotice {
-  color: #fff;
+  color: #000;
   width: 30%;
   font-size: 20px;
   font-weight: bold;
-  border-radius: 5px;
-  border: 2px solid #000;
+  border: none;
+  background-color: #e2b8ff;
+  text-align: center;
+  border-bottom: 2px solid #000;
+}
+
+.modifyBroadcastNotice::placeholder {
+  color: #000;
 }
 
 .thumbnail {
@@ -100,13 +110,17 @@ input[placeholder] {
 
 .modifyBroadcastTitle {
   color: #fff;
-  margin-right: 100px;
-  width: 98%;
+  width: 100%;
   font-size: 23px;
-  font-weight: bold;
-  border-radius: 5px;
+  // font-weight: bold;
   border: none;
+  border-bottom: 2px solid #fff;
   background-color: #13161f;
+  margin-right: 10px;
+  text-align: center;
+}
+.modifyBroadcastTitle::placeholder {
+  color: #fff;
 }
 
 input[type="checkbox"] {
@@ -131,10 +145,34 @@ input[type="checkbox"]:checked {
 .desc {
   color: #fff;
   margin-right: 100px;
-  width: 108%;
-  height: 50px;
+  width: 100%;
+  height: 110px;
   font-weight: bold;
   border-radius: 5px;
   border: 2px solid #e2b8ff;
   background-color: #13161f;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+#resTitle {
+  height: 20px;
+  width: 100%;
+  text-align: center;
+}
+
+#modifyTime {
+  width: 100%;
+  height: 20px;
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+#modifyCategory {
+  width: 100%;
+  height: 20px;
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }

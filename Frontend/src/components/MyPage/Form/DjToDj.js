@@ -135,7 +135,7 @@ const DjToDj = () => {
               value={moveToCreate}
               margin="30px"
               marginLeft="10px"
-              name="방송시작하기"
+              name="방송시작"
             />
           </div>
           <div>

@@ -35,7 +35,21 @@ const MainPageForm = () => {
     window.localStorage.setItem("token", accessToken);
     const userId = urlSearch.get("userId");
     window.localStorage.setItem("userId", userId);
+
+    const API_URL = `http://localhost:8080/api/main/top-ten`;
+    axios({
+      url: API_URL,
+      method: "GET",
+    })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }, []);
+
+  localStorage.setItem("userId", "2");
 
   return (
     <motion.div variants={containerVariants} initial="hidden" animate="visible">

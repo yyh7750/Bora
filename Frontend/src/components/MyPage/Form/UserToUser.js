@@ -26,7 +26,11 @@ const UserToUser = () => {
       method: "GET",
     })
       .then((res) => {
+<<<<<<< HEAD
         // console.log(res);
+=======
+        console.log(res);
+>>>>>>> 5e5a1e0d3d91f131f6483c8596c3a67851968cbb
         setNickname(res.data.nickName);
         setDesc(res.data.desc);
         dispatch(profileActions.setProfile(res.data));
