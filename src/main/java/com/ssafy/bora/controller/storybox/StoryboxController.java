@@ -16,7 +16,7 @@ import java.util.NoSuchElementException;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/storybox")
+@RequestMapping("/api/storybox")
 @CrossOrigin(origins = "*")
 public class StoryboxController {
 

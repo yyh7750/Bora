@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("api/stations")
+@RequestMapping("/api/stations")
 @CrossOrigin(origins = "*")
 public class StationController {
 

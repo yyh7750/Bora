@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("api/follow")
+@RequestMapping("/follow")
 public class FollowController {
 
     private final IFollowService followService;

@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
 @RestController //json 형태로 반환을 위해서
-@RequestMapping("api/auth") // 각각의 value를 설정 안하기위해
+@RequestMapping("/api/auth") // 각각의 value를 설정 안하기위해
 @RequiredArgsConstructor // Lombok, 생성자 주입을 임의 설정
 @Slf4j//Simple Logging Facade for Java
 public class AuthController {
