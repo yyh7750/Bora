@@ -98,6 +98,7 @@ public class OAuth2LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHan
                 targetUrl = UriComponentsBuilder.fromUriString("https:i8b301.p.ssafy.io/regist")
                         .queryParam("token", accessToken)
                         .build().toUriString();
+                log.info("targetUrl : " + targetUrl);
             } else {
                 log.info("CUSTOMER");
                 targetUrl = UriComponentsBuilder.fromUriString(redirectUri.orElse("https://i8b301.p.ssafy.io"))
