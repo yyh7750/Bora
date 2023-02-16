@@ -37,7 +37,7 @@ const MainPageForm = () => {
     const userId = urlSearch.get("userId");
     window.localStorage.setItem("userId", userId);
 
-    const API_URL = `http://localhost:8080/api/main/top-ten`;
+    const API_URL = `https://i8b301.p.ssafy.io/api/main/top-ten`;
     axios({
       url: API_URL,
       method: "GET",

@@ -64,7 +64,7 @@ const MakeBroadcast = () => {
       sun: dayArr[6],
     };
 
-    const API_URL = `http://localhost:8080/stations`;
+    const API_URL = `https://i8b301.p.ssafy.io/api/stations`;
     axios({
       headers: {
         "Content-Type": "multipart/form-data",

@@ -18,7 +18,7 @@ const ViewBoard = () => {
 
   useEffect(() => {
     //1.axios요청으로 사연리스트 객체 받아오기
-    const API_URL = `http://localhost:8080/api/storybox/${djId}/${userId}`;
+    const API_URL = `https://i8b301.p.ssafy.io/api/storybox/${djId}/${userId}`;
     axios({
       url: API_URL,
       method: "GET",
