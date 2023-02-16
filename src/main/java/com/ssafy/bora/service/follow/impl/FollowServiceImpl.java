@@ -106,7 +106,7 @@ public class FollowServiceImpl implements IFollowService {
 
     @Override
     @Async
-    @Scheduled(cron = "0 0/1 * * * *")
+    @Scheduled(cron = "0 0 0 * * *")
     public void sendRedisDataToAddFollow() {
 
         // redis에서 값을 RDB에 옮겨준다.
