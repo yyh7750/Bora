@@ -20,7 +20,7 @@ import axios from "axios";
 const Broadcast = () => {
   const dispatch = useDispatch();
 
-  const userId = "3";
+  const userId = window.localStorage.getItem("userId");
   const [category, setCategory] = useState("");
   const [description, setDescription] = useState("");
   const [starttime, setStarttime] = useState("");
@@ -30,13 +30,13 @@ const Broadcast = () => {
   const [day, setDay] = useState("");
   useEffect(() => {
     const resarr = ["월", "화", "수", "목", "금", "토", "일"];
-    const API_URL = `http://localhost:8080/stations/${userId}`;
+    const API_URL = `https://i8b301.p.ssafy.io/api/stations/${userId}`;
     axios({
       url: API_URL,
       method: "GET",
     })
       .then((res) => {
-        // console.log(res);
+        console.log(res);
         setCategory(res.data.category);
         setDescription(res.data.description);
         setStarttime(res.data.startTime);
@@ -70,7 +70,7 @@ const Broadcast = () => {
 
   const showblackList = () => {
     dispatch(blacklistActions.openBlacklist());
-    const API_URL = `http://localhost:8080/api/users/blacklist/${userId}`;
+    const API_URL = `https://i8b301.p.ssafy.io/api/users/blacklist/${userId}`;
     axios({
       url: API_URL,
       method: "GET",
