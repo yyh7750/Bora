@@ -14,7 +14,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 @RestController
 @Slf4j
-@RequestMapping("/img")
+@RequestMapping("api/img")
 public class FileController {
     private final FileUploadService fileUploadService;
 
