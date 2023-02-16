@@ -58,9 +58,8 @@ public class BroadcastServiceImpl implements IBroadcastService {
             if(station==null) continue;
             //방송중인 유저
             Broadcast broadcast = broadcastRepository.findByUserAndEndBroadIsNull(follow.getDj());
-            boolean isLive= broadcast!=null;
-            String sessionId= (isLive)?broadcast.getSessionId():null;
-            MyFollowBroadcastDTO mfbDTO = MyFollowBroadcastDTO.convertEntityToMyFollowBroadcastDTO(isLive,sessionId,station);
+            if(broadcast==null) continue;
+            MyFollowBroadcastDTO mfbDTO = MyFollowBroadcastDTO.convertEntityToMyFollowBroadcastDTO(broadcast.getSessionId(),station);
             mfbDtoList.add(mfbDTO);
         }
         return mfbDtoList;
