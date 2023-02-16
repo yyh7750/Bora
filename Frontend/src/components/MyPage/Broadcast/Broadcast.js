@@ -20,7 +20,7 @@ import axios from "axios";
 const Broadcast = () => {
   const dispatch = useDispatch();
 
-  const userId = "3";
+  const userId = window.localStorage.getItem("userId");
   const [category, setCategory] = useState("");
   const [description, setDescription] = useState("");
   const [starttime, setStarttime] = useState("");
@@ -36,7 +36,7 @@ const Broadcast = () => {
       method: "GET",
     })
       .then((res) => {
-        // console.log(res);
+        console.log(res);
         setCategory(res.data.category);
         setDescription(res.data.description);
         setStarttime(res.data.startTime);

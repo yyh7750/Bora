@@ -20,6 +20,7 @@ const Login = () => {
   };
 
   const CLIENT_ID = "6994198e0a1efb1a987463241de95a65";
+
   const REDIRECT_URI = "https://i8b301.p.ssafy.io/api/oauth2/authorization/kakao";
   let URL = `https://kauth.kakao.com/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code`;
 
@@ -43,7 +44,7 @@ const Login = () => {
         )}
 
         {show && (
-          <a href={REDIRECT_URI} style={{ marginTop: "100px" }}>
+          <a href={URL} style={{ marginTop: "100px" }}>
             <img
               src={kakaoLoginBtn}
               alt="카카오로그인버튼"

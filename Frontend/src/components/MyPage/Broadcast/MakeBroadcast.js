@@ -15,7 +15,7 @@ import thumbnailImg from "../../../assets/4.jpg";
 const MakeBroadcast = () => {
   const formData = new FormData();
   const createBroadcast = () => {
-    const userId = "3";
+    const userId = window.localStorage.getItem("userId");
     const arr = [];
     const query = 'input[name="day"]:checked';
     const selectedEls = document.querySelectorAll(query);
@@ -66,15 +66,12 @@ const MakeBroadcast = () => {
 
     const API_URL = `https://i8b301.p.ssafy.io/api/stations`;
     axios({
-      headers: {
-        "Content-Type": "multipart/form-data",
-        "Access-Control-Allow-Origin": "*",
-      },
       url: API_URL,
       method: "POST",
       data: stationInfo,
     })
       .then((res) => {
+        console.log(stationInfo);
         console.log(res);
       })
       .catch((err) => {

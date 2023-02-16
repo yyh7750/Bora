@@ -51,6 +51,7 @@ const UserRegist = () => {
     // };
     // console.log(userInfo);
 
+
     const API_URL = `https://i8b301.p.ssafy.io/api/sign-up`;
     const userId = window.localStorage.getItem("userId");
     const DATA = {
@@ -69,7 +70,7 @@ const UserRegist = () => {
       .then((res) => {
         console.log(res);
         window.localStorage.setItem("userId", res.data.id);
-        // window.location.href = "http://localhost:3000/main";
+        window.location.href = "http://localhost:3000/main";
       })
       .catch((err) => {
         console.log(err);
