@@ -3,6 +3,8 @@ package com.ssafy.bora.dto.user;
 import com.ssafy.bora.entity.Station;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import javax.persistence.Column;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
@@ -24,6 +26,10 @@ public class StationDTO {
     private String notice;
 
     private String category;
+
+    private String thumbnail;
+
+    private String banner;
 
     private boolean mon;
 
@@ -59,6 +65,8 @@ public class StationDTO {
         stationDTO.sat = station.isSat();
         stationDTO.sun = station.isSun();
         stationDTO.followCnt = followCnt;
+        stationDTO.banner = station.getBanner();
+        stationDTO.thumbnail = station.getThumbnail();
         return stationDTO;
     }
 }

@@ -3,11 +3,13 @@ package com.ssafy.bora.service.follow.impl;
 import com.ssafy.bora.dto.follow.ResFollowDTO;
 import com.ssafy.bora.dto.main.TopTenDTO;
 import com.ssafy.bora.entity.BroadcastOrder;
+import com.ssafy.bora.entity.User;
 import com.ssafy.bora.entity.follow.Follow;
 import com.ssafy.bora.entity.follow.RedisFollow;
 import com.ssafy.bora.repository.broadcast.BroadcastOrderRepository;
 import com.ssafy.bora.repository.follow.IFollowRepository;
 import com.ssafy.bora.repository.follow.IRedisFollowRepository;
+import com.ssafy.bora.repository.user.IUserRepository;
 import com.ssafy.bora.service.follow.IFollowService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -33,8 +35,8 @@ public class FollowServiceImpl implements IFollowService {
     private final JdbcTemplate jdbcTemplate;
     private final IFollowRepository followRepository;
     private final IRedisFollowRepository redisFollowRepository;
-    private final BroadcastOrderRepository broadcastOrderRepository;
     private final RedisTemplate redisTemplate;
+    private final IUserRepository userRepository;
 
     @Override
     public int[][] addFollow(List<ResFollowDTO> resFollowDtoList) {
@@ -170,8 +172,8 @@ public class FollowServiceImpl implements IFollowService {
         // 리턴할 리스트 생성 및 값 초기화
         List<ResFollowDTO> resFollowDTOList = new ArrayList<>();
         for (RedisFollow redisFollow : redisFollowList) {
-            String djNickName = redisFollow.getDjId();
-            String viewerNickName = redisFollow.getViewerId();
+            String djNickName = userRepository.findById(redisFollow.getDjId()).get().getNickName();
+            String viewerNickName = userRepository.findById(redisFollow.getViewerId()).get().getNickName();
             resFollowDTOList.add(ResFollowDTO.addDTO(djNickName, viewerNickName));
         }
 
