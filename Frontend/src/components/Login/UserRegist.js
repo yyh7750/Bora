@@ -70,7 +70,7 @@ const UserRegist = () => {
       .then((res) => {
         console.log(res);
         window.localStorage.setItem("userId", res.data.id);
-        window.location.href = "http://localhost:3000/main";
+        window.location.href = "https://i8b301.p.ssafy.io/main";
       })
       .catch((err) => {
         console.log(err);
