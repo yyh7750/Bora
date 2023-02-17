@@ -21,7 +21,7 @@ public class BasicMainDTO {
 
     public static BasicMainDTO convertEntityToBasicMainDTO(Station station, TopTenDTO ttDto){
         BasicMainDTO bmDto = new BasicMainDTO();
-        bmDto.bannerUrl=station.getUser().getProfileImg();
+        bmDto.bannerUrl=station.getBanner();
         bmDto.userId=station.getUser().getId();
         bmDto.nickName=station.getUser().getNickName();
         bmDto.stationName=station.getName();
