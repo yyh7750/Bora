@@ -1,0 +1,128 @@
+.letterListContainer {
+  background-color: #f1deff;
+  color: #000;
+  border-radius: 5px;
+  width: 1100px;
+  height: 400px;
+  margin-top: 60px;
+  margin-left: 60px;
+  margin-bottom: 50px;
+  padding-top: 5px;
+}
+
+.letterListTitleNav {
+  width: 90%;
+  margin: 10px auto;
+  display: flex;
+}
+
+.letterListTitleIcon1 {
+  float: left;
+  height: 50px;
+  width: 50px;
+  box-sizing: border-box;
+  margin-left: 40.5%;
+}
+.letterListTitle {
+  float: left;
+  font-weight: 900;
+  font-size: 30px;
+  text-align: center;
+  vertical-align: middle;
+  box-sizing: border-box;
+  margin: 10px 10px;
+}
+
+.letterListTitleIcon2 {
+  float: left;
+  height: 50px;
+  width: 50px;
+  box-sizing: border-box;
+}
+
+.letterListTitleIcon {
+  width: 50px;
+  height: 50px;
+}
+
+.letterListhr {
+  width: 90%;
+}
+
+.letterListInfo {
+  margin-left: 40px;
+}
+
+.letterListInfoTitle {
+  width: 300px;
+}
+
+table {
+  table-layout: fixed;
+  border-collapse: separate;
+  border-spacing: 0 0.8rem;
+}
+
+table tbody tr {
+  line-height: 1.2rem;
+}
+
+table tbody tr:hover {
+  background-color: #e2b8ff;
+  border-radius: 10px;
+  height: 30px;
+}
+
+.letterListBtn {
+  display: block;
+  position: relative;
+  padding: 5px 20px 5px 20px;
+  border: 3px solid #e2b8ff;
+  border-radius: 30px;
+  color: #000;
+  overflow: hidden;
+  background-color: #e2b8ff;
+  transition: color 0s 0.1s;
+  font-weight: bold;
+  font-size: 15px;
+  width: 12%;
+  margin-top: 10px;
+  margin-right: 50px;
+  float: right;
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    transform: translateX(-100%);
+    transition: transform 0.25s cubic-bezier(0.65, 0.05, 0.36, 1);
+    color: #fff;
+
+    z-index: -1;
+  }
+  &::before {
+    background-color: #fff;
+    transition-delay: 0.025s;
+  }
+  &::after {
+    background-color: #fff;
+  }
+  &:hover {
+    animation: ctButton 1s ease infinite;
+    -moz-animation: ctButton 1s ease infinite;
+    -webkit-animation: ctButton 1s ease infinite;
+    color: #000;
+    &::before,
+    &::after {
+      transform: translateY(0%);
+      transition: transform 0.25s cubic-bezier(0.65, 0.05, 0.36, 1);
+    }
+    &::after {
+      transition-delay: 0.025s;
+    }
+  }
+}

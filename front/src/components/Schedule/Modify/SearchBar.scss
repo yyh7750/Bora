@@ -1,0 +1,44 @@
+.searchBar {
+  padding: 5px;
+  width: 400px;
+  height: 2102px;
+  border: 1px solid #efefef;
+  background-color: white;
+  border-radius: 5px;
+  margin: 5px;
+}
+
+.SerchBarForm {
+  font-weight: bold;
+  color: #000;
+  font-size: 15px;
+  margin-left: 20px;
+}
+
+.searchBar input {
+  width: 385px;
+  height: 40px;
+  border-radius: 5px;
+  background-color: #d8a3ff;
+  margin: 5px 5px 0 5px;
+  border: none;
+  // background-image: url("/Frontend/src/assets/magnifier.png");
+  background-repeat: no-repeat;
+  background-size: 32px;
+  background-position: right;
+}
+
+.searchBar ul {
+  list-style: none;
+  padding: 5px;
+}
+
+.searchBar ul li {
+  text-align: left;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+.searchBar ul li:hover {
+  background-color: #d8a3ff;
+}

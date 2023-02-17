@@ -1,0 +1,48 @@
+server:
+  port: 8080
+#  servlet:
+#    context-path: /api
+
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: ENC(w+v9nu+Ntv0+s9QUaiz4VgcGloO89gs0IVh+7m+THm3OuJjK6H6voJLoK2lcQWzmT6V/JfOoVNTieFMe3ZlrqnfWpguucxpUEn5ILLqbUIjry03hypQrmF3irwKlX7hC)
+    username: ENC(IOvBivSpocQ38UJMe1yl9g==)
+    password: ENC(09vfPMIkaeR8S2PSSSqPTA==)
+  jpa:
+    open-in-view: false
+    generate-ddl: true
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        globally_quoted_identifiers: true
+        format_sql: true
+  cache: redis
+  redis:
+    host: ENC(Q9p0fgKLEttpqkOJfkUl3Ni3EPatbaBWWNjOT1zFhQw=)
+    port: 33016
+    password: ENC(SySkQP5FyENHyJzugAE3AbsAHK8GtOMM)
+  profiles:
+    include: oauth
+
+cloud:
+  aws:
+    credentials:
+      accessKey: ENC(G3SnF+/APsKh3EDjgWs73YgtA5vFzcRfJYisABrluCg=)
+      secretKey: ENC(WJD4vE/sSRqbmBTsdzh4/HV3mbwop5lV71XNxNW/TXpOrZ8GnTrQjcPQ7BDWpudd52MnyethM5w=)
+    s3:
+      bucket: woojin-test-bucket
+      # dir: kwj
+    region:
+      static: ap-northeast-2
+    stack:
+      auto: false
+
+logging:
+  level:
+    org.hibernate.SQL: debug
+    org.hibernate.type: trace
