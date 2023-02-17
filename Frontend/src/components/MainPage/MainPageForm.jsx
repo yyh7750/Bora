@@ -47,7 +47,7 @@ const MainPageForm = () => {
 
     //닉네임 저장하기 위해서 받아오는 get 요청
     const id = localStorage.getItem("userId");
-    const API_URL = `https://i8b301.p.ssafy.io/api/users/${id}`;
+    const API_URL = `http://localhost:8080/users/${id}`;
     axios({
       url: API_URL,
       method: "GET",

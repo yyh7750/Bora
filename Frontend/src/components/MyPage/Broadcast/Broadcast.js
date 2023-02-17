@@ -32,7 +32,7 @@ const Broadcast = () => {
   const [thumbnailimg, setThumbnail] = useState("");
   useEffect(() => {
     const resarr = ["월", "화", "수", "목", "금", "토", "일"];
-    const API_URL = `https://i8b301.p.ssafy.io/api/stations/${userId}`;
+    const API_URL = `http://localhost:8080/api/stations/${userId}`;
     axios({
       url: API_URL,
       method: "GET",
@@ -47,24 +47,7 @@ const Broadcast = () => {
         setNotice(res.data.notice);
         setBannerimg(res.data.banner);
         setThumbnail(res.data.thumbnail);
-        const dayarr = [
-          res.data.mon,
-          res.data.tue,
-          res.data.wen,
-          res.data.thu,
-          res.data.fri,
-          res.data.sat,
-          res.data.sun,
-        ];
-        let realday = "";
-        for (let i = 0; i < dayarr.length; i++) {
-          if (dayarr[i] === true) {
-            setDay(resarr[i]);
-            realday = resarr[i];
-          }
-        }
-        dispatch(broadcastActions.setBroadcast(res.data));
-        dispatch(broadcastActions.setDay(realday));
+        setDay(res.data.day);
       })
       .catch((err) => {
         console.log(err);
@@ -74,7 +57,7 @@ const Broadcast = () => {
 
   const showblackList = () => {
     dispatch(blacklistActions.openBlacklist());
-    const API_URL = `https://i8b301.p.ssafy.io/api/users/blacklist/${userId}`;
+    const API_URL = `http://localhost:8080/users/blacklist/${userId}`;
     axios({
       url: API_URL,
       method: "GET",

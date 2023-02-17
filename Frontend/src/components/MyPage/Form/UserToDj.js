@@ -26,7 +26,7 @@ const UserToDj = () => {
   const djId = "3";
   //DJ정보 렌더링
   useEffect(() => {
-    const API_URL = `https://i8b301.p.ssafy.io/api/users/${djId}`;
+    const API_URL = `http://localhost:8080/users/${djId}`;
     axios({
       url: API_URL,
       method: "GET",
@@ -56,7 +56,7 @@ const UserToDj = () => {
 
   const subscribeHandler = () => {
     dispatch(boardActions.toggleSubscribe());
-    const API_URL = `https://i8b301.p.ssafy.io/api/follow/redis`;
+    const API_URL = `http://localhost:8080/follow/redis`;
     let DATA = {};
     if (subscribe) {
       DATA = {

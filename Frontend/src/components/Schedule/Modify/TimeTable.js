@@ -73,7 +73,7 @@ const TimeTable = (props) => {
         DATA.push(OBJECT);
       }
     }
-    const API_URL = `https://i8b301.p.ssafy.io/api/users/playlist`;
+    const API_URL = `http://localhost:8080/users/playlist`;
     console.log(DATA);
     axios({
       url: API_URL,

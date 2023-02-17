@@ -37,15 +37,7 @@ const MakeBroadcast = () => {
       arr.push(el.value);
       // result += el.value + " ";
     });
-    const dayArr = [
-      arr.includes("mon"),
-      arr.includes("tue"),
-      arr.includes("wed"),
-      arr.includes("thu"),
-      arr.includes("fri"),
-      arr.includes("sat"),
-      arr.includes("sun"),
-    ];
+
     const stationInfo = {
       userId: userId,
       name: document.getElementById("broadcastTitle").value,
@@ -54,16 +46,10 @@ const MakeBroadcast = () => {
       description: document.getElementById("broadcastDesc").value,
       notice: document.getElementById("broadcastNotice").value,
       category: document.getElementById("broadcastCategory").value,
-      mon: dayArr[0],
-      tue: dayArr[1],
-      wen: dayArr[2],
-      thu: dayArr[3],
-      fri: dayArr[4],
-      sat: dayArr[5],
-      sun: dayArr[6],
+      day: selectedEls,
     };
 
-    const API_URL = `https://i8b301.p.ssafy.io/api/stations`;
+    const API_URL = `http://localhost:8080/api/stations`;
     axios({
       url: API_URL,
       method: "POST",
@@ -109,7 +95,7 @@ const MakeBroadcast = () => {
         "Access-Control-Allow-Origin": "*",
       };
       //이미지 axios요청
-      const IMG_URL = `https://i8b301.p.ssafy.io/api/img/file-upload/banner/${userId}`;
+      const IMG_URL = `http://localhost:8080/img/file-upload/banner/${userId}`;
       axios({
         headers: HEADERS,
         url: IMG_URL,
@@ -144,7 +130,7 @@ const MakeBroadcast = () => {
         "Access-Control-Allow-Origin": "*",
       };
       //이미지 axios요청
-      const IMG_URL = `https://i8b301.p.ssafy.io/api/img/file-upload/thumbnail/${userId}`;
+      const IMG_URL = `http://localhost:8080/img/file-upload/thumbnail/${userId}`;
       axios({
         headers: HEADERS,
         url: IMG_URL,
@@ -159,6 +145,18 @@ const MakeBroadcast = () => {
           console.log(err);
         });
     }
+  };
+
+  const genderHandler = () => {
+    const genderNodeList = document.getElementsByName("gender");
+
+    genderNodeList.forEach((node) => {
+      if (node.checked) {
+        // dispatch(broadcastActions.setDay(node.value));
+      } else {
+        //유효성검사(귀찮아서 안함)
+      }
+    });
   };
 
   return (
@@ -239,7 +237,8 @@ const MakeBroadcast = () => {
           금
           <input type="radio" value="sat" name="day" />
           토
-          <input type="radio" value="sun" name="day" />일
+          <input type="radio" value="sun" name="day" />
+          일
           <br />
           방송시간
           <br />

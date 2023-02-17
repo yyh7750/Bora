@@ -43,7 +43,7 @@ const ModifyProfile = (props) => {
         "Access-Control-Allow-Origin": "*",
       };
       //이미지 axios요청
-      const IMG_URL = `https://i8b301.p.ssafy.io/api/img/file-upload/profile/${userId}`;
+      const IMG_URL = `http://localhost:8080/img/file-upload/profile/${userId}`;
       axios({
         headers: HEADERS,
         url: IMG_URL,
@@ -71,7 +71,7 @@ const ModifyProfile = (props) => {
       nickName: document.getElementById("nickNameInput").value,
       desc: document.getElementById("userSayInput").value,
     };
-    const API_URL = `https://i8b301.p.ssafy.io/api/users`;
+    const API_URL = `http://localhost:8080/users`;
     axios({
       url: API_URL,
       method: "PATCH",

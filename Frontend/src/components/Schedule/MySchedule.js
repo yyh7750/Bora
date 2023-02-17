@@ -45,7 +45,7 @@ const MySchedule = () => {
   const [saturdaylist, setSaturdaylist] = useState([]);
 
   useEffect(() => {
-    const API_URL = `https://i8b301.p.ssafy.io/api/users/playlist/${"1"}`;
+    const API_URL = `http://localhost:8080/users/playlist/${"1"}`;
     axios({
       url: API_URL,
       method: "GET",
