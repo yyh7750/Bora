@@ -1,0 +1,667 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="5e63f86d-bedd-4510-9a1e-7cfc4147524a" name="Changes" comment="feat: error">
+      <change afterPath="$PROJECT_DIR$/back/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/build.gradle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/ssafy/bora/BoraApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/ssafy/bora/config/AWSConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/ssafy/bora/config/AwsS3DirectoryName.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/ssafy/bora/config/CorsConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/ssafy/bora/config/JasyptConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/ssafy/bora/config/QuerydslConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/ssafy/bora/config/RedisConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/ssafy/bora/config/SchedulerConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/ssafy/bora/config/SecurityConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/ssafy/bora/config/SwaggerConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/ssafy/bora/controller/Auth/AuthController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/ssafy/bora/controller/exception/ExceptionHandlerController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/ssafy/bora/controller/follow/FollowController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/ssafy/bora/controller/main/MainController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/ssafy/bora/controller/sign_up/SignUpController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/ssafy/bora/controller/storybox/StoryboxController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/ssafy/bora/controller/upload/FileController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/ssafy/bora/controller/user/PlaylistController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/ssafy/bora/controller/user/StationController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/ssafy/bora/controller/user/UserController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/ssafy/bora/dto/blacklist/ReqBlacklistDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/ssafy/bora/dto/blacklist/ResBlacklistDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/ssafy/bora/dto/exception/ErrorResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/ssafy/bora/dto/exception/UnauthorizedException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/ssafy/bora/dto/follow/ResFollowDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/ssafy/bora/dto/main/BasicMainDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/ssafy/bora/dto/main/BroadcastReqDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/ssafy/bora/dto/main/BroadcastResDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/ssafy/bora/dto/main/MyFollowBroadcastDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/ssafy/bora/dto/main/SearchCondition.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/ssafy/bora/dto/main/TopTenDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/ssafy/bora/dto/main/ViewLogDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/ssafy/bora/dto/sign_up/SignUpDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/ssafy/bora/dto/stroybox/ReqStoryBoxDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/ssafy/bora/dto/stroybox/ResStoryBoxDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/ssafy/bora/dto/user/MaxViewerDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/ssafy/bora/dto/user/PrivacyDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/ssafy/bora/dto/user/StationDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/ssafy/bora/dto/user/UserDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/ssafy/bora/dto/user/UserExtraInfoReq.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/ssafy/bora/dto/user/playlist/ReqPlaylistDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/ssafy/bora/dto/user/playlist/ResPlaylistDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/ssafy/bora/entity/Broadcast.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/ssafy/bora/entity/BroadcastOrder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/ssafy/bora/entity/Playlist.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/ssafy/bora/entity/Privacy.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/ssafy/bora/entity/Station.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/ssafy/bora/entity/StoryBox.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/ssafy/bora/entity/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/ssafy/bora/entity/ViewLog.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/ssafy/bora/entity/enums/Role.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/ssafy/bora/entity/follow/Follow.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/ssafy/bora/entity/follow/RedisFollow.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/ssafy/bora/repository/broadcast/BroadcastOrderRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/ssafy/bora/repository/broadcast/BroadcastRepositoryCustom.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/ssafy/bora/repository/broadcast/BroadcastRepositoryCustomImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/ssafy/bora/repository/broadcast/IBroadcastRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/ssafy/bora/repository/broadcast/ViewLogRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/ssafy/bora/repository/follow/IFollowRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/ssafy/bora/repository/follow/IRedisFollowRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/ssafy/bora/repository/privacy/IPrivacyRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/ssafy/bora/repository/station/IStationRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/ssafy/bora/repository/storybox/IStoryBoxRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/ssafy/bora/repository/user/IBlacklistRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/ssafy/bora/repository/user/IPlaylistRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/ssafy/bora/repository/user/IUserRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/ssafy/bora/security/jwt/JwtAccessDeniedHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/ssafy/bora/security/jwt/JwtAuthenticationEntryPoint.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/ssafy/bora/security/jwt/JwtExceptionCode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/ssafy/bora/security/jwt/JwtExceptionFilter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/ssafy/bora/security/jwt/JwtExceptionResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/ssafy/bora/security/jwt/JwtFilter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/ssafy/bora/security/jwt/JwtProvider.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/ssafy/bora/security/oauth2/CustomOAuth2User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/ssafy/bora/security/oauth2/CustomOAuth2UserService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/ssafy/bora/security/oauth2/OAuth2LoginSuccessHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/ssafy/bora/security/oauth2/OAuthAttributes.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/ssafy/bora/service/auth/AuthService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/ssafy/bora/service/broadcast/IBroadcastService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/ssafy/bora/service/broadcast/impl/BroadcastServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/ssafy/bora/service/fileupload/FileUploadService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/ssafy/bora/service/follow/IFollowService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/ssafy/bora/service/follow/impl/FollowServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/ssafy/bora/service/station/IStationService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/ssafy/bora/service/station/impl/StationServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/ssafy/bora/service/storybox/IStoryBoxService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/ssafy/bora/service/storybox/impl/StoryBoxServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/ssafy/bora/service/user/IBlacklistService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/ssafy/bora/service/user/IPlaylistService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/ssafy/bora/service/user/IUserService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/ssafy/bora/service/user/impl/BlacklistServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/ssafy/bora/service/user/impl/PlaylistServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/ssafy/bora/service/user/impl/UserServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/ssafy/bora/util/CookieUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/ssafy/bora/vo/FileVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/resources/application-oauth.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/resources/application.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/test/java/com/ssafy/bora/BoraApplicationTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" afterPath="$PROJECT_DIR$/back/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/back/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/gradlew" beforeDir="false" afterPath="$PROJECT_DIR$/back/gradlew" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/gradlew.bat" beforeDir="false" afterPath="$PROJECT_DIR$/back/gradlew.bat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/back/settings.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/src/main/java/com/ssafy/bora/BoraApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/src/main/java/com/ssafy/bora/entity/Blacklist.java" beforeDir="false" afterPath="$PROJECT_DIR$/back/src/main/java/com/ssafy/bora/entity/Blacklist.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/src/main/java/com/ssafy/bora/entity/Category.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/src/main/java/com/ssafy/bora/entity/Follow.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/src/main/java/com/ssafy/bora/entity/Privacy.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/src/main/java/com/ssafy/bora/entity/Station.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/src/main/java/com/ssafy/bora/entity/StoryBox.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/src/main/java/com/ssafy/bora/entity/User.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/src/test/java/com/ssafy/bora/BoraApplicationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/back/README.md" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="Bora" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="Bora" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="Bora" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="build" type="c8890929:TasksNode$1" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="Bora" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="other" type="c8890929:TasksNode$1" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="Bora" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="querydsl" type="c8890929:TasksNode$1" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Merge.Settings">
+    <option name="BRANCH" value="origin/kde" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="dev" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitToolBoxStore">
+    <option name="projectConfigVersion" value="5" />
+    <option name="recentBranches">
+      <RecentBranches>
+        <option name="branchesForRepo">
+          <list>
+            <RecentBranchesForRepo>
+              <option name="branches">
+                <list>
+                  <RecentBranch>
+                    <option name="branchName" value="front_final" />
+                    <option name="lastUsedInstant" value="1676600484" />
+                  </RecentBranch>
+                  <RecentBranch>
+                    <option name="branchName" value="sm" />
+                    <option name="lastUsedInstant" value="1676507671" />
+                  </RecentBranch>
+                  <RecentBranch>
+                    <option name="branchName" value="front_webrtc" />
+                    <option name="lastUsedInstant" value="1676462283" />
+                  </RecentBranch>
+                  <RecentBranch>
+                    <option name="branchName" value="dev" />
+                    <option name="lastUsedInstant" value="1676013212" />
+                  </RecentBranch>
+                </list>
+              </option>
+              <option name="repositoryRootUrl" value="file://$PROJECT_DIR$" />
+            </RecentBranchesForRepo>
+          </list>
+        </option>
+      </RecentBranches>
+    </option>
+  </component>
+  <component name="JpbToolWindowState">
+    <option name="isDesignerTabSelected" value="false" />
+    <option name="isToolWindowVisible" value="false" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2LWaU0kqGcFxELtam8o0ZHB3Eni" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelOrder2&quot;: &quot;2&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth2&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;import_schema_mapping&quot;: &quot;&lt;schema-mapping&gt;\n  &lt;databases&gt;\n    &lt;list&gt;\n      &lt;schema-mapping-item&gt;\n        &lt;source-data-source-id&gt;ead7d8ca-50e2-4b42-8877-c41876cd6d77&lt;/source-data-source-id&gt;\n        &lt;source-path&gt;schema/&amp;quot;bora&amp;quot;&lt;/source-path&gt;\n        &lt;target-data-source-id&gt;ead7d8ca-50e2-4b42-8877-c41876cd6d77&lt;/target-data-source-id&gt;\n        &lt;target-path&gt;schema/&amp;quot;bora&amp;quot;&lt;/target-path&gt;\n      &lt;/schema-mapping-item&gt;\n    &lt;/list&gt;\n  &lt;/databases&gt;\n&lt;/schema-mapping&gt;&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/SSAFY/Documents/dummy/viewlog.csv&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15136719&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;testing.instrumented.configuration&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;e2919862482bd7358cc4030414ec9459&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="ReactorSettings">
+    <option name="notificationShown" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\SSAFY\Desktop\S08P12B301\src\main\resources" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.ssafy.bora.repository.broadcast" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Spring Boot.BoraApplication">
+    <configuration name="BoraApplicationTests" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;com.ssafy.bora.BoraApplicationTests&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="S08P12B301 [cleanQuerydslSourcesDir]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="cleanQuerydslSourcesDir" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="S08P12B301 [compileQuerydsl]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="compileQuerydsl" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="S08P12B301 [initQuerydslSourcesDir]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="initQuerydslSourcesDir" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="S08P12B301 [querydslClasses]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="querydslClasses" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="BoraApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="Bora.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.ssafy.bora.BoraApplication" />
+      <option name="VM_PARAMETERS" value="-Djasypt.encryptor.password=0836895" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Gradle.BoraApplicationTests" />
+      <item itemvalue="Gradle.S08P12B301 [cleanQuerydslSourcesDir]" />
+      <item itemvalue="Gradle.S08P12B301 [compileQuerydsl]" />
+      <item itemvalue="Gradle.S08P12B301 [initQuerydslSourcesDir]" />
+      <item itemvalue="Gradle.S08P12B301 [querydslClasses]" />
+      <item itemvalue="Spring Boot.BoraApplication" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Gradle.S08P12B301 [querydslClasses]" />
+        <item itemvalue="Gradle.S08P12B301 [initQuerydslSourcesDir]" />
+        <item itemvalue="Gradle.S08P12B301 [compileQuerydsl]" />
+        <item itemvalue="Gradle.S08P12B301 [cleanQuerydslSourcesDir]" />
+        <item itemvalue="Gradle.BoraApplicationTests" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="5e63f86d-bedd-4510-9a1e-7cfc4147524a" name="Changes" comment="" />
+      <created>1675989304337</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1675989304337</updated>
+      <workItem from="1675989305523" duration="2999000" />
+      <workItem from="1675992390659" duration="28387000" />
+      <workItem from="1676129646074" duration="5846000" />
+      <workItem from="1676206434807" duration="15076000" />
+      <workItem from="1676246347582" duration="1293000" />
+      <workItem from="1676248067783" duration="54568000" />
+      <workItem from="1676459574541" duration="53657000" />
+      <workItem from="1676600113905" duration="383000" />
+    </task>
+    <task id="LOCAL-00001" summary="feat:방송하기/끝내기">
+      <created>1676003534101</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1676003534101</updated>
+    </task>
+    <task id="LOCAL-00002" summary="feat:main 변수 하나 수정 (id-&gt;userId)">
+      <created>1676003841582</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1676003841583</updated>
+    </task>
+    <task id="LOCAL-00003" summary="feat:maincontroller final 추가">
+      <created>1676012056206</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1676012056206</updated>
+    </task>
+    <task id="LOCAL-00004" summary="feat:dev to sm merge 전 commit">
+      <created>1676130131358</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1676130131358</updated>
+    </task>
+    <task id="LOCAL-00005" summary="feat:viewlog 테이블">
+      <created>1676135985531</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1676135985531</updated>
+    </task>
+    <task id="LOCAL-00006" summary="feat:swagger추가 및 test">
+      <created>1676225423966</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1676225423966</updated>
+    </task>
+    <task id="LOCAL-00007" summary="feat: main 점검">
+      <created>1676252861806</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1676252861806</updated>
+    </task>
+    <task id="LOCAL-00008" summary="feat: 0214 merge전 commit and push">
+      <created>1676339487967</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1676339487967</updated>
+    </task>
+    <task id="LOCAL-00009" summary="feat: merge후 push">
+      <created>1676339731730</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1676339731730</updated>
+    </task>
+    <task id="LOCAL-00010" summary="feat: merge(sm-&gt;dev)전 커밋푸쉬">
+      <created>1676350387595</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1676350387595</updated>
+    </task>
+    <task id="LOCAL-00011" summary="feat: jasypt 추가">
+      <created>1676422562647</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1676422562647</updated>
+    </task>
+    <task id="LOCAL-00012" summary="feat: dockerfile, yml 수정">
+      <created>1676424934087</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1676424934087</updated>
+    </task>
+    <task id="LOCAL-00013" summary="feat: 재수정">
+      <created>1676432227523</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1676432227523</updated>
+    </task>
+    <task id="LOCAL-00014" summary="feat: 요청하신 Dto">
+      <created>1676450342858</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1676450342858</updated>
+    </task>
+    <task id="LOCAL-00015" summary="chore : merge comment 삭제">
+      <created>1676523245827</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1676523245827</updated>
+    </task>
+    <task id="LOCAL-00016" summary="feat: main 수정">
+      <created>1676532391432</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1676532391432</updated>
+    </task>
+    <task id="LOCAL-00017" summary="feat: contextpath 삭제">
+      <created>1676532464820</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1676532464820</updated>
+    </task>
+    <task id="LOCAL-00018" summary="feat: FileController 수정">
+      <created>1676536754491</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1676536754491</updated>
+    </task>
+    <task id="LOCAL-00019" summary="feat: islive삭제">
+      <created>1676537852384</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1676537852384</updated>
+    </task>
+    <task id="LOCAL-00020" summary="feat: 많은 수정">
+      <created>1676566654666</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1676566654666</updated>
+    </task>
+    <task id="LOCAL-00021" summary="feat: querydsl수정">
+      <created>1676567993317</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1676567993317</updated>
+    </task>
+    <task id="LOCAL-00022" summary="feat: querydsl수정">
+      <created>1676572076823</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1676572076823</updated>
+    </task>
+    <task id="LOCAL-00023" summary="feat: error">
+      <created>1676583384959</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1676583384959</updated>
+    </task>
+    <task id="LOCAL-00024" summary="feat: error">
+      <created>1676583776596</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1676583776596</updated>
+    </task>
+    <task id="LOCAL-00025" summary="feat: error">
+      <created>1676593735121</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1676593735121</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="feat:방송하기/끝내기" />
+    <MESSAGE value="feat:main 변수 하나 수정 (id-&gt;userId)" />
+    <MESSAGE value="feat:maincontroller final 추가" />
+    <MESSAGE value="feat:merge 전 commit" />
+    <MESSAGE value="feat:dev to sm merge 전 commit" />
+    <MESSAGE value="feat:viewlog 테이블" />
+    <MESSAGE value="feat:swagger추가 및 test" />
+    <MESSAGE value="feat: main 점검" />
+    <MESSAGE value="feat: 0214 merge전 commit and push" />
+    <MESSAGE value="feat: merge후 push" />
+    <MESSAGE value="feat: merge(sm-&gt;dev)전 커밋푸쉬" />
+    <MESSAGE value="feat: jasypt 추가" />
+    <MESSAGE value="feat: dockerfile, yml 수정" />
+    <MESSAGE value="feat: 재수정" />
+    <MESSAGE value="feat: 요청하신 Dto" />
+    <MESSAGE value="chore : merge comment 삭제" />
+    <MESSAGE value="feat: main 수정" />
+    <MESSAGE value="feat: contextpath 삭제" />
+    <MESSAGE value="feat: FileController 수정" />
+    <MESSAGE value="feat: islive삭제" />
+    <MESSAGE value="feat: 많은 수정" />
+    <MESSAGE value="feat: querydsl수정" />
+    <MESSAGE value="feat: error" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: error" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.sql.SQLNonTransientConnectionException" package="java.sql" />
+          <option name="timeStamp" value="14" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>
